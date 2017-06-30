@@ -1,0 +1,46 @@
+body {
+  font-family: Times, serif;
+  background-color: #f5f5eb;
+  color: black;
+  margin: 1% 1% 1% 1%;
+}
+
+div#content {
+  padding: 0em .5em 0em .5em;
+}
+
+div h1 {
+  background-color: #6666ff;
+  color: white;
+  padding-left: .5em;
+  padding-right: .5em;
+  padding-top: .5em;
+  padding-bottom: .5em;
+  text-align: center;
+}
+
+ul.pub li {
+  list-style-type: none;
+  text-indent: -2em;
+  padding-left: 2em;
+}
+
+ul.glossary li {
+  list-style-type: none;
+  text-indent: -2em;
+  padding-left: 2em;
+}
+
+div#content li {
+  padding-bottom: .5em;
+}
+
+div#footer {
+  width:100%;
+}
+
+p.footertext {
+  font-size: 66%;
+  font-style: italic;
+  text-align: center;
+}
