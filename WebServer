@@ -1,0 +1,17 @@
+# You cannot see the Khan Academy exercises or JSAV code objects
+# in a browser directed to a local file unless you run a web
+# server. In case you are on a machine (such as your own PC) without a
+# web server running, here is a little python-based web server.
+# You only need to have Python installed to run this.
+# After invoking this script from ~OpenDSA, point your web browser to:
+# http://127.0.0.1:8080/
+# python -m SimpleHTTPServer
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    MINGW*)  python server.py 0.0.0.0:8080;;
+    CYGWIN*) python server.py 0.0.0.0:8080;;
+    Linux*)  sudo python server.py 0.0.0.0:8080;;
+    Darwin*) sudo python server.py 0.0.0.0:8080;;
+    *)       python server.py 0.0.0.0:8080
+
+esac
