@@ -34,13 +34,13 @@
             <a class="nav-link" href="exercise-model.html">Exercise Model</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="code-model.html">Code Assets</a>
+            <a class="nav-link" href="code-model.html">Code Assets</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="testing-model.html">Testing Model</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pemltest.html">Testing Language</a>
+            <a class="nav-link active" href="pemltest.html">Testing Language</a>
           </li>
         </ul>
       </div>
@@ -50,7 +50,7 @@
   <div class="container jumbotron bg-primary text-white">
     <h1>PEML</h1>
     <p class="lead">The <strong>Programming Exercise Markup
-      Language</strong></p>
+      Language</strong>.</p>
     <hr class="my-4 bg-white"/>
     <p>Designed to provide an ultra-human-friendly authoring format
       for describing automatically graded programming assignments.</p>
@@ -60,21 +60,90 @@
     <h2>Title</h2>
     <p>blah blah blah ...
     </p>
-<!--
+    
+    influences:
+    rspec
+    cucumber
+    xunit (starting with junit)
+    xtest
+
 <pre>
 ---
+# top-level sequence of hashes
+- describe: some string
+  type: ...
+  test: (same as describe)
+  tests: (same as describe)
+  test_for: (same as describe)
+  tests_for: (same as describe)
+  context: (same as describe)
+  contexts: (same as describe)
+  it: (same as describe)
+  examples: (same as describe)
+  examples_for: (same as describe)
+  subject: string (or maybe a hash of name/initialization?)
+  given:
+    name:
+    type:
+    initialization:
 
-starter:
-wrapper:
-library:
-(reference:)
-model_solution:
-multiple models?
 
-input generator?
 
+
+
+  imports: string
+  helpers: string (covers let, etc.)
+  options:
+    grading:
+      weight:
+      visibility: example, hidden
+        show: input, output, expected output, input code, expected code
+      category: tool-specific label (public, instructor, example, etc.)
+    matching:
+      string normalization options
+  
+  before:
+  
+  files: [{pathname: ..., content: ...}, {location: url}, ...]
+  given: (same as subject?)
+  given_input:
+  when:  
+  invariant:
+  then:
+   [ { clause: ..., parameters = { ... }, use reference: { subject: ..., reference: ...}}]
+  then_output:
+  then_output_matches:
+  then_reference_output: (grade by reference implementation)
+  
+  after:
+
+  
+  suites: (nested as deeply as desired,)
+
+
+
+
+
+
+
+  name:
+  description:
+  weight:
+  type: (unit test, IO test, JavaX.Swing test, code quality test, custom)
+  files: (injected)
+  failure message:
+  show unit code:
+  show output:
+  
+  # for IO:
+  automatically generate output:
+  show input:
+  show output:
+  show correct output:
+  show diff:
+  enable output regex:
 </pre>
--->
+
   </div></section>
 
 </body>

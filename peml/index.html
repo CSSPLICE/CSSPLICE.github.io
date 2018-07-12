@@ -27,17 +27,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-        <!--
           <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link active" href="index.html">Introduction</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
+            <a class="nav-link" href="exercise-model.html">Exercise Model</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
+            <a class="nav-link" href="code-model.html">Code Assets</a>
           </li>
-        -->
+          <li class="nav-item">
+            <a class="nav-link" href="testing-model.html">Testing Model</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pemltest.html">Testing Language</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -675,79 +679,21 @@ stdout: url(http://my.school.edu/some/local/generator/output)
   </div></section>
 
   <section id="model"><div class="container">
-    <h2>Data Model</h2>
-    <p>Still writing this! ...</p>
+    <h2>The Details</h2>
 
-    <!-- <p>Every exercise requires a <b>title</b> property, and that also serves
-    as the marker for the start of an exercise description. This allows a
-    single file to include multiple exercise descriptions, if desired.
-    Otherwise, property order within a mapping doesn't matter.
-    </p> -->
-
-  </div></section>
-
-  <section id="tests"><div class="container">
-    <h2>Specifying Tests</h2>
-    <p>Still writing this! ...</p>
-
-    <p>We expect there to be a wide variety of test specification formats,
-    and they may not all be supported by all automated grading tools. Many
-    may be programming-language-specific, and only suitable for exercises
-    where solutions are written in that one language. However, we feel that
-    supporting some variety here is much better than forcing everyone to
-    conform to a single format, and limiting assessment actions (and feedback
-    possibilities) to that one style only.</p>
-    
-    <p>Although we're still missing a lot of the details here, we expect that
-    this section will include (but not be limited to) at least the
-    following:</p>
     <ul>
-    <li><p><b>Stdin/stdout text segments</b>, for testing main programs that
-      read/write text. This will probably include ClodeCoder-style regular
-      expression support plus some Web-CAT-inspired normalization options
-      so that less-brittle matching can be supported with little effort.
-    </p></li>
-    <li><p><b>Tables of input values and expected results</b>, which are
-      commonly used for assignments that are more functional in nature,
-      rather than focused on objects or whole programs. In some ways,
-      stdin/stdout testing is a special case of flexible input/output tables
-      (just with larger, string-only values).
-    </p></li>
-    <li><p><b>Native XUnit-style</b> executable software tests (such as JUnit,
-      CxxTest, NUnit, pyunit, etc.). These would be language-specific, but
-      are already used widely enough, and are expressive enough, that
-      they play an important role.
-    </p></li>
-    <li><p>A <b>custom testing DSL</b> designed to express a wide variety of
-      software tests in a more concise, lighter weight way than XUnit
-      programming. This DSL supports writing tests for multiple programming
-      languages, and test specs can be translated down to executable
-      XUnit-style tests in the target language.
-    </p></li>
-    <li><p><b>Generator-based strategies</b> where inputs of some form and
-      expected outputs are programmatically generated fresh for every
-      attempt.
-    </p></li>
-    <li><p><b>Reference solution strategies</b> where input comes from
-      one of the approaches covered another way, but expected output is
-      produced by running a reference solution provided by the
-      exercise author, instead of being described as part of the tests.
-    </p></li>
+      <li><p><a href="exercise-model.html">The Data Model for
+        Exercises</a></p></li>
+      <li><p><a href="code-model.html">The Data Model for
+        Code Assets</a></p></li>
+      <li><p><a href="testing-model.html">The Data Model for
+        Software Tests</a></p></li>
+      <li><p><a href="pemltest.html">PEML-Test: a Language for Describing
+        Software Tests</a></p></li>
     </ul>
-    
-    <p>We believe that many such test expression formats can all be
-    represented as a sequence (array) of hashes, and should naturally fit
-    into a data model that is readily expressable in PEML, YAML, or JSON.
-    </p>
-    <p>We also expect that a variety of test case attributes (visibility,
-    weight, scoring, etc.) may cleanly fit in as additional keys within
-    a hash representing a test, and thus may be applicable to many of
-    the formats listed above.
-    </p>
-    <p>
-    OK, more to come later! ...
-    </p>
+
   </div></section>
+
 
 </body>
 </html>
