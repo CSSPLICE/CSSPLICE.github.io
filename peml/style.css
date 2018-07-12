@@ -1,0 +1,26 @@
+@import url(https://fonts.googleapis.com/css?family=Overlock:900);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
+
+pre {
+  background-color: #e4f0f5;
+  padding: 1rem;
+  border-left: 5px solid #3f87a6;
+  color: black;
+  font-size: 100%;
+}
+
+h2 {
+  margin-top: 1.5em;
+  padding-top: 0.5em;
+  border-top: 3px solid #3f87a6;
+}
+
+code, pre {
+  font-family: Inconsolata, Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+ 
+.navbar, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+{
+  font-family: "Overlock", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 900;
+}
