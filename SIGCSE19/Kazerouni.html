@@ -13,26 +13,35 @@
 
 
       <p>
-        There exist numerous "smart learning tools", each serving
-        different purposes. A primary challenge associated with these
-        tools is getting them to work together smoothly and with
-        minimal overhead for the end-user (e.g., instructors or
-        students). We describe the infrastructure behind the
-        integration of two learning tools with the Canvas LMS. This
-        infrastructure is LTI compliant and is in use at several US
-        universities.
+        OpenDSA is an e-Textbook project developed at Virginia Tech,
+        which provides materials to support courses in a wide variety
+        of Computer Science-related topics. OpenDSA primarily contains
+        Java exercises. ACOS server which is a smart learning content
+        server developed as a joint project of Aalto University and
+        the University of Pittsburgh. It enhances the reusability of
+        online learning activities by decoupling the content and the
+        existing interoperability protocols including LTI. ACOS is
+        capable of serving multiple smart contents including Python
+        animations and exercises. In this project, we present steps
+        toward integrating smart content served through ACOS into
+        OpenDSA.
       </p>
 
       <p>
-        OpenDSA is an e-textbook project that allows instructors to
-        create custom books by putting together combinations of
-        available modules, and CodeWorkout is an online system that
-        serves short programming exercises and multiple-choice
-        questions. I will describe the implementation that allows
-        OpenDSA textbooks to serve CodeWorkout exercises within
-        Canvas. OpenDSA does this by being a "man in the middle",
-        i.e., by functioning both as a tool consumer (facing
-        CodeWorkout) and as a tool provider (facing Canvas)
+        Similarly, CodeWorkout is an open source system which helps
+        students to practice small programming problems. Mastery Grids
+        is also open source progress visualization environment which
+        has open (social) learner model features designed at the
+        University of Pittsburgh. In this project, we extended
+        contents served by Mastery Grids by integrating CodeWorkout
+        exercises and visualize student progress in an Open Learner
+        Model.
+      </p>
+ 
+      <p>
+        All of this has been possible because all of these tools
+        support LTI, reiterating the importance of why the utilization
+        of standards while developing applications is important.
       </p>
 
       <p>Paper: To appear</p>
