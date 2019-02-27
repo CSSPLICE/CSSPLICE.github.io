@@ -56,16 +56,219 @@
       for describing automatically graded programming assignments.</p>
   </div>
 
-  <section id="goals"><div class="container">
-    <h2>Title</h2>
+  <section id="required"><div class="container">
+    <h2>Required Keys</h2>
 
-    <p>Still writing this! ...</p>
+    <p>The following set of keys are required for an exercise. By convention,
+    exercises should start with the <code>exercise_id</code> key, so that
+    multiple exercises can be concatenated together in a single file but
+    still sliced/parsed as separate exercises easily.</p>
+    
+    <dl>
+    <dt><code>exercise_id</code></dt>
+    <dd><p>
+      A globally unique, human-written identifier created by the exercise
+      author to uniquely identify this exercise on any system. Any sequence
+      of non-whitespace unicode characters can be used. We imagine that
+      authors might construct these identifiers in similar ways to
+      programming package names. For example, the following ID includes a
+      university and course identifier around an exercise name that is
+      presumed to be unique within that context. By combining the context
+      and the name, a globally unique identifier can be formed: 
+    </p>
+<pre>
+exercise_id: edu.vt.cs.cs1114.palindromes
+</pre>
+    </dd>
+    <dt><code>title</code></dt>
+    <dd><p>
+      A string name or title used as a human-readable label for the
+      exercise. The intent is for this to be the "title" shown to students
+      in various contexts, either when viewing a single exercise or when
+      viewing lists of exercises.  While there is no specific length limit,
+      ideally titles should be no more than "one line" in size, because of
+      the various contexts where they might be displayed. How much of the
+      title is displayed (or truncated) when collections of exercises are
+      shown is tool-dependent.
+    </p>
+<pre>
+title: Palindromes (A Simple PEML Example)
+</pre>
+    </dd>
+    <dt><code>instructions</code></dt>
+    <dd><p>
+      The instructions for the student describing the task to complete. This
+      is the meat of the "assignment" or "exercise". The value associated
+      with this key is a string, but probably a long one. As with any
+      key/value pairs in PEML, quoting can be used. Instructions written
+      in Markdown (or, as a subset, vanilla HTML) are useful.
+    </p>
+<pre>
+instructions:----------
+Write your full assignment instructions here. Inline text instead of
+a separate PDF resource is preferred.
+...
+----------
+</pre>
+    </dd>
+    <dt><code>version.timestamp</code></dt>
+    <dd><p>
+      A human-readable timestamp indicating the time at which this version
+      of the exercise was last modified. For lack of a better option, at
+      the moment this should be an RFC 3339/ISO 8601 UTC timestamp (if you
+      know of something more user-friendly but equally unambiguous, let
+      us know!). That format is: YYYY-MM-DDThh:mm:ss.nnn±hh:mm.
+    </p>
+<pre>
+version.timestamp: 2018-08-25T15:23:22.635-05:00
+</pre>
+    </dd>
+    </dl>
 
-    <!-- <p>Every exercise requires a <b>title</b> property, and that also serves
-    as the marker for the start of an exercise description. This allows a
-    single file to include multiple exercise descriptions, if desired.
-    Otherwise, property order within a mapping doesn't matter.
-    </p> -->
+  </div></section>
+
+  <section id="optional"><div class="container">
+    <h2>Optional Keys</h2>
+
+    <p>The following set of keys are required for an exercise. By convention,
+    exercises should start with the <code>exercise_id</code> key, so that
+    multiple exercises can be concatenated together in a single file but
+    still sliced/parsed as separate exercises easily.</p>
+    
+    <dl>
+    <dt><code>tag</code></dt>
+    <dd><p>
+    </p>
+      <dl>
+      <dt><code>tag.topics</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      <dt><code>tag.required</code></dt>
+      <dd><p>
+      </p>
+        <dl>
+        <dt><code>tag.required.exposure</code></dt>
+        <dd><p>
+        </p>
+<pre>
+</pre>
+        </dd>
+        <dt><code>tag.required.familiarity</code></dt>
+        <dd><p>
+        </p>
+<pre>
+</pre>
+        </dd>
+        <dt><code>tag.required.mastery</code></dt>
+        <dd><p>
+        </p>
+<pre>
+</pre>
+        </dd>
+        </dl>
+      </dd>
+      <dt><code>tag.book</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      <dt><code>tag.course</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      <dt><code>tag.style</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      <dt><code>tag.personal</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      </dl>
+    </dd>
+    <dt><code>difficulty</code></dt>
+    <dd><p>
+    </p>
+<pre>
+</pre>
+    </dd>
+    <dt><code>version</code></dt>
+    <dd><p>
+    </p>
+      <dl>
+      <dt><code>version.id</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      <dt><code>version.repository</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      </dl>
+    </dd>
+    <dt><code>license</code></dt>
+    <dd><p>
+    </p>
+      <dl>
+      <dt><code>license.id</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      <dt><code>license.book</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      <dt><code>license.owner</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      <dt><code>license.attribution</code></dt>
+      <dd><p>
+      </p>
+<pre>
+</pre>
+      </dd>
+      </dl>
+    </dd>
+    <dt><code>forked.*</code></dt>
+    <dd><p>
+    </p>
+<pre>
+</pre>
+    </dd>
+    <dt><code>assets.*</code></dt>
+    <dd><p>
+    </p>
+<pre>
+</pre>
+    </dd>
+    <dt><code>vendor.*</code></dt>
+    <dd><p>
+    </p>
+<pre>
+</pre>
+    </dd>
+    </dl>
 
   </div></section>
 
