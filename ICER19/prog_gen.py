@@ -35,20 +35,25 @@ with open("ICER19/splice_icer19.csv", encoding="utf8") as file:
         authors = html.escape(row["Authors"])
         category = html.escape(row["Category"])
         abstract = html.escape(row["Abstract"]).replace("\n", "<br/>\n")
+        slides_link = row["SlidesLink"]
 
-        link = "proc/SPLICE_2019_ICER_paper_" + row["Number"] + ".pdf"
+        paper_link = "proc/SPLICE_2019_ICER_paper_" + row["Number"] + ".pdf"
 
         if last_category != category:
             body += "<h2>%ss</h2>\n" % category
             last_category = category
 
+        slides = ""
+        if slides_link != "":
+          slides = "<b>Slides</b>: <a href='%s' target='_blank'>Available Here</a><br/>" % (slides_link)
+
         body += """
         <p>
             <b>Title</b>: <a href="%s" target="_blank">%s</a><br/>
             <b>Authors</b>: %s<br/>
+            %s
             <b>Abstract</b>: <small>%s</small>
-        </p>
-        """ % (link, title, authors, abstract)
+        </p>""" % (paper_link, title, authors, slides, abstract)
 
 body += """
     </div>
