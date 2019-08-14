@@ -24,3 +24,5 @@ code, pre {
   font-family: "Overlock", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 900;
 }
+
+.container-fluid section:first-of-type h2 { margin-top: 0; }

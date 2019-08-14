@@ -31,13 +31,16 @@
             <a class="nav-link active" href="index.html">Introduction</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="exercise-model.html">Exercise Model</a>
+            <a class="nav-link" href="schemas/definitions.html">Building Blocks</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="code-model.html">Code Assets</a>
+            <a class="nav-link" href="schemas/exercise.html">Exercise Model</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="testing-model.html">Testing Model</a>
+            <a class="nav-link" href="schemas/code.html">Code Assets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="schemas/testing.html">Testing Model</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pemltest.html">Testing Language</a>
@@ -382,7 +385,7 @@ stdout: url(http://my.school.edu/some/local/generator/output)
     Inspired by YAML's document start and end markers, PEML uses a specific
     comment line ("#---", a pound sign followed by three dashes) to signal
     the start of a PEML description. This marker is optional for the first
-    PEML description in text stream, but serves as the delimiter between
+    PEML description in a text stream, but serves as the delimiter between
     exercises if multiple PEML descriptions are presented in a single file
     or stream. The current PEML description continues until the next occurrence
     of this marker (signaling the beginning of a new exercise), or the end
@@ -428,6 +431,10 @@ You can use any printable character as the delimiter,
 as long as it is repeated at least three times. The ending
 delimiter must exactly match the starting one, and appear
 on its own line with no indentation.
+
+Of course, using a punctuation symbol such as -, =, ~, +, etc.,
+is encouraged, and use of letters or digits is discouraged
+since it may reduce readability.
 ~~~~~
 </pre>
     <p>Of course, many programming languages also use # as a comment character.
@@ -444,6 +451,30 @@ on its own line with no indentation.
     So use Markdown or HTML for adding formatting to your text. Plain,
     unformatted text also works, when no special formatting markup is
     desired. Here, we specify git's flavor of markdown.</p>
+    <p>
+    <i>Note:</i> It is easy to consider adding a key for "text_format:",
+    specifying markdown as the default but allowing individual users to
+    use other markup formats (such as reStructuredText, AsciiDoc, POD,
+    LaTeX, etc.). However, allowing this dialectic specialization risks
+    making PEML descriptions harder to port among tools unless all tools
+    support the superset of all commonly used formats. Currently, in the
+    interests of interoperability, we're restricting text markup to using
+    Markdown, but public comments/debate on allowing other formats is welcome.
+    </p>
+    <p>
+    <i>Another Note:</i> Actually, by using
+    <a href="https://pandoc.org/">pandoc</a> and a PEML parsing wrapper, it
+    should be possible to create a web service that can read
+    a PEML document using a wide variety of text markup formats and normalize
+    any of them to using github-style Markdown, including reStructuredText,
+    many dialects of markdown, many wiki markup languages, Docbook, LaTeX,
+    and even Microsoft Word docx files (!). Unfortunately, this doesn't
+    address AsciiDoc :-(. At this point, it is plausible to consider supporting
+    other markup formats along with an appropriate "text_format:" key if
+    community effort can generate the necessary support for adopting tools to
+    make use of it (i.e., through a translation web site for converting PEML
+    using a different text markup into PEML using github Markdown, for example).
+    </p>
 
     <h3>External Resources</h3>
     <p>
@@ -458,7 +489,8 @@ instructions: url(some/directory/assignment.pdf)
 </pre>
 
     <p>While we strongly discourage the use of PDF assignment descriptions,
-    any key value can be farmed out into an external file that may be
+    any key value can be farmed out into an external file (or directory of
+    files!) that may be
     stored locally (and referred to using a relative URL) or remotely
     (and referred to using an absolute URL). This approach might be most
     used for source code content stored in separate files, test data stored
@@ -682,11 +714,12 @@ stdout: url(http://my.school.edu/some/local/generator/output)
     <h2>The Details</h2>
 
     <ul>
-      <li><p><a href="exercise-model.html">The Data Model for
+      <li><p><a href="schemas/definitions.html">Building blocks: definitions of recurring model elements</a></p></li>
+      <li><p><a href="schemas/exercise.html">The Data Model for
         Exercises</a></p></li>
-      <li><p><a href="code-model.html">The Data Model for
+      <li><p><a href="schemas/code.html">The Data Model for
         Code Assets</a></p></li>
-      <li><p><a href="testing-model.html">The Data Model for
+      <li><p><a href="schemas/testing.html">The Data Model for
         Software Tests</a></p></li>
       <li><p><a href="pemltest.html">PEML-Test: a Language for Describing
         Software Tests</a></p></li>
