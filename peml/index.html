@@ -521,7 +521,34 @@ instructions: url(some/directory/assignment.pdf)
     in separate files, code libraries, and so on. Also, relative (or absolute)
     URLs used in embedded Markdown or HTML within keys may be appropriate for
     referring to images, downloadable resources accessible to the student,
-    etc.</p>
+    etc.
+    </p>
+
+    <h3>Splitting Up PEML Descriptions</h3>
+    <p>
+    In addition to allowing individual key values to be provided in external
+    files, PEML adds a <code>:include</code> directive that allows parts of
+    the PEML description to be included from another external location. While
+    this directive is not strictly necessary, it might be used by some
+    authors to factor out repeated key/value pairs (for the <code>license</code>,
+    <code>author</code>, environment definitions, etc.) so they can be written
+    once and reused across multiple PEML descriptions without repeating the
+    content.
+    </p>
+
+<pre>
+# An example of an external resource
+:include url(some/directory/cc-sa-license.peml)
+</pre>
+
+    <p>
+    Another use for <code>:include</code> is to allow an author to separate
+    out the definition of the test cases and test environment for an exercise
+    so they are placed in a separate file. This might be useful so that the
+    exercise description itself might be public/accessible, but the test cases
+    or grading criteria applied to the exercise are managed separately and
+    only available to some users.
+    </p>
 
     <h3>Nested Structure</h3>
     <p>
