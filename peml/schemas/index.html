@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Stephen Edwards">
 
-  <title>Programming Exercise Markup Language</title>
+  <title>PEML Schema</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
@@ -37,7 +37,7 @@
             <a class="nav-link" href="exercise.html">Exercise Model</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="code.html">Code Assets</a>
+            <a class="nav-link" href="code.html">Code Assets</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="testing.html">Testing Model</a>
@@ -59,102 +59,45 @@
       for describing automatically graded programming assignments.</p>
   </div>
 
-  <section id="goals"><div class="container">
-    <h2>Title</h2>
-    <p>blah blah blah ...
+  <section><div class="container">
+    <h2>PEML Schema</h2>
+    <p>PEML, the <a href="../index.html">Program Exercise Markup Language</a>,
+    is a notation for authoring/describing programming exercises. This page
+    links to its data model definition, both in terms of more syntactically
+    formalized <a href="http://json-schema.org/">JSON Schema</a> documents
+    and in terms of the human-readable documentation.</p>
+
+  <section>
+    <h3>JSON Schema Definitions</h3>
+    <p>The following documents describe the structure of the data model
+    using <a href="http://json-schema.org/">JSON Schema</a>. This schema
+    notation is used because it is widely available and is a convenient way
+    to describe a structured data format, even though PEML uses its own
+    notation instead of JSON for describing artifacts. PEML representations
+    can be easily mapped into JSON or YAML representations of the same
+    data model.
     </p>
-<!--
-<pre>
----
-
-starter:
-wrapper:
-library:
-(reference:)
-model_solution:
-multiple models?
-
-input generator?
-
-</pre>
--->
-
-    <dl>
-
-    <dt><code>assets.*</code></dt>
-    <dd><p>
-    <pre>
-    assets.tests = url/location
-    assets.tests = array
-
-    .visibility
-
-    .stdin
-    .stdout
+    <ul>
+    <li><a href="PEML.json">http://cssplice.github.io/peml/schemas/PEML.json</a></li>
+    <li><a href="PEMLtest.json">http://cssplice.github.io/peml/schemas/PEMLtest.json</a>
+      <span class="badge badge-warning">coming soon</span></li>
+    <p>
+  </section>
     
-    .file.name
-    .file.content
-    .file.format
-    
-    .csv.pattern
-    .csv.content
-    .csv.delimiter = ,
-    .csv.trim = true/false
+  <section>
+    <h2>Data Model Documentation</h2>
+    <p>The human-readable documentation describing the intent/meaning
+      for the data model:</p>
+    <ul>
+      <li><a href="definitions.html">Building blocks: definitions of
+        recurring model elements</a></li>
+      <li><a href="exercise.html">The Data Model for Exercises</a></li>
+      <li><a href="code.html">The Data Model for Code Assets</a></li>
+      <li><a href="testing.html">The Data Model for Software Tests</a></li>
+      <li><a href="PEMLtest.html">The PEMLtest Data Model</a></li>
+    </ul>
 
-
-    assets.build/.run/.test
-      .environment
-        .extends = (previous)
-        .type
-        .container
-
-        .data
-        .lib
-        .include
-        .scripts
-        .commands
-
-
-    assets.data = url/location
-    assets.data = array
-    .file.*
-    ## Need some way to indicate whether zip urls need to be unpacked or not
-    ## Maybe add "#unpack" on the end of an archive url to request unpacking?
-    ## Then it looks kind of like a URL anchor name
-    ##---
-    ## Instead, make compressed archives that aren't simple files auto-uncompress
-
-    assets.environment.type
-    assets.environment.container = url/location
-    
-    assets.code.starter = url/location
-    assets.code.starter = array
-    .file.*
-
-    assets.code.lib = url/location
-    assets.code.lib = array
-    .file.*
-
-    assets.code.include = url/location
-    assets.code.include = array
-    .file.*
-
-    assets.code.solutions = url/location
-    assets.code.solutions = array
-    .label (reference)
-    .description
-    [.files]
-
-    assets.code.unified = url/location
-    assets.code.unified = array
-    .file.*
-    </pre>
-    </p>
-<pre>
-</pre>
-    </dd>
-    </dl>
-
+  </section>
 
   </div></section>
 

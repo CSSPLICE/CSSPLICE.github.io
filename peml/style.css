@@ -1,6 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Overlock:900);
 @import url(https://fonts.googleapis.com/css?family=Inconsolata);
 
+/* Weird fix for anchor loads so they don't slip under the nav bar */
+body { padding-top: 60px; }
+@media screen and (max-width: 768px) {
+  body { padding-top: 60px; }
+}
+*[id]:before { 
+  display: block; 
+  content: " "; 
+  margin-top: -75px; 
+  height: 75px; 
+  visibility: hidden; 
+}
+
+
 pre {
   background-color: #e4f0f5;
   padding: 1rem;
@@ -9,14 +23,29 @@ pre {
   font-size: 100%;
 }
 
+pre.schema {
+  background-color: #e2e3e5;
+  border-color: #383d41;
+}
+
 h2 {
-  margin-top: 1.5em;
-  padding-top: 0.5em;
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
   border-top: 3px solid #3f87a6;
 }
 
+h3 { margin-top: 0.5rem; padding-top: 0.5rem; }
+
 code, pre {
   font-family: Inconsolata, Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
 }
  
 .navbar, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
@@ -25,4 +54,14 @@ code, pre {
   font-weight: 900;
 }
 
-.container-fluid section:first-of-type h2 { margin-top: 0; }
+.bracket {
+  border-width: 3px 0 3px 3px;
+  border-style: solid;
+  border-color: #3f87a6;
+}
+
+.bracket.col-1 {
+    -ms-flex: 0 0 2rem;
+    flex: 0 0 2rem;
+    max-width: 2rem;
+}

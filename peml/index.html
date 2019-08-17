@@ -9,15 +9,30 @@
 
   <title>Programming Exercise Markup Language</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css" />
+  <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js" crossorigin="anonymous"></script>
+
   <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 
-<body role="document" id="bodytop">
+<body role="document" id="bodytop" data-spy="scroll" data-target="#toc">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
@@ -59,7 +74,16 @@
       for describing automatically graded programming assignments.</p>
   </div>
 
-  <section id="goals"><div class="container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <b>PEML Exercise Data Model</b>
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      <!-- main content area -->
+      <div class="col-9">
+
+  <section id="goals">
     <h2>Purpose</h2>
     <p>The <b>Programming Exercise Markup Language (PEML)</b> (feedback on
     name choice is welcome!) is intended to be a simple, easy format for
@@ -92,9 +116,9 @@
     in the name of the language is to remind developers that it covers a
     broader range of activities than what many instructors see as pure
     "programming assignments".</p>
-  </div></section>
+  </section>
 
-  <section id="whynot"><div class="container">
+  <section id="whynot">
     <h2>Why not YAML? or JSON?</h2>
     <p>Actually, one of our design goals is for PEML descriptions to be
     directly mappable to YAML <i>and</i> JSON, so that people who prefer
@@ -143,9 +167,9 @@
     program solutions, program text, whatever) with minimal additional
     reformatting work in order to create a readable, streamlined programming
     exercise representation.</p>
-  </div></section>
+  </section>
 
-  <section id="design"><div class="container">
+  <section id="design">
     <h2>Design Goals</h2>
     <p>OK, with the context for this description language out of the way,
     here are the specific objectives we are hoping to achieve:</p>
@@ -235,9 +259,9 @@
       about new tools or technologies.
       </p></li>
     </ol>
-  </div></section>
+  </section>
 
-  <section id="influences"><div class="container">
+  <section id="influences">
     <h2>Influences</h2>
     <p>In terms of inspiration, PEML has been influenced heavily by YAML
     and its relatives (including HAML), as well as many alternative
@@ -264,10 +288,10 @@
     <a href="https://doi.org/10.1145/1473195.1473240"><i>Developing a Common
     Format for Sharing Programming Assignments</i></a>.
     </p>
-  </div></section>
+  </section>
 
-  <section id="format"><div class="container">
-    <h2>Basic Format</h2>
+  <section id="format">
+    <h2>Basic Format (And an Example)</h2>
     <p>The remainder of this description is split into two main parts:
     first, the format for describing key/value pairs (in this section), and
     second, the data model (in the following section). We view these two
@@ -392,7 +416,7 @@ stdout: url(http://my.school.edu/some/local/generator/output)
     of input.
     </p>
 
-    <h3>Quoting</h3>    
+    <h3 id="quoting">Quoting</h3>    
     <p>
     On occasion, one may end up including text as part of a value that
     might also be recognizable as the start of a key. You can see this where
@@ -443,7 +467,7 @@ since it may reduce readability.
     code from such a programming language, to prevent a program's comment lines
     from being interpreted as PEML comments.</p>
 
-    <h3>Embedding Markdown (and HTML)</h3>
+    <h3 id="embedding-markup">Embedding Markdown (and HTML)</h3>
     <p>Special formatting in the textual description of the
     exercise can be written using
     <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">Markdown</a>,
@@ -570,9 +594,9 @@ stdout: url(some/local/output.txt)
     <p>Further details about nested mappings and sequences (and how they
     are terminated) are available in the
     <a href="http://archieml.org/">ArchieML</a> definition.</p>
-  </div></section>
+  </section>
 
-  <section id="model"><div class="container">
+  <section id="model">
     <h2>Side by Side</h2>
     <p>The (very brief) example shown above can be directly represented
     in JSON (or YAML):</p>
@@ -708,25 +732,23 @@ stdout: url(http://my.school.edu/some/local/generator/output)
 </pre>
       </div>
     </div>
-  </div></section>
+  </section>
 
-  <section id="model"><div class="container">
+  <section id="model">
     <h2>The Details</h2>
 
     <ul>
-      <li><p><a href="schemas/definitions.html">Building blocks: definitions of recurring model elements</a></p></li>
-      <li><p><a href="schemas/exercise.html">The Data Model for
-        Exercises</a></p></li>
-      <li><p><a href="schemas/code.html">The Data Model for
-        Code Assets</a></p></li>
-      <li><p><a href="schemas/testing.html">The Data Model for
-        Software Tests</a></p></li>
-      <li><p><a href="pemltest.html">PEML-Test: a Language for Describing
-        Software Tests</a></p></li>
+      <li><a href="schemas/definitions.html">Building blocks: definitions of
+        recurring model elements</a></li>
+      <li><a href="schemas/exercise.html">The Data Model for Exercises</a></li>
+      <li><a href="schemas/code.html">The Data Model for Code Assets</a></li>
+      <li><a href="schemas/testing.html">The Data Model for Software Tests</a></li>
+      <li><a href="pemltest.html">PEML-Test: a Language for Describing
+        Software Tests</a></li>
     </ul>
 
-  </div></section>
+  </section>
 
-
+</div></div></div>
 </body>
 </html>

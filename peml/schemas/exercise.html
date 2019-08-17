@@ -9,15 +9,30 @@
 
   <title>Programming Exercise Markup Language</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <link href="style.css" rel="stylesheet" type="text/css">
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css" />
+  <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js" crossorigin="anonymous"></script>
+
+  <link href="../style.css" rel="stylesheet" type="text/css">
 </head>
 
-<body role="document" id="bodytop">
+<body role="document" id="bodytop" data-spy="scroll" data-target="#toc">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
@@ -59,33 +74,159 @@
       for describing automatically graded programming assignments.</p>
   </div>
 
-  <section id="required"><div class="container">
-    <h2>Required Keys</h2>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <b>PEML Exercise Data Model</b>
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>
+      <!-- main content area -->
+      <div class="col-9">
 
-    <p>The following set of keys are required for an exercise. By convention,
-    exercises should start with the <code>exercise_id</code> key, so that
-    multiple exercises can be concatenated together in a single file but
-    still sliced/parsed as separate exercises easily.</p>
-    
-    <dl>
-    <dt><code>exercise_id</code></dt>
-    <dd><p>
-      A globally unique, human-written identifier created by the exercise
-      author to uniquely identify this exercise on any system. Any sequence
-      of non-whitespace unicode characters can be used. We imagine that
-      authors might construct these identifiers in similar ways to
-      programming package names. For example, the following ID includes a
-      university and course identifier around an exercise name that is
+  <section>
+    <h2 id="intro">Data Model Schema for PEML Exercises</h2>
+    <p>
+    This page presents the data model for PEML. While PEML is its own notation,
+    the data model's structure is also described in the form of a
+    <a href="http://json-schema.org/">JSON Schema</a> for PEML:
+    </p>
+    <p><a href="PEML.json">http://cssplice.github.io/peml/schemas/PEML.json</a></p>
+    <p>
+    Even though PEML uses its own notation, the data model's structure can
+    easily be mapped into JSON or YAML, and a JSON Schema provides a
+    program-checkable way of expressing the intended data model structure.
+    Snippets from the schema are included below to show the definitions
+    for each key/value field in PEML. PEML fields that have their own
+    substructure are described separately as building blocks in the
+    <a href="definitions.html">definitions of recurring model elements</a>.</p>
+    <p>
+    The main attributes of a PEML exercise description are broken down into
+    three groups: 
+    </p>
+
+    <p><b>Required keys</b></p>
+    <ul>
+    <li><a href="#exercise_id">exercise_id</a></li>
+    <li><a href="#title">title</a></li>
+    <li><a href="#version.timestamp">version.timestamp</a></li>
+    <li><a href="#author">author</a> (or <code>authors</code>) (at least one
+      of <code>author</code> or <code>license.owner</code> is required)</li>
+    </ul>
+
+    <p><b>Recommended keys</b></p>
+    <ul>
+    <li><a href="#instructions">instructions</a> (at least one of
+      <code>instructions</code> or <code>assets</code> is required)</li>
+    <li><a href="#assets">assets</a></li>
+    <li><a href="#tags">tags</a></li>
+    <li><a href="#version">version</a>
+      <ul>
+      <li><a href="#version.timestamp">version.timestamp</a></li>
+      <li><a href="#version.type">version.type</a></li>
+      <li><a href="#version.id">version.id</a></li>
+      <li><a href="#version.repository">version.repository</a></li>
+      <li><a href="#version.location">version.location</a></li>
+      </ul></li>
+    <li><a href="#license">license</a>
+      <ul>
+      <li><a href="#license.id">license.id</a></li>
+      <li><a href="#license.owner">license.owner</a></li>
+      <li><a href="#license.book">license.book</a></li>
+      <li><a href="#license.attribution">license.attribution</a></li>
+      <li><a href="#license.acknowledgements">license.acknowledgements</a></li>
+      <li><a href="#license.permissions">license.permissions</a></li>
+      </ul></li>
+    </ul>
+
+    <p><b>Optional keys</b></p>
+    <ul>
+    <li><a href="#difficulty">difficulty</a></li>
+    <li><a href="#options">options</a></li>
+    <li><a href="#origin">origin</a></li>
+    <li><a href="#vendor">vendor</a></li>
+    </ul>
+
+    <p>It is important to note that PEML allows the use of additional keys
+    beyond those described here, which may be custom-supported by specific
+    tools. THe list of keys described here is intended to provide a
+    <b>common vocabulary</b> that can be used by many tools for
+    <b>representing</b> programming exercises, to facilitate <b>authoring</b>,
+    <b>importing</b>, and <b>exporting</b> these exercises. Some
+    keys may relate to features or content that is not supported in every
+    tool, but the goal is to streamline the ability of instructors (or "people"
+    in general) to get exercises into (and potentially out of) educational
+    tools.</p>
+
+  </section>
+
+  <section>
+    <h2 id="required">Required Keys</h2>
+    <p>
+    <strong>Required</strong> keys must be present in each PEML description.
+    We keep these to a minimum. However, to promote some aspects of
+    interoperability and data management, considering these required elements
+    on every exercise will help authors keep information organized when it
+    is imported into tools.
+    </p>
+
+  <section>
+    <h3 id="exercise_id" data-toc-text="exercise_id">exercise_id
+      <small class="text-muted">required: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"exercise_id": { "type": "string", "minLength": 1, "pattern": "^[^\s]+$" }
+</pre>
+
+    <p>
+      The <code>exercise_id</code> is a globally unique, human-written
+      identifier created by the exercise
+      author to uniquely identify this exercise on any system. Any non-empty
+      sequence of non-whitespace unicode characters can be used. We imagine
+      that authors might construct these identifiers in similar ways to
+      programming package names or URLs. For example, the following ID includes
+      a university and course identifier around an exercise name that is
       presumed to be unique within that context. By combining the context
       and the name, a globally unique identifier can be formed: 
     </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
 <pre>
 exercise_id: edu.vt.cs.cs1114.palindromes
 </pre>
-    </dd>
-    <dt><code>title</code></dt>
-    <dd><p>
-      A string name or title used as a human-readable label for the
+    <p>
+      By convention, exercises should start with the <code>exercise_id</code>
+      key first, so that multiple exercises can be concatenated together in a
+      single file but still sliced/parsed as separate exercises easily.
+    </p>
+    <p>
+      The purpose of the <code>exercise_id</code> is to serve as an external
+      identifier that tools (and people) can use to determine whether two
+      PEML descriptions describe "the same thing". Exercises with different
+      ids should be considered as distinct entities, rather than as different
+      versions of the "same thing". The <code>version</code> key is used to
+      identify basic version info for long-lived exercises.
+    </p>
+    <p>
+      When a user externally edits an exercise representation and re-imports
+      it into a tool, or exports an exercise from one tool to use in another
+      context, tools can use the <code>exercise_id</code> to determine whether
+      imported information is an update to an existing artifact or whether it
+      defines a new exercise.
+  </section>
+
+
+  <section>
+    <h3 id="title" data-toc-text="title">title
+      <small class="text-muted">required: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"title": { "type": "string", "minLength": 1 }
+</pre>
+
+    <p>
+      The <code>title</code> is a string name or title used as a human-readable
+      label for the
       exercise. The intent is for this to be the "title" shown to students
       in various contexts, either when viewing a single exercise or when
       viewing lists of exercises.  While there is no specific length limit,
@@ -94,18 +235,137 @@ exercise_id: edu.vt.cs.cs1114.palindromes
       title is displayed (or truncated) when collections of exercises are
       shown is tool-dependent.
     </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
 <pre>
 title: Palindromes (A Simple PEML Example)
 </pre>
-    </dd>
-    <dt><code>instructions</code></dt>
-    <dd><p>
-      The instructions for the student describing the task to complete. This
-      is the meat of the "assignment" or "exercise". The value associated
-      with this key is a string, but probably a long one. As with any
-      key/value pairs in PEML, quoting can be used. Instructions written
-      in Markdown (or, as a subset, vanilla HTML) are useful.
+  </section>
+
+  <section>
+    <h3 id="version.timestamp" data-toc-text="version.timestamp">version.timestamp
+      <small class="text-muted">required: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"timestamp": {
+  "type": "string",
+  "minLength": 1,
+  "pattern": "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d{1,9})?(?:Z|[+-][01]\\d:[0-5]\\d)$",
+}
+</pre>
+
+    <p>
+      Just as in YAML or JSON, a PEML description represents a set of key/value
+      pairs (a dictionary, hash, or map, also called an "object" in JSON terms),
+      where keys can map to nested structured values. In PEML, dotted names
+      represent nesting structure. The <code>version</code> key maps to a
+      nested dictionary (or object) containing one required subkey:
+      <code>timestamp</code>. The other fields inside
+      <code>version</code> are optional and <a href="#version">described
+      below under recommended keys</a>. 
     </p>
+    <p>
+      The <code>version.timestamp</code>
+      is a human-readable timestamp indicating the time at which this version
+      of the exercise was last modified. For lack of a better option, at
+      the moment this should be an RFC 3339/ISO 8601 UTC timestamp (if you
+      know of something more user-friendly but equally unambiguous, let
+      us know!). That format is: YYYY-MM-DDThh:mm:ss.nnn±hh:mm.
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+version.timestamp: 2018-08-25T15:23:22.635-05:00
+</pre>
+  </section>
+    <p>
+      We expect that tool-edited exercise descriptions will likely generate
+      this field's contents automatically. Also, tools will no doubt have to
+      cope with the fact that authors who externally edit PEML representations
+      might make multiple edits and re-import an exercise multiple times,
+      while "forgetting" to manually update the timestamp. The point of the
+      timestamp is to help authors (and tools) to distinguish between multiple
+      edits/versions of a single exercise (with one <code>exercise_id</code>).
+      However, tool developers are encouraged to keep hash fingerprints of
+      exercise descriptions internally so that when externally edited/modified
+      PEML descriptions are re-uploaded, they can (a) detect meaningful content
+      changes, (b) use <code>version.timestamp</code> values to determine
+      whether an import is a "newer" revision and inform users if the internally
+      stored version is newer than what is being imported, and (c) in the
+      case of <code>version.timestamp</code> "ties", prompt the author/user
+      for more information (for example, suspecting failure to update the
+      timestamp in a changed PEML description for an exercise that has already
+      been imported).
+    </p>
+  </section>
+  <section>
+    <h3 id="author" data-toc-text="author">author
+      <small class="text-muted">required: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"author": { "type": "string", "minLength": 1 }
+</pre>
+
+    <p>
+      The <code>author</code> tag is used to identify the author of the
+      exercise (or at least of the PEML exercise description). Recommended
+      practice is to identify the author by a unique e-mail address. This
+      field can be used to provide a single e-mail address. Alternatively,
+      the key <code>authors</code> can be used to provide a list of one or
+      more author e-mail addresses to identify a set of multiple authors.
+      This can be a single string of comma-separated e-mail addresses, or
+      the e-mail addresses can actually be provided as a PEML array (list).
+      Both forms have the same meaning.
+    </p>
+    <p>
+      If the optional <code>license</code> key is provided and the
+      <code>license.owner</code> is the same as the <code>author</code>, then
+      the <code>author</code> key can be omitted.
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+author: edwards@cs.vt.edu
+</pre>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+# Just a comma-separated string
+authors: edwards@cs.vt.edu, ayaan@vt.edu
+
+
+# Alternatively, can use an array structure
+[authors]
+* edwards@cs.vt.edu
+* ayaan@vt.edu
+[]
+</pre>
+  </section>
+  </section>
+
+
+  <section>
+    <h2 id="recommended">Recommended Keys</h2>
+
+  <section>
+    <h3 id="instructions" data-toc-text="instructions">instructions
+      <small class="text-muted">recommended: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"instructions": { "type": "string" }
+</pre>
+
+    <p>
+      The <code>instructions</code> is where you can provide the exercise's
+      instructions for the student describing the task to complete. This
+      is the meat of the "assignment" or "exercise" in many cases. The value
+      associated with this key is a string, but probably a long one. As with
+      any key/value pairs in PEML, <a href="../index.html#quoting">quoting can
+      be used</a>. Instructions <a href="../index.html#embedding-markup">written
+      in Markdown</a> (or, as a subset, vanilla HTML) are useful, and some
+      tools <a href="../index.html#embedding-markup">may support other
+      markup formats</a>.
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
 <pre>
 instructions:----------
 Write your full assignment instructions here. Inline text instead of
@@ -113,233 +373,497 @@ a separate PDF resource is preferred.
 ...
 ----------
 </pre>
-    </dd>
-    <dt><code>version.timestamp</code></dt>
-    <dd><p>
-      A human-readable timestamp indicating the time at which this version
-      of the exercise was last modified. For lack of a better option, at
-      the moment this should be an RFC 3339/ISO 8601 UTC timestamp (if you
-      know of something more user-friendly but equally unambiguous, let
-      us know!). That format is: YYYY-MM-DDThh:mm:ss.nnn±hh:mm.
+    <p>
+      Note that some educational tools that support PEML may not use the
+      instructions, or may expect that the instructions are provided through
+      some means external to the tool. In these cases, the
+      <code>instructions</code> field can be omitted, although in practice
+      either <code>instructions</code> (describing the assignment) or
+      <code>assets</code> (describing how a solution would be tested) are
+      required.
     </p>
+    <p>
+      If in a specific situation the exercise's instructions are intended to
+      be accessible through a course management system, an instructor-provided
+      website, or some other mechanism, a URL can be used:
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+instructions: url(https://canvas.myschool.edu/courses/12345/assignments/12345)
+</pre>
+    <p>
+      While assignments can be farmed out into external files in this way,
+      we strongly discourage the use of PDF assignment descriptions as
+      limiting the value/utility of a PEML resource. However, in many
+      cases that may be the fastest/cleanest way for an author to get started,
+      and who then may move more into embedding markup in PEML descriptions
+      on future assignments as time permits.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="assets" data-toc-text="assets">assets
+      <small class="text-muted">recommended: object</small></h2>
+
+    <p>
+      The <code>assets</code> key maps to a nested dictionary (object) that
+      defines the source code assets associated with the exercise. The full
+      definition of what is included under <code>assets</code> is described
+      in the <a href="code.html">code data model</a>.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="tags" data-toc-text="tags">tags
+      <small class="text-muted">recommended: object</small></h2>
+
+    <p>
+      The <code>tags</code> key maps to a nested dictionary (object) that
+      defines categorical/classification/metadata about the exercise. The full
+      definition of what is included under <code>tags</code> is described
+      in the <a href="definitions.html#tags">building blocks definitions</a>.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="version" data-toc-text="version">version
+      <small class="text-muted">recommended: object</small></h2>
+
+    <p>
+      The <code>version</code> key maps to a nested dictionary (object) that
+      identifies the version of this exercise that is described. At a minimum,
+      the <code>version</code> should include a
+      <a href="#version.timestamp">timestamp</a> identifying when this
+      description was last updated. However, many authors may use forms of
+      version control to manage their sources (which is recommended), so
+      additional fields under <code>version</code> can be provided to
+      capture access paths to an exercise description's version history.
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
 <pre>
 version.timestamp: 2018-08-25T15:23:22.635-05:00
+version.type: git
+version.id: 2ab880a
+version.repository: url(https://github.com/CSSPLICE/peml.git)
+version.location: url(test/peml/palindrome.peml)
 </pre>
-    </dd>
-    </dl>
+    <p>
+      Some tools may be able to deduce the type, repository, id, and location
+      all from a single URL, such as with direct URLs to files on github.com.
+      In such a situation, only the full location URL needs to be specified:
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+version.timestamp: 2018-08-25T15:23:22.635-05:00
+version.location: url(https://github.com/CSSPLICE/peml/blob/master/test/peml/palindrome.peml)
+</pre>
 
-  </div></section>
+    <div class="container-fluid"><div class="row">
+      <div class="bracket col-1"></div>
+      <div class="col-11">
 
-  <section id="optional"><div class="container">
+        <section>
+          <h4 id="version.type">version.type
+            <small class="text-muted">optional: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"id": { "type": "string", "minLength": 1 }
+</pre>
+          <p>
+            The <code>version.type</code> captures the kind of version control
+            system or repository format used for this PEML description's
+            version history. Examples include: git, mercurial, CVS, Visual
+            SourceSafe, etc.
+          </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+version.type: git
+</pre>
+        </section>
+
+        <section>
+          <h4 id="version.id" data-toc-text="version.id">version.id
+            <small class="text-muted">optional: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"type": { "type": "string", "minLength": 1 }
+</pre>
+          <p>
+            The <code>version.id</code> is intended as a way to identify the
+            commit within the repository holding this description's contents.
+            It could be a tag, a branch name, a version number, a commit hash,
+            etc. It's exact meaning is dependent on the nature of the version
+            control system being used.
+          </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+version.id: 2ab880a
+</pre>
+        </section>
+
+        <section>
+          <h4 id="version.repository">version.repository
+            <small class="text-muted">optional: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"repository": { "type": "string", "minLength": 1 }
+</pre>
+          <p>
+            The <code>version.repository</code> is intended to provide an
+            access path to the repository containing this PEML description's
+            version history. This is most likely a URL (see the discussion of
+            URLs in
+            <a href="../index.html#design">Design Goals</a>), although
+            relative URLs that are resolved relative to the location of this
+            PEML description can be used.
+          </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+version.repository: url(https://github.com/CSSPLICE/peml.git)
+</pre>
+        </section>
+
+        <section>
+          <h4 id="version.location">version.location
+            <small class="text-muted">optional: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"location": { "type": "string", "minLength": 1 }
+</pre>
+          <p>
+            The <code>version.location</code> is intended to point to the
+            specific location of this PEML description inside its repository.
+            It could be, for example, a relative URL. Since this key is
+            intended to provide a location within the version control
+            repository, if a relative URL is provided and a
+            <code>version.repository</code> is also provided, the
+            <code>version.location</code> should be resolved relative to
+            the repository, rather than relative to the PEML description.
+          </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+version.location: url(test/peml/palindrome.peml)
+</pre>
+        </section>
+      </div>
+    </div></div>
+
+  </section>
+
+  <section>
+    <h3 id="license" data-toc-text="license">license
+      <small class="text-muted">recommended: object</small></h2>
+
+    <p>
+      The <code>license</code> key maps to a nested dictionary (object) that
+      identifies the license that applies to use of the exercise. At a minimum,
+      the <code>license</code> should include an
+      <a href="#license.id">id</a> identifying which license governs use
+      of the exercise. Additional information can be provided in the other
+      optional fields if desired.
+    </p>
+    <p>
+      If the <code>license</code> is provided, both the <code>license.id</code>
+      and the <code>license.owner</code> are <strong>required</strong>.
+    </p>
+
+    
+    <div class="container-fluid"><div class="row">
+      <div class="bracket col-1"></div>
+      <div class="col-11">
+
+        <section>
+          <h4 id="license.id">license.id
+            <small class="text-muted">required: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"id": { "type": "string", "minLength": 1 }
+</pre>
+          <p>
+            The <code>license.id</code> identifies the license used for this
+            exercise. The id can be specified by a URL that identifies the
+            license, or by a name (or abbreviated name) that is in common
+            use, such as any of the
+            <a href="https://help.github.com/en/articles/licensing-a-repository">license
+            keywords used by github</a> (an excellent source for potential
+            license choices).
+          </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+license.id: cc-sa-4.0
+</pre>
+        </section>
+        <section>
+          <h4 id="license.owner">license.owner
+            <small class="text-muted">required: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"owner": { "type": "string", "minLength": 1 }
+</pre>
+          <p>
+            The <code>license.owner</code> identifies the person who "owns"
+            the exercise being described, in the sense of intellectual
+            property. This could be an individual, a publisher, a corporation,
+            or whoever. For individual authors, unique e-mail addresses are
+            preferred as a method of identification, although any string that
+            unambiguously identifies the copyright holder/licenser for this
+            work can be used here.
+          </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+license.owner: edwards@cs.vt.edu
+</pre>
+        </section>
+        <section>
+          <h4 id="license.book">license.book
+            <small class="text-muted">optional: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"book": { "type": "string", "minLength": 1 }
+</pre>
+          <p>
+            In a situation where an exercise is part of a textbook or another
+            copyrighted resource, the <code>license.book</code> key can
+            be used to identify the source. In such cases, the "license" for
+            use of the exercise is presumably the same as the license for
+            the corresponding book or containing work. For most textbooks,
+            reuse of resources from the book presumably requires owning a
+            copy of the book. Such exercises should normally be limited to
+            use in situations where the textbook is required or optional for
+            a given pool of users (e.g., students in a course that use that
+            textbook). The value of the <code>license.book</code> can either
+            be a bibliographic-style citation for the book, or a URL
+            that identifies the book.
+          </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+version.book:
+Cay S. Hortsmann, _Big Java: Early Objects, 5th Edition_,
+Wiley, 2013. ISBN: 9788126554010
+</pre>
+          <p>
+            Tool developers are expected to be flexible and forgiving in terms
+            of allowing for a wide variety of human-authored variations in
+            specifying books, although tools should be free to "normalize"
+            these to a standard representation internally (and even for
+            presentation).
+          </p>
+        </section>
+        <section>
+          <h4 id="license.attribution">license.attribution
+            <small class="text-muted">optional: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"attribution": { "type": "string", "minLength": 1 }
+</pre>
+          <p>
+            The <code>license.attribution</code>, if provided, contains an
+            acknowledgement string that the license owner wishes for users
+            of the exercise to include when using the work. The
+            <code>license.attribution</code> should be provided for licenses
+            that require users to provide attribution (such as Creative
+            Commons licenses that include the "BY" requirement, or other
+            licenses that require attribution).
+          </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<pre>
+license.attribution:
+"Palindromes (A Simple PEML Example)" by edwards@cs.vt.edu is licensed
+under &lt;a href="https://creativecommons.org/licenses/by/4.0/"&gt;CC BY 4.0&lt;/a&gt;
+</pre>
+        </section>
+        <section>
+          <h4 id="license.acknowledgements">license.acknowledgements
+            <small class="text-muted">optional: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"acknowledgements": { "type": "string" }
+</pre>
+          <p>
+            The <code>license.acknowledgements</code>, if provided, contains
+            <i>all the attributions</i> this exercise makes for licensed
+            use of other (separate) content. While the
+            <code>license.attribution</code> contains content for the <i>users
+            of this exercise</i> to include in derived works, the
+            <code>license.acknowledgements</code> contains attributions
+            acknowledging <i>other content this exercise uses</i>.
+          </p>
+          <p>
+            Both the spelling "acknowledgments" (more common in the U.S.) and
+            "acknowledgements" (more common in Britain and elsewhere) should
+            be supported by tools (as synonyms).
+          </p>
+        </section>
+        <section>
+          <h4 id="license.permissions">license.permissions
+            <small class="text-muted">recommended: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"permissions": { "enum": [
+  "none",
+  "read",
+  "fork",
+  "fork-with-tests",
+  "contribute",
+  "all"
+] }
+</pre>
+          <p>
+            Although the license (as identified by the <code>license.id</code>
+            governs the rights that other users have with this exercise, the
+            <code>license.permissions</code> field provides a tool-processable
+            shorthand notation to capture the access permissions granted to
+            others by the license terms. The value should be one of:
+          </p>
+          <ul>
+          <li><p><code>none</code>: "all rights reserved" (for the
+            author(s)).</p></li>
+          <li><p><code>read</code>: all other users can read/practice the
+            exercise, use it in assignments, etc., but may not create any
+          <li><p><code>fork</code>: In addition to <code>read</code>
+            permissions, other users can "fork" this one--that is, use this
+            exercise as a starting point to create a new derived exercise.
+            Forking includes access to all aspects of the exercise except
+            the test suites and the test environment definition. Users are
+            expected to be aware of and obey any licensing restrictions
+            imposed by the license associated with the original exercise.
+          </p></li>
+          <li><p><code>fork-with-tests</code>: Implies the same access
+            permissions as <code>fork</code> but all test suites and test
+            environment details are also included.</p></li>
+          <li><p><code>contribute</code>: In addition to full
+            <code>fork-with-tests</code> access, <code>contribute</code> adds
+            the ability to edit and/or import updated versions of the original
+            exercise.</p></li>
+          <li><p><code>all</code>: Implies full access, which is the
+            permissions level of the author(s) and/or license owner.</p></li>
+          </ul>
+        </section>
+      </div>
+    </div></div>
+
+  </section>
+
+  </section>
+
+  <section id="optional">
     <h2>Optional Keys</h2>
 
-    <p>The following set of keys are required for an exercise. By convention,
-    exercises should start with the <code>exercise_id</code> key, so that
-    multiple exercises can be concatenated together in a single file but
-    still sliced/parsed as separate exercises easily.</p>
-    
-    <dl>
-    <dt><code>tag</code></dt>
-    <dd><p>
+  <section>
+    <h3 id="difficulty" data-toc-text="difficulty">difficulty
+      <small class="text-muted">optional: string</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"difficulty": { "type": "integer", "minimum": 0, "maximum": 100 }
+</pre>
+
+    <p>
+      The <code>difficulty</code> is a subjective rating of question
+      difficulty on an integer scale from 0 (easiest) to 100 (hardest).
+      <strong>Difficulty is relative</strong> to the presumed level of
+      the target audience intended for the exercise. Typically, an author
+      might use <code>tags</code> to indicate the topics/skills that they
+      expect the user to be familiar with, and also use <code>tags</code>
+      to indicate the topics/skills that the intended audience would be
+      <em>practicing</em> through this exercise. Together, the prerequisites
+      and the topics for the exercise communicate the author's idea of the
+      target audience, and difficulty should be interpreted relative to
+      that target audience.
     </p>
-      <dl>
-      <dt><code>tag.topics</code></dt>
-      <dd><p>
-      </p>
-<pre>
-</pre>
-      </dd>
-      <dt><code>tag.required</code></dt>
-      <dd><p>
-      </p>
-        <dl>
-        <dt><code>tag.required.exposure</code></dt>
-        <dd><p>
-        </p>
-<pre>
-</pre>
-        </dd>
-        <dt><code>tag.required.familiarity</code></dt>
-        <dd><p>
-        </p>
-<pre>
-</pre>
-        </dd>
-        <dt><code>tag.required.mastery</code></dt>
-        <dd><p>
-        </p>
-<pre>
-</pre>
-        </dd>
-        </dl>
-      </dd>
-      <dt><code>tag.book</code></dt>
-      <dd><p>
-      </p>
-<pre>
-</pre>
-      </dd>
-      <dt><code>tag.course</code></dt>
-      <dd><p>
-      </p>
-<pre>
-</pre>
-      </dd>
-      <dt><code>tag.style</code></dt>
-      <dd><p>
-      </p>
-<pre>
-</pre>
-      </dd>
-      <dt><code>tag.personal</code></dt>
-      <dd><p>
-      </p>
-<pre>
-</pre>
-      </dd>
-      </dl>
-    </dd>
-    <dt><code>difficulty</code></dt>
-    <dd><p>
+    <p>
+      Intuitively, the <code>difficulty</code> can be thought of as a rough
+      approximation of <strong>the percentage of the target audience who
+      might be unable to complete the exercise successfully</strong>. One
+      would normally
+      imagine that extreme values of 0 or 100 would not typically be used,
+      since exercises no one can complete (difficulty == 100), or that
+      everyone can trivially succeed at (difficulty == 0)) may have little
+      value. Instead, a <code>difficulty</code> of 50 should be thought of
+      as "average" difficulty, where an average student may have a 50/50
+      chance of completing the exercise successfully.
     </p>
-<pre>
-</pre>
-    </dd>
-    <dt><code>version</code></dt>
-    <dd><p>
+    <p>
+      However, don't overthink it, since difficulty ratings are both
+      subjective and relative. The author's intuitive reaction to the question
+      of "how hard or easy is this exercise compared to an 'average' exercise
+      for this target audience" is a better way to quickly assign a
+      difficulty value that can still be of value to others reading the
+      exercise description.
     </p>
-      <dl>
-      <dt><code>version.id</code></dt>
-      <dd><p>
-      </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
 <pre>
+difficulty: 60
 </pre>
-      </dd>
-      <dt><code>version.repository</code></dt>
-      <dd><p>
-      </p>
-<pre>
+  </section>
+
+  <section>
+    <h3 id="options" data-toc-text="options">options
+      <small class="text-muted">optional: object</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"options": { "type": "object" }
 </pre>
-      </dd>
-      </dl>
-    </dd>
-    <dt><code>license</code></dt>
-    <dd><p>
+
+    <p>
+      The <code>options</code> is ...
     </p>
-      <dl>
-      <dt><code>license.id</code></dt>
-      <dd><p>
-      </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
 <pre>
+options: 60
 </pre>
-      </dd>
-      <dt><code>license.book</code></dt>
-      <dd><p>
-      </p>
-<pre>
+  </section>
+
+  <section>
+    <h3 id="origin" data-toc-text="origin">origin
+      <small class="text-muted">optional: object</small></h2>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"origin": { "type": "object" }
 </pre>
-      </dd>
-      <dt><code>license.owner</code></dt>
-      <dd><p>
-      </p>
-<pre>
-</pre>
-      </dd>
-      <dt><code>license.attribution</code></dt>
-      <dd><p>
-      </p>
-<pre>
-</pre>
-      </dd>
-      </dl>
-    </dd>
-    <dt><code>forked.*</code></dt>
-    <dd><p>
+
+    <p>
+      The <code>origin</code> is ...
     </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
 <pre>
+origin: 60
 </pre>
-    </dd>
-    <dt><code>assets.*</code></dt>
-    <dd><p>
-    <pre>
-    assets.tests = url/location
-    assets.tests = array
+  </section>
 
-    .visibility
+  <section>
+    <h3 id="vendor" data-toc-text="vendor">vendor
+      <small class="text-muted">optional: object</small></h2>
 
-    .stdin
-    .stdout
-    
-    .file.name
-    .file.content
-    .file.format
-    
-    .csv.pattern
-    .csv.content
-    .csv.delimiter = ,
-    .csv.trim = true/false
+<p><span class="badge badge-secondary">Schema:</span></p>
+<pre class="schema">
+"vendor": { "type": "object" }
+</pre>
 
-
-    assets.build/.run/.test
-      .environment
-        .extends = (previous)
-        .type
-        .container
-
-        .data
-        .lib
-        .include
-        .scripts
-        .commands
-
-
-    assets.data = url/location
-    assets.data = array
-    .file.*
-    ## Need some way to indicate whether zip urls need to be unpacked or not
-    ## Maybe add "#unpack" on the end of an archive url to request unpacking?
-    ## Then it looks kind of like a URL anchor name
-    ##---
-    ## Instead, make compressed archives that aren't simple files auto-uncompress
-
-    assets.environment.type
-    assets.environment.container = url/location
-    
-    assets.code.starter = url/location
-    assets.code.starter = array
-    .file.*
-
-    assets.code.lib = url/location
-    assets.code.lib = array
-    .file.*
-
-    assets.code.include = url/location
-    assets.code.include = array
-    .file.*
-
-    assets.code.solutions = url/location
-    assets.code.solutions = array
-    .label (reference)
-    .description
-    [.files]
-
-    assets.code.unified = url/location
-    assets.code.unified = array
-    .file.*
-    </pre>
+    <p>
+      The <code>vendor</code> key is intended to be a nested map containing
+      any tool-specific keys or extension properties that individual
+      educational tools might support, but that are not intended to be
+      portable across a wide range of tools. The vocabulary and structure for
+      the contents within this dictionary/map do not have any restrictions
+      on how they are modeled.
     </p>
-<pre>
-</pre>
-    </dd>
-    <dt><code>vendor.*</code></dt>
-    <dd><p>
-    </p>
-<pre>
-</pre>
-    </dd>
-    </dl>
+  </section>
 
-  </div></section>
+  </section>
 
+</div></div></div>
 </body>
 </html>
