@@ -1,0 +1,15 @@
+header:
+  - title: Introduction
+    url: /
+  - title: Data Model
+    url: /schemas/
+  - title: PEMLtest
+    url: /PEMLtest/
+  - title: Examples
+    url: /examples/
+  - title: Software
+    url: https://github.com/CSSPLICE/peml/
+  - title: GitHub
+    url: https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/
+  - title: SPLICE
+    url: https://cssplice.github.io/

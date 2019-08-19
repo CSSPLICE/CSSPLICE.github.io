@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="en">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>PEML Data Model for Code Assets - PEML</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>PEML</title>
 
 <meta name="description" content="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programmi...">
-<link rel="canonical" href="https://cssplice.github.io/peml/schemas/code.html"><link rel="alternate" type="application/rss+xml" title="PEML" href="/peml/feed.xml">
+<link rel="canonical" href="http://localhost:4000/peml/assets/search.js"><link rel="alternate" type="application/rss+xml" title="PEML" href="/peml/feed.xml">
 <!-- begin favicon --><link rel="apple-touch-icon" sizes="180x180" href="/peml/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/peml/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/peml/assets/favicon-16x16.png"><link rel="manifest" href="/peml/assets/site.webmanifest"><link rel="mask-icon" href="/peml/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/peml/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/peml/assets/browserconfig.xml">
@@ -273,116 +273,19 @@
         </ul>
       </nav></div>
   </header>
-</div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>PEML Data Model for Code Assets</h1></header><span class="split-space">&nbsp;</span>
+</div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1></h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title=""
-            href="https://github.com/cssplice/cssplice.github.io/tree/master/peml/schemas/code.html">
+            href="https://github.com/cssplice/cssplice.github.io/tree/master/peml/assets/search.js">
             <i class="far fa-edit"></i></a></div><p class="overlay__excerpt">The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.</p></div>
               </div>
             </div><div class="grid grid--reverse">
 
               <div class="col-aside d-print-none js-col-aside"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div></aside></div>
 
-              <div class="col-main cell cell--auto"><article itemscope itemtype="http://schema.org/Article"><meta itemprop="headline" content="PEML Data Model for Code Assets"><meta itemprop="author" content="Virginia Tech"/><div class="js-article-content"><div class="layout--article">
+              <div class="col-main cell cell--auto"><article itemscope itemtype="http://schema.org/Article"><meta itemprop="headline" content=""><meta itemprop="author" content="Virginia Tech"/><div class="js-article-content"><div class="layout--article">
 
-  <div class="article__content" itemprop="articleBody"><section>
-  <h2 id="goals">Title</h2>
-  <p>blah blah blah ...
-  </p>
-<!--
-<pre>
----
-
-starter:
-wrapper:
-library:
-(reference:)
-model_solution:
-multiple models?
-
-input generator?
-
-</pre>
--->
-
-    <dl>
-
-    <dt><code>assets.*</code></dt>
-    <dd><p>
-    <pre>
-    assets.tests = url/location
-    assets.tests = array
-
-    .visibility
-
-    .stdin
-    .stdout
-    
-    .file.name
-    .file.content
-    .file.format
-    
-    .csv.pattern
-    .csv.content
-    .csv.delimiter = ,
-    .csv.trim = true/false
-
-
-    assets.build/.run/.test
-      .environment
-        .extends = (previous)
-        .type
-        .container
-
-        .data
-        .lib
-        .include
-        .scripts
-        .commands
-
-
-    assets.data = url/location
-    assets.data = array
-    .file.*
-    ## Need some way to indicate whether zip urls need to be unpacked or not
-    ## Maybe add "#unpack" on the end of an archive url to request unpacking?
-    ## Then it looks kind of like a URL anchor name
-    ##---
-    ## Instead, make compressed archives that aren't simple files auto-uncompress
-
-    assets.environment.type
-    assets.environment.container = url/location
-    
-    assets.code.starter = url/location
-    assets.code.starter = array
-    .file.*
-
-    assets.code.lib = url/location
-    assets.code.lib = array
-    .file.*
-
-    assets.code.include = url/location
-    assets.code.include = array
-    .file.*
-
-    assets.code.solutions = url/location
-    assets.code.solutions = array
-    .label (reference)
-    .description
-    [.files]
-
-    assets.code.unified = url/location
-    assets.code.unified = array
-    .file.*
-    </pre>
-    </p>
-<pre>
-</pre>
-    </dd>
-    </dl>
-
-</section>
-</div><footer class="article__footer"><!-- this will show at every article content's bottom --><div class="article__license"><div class="license">
+  <div class="article__content" itemprop="articleBody">window.TEXT_SEARCH_DATA={'posts':[]};</div><footer class="article__footer"><!-- this will show at every article content's bottom --><div class="article__license"><div class="license">
     <p>
       <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
         <img alt="Attribution-ShareAlike 4.0 International" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
@@ -638,7 +541,7 @@ input generator?
           $headings.each(function() {
             var $this = $(this);
             $tocUl.append($('<li></li>').addClass('toc-' + $this.prop('tagName').toLowerCase())
-              .append($('<a></a>').text($this.text()).attr('href', '#' + $this.prop('id'))));
+              .append($('<a></a>').html($this.html()).attr('href', '#' + $this.prop('id'))));
           });
           $tocLi = $tocUl.children('li');
           $tocUl.on('click', 'a', function(e) {

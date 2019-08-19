@@ -1,69 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Stephen Edwards">
+---
+title: PEML Data Model for Software Tests
+---
+<section>
+  <h2 id="tests">Specifying Tests</h2>
+  <p>Still writing this! ...</p>
 
-  <title>Programming Exercise Markup Language</title>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <link href="../style.css" rel="stylesheet" type="text/css">
-</head>
-
-<body role="document" id="bodytop">
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand" href="../index.html">PEML</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="../index.html">Introduction</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="definitions.html">Building Blocks</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="exercise.html">Exercise Model</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="code.html">Code Assets</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="testing.html">Testing Model</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../pemltest.html">Testing Language</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container jumbotron bg-primary text-white">
-    <h1>PEML</h1>
-    <p class="lead">The <strong>Programming Exercise Markup
-      Language</strong>.</p>
-    <hr class="my-4 bg-white"/>
-    <p>Designed to provide an ultra-human-friendly authoring format
-      for describing automatically graded programming assignments.</p>
-  </div>
-
-  <section id="tests"><div class="container">
-    <h2>Specifying Tests</h2>
-    <p>Still writing this! ...</p>
-
-    <p>We expect there to be a wide variety of test specification formats,
+  <p>We expect there to be a wide variety of test specification formats,
     and they may not all be supported by all automated grading tools. Many
     may be programming-language-specific, and only suitable for exercises
     where solutions are written in that one language. However, we feel that
@@ -71,10 +13,10 @@
     conform to a single format, and limiting assessment actions (and feedback
     possibilities) to that one style only.</p>
     
-    <p>Although we're still missing a lot of the details here, we expect that
+  <p>Although we're still missing a lot of the details here, we expect that
     this section will include (but not be limited to) at least the
     following:</p>
-    <ul>
+  <ul>
     <li><p><b>Stdin/stdout text segments</b>, for testing main programs that
       read/write text. This will probably include ClodeCoder-style regular
       expression support plus some Web-CAT-inspired normalization options
@@ -107,28 +49,23 @@
       produced by running a reference solution provided by the
       exercise author, instead of being described as part of the tests.
     </p></li>
-    </ul>
+  </ul>
     
-    <p>We believe that many such test expression formats can all be
+  <p>We believe that many such test expression formats can all be
     represented as a sequence (array) of hashes, and should naturally fit
     into a data model that is readily expressable in PEML, YAML, or JSON.
-    </p>
-    <p>We also expect that a variety of test case attributes (visibility,
+  </p>
+  <p>We also expect that a variety of test case attributes (visibility,
     weight, scoring, etc.) may cleanly fit in as additional keys within
     a hash representing a test, and thus may be applicable to many of
     the formats listed above.
-    </p>
-    <p>
+  </p>
+  <p>
     OK, more to come later! ...
-    </p>
-  </div></section>
+  </p>
+</section>
 
-<!--
-  <section id="goals"><div class="container">
-    <h2>Title</h2>
-    <p>blah blah blah ...
-    </p>
-    
+<!--    
     influences:
     rspec
     cucumber
@@ -211,8 +148,4 @@
   show diff:
   enable output regex:
 </pre>
-
-  </div></section>
 -->
-</body>
-</html>

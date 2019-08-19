@@ -1,0 +1,137 @@
+---
+title: PEMLtest
+excerpt: A DSL for writing software tests for PEML descriptions.
+---
+<section>
+  <h2 id="why">Why a DSL for Test Writing?</h2>
+  <p>
+    We want PEML's <a href="../schema/tests.html">testing model</a> to cleanly
+    support the inclusion of native-programming-language XUnit-style executable
+    software tests (such as JUnit, CxxTest, NUnit, pyunit, etc.), so that
+    the full expressiveness of such representations can be used when necessary.
+  </p>
+  <p>
+    However, at the same time, we realize that such testing infrastructure
+    can be challenging for new users to master. As a result, PEML includes
+    an associated <b>custom testing DSL</b> called <b>PEMLtest</b> designed
+    to express a wide variety of
+    software tests in a more concise, lighter weight way than XUnit
+    programming. This DSL supports writing tests for multiple programming
+    languages, and test specs can be translated down to executable
+    XUnit-style tests in the target language.
+  </p>
+  <p>
+    While PEMLtest itself is <b>programming-language-neutral</b>, any
+    specific test suite written for a given exercise will naturally be
+    targeted toward the specific programming language in which solutions
+    to that exercise are expected. In other words, while PEMLtest itself is
+    neutral, the individual test suites written in it will be
+    programming-language-specific in most cases (at least, until we can
+    tackle that problem also!).
+  </p>
+  <p>
+    The model for PEMLtest is that a general-purpose <b>generator</b>
+    allows one to generate executable XUnit-style tests in the target
+    language for a specific problem. The tests for that problem will
+    use specific features or ideas from the target language of the solution,
+    even though these bits are placed in a surrounding language-neutral
+    medium.
+  </p>
+</section>
+
+
+<section>
+  <h2 id="structure">PEMLtest's Basic Structure</h2>
+  <p>
+    We want PEML's <a href="../schemas/tests.html">testing model</a> to cleanly
+    support the inclusion of native-programming-language XUnit-style executable
+    software tests (such as JUnit, CxxTest, NUnit, pyunit, etc.), so that
+    the full expressiveness of such representations can be used when necessary.
+  </p>
+</section>
+
+
+<!--    
+    influences:
+    rspec
+    cucumber
+    xunit (starting with junit)
+    xtest
+
+<pre>
+---
+# top-level sequence of hashes
+- describe: some string
+  type: ...
+  test: (same as describe)
+  tests: (same as describe)
+  test_for: (same as describe)
+  tests_for: (same as describe)
+  context: (same as describe)
+  contexts: (same as describe)
+  it: (same as describe)
+  examples: (same as describe)
+  examples_for: (same as describe)
+  subject: string (or maybe a hash of name/initialization?)
+  given:
+    name:
+    type:
+    initialization:
+
+
+
+
+
+  imports: string
+  helpers: string (covers let, etc.)
+  options:
+    grading:
+      weight:
+      visibility: example, hidden
+        show: input, output, expected output, input code, expected code
+      category: tool-specific label (public, instructor, example, etc.)
+    matching:
+      string normalization options
+  
+  before:
+  
+  files: [{pathname: ..., content: ...}, {location: url}, ...]
+  given: (same as subject?)
+  given_input:
+  when:  
+  invariant:
+  then:
+   [ { clause: ..., parameters = { ... }, use reference: { subject: ..., reference: ...}}]
+  then_output:
+  then_output_matches:
+  then_reference_output: (grade by reference implementation)
+  
+  after:
+
+  
+  suites: (nested as deeply as desired,)
+
+
+
+
+
+
+
+  name:
+  description:
+  weight:
+  type: (unit test, IO test, JavaX.Swing test, code quality test, custom)
+  files: (injected)
+  failure message:
+  show unit code:
+  show output:
+  
+  # for IO:
+  automatically generate output:
+  show input:
+  show output:
+  show correct output:
+  show diff:
+  enable output regex:
+</pre>
+-->

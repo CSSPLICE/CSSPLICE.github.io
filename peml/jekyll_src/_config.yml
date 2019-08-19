@@ -1,0 +1,65 @@
+# Site settings
+title: PEML
+email: edwards@cs.vt.edu
+description: >
+  The Programming Exercise Markup Language (PEML) is designed to provide an
+  ultra-human-friendly authoring format for describing automatically graded
+  programming assignments.
+baseurl: /peml # the subpath of your site, e.g. /blog
+url: "https://cssplice.github.io"
+repository: cssplice/cssplice.github.io
+repository_tree: master/peml
+lang: en
+permalink: none
+theme: jekyll-text-theme
+
+# plugins:
+  # - jekyll-feed
+
+# collections:
+#   projects:
+#     output: true
+
+
+# ----------------------------------------------------------------------
+# For TeXT theme:
+# ----------------------------------------------------------------------
+license: "CC-BY-SA-4.0"
+search:
+  provider: default
+
+author:
+  type      : organization
+  name      : Virginia Tech
+  url       : http://www.cs.vt.edu/
+  bio: >
+    PEML, Web-CAT, and related projects are academic research projects
+    developed at Virginia Tech. The project lead is Stephen Edwards.
+  email     : webcat@vt.edu
+  github    : CSSPLICE
+
+
+# ----------------------------------------------------------------------
+# Front matter defaults:
+# ----------------------------------------------------------------------
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: article
+      license: true
+      show_edit_on_github: true
+      full_width: true
+      excerpt: >
+        The <strong>Programming Exercise Markup Language</strong> (PEML)
+        is designed to provide an ultra-human-friendly authoring format
+        for describing automatically graded programming assignments.
+      article_header:
+        type: overlay
+        theme: dark
+        align: center
+        background_color: '#007bff'
+        background_image: false
+      aside:
+        toc: true
+

@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="en">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>PEML Data Model for Code Assets - PEML</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>PEML Data Model for Software Tests - PEML</title>
 
 <meta name="description" content="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programmi...">
-<link rel="canonical" href="https://cssplice.github.io/peml/schemas/code.html"><link rel="alternate" type="application/rss+xml" title="PEML" href="/peml/feed.xml">
+<link rel="canonical" href="https://cssplice.github.io/peml/schemas/tests.html"><link rel="alternate" type="application/rss+xml" title="PEML" href="/peml/feed.xml">
 <!-- begin favicon --><link rel="apple-touch-icon" sizes="180x180" href="/peml/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/peml/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/peml/assets/favicon-16x16.png"><link rel="manifest" href="/peml/assets/site.webmanifest"><link rel="mask-icon" href="/peml/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/peml/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/peml/assets/browserconfig.xml">
@@ -273,115 +273,166 @@
         </ul>
       </nav></div>
   </header>
-</div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>PEML Data Model for Code Assets</h1></header><span class="split-space">&nbsp;</span>
+</div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>PEML Data Model for Software Tests</h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title=""
-            href="https://github.com/cssplice/cssplice.github.io/tree/master/peml/schemas/code.html">
+            href="https://github.com/cssplice/cssplice.github.io/tree/master/peml/schemas/tests.html">
             <i class="far fa-edit"></i></a></div><p class="overlay__excerpt">The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.</p></div>
               </div>
             </div><div class="grid grid--reverse">
 
               <div class="col-aside d-print-none js-col-aside"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div></aside></div>
 
-              <div class="col-main cell cell--auto"><article itemscope itemtype="http://schema.org/Article"><meta itemprop="headline" content="PEML Data Model for Code Assets"><meta itemprop="author" content="Virginia Tech"/><div class="js-article-content"><div class="layout--article">
+              <div class="col-main cell cell--auto"><article itemscope itemtype="http://schema.org/Article"><meta itemprop="headline" content="PEML Data Model for Software Tests"><meta itemprop="author" content="Virginia Tech"/><div class="js-article-content"><div class="layout--article">
 
   <div class="article__content" itemprop="articleBody"><section>
-  <h2 id="goals">Title</h2>
-  <p>blah blah blah ...
+  <h2 id="tests">Specifying Tests</h2>
+  <p>Still writing this! ...</p>
+
+  <p>We expect there to be a wide variety of test specification formats,
+    and they may not all be supported by all automated grading tools. Many
+    may be programming-language-specific, and only suitable for exercises
+    where solutions are written in that one language. However, we feel that
+    supporting some variety here is much better than forcing everyone to
+    conform to a single format, and limiting assessment actions (and feedback
+    possibilities) to that one style only.</p>
+    
+  <p>Although we're still missing a lot of the details here, we expect that
+    this section will include (but not be limited to) at least the
+    following:</p>
+  <ul>
+    <li><p><b>Stdin/stdout text segments</b>, for testing main programs that
+      read/write text. This will probably include ClodeCoder-style regular
+      expression support plus some Web-CAT-inspired normalization options
+      so that less-brittle matching can be supported with little effort.
+    </p></li>
+    <li><p><b>Tables of input values and expected results</b>, which are
+      commonly used for assignments that are more functional in nature,
+      rather than focused on objects or whole programs. In some ways,
+      stdin/stdout testing is a special case of flexible input/output tables
+      (just with larger, string-only values).
+    </p></li>
+    <li><p><b>Native XUnit-style</b> executable software tests (such as JUnit,
+      CxxTest, NUnit, pyunit, etc.). These would be language-specific, but
+      are already used widely enough, and are expressive enough, that
+      they play an important role.
+    </p></li>
+    <li><p>A <b>custom testing DSL</b> called
+      <a href="../pemltest.html">PEMLtest</a> designed to express a wide variety
+      of software tests in a more concise, lighter weight way than XUnit
+      programming. This DSL supports writing tests for multiple programming
+      languages, and test specs can be translated down to executable
+      XUnit-style tests in the target language.
+    </p></li>
+    <li><p><b>Generator-based strategies</b> where inputs of some form and
+      expected outputs are programmatically generated fresh for every
+      attempt.
+    </p></li>
+    <li><p><b>Reference solution strategies</b> where input comes from
+      one of the approaches covered another way, but expected output is
+      produced by running a reference solution provided by the
+      exercise author, instead of being described as part of the tests.
+    </p></li>
+  </ul>
+    
+  <p>We believe that many such test expression formats can all be
+    represented as a sequence (array) of hashes, and should naturally fit
+    into a data model that is readily expressable in PEML, YAML, or JSON.
   </p>
-<!--
+  <p>We also expect that a variety of test case attributes (visibility,
+    weight, scoring, etc.) may cleanly fit in as additional keys within
+    a hash representing a test, and thus may be applicable to many of
+    the formats listed above.
+  </p>
+  <p>
+    OK, more to come later! ...
+  </p>
+</section>
+
+<!--    
+    influences:
+    rspec
+    cucumber
+    xunit (starting with junit)
+    xtest
+
 <pre>
 ---
+# top-level sequence of hashes
+- describe: some string
+  type: ...
+  test: (same as describe)
+  tests: (same as describe)
+  test_for: (same as describe)
+  tests_for: (same as describe)
+  context: (same as describe)
+  contexts: (same as describe)
+  it: (same as describe)
+  examples: (same as describe)
+  examples_for: (same as describe)
+  subject: string (or maybe a hash of name/initialization?)
+  given:
+    name:
+    type:
+    initialization:
 
-starter:
-wrapper:
-library:
-(reference:)
-model_solution:
-multiple models?
 
-input generator?
 
+
+
+  imports: string
+  helpers: string (covers let, etc.)
+  options:
+    grading:
+      weight:
+      visibility: example, hidden
+        show: input, output, expected output, input code, expected code
+      category: tool-specific label (public, instructor, example, etc.)
+    matching:
+      string normalization options
+  
+  before:
+  
+  files: [{pathname: ..., content: ...}, {location: url}, ...]
+  given: (same as subject?)
+  given_input:
+  when:  
+  invariant:
+  then:
+   [ { clause: ..., parameters = { ... }, use reference: { subject: ..., reference: ...}}]
+  then_output:
+  then_output_matches:
+  then_reference_output: (grade by reference implementation)
+  
+  after:
+
+  
+  suites: (nested as deeply as desired,)
+
+
+
+
+
+
+
+  name:
+  description:
+  weight:
+  type: (unit test, IO test, JavaX.Swing test, code quality test, custom)
+  files: (injected)
+  failure message:
+  show unit code:
+  show output:
+  
+  # for IO:
+  automatically generate output:
+  show input:
+  show output:
+  show correct output:
+  show diff:
+  enable output regex:
 </pre>
 -->
-
-    <dl>
-
-    <dt><code>assets.*</code></dt>
-    <dd><p>
-    <pre>
-    assets.tests = url/location
-    assets.tests = array
-
-    .visibility
-
-    .stdin
-    .stdout
-    
-    .file.name
-    .file.content
-    .file.format
-    
-    .csv.pattern
-    .csv.content
-    .csv.delimiter = ,
-    .csv.trim = true/false
-
-
-    assets.build/.run/.test
-      .environment
-        .extends = (previous)
-        .type
-        .container
-
-        .data
-        .lib
-        .include
-        .scripts
-        .commands
-
-
-    assets.data = url/location
-    assets.data = array
-    .file.*
-    ## Need some way to indicate whether zip urls need to be unpacked or not
-    ## Maybe add "#unpack" on the end of an archive url to request unpacking?
-    ## Then it looks kind of like a URL anchor name
-    ##---
-    ## Instead, make compressed archives that aren't simple files auto-uncompress
-
-    assets.environment.type
-    assets.environment.container = url/location
-    
-    assets.code.starter = url/location
-    assets.code.starter = array
-    .file.*
-
-    assets.code.lib = url/location
-    assets.code.lib = array
-    .file.*
-
-    assets.code.include = url/location
-    assets.code.include = array
-    .file.*
-
-    assets.code.solutions = url/location
-    assets.code.solutions = array
-    .label (reference)
-    .description
-    [.files]
-
-    assets.code.unified = url/location
-    assets.code.unified = array
-    .file.*
-    </pre>
-    </p>
-<pre>
-</pre>
-    </dd>
-    </dl>
-
-</section>
 </div><footer class="article__footer"><!-- this will show at every article content's bottom --><div class="article__license"><div class="license">
     <p>
       <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">

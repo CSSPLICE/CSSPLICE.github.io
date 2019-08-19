@@ -1,0 +1,149 @@
+@import url(https://fonts.googleapis.com/css?family=Overlock:900);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
+
+/* Weird fix for anchor loads so they don't slip under the nav bar */
+/*body { padding-top: 60px; }
+@media screen and (max-width: 768px) {
+  body { padding-top: 60px; }
+}*/
+/*
+*[id]:before { 
+  display: block; 
+  content: " "; 
+  margin-top: -75px; 
+  height: 75px; 
+  visibility: hidden; 
+}
+*/
+
+/* ---------- TeXt theme overrides ---------- */
+.full-width .grid, .has-aside .grid
+{ padding: 0 3rem; margin: 0 auto; }
+.has-aside .main { width: 100%; max-width: 100%; }
+
+.article__header--overlay .overlay {
+  padding-top: 0;
+  padding-bottom: 0;
+  min-height: 4rem;
+}
+
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: .3rem;
+}
+.article__content .jumbotron h1 {
+  border: none;
+  margin: 0 0 0.5rem 0;
+  color: inherit;
+}
+.article__content p { margin : 0 0 1rem 0; }
+.lead { font-size: 1.25rem; font-weight: 300; }
+.article__content hr {
+  box-sizing: content-box;
+  height: 0;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+.article__header--overlay .overlay__excerpt { font-weight: 400; }
+.header__brand > svg { display: none; }
+
+
+/* ---------- Bootstrap definitions ---------- */
+.text-muted { color: #6c757d!important; }
+.bg-primary { background-color: #007bff!important; }
+.text-white { color: #fff!important; }
+.mb-4, .my-4 { margin-bottom: 1.5rem!important; }
+.mt-4, .my-4 { margin-top: 1.5rem!important; }
+.bg-white { background-color: #fff!important; }
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.col-1, .col-11 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.col-11 {
+    -ms-flex: 0 0 91.666667%;
+    flex: 0 0 91.666667%;
+    max-width: 91.666667%;
+}
+.col-1 {
+    -ms-flex: 0 0 8.333333%;
+    flex: 0 0 8.333333%;
+    max-width: 8.333333%;
+}
+
+/* ---------- Custom content formatting ---------- */
+pre {
+  background-color: #e4f0f5;
+  padding: 1rem;
+  border-left: 5px solid #3f87a6;
+  color: black;
+  font-size: 100%;
+}
+
+pre.schema {
+  background-color: #e2e3e5;
+  border-color: #383d41;
+}
+
+.article_content h2 {
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
+  border-top: 3px solid #3f87a6;
+}
+
+.article_content h3 { margin-top: 0.5rem; padding-top: 0.5rem; }
+
+code, pre {
+  font-family: Inconsolata, Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+
+.article__content code {
+  padding: 2px 4px;
+  font-size: 95%;
+  color: #c7254e;
+  background-color: rgba(0, 0, 0, 0.05); /*#f9f2f4;*/
+  border-radius: 4px;
+}
+ 
+.navbar, .header, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+{
+  font-family: "Overlock", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 900;
+}
+
+.bracket {
+  border-width: 3px 0 3px 3px;
+  border-style: solid;
+  border-color: #3f87a6;
+}
+
+.bracket.col-1 {
+    -ms-flex: 0 0 2rem;
+    flex: 0 0 2rem;
+    max-width: 2rem;
+}
+
+.peml b {
+  padding-left: 3px;
+  padding-right: 3px;
+  font-weight: 900;
+  background-color: rgba(0, 0, 0, 0.1);
+}

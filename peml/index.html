@@ -1,325 +1,527 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Stephen Edwards">
+<!DOCTYPE html><html lang="en">
+  <head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>PEML - PEML</title>
 
-  <title>Programming Exercise Markup Language</title>
+<meta name="description" content="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programmi...">
+<link rel="canonical" href="https://cssplice.github.io/peml/"><link rel="alternate" type="application/rss+xml" title="PEML" href="/peml/feed.xml">
+<!-- begin favicon --><link rel="apple-touch-icon" sizes="180x180" href="/peml/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/peml/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/peml/assets/favicon-16x16.png"><link rel="manifest" href="/peml/assets/site.webmanifest"><link rel="mask-icon" href="/peml/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/peml/assets/favicon.ico">
 
-  <link rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous">
-  <script
-    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+<meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/peml/assets/browserconfig.xml">
 
-  <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css" />
-  <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js" crossorigin="anonymous"></script>
+<meta name="theme-color" content="#ffffff">
+<!-- end favicon --><link rel="stylesheet" href="/peml/assets/css/main.css"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+<script>(function() {
+  window.isArray = function(val) {
+    return Object.prototype.toString.call(val) === '[object Array]';
+  };
+  window.isString = function(val) {
+    return typeof val === 'string';
+  };
 
-  <link href="style.css" rel="stylesheet" type="text/css">
-</head>
+  window.decodeUrl = function(str) {
+    return str ? decodeURIComponent(str.replace(/\+/g, '%20')) : '';
+  };
 
-<body role="document" id="bodytop" data-spy="scroll" data-target="#toc">
+  window.hasEvent = function(event) {
+    return 'on'.concat(event) in window.document;
+  };
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand" href="#bodytop">PEML</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Introduction</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="schemas/definitions.html">Building Blocks</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="schemas/exercise.html">Exercise Model</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="schemas/code.html">Code Assets</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="schemas/testing.html">Testing Model</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pemltest.html">Testing Language</a>
-          </li>
+  window.isOverallScroller = function(node) {
+    return node === document.documentElement || node === document.body || node === window;
+  };
+
+  window.isFormElement = function(node) {
+    var tagName = node.tagName;
+    return tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA';
+  };
+
+  window.pageLoad = (function () {
+    var loaded = false, cbs = [];
+    window.addEventListener('load', function () {
+      var i;
+      loaded = true;
+      if (cbs.length > 0) {
+        for (i = 0; i < cbs.length; i++) {
+          cbs[i]();
+        }
+      }
+    });
+    return {
+      then: function(cb) {
+        cb && (loaded ? cb() : (cbs.push(cb)));
+      }
+    };
+  })();
+})();(function() {
+  window.throttle = function(func, wait) {
+    var args, result, thisArg, timeoutId, lastCalled = 0;
+
+    function trailingCall() {
+      lastCalled = new Date;
+      timeoutId = null;
+      result = func.apply(thisArg, args);
+    }
+    return function() {
+      var now = new Date,
+        remaining = wait - (now - lastCalled);
+
+      args = arguments;
+      thisArg = this;
+
+      if (remaining <= 0) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+        lastCalled = now;
+        result = func.apply(thisArg, args);
+      } else if (!timeoutId) {
+        timeoutId = setTimeout(trailingCall, remaining);
+      }
+      return result;
+    };
+  };
+})();(function() {
+  var Set = (function() {
+    var add = function(item) {
+      var i, data = this._data;
+      for (i = 0; i < data.length; i++) {
+        if (data[i] === item) {
+          return;
+        }
+      }
+      this.size ++;
+      data.push(item);
+      return data;
+    };
+
+    var Set = function(data) {
+      this.size = 0;
+      this._data = [];
+      var i;
+      if (data.length > 0) {
+        for (i = 0; i < data.length; i++) {
+          add.call(this, data[i]);
+        }
+      }
+    };
+    Set.prototype.add = add;
+    Set.prototype.get = function(index) { return this._data[index]; };
+    Set.prototype.has = function(item) {
+      var i, data = this._data;
+      for (i = 0; i < data.length; i++) {
+        if (this.get(i) === item) {
+          return true;
+        }
+      }
+      return false;
+    };
+    Set.prototype.is = function(map) {
+      if (map._data.length !== this._data.length) { return false; }
+      var i, j, flag, tData = this._data, mData = map._data;
+      for (i = 0; i < tData.length; i++) {
+        for (flag = false, j = 0; j < mData.length; j++) {
+          if (tData[i] === mData[j]) {
+            flag = true;
+            break;
+          }
+        }
+        if (!flag) { return false; }
+      }
+      return true;
+    };
+    Set.prototype.values = function() {
+      return this._data;
+    };
+    return Set;
+  })();
+
+  window.Lazyload = (function(doc) {
+    var queue = {js: [], css: []}, sources = {js: {}, css: {}}, context = this;
+    var createNode = function(name, attrs) {
+      var node = doc.createElement(name), attr;
+      for (attr in attrs) {
+        if (attrs.hasOwnProperty(attr)) {
+          node.setAttribute(attr, attrs[attr]);
+        }
+      }
+      return node;
+    };
+    var end = function(type, url) {
+      var s, q, qi, cbs, i, j, cur, val, flag;
+      if (type === 'js' || type ==='css') {
+        s = sources[type], q = queue[type];
+        s[url] = true;
+        for (i = 0; i < q.length; i++) {
+          cur = q[i];
+          if (cur.urls.has(url)) {
+            qi = cur, val = qi.urls.values();
+            qi && (cbs = qi.callbacks);
+            for (flag = true, j = 0; j < val.length; j++) {
+              cur = val[j];
+              if (!s[cur]) {
+                flag = false;
+              }
+            }
+            if (flag && cbs && cbs.length > 0) {
+              for (j = 0; j < cbs.length; j++) {
+                cbs[j].call(context);
+              }
+              qi.load = true;
+            }
+          }
+        }
+      }
+    };
+    var load = function(type, urls, callback) {
+      var s, q, qi, node, i, cur,
+        _urls = typeof urls === 'string' ? new Set([urls]) : new Set(urls), val, url;
+      if (type === 'js' || type ==='css') {
+        s = sources[type], q = queue[type];
+        for (i = 0; i < q.length; i++) {
+          cur = q[i];
+          if (_urls.is(cur.urls)) {
+            qi = cur;
+            break;
+          }
+        }
+        val = _urls.values();
+        if (qi) {
+          callback && (qi.load || qi.callbacks.push(callback));
+          callback && (qi.load && callback());
+        } else {
+          q.push({
+            urls: _urls,
+            callbacks: callback ? [callback] : [],
+            load: false
+          });
+          for (i = 0; i < val.length; i++) {
+            node = null, url = val[i];
+            if (s[url] === undefined) {
+              (type === 'js' ) && (node = createNode('script', { src: url }));
+              (type === 'css') && (node = createNode('link', { rel: 'stylesheet', href: url }));
+              if (node) {
+                node.onload = (function(type, url) {
+                  return function() {
+                    end(type, url);
+                  };
+                })(type, url);
+                (doc.head || doc.body).appendChild(node);
+                s[url] = false;
+              }
+            }
+          }
+        }
+      }
+    };
+    return {
+      js: function(url, callback) {
+        load('js', url, callback);
+      },
+      css: function(url, callback) {
+        load('css', url, callback);
+      }
+    };
+  })(this.document);
+})();</script><script>
+  (function() {
+    var TEXT_VARIABLES = {
+      version: '2.2.4',
+      sources: {
+        font_awesome: 'https://use.fontawesome.com/releases/v5.0.13/css/all.css',
+        jquery: 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js',
+        leancloud_js_sdk: '//cdn1.lncld.net/static/js/3.4.1/av-min.js',
+        chart: 'https://cdn.bootcss.com/Chart.js/2.7.2/Chart.bundle.min.js',
+        gitalk: {
+          js: 'https://cdn.bootcss.com/gitalk/1.2.2/gitalk.min.js',
+          css: 'https://cdn.bootcss.com/gitalk/1.2.2/gitalk.min.css'
+        },
+        valine: 'https://unpkg.com/valine/dist/Valine.min.js',
+        mathjax: 'https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML',
+        mermaid: 'https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js'
+      },
+      site: {
+        toc: {
+          selectors: 'h2,h3,h4'
+        }
+      },
+      paths: {
+        search_js: '/peml/assets/search.js'
+      }
+    };
+    window.TEXT_VARIABLES = TEXT_VARIABLES;
+  })();
+</script></head>
+  <body>
+    <div class="root" data-is-touch="false">
+      <div class="layout--page js-page-root"><div class="page__main js-page-main page__viewport has-aside cell cell--auto">
+
+      <div class="page__main-inner">
+        <div></div><div class="page__header d-print-none"><header class="header"><div class="main">
+      <div class="header__title">
+        <div class="header__brand"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="24px" height="24px" viewBox="0 0 24 24">
+<style type="text/css">
+	.st0{fill:#515151;}
+</style>
+<path class="st0" d="M1.7,22.3c5.7-5.7,11.3-5.7,17,0c3.3-3.3,3.5-5.3,0.8-6c2.7,0.7,3.5-1.1,2.3-5.6s-3.3-5.2-6.3-2.1
+	c3-3,2.3-5.2-2.1-6.3S7,1.8,7.7,4.6C7,1.8,5,2.1,1.7,5.3C7.3,11,7.3,16.7,1.7,22.3"/>
+</svg><a title="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.
+" href="/peml/">PEML</a></div>
+        <button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button>
+      </div><nav class="navigation">
+        <ul><li class="navigation__link navigation__link--active"><a href="/peml/">Introduction</a></li><li class="navigation__link"><a href="/peml/schemas/">Data Model</a></li><li class="navigation__link"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__link"><a href="/peml/examples/">Examples</a></li><li class="navigation__link"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__link"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__link"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li>
         </ul>
-      </div>
-    </div>
-  </nav>
+      </nav></div>
+  </header>
+</div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>PEML</h1></header><span class="split-space">&nbsp;</span>
+          <a class="edit-on-github"
+            title=""
+            href="https://github.com/cssplice/cssplice.github.io/tree/master/peml/index.html">
+            <i class="far fa-edit"></i></a></div><p class="overlay__excerpt">The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.</p></div>
+              </div>
+            </div><div class="grid grid--reverse">
 
-  <div class="container jumbotron bg-primary text-white">
-    <h1>PEML</h1>
-    <p class="lead">The <strong>Programming Exercise Markup
-      Language</strong></p>
-    <hr class="my-4 bg-white"/>
-    <p>Designed to provide an ultra-human-friendly authoring format
-      for describing automatically graded programming assignments.</p>
-  </div>
+              <div class="col-aside d-print-none js-col-aside"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div></aside></div>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-3">
-        <b>PEML Exercise Data Model</b>
-        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-      </div>
-      <!-- main content area -->
-      <div class="col-9">
+              <div class="col-main cell cell--auto"><article itemscope itemtype="http://schema.org/Article"><meta itemprop="headline" content="PEML"><meta itemprop="author" content="Virginia Tech"/><div class="js-article-content"><div class="layout--article">
 
-  <section id="goals">
-    <h2>Purpose</h2>
-    <p>The <b>Programming Exercise Markup Language (PEML)</b> (feedback on
-    name choice is welcome!) is intended to be a simple, easy format for
-    CS and IT instructors of all kinds (college, community college, high
-    school, whatever) to describe programming assignments and activities.
-    We want it to be so easy (and obvious) to use that instructors won't
-    see it as a technological or notational barrier to expressing their
-    assignments.
-    </p><p>
-    We intend for this format to be something that authors of automated
-    grading tools can adopt, so they can provide a very easy, low-energy
-    onboarding path for existing instructors to get programming activities
-    into such tools. As a result, this notation leans heavily on supporting
-    authors and streamlining common cases, even if this may require more
-    work on the part of tool developers--the goal is to make it super easy
-    for <b>authors</b> of programming activities, not to fit into a specific
-    auto-grader or simplify tasks for tool writers.
+  <div class="article__content" itemprop="articleBody"><section>
+  <h2 id="purpose">Purpose</h2>
+  <p>The <b>Programming Exercise Markup Language (PEML)</b> (feedback on
+  name choice is welcome!) is intended to be a simple, easy format for
+  CS and IT instructors of all kinds (college, community college, high
+  school, whatever) to describe programming assignments and activities.
+  We want it to be so easy (and obvious) to use that instructors won't
+  see it as a technological or notational barrier to expressing their
+  assignments.
+  </p><p>
+  We intend for this format to be something that authors of automated
+  grading tools can adopt, so they can provide a very easy, low-energy
+  onboarding path for existing instructors to get programming activities
+  into such tools. As a result, this notation leans heavily on supporting
+  authors and streamlining common cases, even if this may require more
+  work on the part of tool developers--the goal is to make it super easy
+  for <b>authors</b> of programming activities, not to fit into a specific
+  auto-grader or simplify tasks for tool writers.
+  </p>
+  <p>OK, so this is a new notation. That sucks. But there doesn't seem to
+  be an obvious alternative that meets our goals, so ...</p>
+  <p>
+  Also, in terms of scope of "programming activity", here we are trying
+  to capture everything from very small programming activities, such as
+  "here's a very short function, fill in the blank to make it work", to
+  very large programming activities, such as "write dozens of classes
+  spanning thousands of lines of code to implement this programming
+  language", or whatever. Yes, that is a very broad range, but the aim
+  is to cover the full range, rather than making simplifying assumptions
+  that limit PEML to a narrower subset. The reason for using "Exercise"
+  in the name of the language is to remind developers that it covers a
+  broader range of activities than what many instructors see as pure
+  "programming assignments".</p>
+</section>
+
+<section>
+  <h2 id="whynot">Why not YAML? or JSON?</h2>
+  <p>Actually, one of our design goals is for PEML descriptions to be
+  directly mappable to YAML <i>and</i> JSON, so that people who prefer
+  one of those notations (or tools that use those notations) can use
+  the data model. Converting PEML to YAML or JSON should be a direct/easy
+  tool translation that we expect will be provided as a service and/or
+  library at some point.</p>
+  <p>But why not just use YAML (or JSON) directly, since parsers already
+  exist?</p>
+  <p>The main reasons are:</p>
+  <ol type="a">
+    <li><p>These existing formats are not <b>writer-friendly enough</b> for
+    descriptions that contain large amounts of free-form text. Face it,
+    programming activities usually require
+    large-ish chunks of multi-line text to describe most of the interesting
+    properties, whether you're talking about the specification for a program,
+    or starter code to provide to a student, or reference tests to check a
+    solution, or a sample/reference solution to provide for other instructors
+    to look at, or whatever. In most cases, PEML is not about simple
+    key/value pairs where values are small pieces of data, or about deeply
+    structured nested object descriptions. It's about writer-friendly input
+    of structured text where most of the values are multi-line text written
+    by humans.
     </p>
-    <p>OK, so this is a new notation. That sucks. But there doesn't seem to
-    be an obvious alternative that meets our goals, so ...</p>
+    </li>
+    <li><p>Are not <b>syntax-friendly enough</b> to present a minimal-effort
+    entry path. Of course, this isn't an obstacle for programming-oriented
+    instructors who have already used YAML (or JSON) and are familiar with
+    working with them. However, the sticky bits of those formats do require
+    a small learning curve that we hope to minimize further.</p>
     <p>
-    Also, in terms of scope of "programming activity", here we are trying
-    to capture everything from very small programming activities, such as
-    "here's a very short function, fill in the blank to make it work", to
-    very large programming activities, such as "write dozens of classes
-    spanning thousands of lines of code to implement this programming
-    language", or whatever. Yes, that is a very broad range, but the aim
-    is to cover the full range, rather than making simplifying assumptions
-    that limit PEML to a narrower subset. The reason for using "Exercise"
-    in the name of the language is to remind developers that it covers a
-    broader range of activities than what many instructors see as pure
-    "programming assignments".</p>
-  </section>
+    In particular, YAML's reliance on whitespace/indentation to indicate
+    nested structure can pose an obstacle to more free-form text input.
+    JSON's reliance on JavaScript quoting and lack of true multi-line values
+    makes it challenging for these tasks in similar ways.</p>
+    </li>
+  </ol>
+  <p> Of course, other practitioners have made the same complaints about both
+  YAML and JSON before, so "more human-friendly" alternatives to both
+  formats have been proposed by others (see
+  <a href="#influences">Influences</a> below). Naturally, we were unable to
+  find an existing format that exactly met the needs here ... If you happen
+  to know of one we've overlooked that would be a better fit, please say
+  so! What we are aiming for is a format that allows instructors to
+  copy-and-paste content from existing sources (existing assignment writeups,
+  program solutions, program text, whatever) with minimal additional
+  reformatting work in order to create a readable, streamlined programming
+  exercise representation.</p>
+</section>
 
-  <section id="whynot">
-    <h2>Why not YAML? or JSON?</h2>
-    <p>Actually, one of our design goals is for PEML descriptions to be
-    directly mappable to YAML <i>and</i> JSON, so that people who prefer
-    one of those notations (or tools that use those notations) can use
-    the data model. Converting PEML to YAML or JSON should be a direct/easy
-    tool translation that we expect will be provided as a service and/or
-    library at some point.</p>
-    <p>But why not just use YAML (or JSON) directly, since parsers already
-    exist?</p>
-    <p>The main reasons are:</p>
-    <ol type="a">
-      <li><p>These existing formats are not <b>writer-friendly enough</b> for
-      descriptions that contain large amounts of free-form text. Face it,
-      programming activities usually require
-      large-ish chunks of multi-line text to describe most of the interesting
-      properties, whether you're talking about the specification for a program,
-      or starter code to provide to a student, or reference tests to check a
-      solution, or a sample/reference solution to provide for other instructors
-      to look at, or whatever. In most cases, PEML is not about simple
-      key/value pairs where values are small pieces of data, or about deeply
-      structured nested object descriptions. It's about writer-friendly input
-      of structured text where most of the values are multi-line text written
-      by humans.
-      </p>
-      </li>
-      <li><p>Are not <b>syntax-friendly enough</b> to present a minimal-effort
-      entry path. Of course, this isn't an obstacle for programming-oriented
-      instructors who have already used YAML (or JSON) and are familiar with
-      working with them. However, the sticky bits of those formats do require
-      a small learning curve that we hope to minimize further.</p>
-      <p>
-      In particular, YAML's reliance on whitespace/indentation to indicate
-      nested structure can pose an obstacle to more free-form text input.
-      JSON's reliance on JavaScript quoting and lack of true multi-line values
-      makes it challenging for these tasks in similar ways.</p>
-      </li>
-    </ol>
-    <p> Of course, other practitioners have made the same complaints about both
-    YAML and JSON before, so "more human-friendly" alternatives to both
-    formats have been proposed by others (see
-    <a href="#influences">Influences</a> below). Naturally, we were unable to
-    find an existing format that exactly met the needs here ... If you happen
-    to know of one we've overlooked that would be a better fit, please say
-    so! What we are aiming for is a format that allows instructors to
-    copy-and-paste content from existing sources (existing assignment writeups,
-    program solutions, program text, whatever) with minimal additional
-    reformatting work in order to create a readable, streamlined programming
-    exercise representation.</p>
-  </section>
+<section>
+  <h2 id="design">Design Goals</h2>
+  <p>OK, with the context for this description language out of the way,
+  here are the specific objectives we are hoping to achieve:</p>
+  <ol>
+    <li><p><b>Minimal learning curve</b>:
+    To paraphrase Cay Horstmann, we are aiming for a format that an average
+    computing instructor can learn in under an hour. Further, after a little
+    practice, we hope that an instructor who has an existing assignment can
+    convert or map it to this representation in less than 10 minutes. We
+    want the syntax to be super simple/direct, so that instructors can focus
+    just on the specific properties they are describing.
+    </p></li>
 
-  <section id="design">
-    <h2>Design Goals</h2>
-    <p>OK, with the context for this description language out of the way,
-    here are the specific objectives we are hoping to achieve:</p>
-    <ol>
-      <li><p><b>Minimal learning curve</b>:
-      To paraphrase Cay Horstmann, we are aiming for a format that an average
-      computing instructor can learn in under an hour. Further, after a little
-      practice, we hope that an instructor who has an existing assignment can
-      convert or map it to this representation in less than 10 minutes. We
-      want the syntax to be super simple/direct, so that instructors can focus
-      just on the specific properties they are describing.
-      </p></li>
+    <li><p><b>Plain-text file representation</b>:
+    PEML uses a plain-text format so that it is easy to edit with any text
+    editor. As mentioned above, we want instructors to be able to directly
+    copy plain-text content, including relevant code assets or instructions,
+    right into the PEML representation. For straightforward assignments
+    that do not require any external resources or a special execution
+    enviroment setup, the entire description can be written in one simple
+    text file. Only instructors with more advanced situations or requirements
+    need to use PEML's facility to connect with external resources.
+    </p></li>
 
-      <li><p><b>Plain-text file representation</b>:
-      PEML uses a plain-text format so that it is easy to edit with any text
-      editor. As mentioned above, we want instructors to be able to directly
-      copy plain-text content, including relevant code assets or instructions,
-      right into the PEML representation. For straightforward assignments
-      that do not require any external resources or a special execution
-      enviroment setup, the entire description can be written in one simple
-      text file. Only instructors with more advanced situations or requirements
-      need to use PEML's facility to connect with external resources.
-      </p></li>
+    <li><p><b>Reference to external resources</b>:
+    While the central representation for an exercise is a text file, we
+    recognize than instructors may run into situations where one or more
+    supporting resources are also necessary for a given exercise (such as
+    custom data files, a special library, existing PDF documents, etc.).
+    PEML provides a clean way for specifying values through relative and
+    absolute URLs. These URLs may refer to remote resources (located online,
+    including in git repositories or other locations, docker containers,
+    etc.), or local resources located alongside the PEML file.
+    </p></li>
 
-      <li><p><b>Reference to external resources</b>:
-      While the central representation for an exercise is a text file, we
-      recognize than instructors may run into situations where one or more
-      supporting resources are also necessary for a given exercise (such as
-      custom data files, a special library, existing PDF documents, etc.).
-      PEML provides a clean way for specifying values through relative and
-      absolute URLs. These URLs may refer to remote resources (located online,
-      including in git repositories or other locations, docker containers,
-      etc.), or local resources located alongside the PEML file.
-      </p></li>
+    <li><p><b>Directory structure</b>:
+    While exercises described as a single text file are easy to transport
+    and process, sometimes it may be useful for an exercise to refer to
+    external resources stored locally. This can be done by including
+    relative URLs in the exercise description (see below). In this situation,
+    we can view the subdirectory containing the PEML file as the root of
+    an exercise description, with relative URLs referring to other file
+    paths within that subdirectory (or subdirectory tree). This allows a
+    single PEML file along with its associated local resources to be
+    managed as a single local entity.
+    </p></li>
 
-      <li><p><b>Directory structure</b>:
-      While exercises described as a single text file are easy to transport
-      and process, sometimes it may be useful for an exercise to refer to
-      external resources stored locally. This can be done by including
-      relative URLs in the exercise description (see below). In this situation,
-      we can view the subdirectory containing the PEML file as the root of
-      an exercise description, with relative URLs referring to other file
-      paths within that subdirectory (or subdirectory tree). This allows a
-      single PEML file along with its associated local resources to be
-      managed as a single local entity.
-      </p></li>
+    <li><p><b>Zip file packaging</b>:
+    Similarly, while a PEML file plus its associated local resources can
+    be represented as a subdirectory (or subdirectory tree), they can also
+    be packaged into a zip file. The PEML file should be in the root of
+    the zip file's internal directory structure, named
+    <code>exercise.peml</code>. Relative URLs inside the PEML file will
+    then be interpreted within the ZIP relative to the location of the
+    PEML file (i.e., relative to the ZIP's root). This makes it easy to
+    zip a subdirectory representing an exercise to make it easy to
+    transport or upload the PEML file and all of the associated local
+    resources, and also makes it easy to unzip a packaged exercise to
+    produce a subdirectory representation.
+    </p></li>
 
-      <li><p><b>Zip file packaging</b>:
-      Similarly, while a PEML file plus its associated local resources can
-      be represented as a subdirectory (or subdirectory tree), they can also
-      be packaged into a zip file. The PEML file should be in the root of
-      the zip file's internal directory structure, named
-      <code>exercise.peml</code>. Relative URLs inside the PEML file will
-      then be interpreted within the ZIP relative to the location of the
-      PEML file (i.e., relative to the ZIP's root). This makes it easy to
-      zip a subdirectory representing an exercise to make it easy to
-      transport or upload the PEML file and all of the associated local
-      resources, and also makes it easy to unzip a packaged exercise to
-      produce a subdirectory representation.
-      </p></li>
+    <li><p>
+    <b>Programming language neutral</b>: PEML should support descriptions
+    of programming activities in any programming language, rather than
+    being specific to just one. Some fields/assets within one exercise
+    description will naturally be programming-language-specific, but the
+    notation used to describe the exercise itself should not be.
+    </p></li>
 
-      <li><p>
-      <b>Programming language neutral</b>: PEML should support descriptions
-      of programming activities in any programming language, rather than
-      being specific to just one. Some fields/assets within one exercise
-      description will naturally be programming-language-specific, but the
-      notation used to describe the exercise itself should not be.
-      </p></li>
+    <li><p><b>Minimal technology support</b>:
+    Basic PEML descriptions do not require the use of any specific
+    supporting technologies to manage build environments, execution
+    environments, or external dependencies. This follows from the goal
+    to use a simple text file representation (with no external resources)
+    for basic programming activities similar to those found in many
+    textbooks. We believe simple, low overhead assignments will be the
+    most common case. However, we also realize that
+    some exercise authors may prefer to use specific tools or technologies
+    to package or compartmentalize execution environment features,
+    supporting libraries, run-time dependencies, build environments,
+    custom testing tools, etc. As a result, PEML is set up to allow such
+    services to be used by exercise authors who desire it, but they
+    are <i>not</i> required for mainstream (or simple) exercise
+    descriptions. In other words, instructors who use "vanilla" assignments
+    without any special tooling or infrastructure should be able to hop in
+    and describe their existing exercises in PEML without having to learn
+    about new tools or technologies.
+    </p></li>
+  </ol>
+</section>
 
-      <li><p><b>Minimal technology support</b>:
-      Basic PEML descriptions do not require the use of any specific
-      supporting technologies to manage build environments, execution
-      environments, or external dependencies. This follows from the goal
-      to use a simple text file representation (with no external resources)
-      for basic programming activities similar to those found in many
-      textbooks. We believe simple, low overhead assignments will be the
-      most common case. However, we also realize that
-      some exercise authors may prefer to use specific tools or technologies
-      to package or compartmentalize execution environment features,
-      supporting libraries, run-time dependencies, build environments,
-      custom testing tools, etc. As a result, PEML is set up to allow such
-      services to be used by exercise authors who desire it, but they
-      are <i>not</i> required for mainstream (or simple) exercise
-      descriptions. In other words, instructors who use "vanilla" assignments
-      without any special tooling or infrastructure should be able to hop in
-      and describe their existing exercises in PEML without having to learn
-      about new tools or technologies.
-      </p></li>
-    </ol>
-  </section>
+<section>
+  <h2 id="influences">Influences</h2>
+  <p>In terms of inspiration, PEML has been influenced heavily by YAML
+  and its relatives (including HAML), as well as many alternative
+  notations that have been developed as alternatives for describing
+  structured textual data.</p>
+  <p>One of the most prominent influences has been
+  <a href="http://archieml.org/">ArchieML</a>, another format with some
+  overlapping goals used by the New York Times to write certain types of
+  online content. PEML reuses big chunks of ArchieML's design.</p>
+  <p>The <a href="https://github.com/burningtree/awesome-json">Awesome
+  JSON</a> page lists a nice collection of extensions to or alternatives
+  to JSON that address some of the shortcomings of using it as a
+  human-authored notation, including
+  <a href="https://github.com/bevry/cson">CSON</a>,
+  <a href="https://github.com/apiaryio/mson">MSON</a>, and
+  <a href="https://github.com/lightbend/config/blob/master/HOCON.md">HOCON</a>.
+  Other languages like <a href="https://github.com/toml-lang/toml">TOML</a>
+  and YAML variants have also influenced this design.
+  </p>
+  <p>
+  Finally, the data model and some of the packaging ideas have been
+  influenced by the work of an ITiCSE 2008 working group on the topic,
+  which produced this report:
+  <a href="https://doi.org/10.1145/1473195.1473240"><i>Developing a Common
+  Format for Sharing Programming Assignments</i></a>.
+  </p>
+</section>
 
-  <section id="influences">
-    <h2>Influences</h2>
-    <p>In terms of inspiration, PEML has been influenced heavily by YAML
-    and its relatives (including HAML), as well as many alternative
-    notations that have been developed as alternatives for describing
-    structured textual data.</p>
-    <p>One of the most prominent influences has been
-    <a href="http://archieml.org/">ArchieML</a>, another format with some
-    overlapping goals used by the New York Times to write certain types of
-    online content. PEML reuses big chunks of ArchieML's design.</p>
-    <p>The <a href="https://github.com/burningtree/awesome-json">Awesome
-    JSON</a> page lists a nice collection of extensions to or alternatives
-    to JSON that address some of the shortcomings of using it as a
-    human-authored notation, including
-    <a href="https://github.com/bevry/cson">CSON</a>,
-    <a href="https://github.com/apiaryio/mson">MSON</a>, and
-    <a href="https://github.com/lightbend/config/blob/master/HOCON.md">HOCON</a>.
-    Other languages like <a href="https://github.com/toml-lang/toml">TOML</a>
-    and YAML variants have also influenced this design.
-    </p>
-    <p>
-    Finally, the data model and some of the packaging ideas have been
-    influenced by the work of an ITiCSE 2008 working group on the topic,
-    which produced this report:
-    <a href="https://doi.org/10.1145/1473195.1473240"><i>Developing a Common
-    Format for Sharing Programming Assignments</i></a>.
-    </p>
-  </section>
-
-  <section id="format">
-    <h2>Basic Format (And an Example)</h2>
-    <p>The remainder of this description is split into two main parts:
-    first, the format for describing key/value pairs (in this section), and
-    second, the data model (in the following section). We view these two
-    as independent. As indicated in the <a href="#whynot">Why Not YAML?</a>
-    section above, we view the data described for a programming assignment
-    as directly representable in PEML, YAML, JSON, etc. We also expect
-    that most tools will support either YAML or JSON directly for tooling
-    purposes, and that conversions between PEML&nbsp;&lt;=&gt;&nbsp;YAML or
-    PEML&nbsp;&lt;=&gt;&nbsp;JSON will be easy. So users who strongly
-    prefer an alternate notation can probably freely use one. However, we
-    strongly believe that a representation optimized for human authoring
-    of structured text consisting primarily of many multi-line text values
-    is warranted to make authoring easier for those who don't think/write
-    in YAML or JSON regularly.</p>
-    <p>OK, on to the format itself.</p>
-    
-<pre>
-exercise_id: edu.vt.cs.cs1114.palindromes
+<section>
+  <h2 id="format">Basic Format</h2>
+  <p>The remainder of this description is split into two main parts:
+  first, the format for describing key/value pairs (in this section), and
+  second, the data model (in the following section). We view these two
+  as independent. As indicated in the <a href="#whynot">Why Not YAML?</a>
+  section above, we view the data described for a programming assignment
+  as directly representable in PEML, YAML, JSON, etc. We also expect
+  that most tools will support either YAML or JSON directly for tooling
+  purposes, and that conversions between PEML&nbsp;&lt;=&gt;&nbsp;YAML or
+  PEML&nbsp;&lt;=&gt;&nbsp;JSON will be easy. So users who strongly
+  prefer an alternate notation can probably freely use one. However, we
+  strongly believe that a representation optimized for human authoring
+  of structured text consisting primarily of many multi-line text values
+  is warranted to make authoring easier for those who don't think/write
+  in YAML or JSON regularly.</p>
+  <p>OK, on to the format itself.</p>
+  
+<pre class="peml">
+<b>exercise_id</b>: edu.vt.cs.cs1114.palindromes
 
 <i># Single-line comments start with #
 # Comments must be on lines by themselves</i>
 
-title: Palindromes (A Simple PEML Example)
+<b>title</b>: Palindromes (A Simple PEML Example)
 
-topics: Strings, loops, conditions
-prerequisites: variables, assignment, boolean operators
+<b>topics</b>: Strings, loops, conditions
+<b>prerequisites</b>: variables, assignment, boolean operators
 
-instructions:----------
+<b>instructions</b>:----------
 Write a program that reads a single string (in the form of one line
 of text) from its standard input, and determines whether the string is
 a _palindrome_. A palindrome is a string that reads the same way
@@ -339,96 +541,96 @@ Or:
 &lt;/pre&gt;
 ----------
 
-assets.test_format: stdin-stdout
+<b>assets.test_format</b>: stdin-stdout
 
-[systems]
-language: java
-version: >= 1.5
+<b>[systems]</b>
+<b>language</b>: java
+<b>version</b>: >= 1.5
 
-[assets.tests]
-stdin: racecar
-stdout: "racecar" is a palindrome.
+<b>[assets.tests]</b>
+<b>stdin</b>: racecar
+<b>stdout</b>: "racecar" is a palindrome.
 
-stdin: Flintstone
-stdout: "Flintstone" is not a palindrome.
+<b>stdin</b>: Flintstone
+<b>stdout</b>: "Flintstone" is not a palindrome.
 
-stdin: url(some/local/input.txt)
-stdout: url(some/local/output.txt)
+<b>stdin</b>: url(some/local/input.txt)
+<b>stdout</b>: url(some/local/output.txt)
 
-stdin: url(http://my.school.edu/some/local/generator/input)
-stdout: url(http://my.school.edu/some/local/generator/output)
+<b>stdin</b>: url(http://my.school.edu/some/local/generator/input)
+<b>stdout</b>: url(http://my.school.edu/some/local/generator/output)
 </pre>
-    
-    <p>PEML uses a plain-text representation for
-    describing exercises.  This format is designed to be easy to edit in a
-    plain text editor.</p>
+  
+  <p>PEML uses a plain-text representation for
+  describing exercises.  This format is designed to be easy to edit in a
+  plain text editor.</p>
 
-    <h3>Key/Value Pairs</h3>
-    <p>Like YAML, we describe a programming exercise as a series of
-    key/value pairs. Wow, big deal.</p>
-    <p>In YAML terms, that means the top-level structure of an exercise is a
-    <b>mapping</b> (a hash or dictionary).</p>
-    <p>Keys are alphanumeric identifiers (starting with
-    a letter, and including underscores). This is more restrictive than YAML,
-    but the more general idea of allowing any representable value to be a key
-    has little utility here and requires more careful parsing and fancier
-    quoting rules that only decrease writability and increase the potential
-    learning curve ... so, PEML uses the simpler notion that is common in
-    many programming language identifier token classes. Note that periods
-    can be used to form dotted names to refer to nested keys, as in
-    ArchieML.</p>
-    <p>Also as in ArchieML, each key must start at the beginning of a line and
-    be followed by a colon (for single-valued keys; keys that map to
-    collections will instead be either: (a) surrounded by square brackets,
-    or (b) surrounded by curly braces, still following ArchieML).</p>
-    <p>The corresponding value follows the colon. All values are potentially
-    multi-lined values, and extend up to the beginning of the next property.
-    Any leading/trailing white space is trimmed (including newlines), and
-    multi-line values (i.e., those containing embedded newline(s) after
-    trimming) are automatically terminated with a single newline. As a result
-    blank lines can appear immediately before any key (or before any unquoted
-    value) for visual spacing/chunking as desired without affecting the
-    meaning.
-    </p>
-    <p>
-    Like ArchieML, PEML is intended to be parsed line by line, with the first
-    non-whitespace sequence on the line determining its role. A simple,
-    line-oriented parsing strategy using a basic state machine should be
-    sufficient, without requiring complex grammar-based parsing strategies.</p>
+  <h3 id="kv-pairs">Key/Value Pairs</h3>
+  <p>Like YAML, we describe a programming exercise as a series of
+  key/value pairs. Wow, big deal.</p>
+  <p>In YAML terms, that means the top-level structure of an exercise is a
+  <b>mapping</b> (a hash or dictionary).</p>
+  <p>Keys are alphanumeric identifiers (starting with
+  a letter, and including underscores). This is more restrictive than YAML,
+  but the more general idea of allowing any representable value to be a key
+  has little utility here and requires more careful parsing and fancier
+  quoting rules that only decrease writability and increase the potential
+  learning curve ... so, PEML uses the simpler notion that is common in
+  many programming language identifier token classes. Note that periods
+  can be used to form dotted names to refer to nested keys, as in
+  ArchieML.</p>
+  <p>Also as in ArchieML, each key must start at the beginning of a line and
+  be followed by a colon (for single-valued keys; keys that map to
+  collections will instead be either: (a) surrounded by square brackets,
+  or (b) surrounded by curly braces, still following ArchieML).</p>
+  <p>The corresponding value follows the colon. All values are potentially
+  multi-lined values, and extend up to the beginning of the next property.
+  Any leading/trailing white space is trimmed (including newlines), and
+  multi-line values (i.e., those containing embedded newline(s) after
+  trimming) are automatically terminated with a single newline. As a result
+  blank lines can appear immediately before any key (or before any unquoted
+  value) for visual spacing/chunking as desired without affecting the
+  meaning.
+  </p>
+  <p>
+  Like ArchieML, PEML is intended to be parsed line by line, with the first
+  non-whitespace sequence on the line determining its role. A simple,
+  line-oriented parsing strategy using a basic state machine should be
+  sufficient, without requiring complex grammar-based parsing strategies.</p>
 
-    <h3>Comments</h3>
-    <p>PEML allows single-line comments using the <code>#</code> character,
-    as in YAML. The # character must be the first (non-whitespace) character
-    on the line (i.e., only whole-line comments are supported), and the
-    corresponding line is completely ignored for the purposes of interpreting
-    the meaning of the PEML. Any line beginning with a # character (and any
-    leading indentation) is interpreted as a comment line, except in quoted
-    values.</p>
-    
-    <p>
-    Inspired by YAML's document start and end markers, PEML uses a specific
-    comment line ("#---", a pound sign followed by three dashes) to signal
-    the start of a PEML description. This marker is optional for the first
-    PEML description in a text stream, but serves as the delimiter between
-    exercises if multiple PEML descriptions are presented in a single file
-    or stream. The current PEML description continues until the next occurrence
-    of this marker (signaling the beginning of a new exercise), or the end
-    of input.
-    </p>
+  <h3 id="comments">Comments</h3>
+  <p>PEML allows single-line comments using the <code>#</code> character,
+  as in YAML. The # character must be the first (non-whitespace) character
+  on the line (i.e., only whole-line comments are supported), and the
+  corresponding line is completely ignored for the purposes of interpreting
+  the meaning of the PEML. Any line beginning with a # character (and any
+  leading indentation) is interpreted as a comment line, except in quoted
+  values.</p>
+  
+  <p>
+  Inspired by YAML's document start and end markers, PEML uses a specific
+  comment line ("#---", a pound sign followed by three dashes) to signal
+  the start of a PEML description. This marker is optional for the first
+  PEML description in a text stream, but serves as the delimiter between
+  exercises if multiple PEML descriptions are presented in a single file
+  or stream. The current PEML description continues until the next occurrence
+  of this marker (signaling the beginning of a new exercise), or the end
+  of input.
+  </p>
 
-    <h3 id="quoting">Quoting</h3>    
-    <p>
-    On occasion, one may end up including text as part of a value that
-    might also be recognizable as the start of a key. You can see this where
-    the word "<code>format:</code>" appears in the example above, as part
-    of the value given for the key "<code>instructions:</code>". In those
-    cases, PEML uses a variant of
-    <a href="https://en.wikipedia.org/wiki/Here_document">HereDoc</a>-style
-    syntax, adapted to be more like triple quotes in languages like Python,
-    Scala, R, etc.:
-    </p>
-<pre>
-some_key:"""
+  <h3 id="quoting">Quoting</h3>    
+  <p>
+  On occasion, one may end up including text as part of a value that
+  might also be recognizable as the start of a key. You can see this where
+  the word "<code>format:</code>" appears in the example above, as part
+  of the value given for the key "<code>instructions:</code>". In those
+  cases, PEML uses a variant of
+  <a href="https://en.wikipedia.org/wiki/Here_document">HereDoc</a>-style
+  syntax, adapted to be more like triple quotes in languages like Python,
+  Scala, R, etc.:
+  </p>
+<pre class="peml">
+<b>some_key</b>:"""
 You can put any multi-line text inside
 here and it is treated as if it is
 quoted: even when it contains things
@@ -436,21 +638,21 @@ that: look
 like: keys and values.
 """
 </pre>
-    <p>Any key where the colon is immediately followed by three or more
-    repetitions of the same printing character is treated as having a
-    HereDoc-style quoted value, with the provided sequence of repeated
-    characters serving as the delimiter. This is more flexible than
-    triple-quoting, since triple quotes themselves may appear in program
-    fragments for exercises using particular programming languages. This
-    technique allows authors to choose a custom delimiter (as with HereDocs),
-    but allows them to use repeated punctuation symbols to provide a more
-    identifiable/scannable horizontal delimiter around the value, rather
-    than using a custom identifier.</p>
-    <p>As with HereDocs in many programming languages, the quoted value
-    is terminated by the first subsequent occurrence of a line containing
-    only the delimiter character sequence.</p>
-<pre>
-yet_another_key:~~~~~
+  <p>Any key where the colon is immediately followed by three or more
+  repetitions of the same printing character is treated as having a
+  HereDoc-style quoted value, with the provided sequence of repeated
+  characters serving as the delimiter. This is more flexible than
+  triple-quoting, since triple quotes themselves may appear in program
+  fragments for exercises using particular programming languages. This
+  technique allows authors to choose a custom delimiter (as with HereDocs),
+  but allows them to use repeated punctuation symbols to provide a more
+  identifiable/scannable horizontal delimiter around the value, rather
+  than using a custom identifier.</p>
+  <p>As with HereDocs in many programming languages, the quoted value
+  is terminated by the first subsequent occurrence of a line containing
+  only the delimiter character sequence.</p>
+<pre class="peml">
+<b>yet_another_key</b>:~~~~~
 You can use any printable character as the delimiter,
 as long as it is repeated at least three times. The ending
 delimiter must exactly match the starting one, and appear
@@ -461,113 +663,184 @@ is encouraged, and use of letters or digits is discouraged
 since it may reduce readability.
 ~~~~~
 </pre>
-    <p>Of course, many programming languages also use # as a comment character.
-    In PEML, # has no special meaning inside a quoted value.
-    As a result, we recommend HereDoc-quoting any values that contain source
-    code from such a programming language, to prevent a program's comment lines
-    from being interpreted as PEML comments.</p>
+  <p>Of course, many programming languages also use # as a comment character.
+  In PEML, # has no special meaning inside a quoted value.
+  As a result, we recommend HereDoc-quoting any values that contain source
+  code from such a programming language, to prevent a program's comment lines
+  from being interpreted as PEML comments.</p>
 
-    <h3 id="embedding-markup">Embedding Markdown (and HTML)</h3>
-    <p>Special formatting in the textual description of the
-    exercise can be written using
-    <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">Markdown</a>,
-    which also supports embedding HTML directly in exercise descriptions.
-    So use Markdown or HTML for adding formatting to your text. Plain,
-    unformatted text also works, when no special formatting markup is
-    desired. Here, we specify git's flavor of markdown.</p>
-    <p>
-    <i>Note:</i> It is easy to consider adding a key for "text_format:",
-    specifying markdown as the default but allowing individual users to
-    use other markup formats (such as reStructuredText, AsciiDoc, POD,
-    LaTeX, etc.). However, allowing this dialectic specialization risks
-    making PEML descriptions harder to port among tools unless all tools
-    support the superset of all commonly used formats. Currently, in the
-    interests of interoperability, we're restricting text markup to using
-    Markdown, but public comments/debate on allowing other formats is welcome.
-    </p>
-    <p>
-    <i>Another Note:</i> Actually, by using
-    <a href="https://pandoc.org/">pandoc</a> and a PEML parsing wrapper, it
-    should be possible to create a web service that can read
-    a PEML document using a wide variety of text markup formats and normalize
-    any of them to using github-style Markdown, including reStructuredText,
-    many dialects of markdown, many wiki markup languages, Docbook, LaTeX,
-    and even Microsoft Word docx files (!). Unfortunately, this doesn't
-    address AsciiDoc :-(. At this point, it is plausible to consider supporting
-    other markup formats along with an appropriate "text_format:" key if
-    community effort can generate the necessary support for adopting tools to
-    make use of it (i.e., through a translation web site for converting PEML
-    using a different text markup into PEML using github Markdown, for example).
-    </p>
+  <h3 id="embedding-markup">Embedding Markdown (and HTML)</h3>
+  <p>Special formatting in the textual description of the
+  exercise can be written using
+  <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">Markdown</a>,
+  which also supports embedding HTML directly in exercise descriptions.
+  So use Markdown or HTML for adding formatting to your text. Plain,
+  unformatted text also works, when no special formatting markup is
+  desired. Here, we specify git's flavor of markdown.</p>
+  <p>
+  <i>Note:</i> It is easy to consider adding a key for "text_format:",
+  specifying markdown as the default but allowing individual users to
+  use other markup formats (such as reStructuredText, AsciiDoc, POD,
+  LaTeX, etc.). However, allowing this dialectic specialization risks
+  making PEML descriptions harder to port among tools unless all tools
+  support the superset of all commonly used formats. Currently, in the
+  interests of interoperability, we're restricting text markup to using
+  Markdown, but public comments/debate on allowing other formats is welcome.
+  </p>
+  <p>
+  <i>Another Note:</i> Actually, by using
+  <a href="https://pandoc.org/">pandoc</a> and a PEML parsing wrapper, it
+  should be possible to create a web service that can read
+  a PEML document using a wide variety of text markup formats and normalize
+  any of them to using github-style Markdown, including reStructuredText,
+  many dialects of markdown, many wiki markup languages, Docbook, LaTeX,
+  and even Microsoft Word docx files (!). Unfortunately, this doesn't
+  address AsciiDoc :-(. At this point, it is plausible to consider supporting
+  other markup formats along with an appropriate "text_format:" key if
+  community effort can generate the necessary support for adopting tools to
+  make use of it (i.e., through a translation web site for converting PEML
+  using a different text markup into PEML using github Markdown, for example).
+  </p>
 
-    <h3>External Resources</h3>
-    <p>
-    Values representing external references can be expressed as absolute
-    or relative URLs using the "<code>url(...)</code>" construct (similar
-    to its use in CSS).
-    </p>
+  <h3 id="urls">External Resources</h3>
+  <p>
+  External resources might be referenced in two different ways in PEML.
+  First, for any key/value pair, the value to the right of the colon
+  can be provided by using an external reference, rather than by
+  providing the value directly in the PEML file. Values that are provided
+  externally can be expressed as absolute or relative URLs using the
+  "<code>url(...)</code>" construct (similar to its use in CSS).
+  </p>
 
-<pre>
-# An example of an external resource
-instructions: url(some/directory/assignment.pdf)
+<pre class="peml">
+<i># An example of an external resource</i>
+<b>instructions</b>: url(some/directory/assignment.pdf)
 </pre>
 
-    <p>While we strongly discourage the use of PDF assignment descriptions,
-    any key value can be farmed out into an external file (or directory of
-    files!) that may be
-    stored locally (and referred to using a relative URL) or remotely
-    (and referred to using an absolute URL). This approach might be most
-    used for source code content stored in separate files, test data stored
-    in separate files, code libraries, and so on. Also, relative (or absolute)
-    URLs used in embedded Markdown or HTML within keys may be appropriate for
-    referring to images, downloadable resources accessible to the student,
-    etc.
-    </p>
+  <p>While we strongly discourage the use of PDF assignment descriptions,
+  any key value can be farmed out into an external file (or directory of
+  files!). This approach might be most
+  used for source code content stored in separate files, test data stored
+  in separate files, code libraries, and so on.
+  </p>
+  <p>Here, an absolute URL would specify the web location of the resource,
+  while a relative URL would be resolved <em>relative to the location of
+  the PEML file containing it</em>. As discussed above under
+  <a href="#design">Design Goals</a>, if a PEML description is packaged
+  in a zip file so that other resources can be transferred along with it,
+  relative URLs could be used to refer to other contents within the zip
+  file. Similarly, PEML files stored on local disk could refer to local
+  files stored adjacently, and PEML files stored in git repositories or
+  other systems could use the same technique.
+  </p>
+  <p>
+  Second, it is likely that some embedded Markdown or HTML content
+  (such as the <code>instructions</code> for the exercise) may include
+  HTML tags that use relative or absolute URLs. This may be appropriate for
+  referring to images, downloadable resources accessible to the student,
+  etc. While authors can use absolute URLs in these contexts, it may be
+  preferable in some circumstances to bundle those resources along with
+  the PEML description. By convention, we encourage authors to place
+  such files in a directory called <code>public_html/</code> that is
+  located alongside the PEML file in the same folder, zip file, or
+  repository. Within Markdown or HTML keys, relative URLs that start
+  with "<code>public_html/...</code>" will then be correctly resolved to
+  these resources. By adhering to this convention, tools can immediately
+  determine that external web-accessible resources must also be provided
+  and also be able to systematically rewrite URLs for user presentation.
+  </p>
+  <p>
+  Third, it is plausible that feedback generated when processing
+  author-provided reference tests may wish to use similar relative
+  URLs to point to images or other resources included as part of the
+  feedback. Again, any such resources should be placed in the
+  <code>public_html/</code> folder.
+  </p>
 
-    <h3>Splitting Up PEML Descriptions</h3>
-    <p>
-    In addition to allowing individual key values to be provided in external
-    files, PEML adds a <code>:include</code> directive that allows parts of
-    the PEML description to be included from another external location. While
-    this directive is not strictly necessary, it might be used by some
-    authors to factor out repeated key/value pairs (for the <code>license</code>,
-    <code>author</code>, environment definitions, etc.) so they can be written
-    once and reused across multiple PEML descriptions without repeating the
-    content.
-    </p>
 
-<pre>
-# An example of an external resource
-:include url(some/directory/cc-sa-license.peml)
+  <h3 id="includes">Splitting Up PEML Descriptions</h3>
+  <p>
+  In addition to allowing individual key values to be provided in external
+  files, PEML adds a <code>:include</code> directive that allows parts of
+  the PEML description to be included from another external location. While
+  this directive is not strictly necessary, it might be used by some
+  authors to factor out repeated key/value pairs (for the <code>license</code>,
+  <code>author</code>, environment definitions, etc.) so they can be written
+  once and reused across multiple PEML descriptions without repeating the
+  content.
+  </p>
+
+<pre class="peml">
+<i># An example of an external resource</i>
+<b>:include</b> url(some/directory/cc-sa-license.peml)
 </pre>
 
-    <p>
-    Another use for <code>:include</code> is to allow an author to separate
-    out the definition of the test cases and test environment for an exercise
-    so they are placed in a separate file. This might be useful so that the
-    exercise description itself might be public/accessible, but the test cases
-    or grading criteria applied to the exercise are managed separately and
-    only available to some users.
-    </p>
+  <p>
+  Another use for <code>:include</code> is to allow an author to separate
+  out the definition of the test cases and test environment for an exercise
+  so they are placed in a separate file. This might be useful so that the
+  exercise description itself might be public/accessible, but the test cases
+  or grading criteria applied to the exercise are managed separately and
+  only available to some users.
+  </p>
 
-    <h3>Nested Structure</h3>
-    <p>
-    Beyond these basics, nested properties follow Archie's conventions for
-    dotted keys (nested key structure), object blocks, and arrays. The main
-    differences here compared to ArchieML is the use of multi-line values
-    by default, the use of a HereDoc/triple-quote hybrid rather than a
-    specific end marker with escaping of special characters when a delimiter
-    is necessary, and support for comments.</p>
-    <p>
-    <div class="row">
-      <div class="col-6">
-        Nested keys:<br/>
-<pre>
-assets.test_format: stdin-stdout
+  <h3 id="interpolation">String Interpolation with Variable Values</h3>
+  <p>
+  <strong>Note: it is possible that some tools may choose not to implement
+  this feature, since it has to do with <em>use</em> of exercises as
+  opposed to simply parsing PEML descriptions.</strong>
+  </p>
+  <p>
+  In some cases, authors may wish to write "parameterized" exercise
+  descriptions where many instances of the exercise can be produced using
+  different parameter values. For example, a parameterized exercise may
+  allow for individualized or unique instances of the exercise to be
+  programmatically generated on demand for each new user/student. To
+  allow for tools that support such features, PEML allows for parameterized
+  contents in instructions, tests, code, etc.
+  </p>
+  <p>
+  PEML uses a Ruby-inspired notation for string interpolation, which is also
+  very close to Python's string interpolation syntax, and similar to
+  using braces in string interpolation in Perl. For any exercise, the
+  author can use any desired number of user-defined variables, and
+  any occurrences of <code>#{<em>variable-name</em>}</code> in the title,
+  instructions, code assets, or test assets will be substituted when an
+  instance of the exercise is needed.
+  </p>
+<pre class="peml">
+<b>instructions</b>:
+Draw a square that is #{width} pixels wide by #{height} pixels tall.
 </pre>
-      </div>
-      <div class="col-6">
-        JSON equivalent:<br/>
+  <p>
+  PEML does not support escaping of such interpolated values. Instead,
+  literal #{...} sequences that do not match any provided variable name
+  are not interpolated (i.e., they are not transformed to empty strings,
+  as they might be in some programming languages where an undefined variable
+  is treated as a nil value) and are instead left unchanged. PEML authors
+  are then advised to ensure that if their instructions or code use
+  #{...} notation, they keep the variable names used for substitution in
+  the PEML description disjoint from those appearing natively in the text.
+  </p>
+
+  <h3 id="structure">Nested Structure</h3>
+  <p>
+  Beyond these basics, nested properties follow Archie's conventions for
+  dotted keys (nested key structure), object blocks, and arrays. The main
+  differences here compared to ArchieML is the use of multi-line values
+  by default, the use of a HereDoc/triple-quote hybrid rather than a
+  specific end marker with escaping of special characters when a delimiter
+  is necessary, and support for comments.</p>
+  <p>
+  <div class="row">
+    <div class="col-6">
+      Nested keys:<br/>
+<pre class="peml">
+<b>assets.test_format</b>: stdin-stdout
+</pre>
+    </div>
+    <div class="col-6">
+      JSON equivalent:<br/>
 <pre>
 {
   "assets": {
@@ -575,26 +848,26 @@ assets.test_format: stdin-stdout
   }
 }
 </pre>
-      </div>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="col-6">
-        Array (list):<br/>
-<pre>
-[assets.tests]
-stdin: racecar
-stdout: "racecar" is a palindrome.
+  <div class="row">
+    <div class="col-6">
+      Array (list):<br/>
+<pre class="peml">
+<b>[assets.tests]</b>
+<b>stdin</b>: racecar
+<b>stdout</b>: "racecar" is a palindrome.
 
-stdin: Flintstone
-stdout: "Flintstone" is not a palindrome.
+<b>stdin</b>: Flintstone
+<b>stdout</b>: "Flintstone" is not a palindrome.
 
-stdin: url(some/local/input.txt)
-stdout: url(some/local/output.txt)
+<b>stdin</b>: url(some/local/input.txt)
+<b>stdout</b>: url(some/local/output.txt)
 </pre>
-      </div>
-      <div class="col-6">
-        JSON equivalent:<br/>
+    </div>
+    <div class="col-6">
+      JSON equivalent:<br/>
 <pre>
 {
   "assets": {
@@ -615,33 +888,33 @@ stdout: url(some/local/output.txt)
   }
 }
 </pre>
-      </div>
     </div>
+  </div>
 
-    <p>Further details about nested mappings and sequences (and how they
-    are terminated) are available in the
-    <a href="http://archieml.org/">ArchieML</a> definition.</p>
-  </section>
+  <p>Further details about nested mappings and sequences (and how they
+  are terminated) are available in the
+  <a href="http://archieml.org/">ArchieML</a> definition.</p>
+</section>
 
-  <section id="model">
-    <h2>Side by Side</h2>
-    <p>The (very brief) example shown above can be directly represented
-    in JSON (or YAML):</p>
-    <div class="row">
-      <div class="col-6">
-        PEML:<br/>
-<pre>
-exercise_id: edu.vt.cs.cs1114.sp2018.simple-PEML-example
+<section id="model">
+  <h2>Side by Side</h2>
+  <p>The (very brief) example shown above can be directly represented
+  in JSON (or YAML):</p>
+  <div class="row">
+    <div class="col-6">
+      PEML:<br/>
+<pre class="peml">
+<b>exercise_id</b>: edu.vt.cs.cs1114.sp2018.simple-PEML-example
 
 <i># Single-line comments start with #
 # Comments must be on lines by themselves</i>
 
-title: Palindromes (A Simple PEML Example)
+<b>title</b>: Palindromes (A Simple PEML Example)
 
-topics: Strings, loops, conditions
-prerequisites: variables, assignment, boolean operators
+<b>topics</b>: Strings, loops, conditions
+<b>prerequisites</b>: variables, assignment, boolean operators
 
-instructions:----------
+<b>instructions</b>:----------
 Write a program that reads a single string (in the form of one line
 of text) from its standard input, and determines whether the string is
 a _palindrome_. A palindrome is a string that reads the same way
@@ -661,40 +934,40 @@ Or:
 &lt;/pre&gt;
 ----------
 
-assets.test_format: stdin-stdout
+<b>assets.test_format</b>: stdin-stdout
 
 
-[systems]
-language: java
-version: >= 1.5
+<b>[systems]</b>
+<b>language</b>: java
+<b>version</b>: >= 1.5
 
 
 
-[assets.tests]
+<b>[assets.tests]</b>
 
 
-stdin: racecar
-stdout: "racecar" is a palindrome.
+<b>stdin</b>: racecar
+<b>stdout</b>: "racecar" is a palindrome.
 
 
-stdin: Flintstone
-stdout: "Flintstone" is not a palindrome.
+<b>stdin</b>: Flintstone
+<b>stdout</b>: "Flintstone" is not a palindrome.
 
 
-stdin: url(some/local/input.txt)
-stdout: url(some/local/output.txt)
+<b>stdin</b>: url(some/local/input.txt)
+<b>stdout</b>: url(some/local/output.txt)
 
 
-stdin: url(http://my.school.edu/some/local/generator/input)
-stdout: url(http://my.school.edu/some/local/generator/output)
+<b>stdin</b>: url(http://my.school.edu/some/local/generator/input)
+<b>stdout</b>: url(http://my.school.edu/some/local/generator/output)
 
 
 
 
 </pre>
-      </div>
-      <div class="col-6">
-        JSON equivalent:<br/>
+    </div>
+    <div class="col-6">
+      JSON equivalent:<br/>
 <pre>
 {
   "exercise_id": "edu.vt.cs.cs1114.sp2018.simple-PEML-example",
@@ -757,25 +1030,635 @@ stdout: url(http://my.school.edu/some/local/generator/output)
   }
 }
 </pre>
-      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="model">
-    <h2>The Details</h2>
+<section>
+  <h2 id="model">The Details</h2>
 
-    <ul>
-      <li><a href="schemas/definitions.html">Building blocks: definitions of
-        recurring model elements</a></li>
-      <li><a href="schemas/exercise.html">The Data Model for Exercises</a></li>
-      <li><a href="schemas/code.html">The Data Model for Code Assets</a></li>
-      <li><a href="schemas/testing.html">The Data Model for Software Tests</a></li>
-      <li><a href="pemltest.html">PEML-Test: a Language for Describing
-        Software Tests</a></li>
-    </ul>
+  <ul>
+    <li><a href="schemas/definitions.html">Building blocks: definitions of
+      recurring model elements</a></li>
+    <li><a href="schemas/exercise.html">The Data Model for Exercises</a></li>
+    <li><a href="schemas/code.html">The Data Model for Code Assets</a></li>
+    <li><a href="schemas/tests.html">The Data Model for Software Tests</a></li>
+    <li><a href="PEMLtest/">PEML-Test: a Language for Describing
+      Software Tests</a></li>
+  </ul>
 
-  </section>
+</section>
+</div><footer class="article__footer"><!-- this will show at every article content's bottom --><div class="article__license"><div class="license">
+    <p>
+      <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
+        <img alt="Attribution-ShareAlike 4.0 International" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+      </a>
+    </p>
+  </div></div></footer>
 
+  <div class="d-print-none"></div>
+
+</div>
+
+<script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    $(function() {
+      var $this ,$scroll;
+      var $articleContent = $('.js-article-content');
+      var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+      var scroll = hasSidebar ? '.js-page-main' : 'html, body';
+      $scroll = $(scroll);
+
+      $articleContent.find('.highlight').each(function() {
+        $this = $(this);
+        $this.attr('data-lang', $this.find('code').attr('data-lang'));
+      });
+      $articleContent.find('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]').each(function() {
+        $this = $(this);
+        $this.append($('<a class="anchor d-print-none" aria-hidden="true"></a>').html('<i class="fas fa-anchor"></i>'));
+      });
+      $articleContent.on('click', '.anchor', function() {
+        $scroll.scrollToAnchor('#' + $(this).parent().attr('id'), 400);
+      });
+    });
+  });
+})();</script></div><section class="page__comments d-print-none"></section></article>
+              </div>
+            </div></div><div class="page__footer d-print-none">
+<div class="footer js-page-footer">
+  <div class="main"><aside  itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Virginia Tech"><meta itemprop="url" content="http://www.cs.vt.edu/"><meta itemprop="description" content="PEML, Web-CAT, and related projects are academic research projects developed at Virginia Tech. The project lead is Stephen Edwards.
+"><div class="footer__author-links"><div class="author-links">
+  <ul class="menu menu--nowrap menu--inline"><link itemprop="url" href="http://www.cs.vt.edu/"><li title="">
+      <a class="button button--circle mail-button" itemprop="email" href="mailto:webcat@vt.edu" target="_blank">
+        <i class="fas fa-envelope"></i>
+      </a><li title="">
+        <a class="button button--circle github-button" itemprop="sameAs" href="https://github.com/CSSPLICE" target="_blank">
+          <div class="icon"><svg fill="#000000" width="24px" height="24px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path class="svgpath" data-index="path_0" fill="#272636" d="M0 525.2c0 223.6 143.3 413.7 343 483.5 26.9 6.8 22.8-12.4 22.8-25.4l0-88.7c-155.3 18.2-161.5-84.6-172-101.7-21.1-36-70.8-45.2-56-62.3 35.4-18.2 71.4 4.6 113.1 66.3 30.2 44.7 89.1 37.2 119 29.7 6.5-26.9 20.5-50.9 39.7-69.6C248.8 728.2 181.7 630 181.7 513.2c0-56.6 18.7-108.7 55.3-150.7-23.3-69.3 2.2-128.5 5.6-137.3 66.5-6 135.5 47.6 140.9 51.8 37.8-10.2 80.9-15.6 129.1-15.6 48.5 0 91.8 5.6 129.8 15.9 12.9-9.8 77-55.8 138.8-50.2 3.3 8.8 28.2 66.7 6.3 135 37.1 42.1 56 94.6 56 151.4 0 117-67.5 215.3-228.8 243.7 26.9 26.6 43.6 63.4 43.6 104.2l0 128.8c0.9 10.3 0 20.5 17.2 20.5C878.1 942.4 1024 750.9 1024 525.3c0-282.9-229.3-512-512-512C229.1 13.2 0 242.3 0 525.2L0 525.2z" />
+</svg>
+</div>
+        </a>
+      </li></ul>
+</div>
+</div>
+    </aside>
+    <footer class="site-info"><p class="menu menu--center">
+        <span>© PEML </span>
+        <a type="application/rss+xml" href="/peml/feed.xml"></a>
+      </p>
+      <p>Powered by <a title="Jekyll is a simple, blog-aware, static site generator." href="http://jekyllrb.com/">Jekyll</a> & <a
+        title="TeXt is a succinct theme for blogging." href="https://github.com/kitian616/jekyll-TeXt-theme">TeXt Theme</a>.
+      </p>
+    </footer>
+  </div>
 </div></div></div>
-</body>
+    </div><div class="modal modal--overflow page__search-modal d-print-none js-page-search-modal"><div class="search search--dark">
+  <div class="main">
+    <div class="search__header"></div>
+    <div class="search-bar">
+      <div class="search-box js-search-box">
+        <div class="search-box__icon-search"><i class="fas fa-search"></i></div>
+        <input type="text" />
+        <div class="search-box__icon-clear js-icon-clear">
+          <a><i class="fas fa-times"></i></a>
+        </div>
+      </div>
+      <button class="button button--theme-dark button--pill search__cancel js-search-toggle">
+        </button>
+    </div>
+    <div class="search-result js-search-result"></div>
+  </div>
+</div></div></div>
+
+
+<script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    function scrollToAnchor(anchor, duration, callback) {
+      var $root = this;
+      $root.animate({ scrollTop: $(anchor).position().top }, duration, function() {
+        window.history.replaceState(null, '', window.location.href.split('#')[0] + anchor);
+        callback && callback();
+      });
+    }
+    $.fn.scrollToAnchor = scrollToAnchor;
+  });
+})();(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    function affix(options) {
+      var $root = this, $window = $(window), $scrollTarget, $scroll,
+        offsetBottom = 0, scrollTarget = window, scroll = window.document, disabled = false, isOverallScroller = true,
+        rootTop, rootLeft, rootHeight, scrollBottom, rootBottomTop,
+        hasInit = false, curState;
+
+      function setOptions(options) {
+        var _options = options || {};
+        _options.offsetBottom && (offsetBottom = _options.offsetBottom);
+        _options.scrollTarget && (scrollTarget = _options.scrollTarget);
+        _options.scroll && (scroll = _options.scroll);
+        _options.disabled !== undefined && (disabled = _options.disabled);
+        $scrollTarget = $(scrollTarget);
+        isOverallScroller = window.isOverallScroller($scrollTarget[0]);
+        $scroll = $(scroll);
+      }
+      function preCalc() {
+        top();
+        rootHeight = $root.outerHeight();
+        rootTop = $root.offset().top + (isOverallScroller ? 0 :  $scrollTarget.scrollTop());
+        rootLeft = $root.offset().left;
+      }
+      function calc(needPreCalc) {
+        needPreCalc && preCalc();
+        scrollBottom = $scroll.outerHeight() - offsetBottom - rootHeight;
+        rootBottomTop = scrollBottom - rootTop;
+      }
+      function top() {
+        if (curState !== 'top') {
+          $root.removeClass('fixed').css({
+            left: 0,
+            top: 0
+          });
+          curState = 'top';
+        }
+      }
+      function fixed() {
+        if (curState !== 'fixed') {
+          $root.addClass('fixed').css({
+            left: rootLeft + 'px',
+            top: 0
+          });
+          curState = 'fixed';
+        }
+      }
+      function bottom() {
+        if (curState !== 'bottom') {
+          $root.removeClass('fixed').css({
+            left: 0,
+            top: rootBottomTop + 'px'
+          });
+          curState = 'bottom';
+        }
+      }
+      function setState() {
+        var scrollTop = $scrollTarget.scrollTop();
+        if (scrollTop >= rootTop && scrollTop <= scrollBottom) {
+          fixed();
+        } else if (scrollTop < rootTop) {
+          top();
+        } else {
+          bottom();
+        }
+      }
+      function init() {
+        if(!hasInit) {
+          var interval, timeout;
+          calc(true); setState();
+          // run calc every 100 millisecond
+          interval = setInterval(function() {
+            calc();
+          }, 100);
+          timeout = setTimeout(function() {
+            clearInterval(interval);
+          }, 45000);
+          window.pageLoad.then(function() {
+            setTimeout(function() {
+              clearInterval(interval);
+              clearTimeout(timeout);
+            }, 3000);
+          });
+          $scrollTarget.on('scroll', function() {
+            disabled || setState();
+          });
+          $window.on('resize', function() {
+            disabled || (calc(true), setState());
+          });
+          hasInit = true;
+        }
+      }
+
+      setOptions(options);
+      if (!disabled) {
+        init();
+      }
+      $window.on('resize', window.throttle(function() {
+        init();
+      }, 200));
+      return {
+        setOptions: setOptions,
+        refresh: function() {
+          calc(true, { animation: false }); setState();
+        }
+      };
+    }
+    $.fn.affix = affix;
+  });
+})();(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    function toc(options) {
+      var $root = this, $window = $(window), $scrollTarget, $scroller, $tocUl = $('<ul class="toc toc--ellipsis"></ul>'), $tocLi, $headings, $activeLast, $activeCur,
+        selectors = 'h1,h2,h3', container = 'body', scrollTarget = window, scroller = 'html, body', disabled = false,
+        headingsPos, scrolling = false, hasRendered = false, hasInit = false;
+
+      function setOptions(options) {
+        var _options = options || {};
+        _options.selectors && (selectors = _options.selectors);
+        _options.container && (container = _options.container);
+        _options.scrollTarget && (scrollTarget = _options.scrollTarget);
+        _options.scroller && (scroller = _options.scroller);
+        _options.disabled !== undefined && (disabled = _options.disabled);
+        $headings = $(container).find(selectors).filter('[id]');
+        $scrollTarget = $(scrollTarget);
+        $scroller = $(scroller);
+      }
+      function calc() {
+        headingsPos = [];
+        $headings.each(function() {
+          headingsPos.push(Math.floor($(this).position().top));
+        });
+      }
+      function setState(element, disabled) {
+        var scrollTop = $scrollTarget.scrollTop(), i;
+        if (disabled || !headingsPos || headingsPos.length < 1) { return; }
+        if (element) {
+          $activeCur = element;
+        } else {
+          for (i = 0; i < headingsPos.length; i++) {
+            if (scrollTop >= headingsPos[i]) {
+              $activeCur = $tocLi.eq(i);
+            } else {
+              $activeCur || ($activeCur = $tocLi.eq(i));
+              break;
+            }
+          }
+        }
+        $activeLast && $activeLast.removeClass('active');
+        ($activeLast = $activeCur).addClass('active');
+      }
+      function render() {
+        if(!hasRendered) {
+          $root.append($tocUl);
+          $headings.each(function() {
+            var $this = $(this);
+            $tocUl.append($('<li></li>').addClass('toc-' + $this.prop('tagName').toLowerCase())
+              .append($('<a></a>').text($this.text()).attr('href', '#' + $this.prop('id'))));
+          });
+          $tocLi = $tocUl.children('li');
+          $tocUl.on('click', 'a', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            scrolling = true;
+            setState($this.parent());
+            $scroller.scrollToAnchor($this.attr('href'), 400, function() {
+              scrolling = false;
+            });
+          });
+        }
+        hasRendered = true;
+      }
+      function init() {
+        var interval, timeout;
+        if(!hasInit) {
+          render(); calc(); setState(null, scrolling);
+          // run calc every 100 millisecond
+          interval = setInterval(function() {
+            calc();
+          }, 100);
+          timeout = setTimeout(function() {
+            clearInterval(interval);
+          }, 45000);
+          window.pageLoad.then(function() {
+            setTimeout(function() {
+              clearInterval(interval);
+              clearTimeout(timeout);
+            }, 3000);
+          });
+          $scrollTarget.on('scroll', function() {
+            disabled || setState(null, scrolling);
+          });
+          $window.on('resize', window.throttle(function() {
+            if (!disabled) {
+              render(); calc(); setState(null, scrolling);
+            }
+          }, 100));
+        }
+        hasInit = true;
+      }
+
+      setOptions(options);
+      if (!disabled) {
+        init();
+      }
+      $window.on('resize', window.throttle(function() {
+        init();
+      }, 200));
+      return {
+        setOptions: setOptions
+      };
+    }
+    $.fn.toc = toc;
+  });
+})();(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $body = $('body'), $window = $(window);
+    var $pageRoot = $('.js-page-root'), $pageMain = $('.js-page-main');
+    var activeCount = 0;
+    function modal(options) {
+      var $root = this, visible, onChange;
+      var scrollTop;
+      function setOptions(options) {
+        var _options = options || {};
+        visible = _options.initialVisible === undefined ? false : show;
+        onChange = _options.onChange;
+      }
+      function init() {
+        setState(visible);
+      }
+      function setState(isShow) {
+        if (isShow === visible) {
+          return;
+        }
+        visible = isShow;
+        if (visible) {
+          activeCount ++;
+          scrollTop = $(window).scrollTop() || $pageMain.scrollTop();
+          $root.addClass('modal--show');
+          $pageMain.scrollTop(scrollTop);
+          activeCount === 1 && ($pageRoot.addClass('show-modal'), $body.addClass('of-hidden'));
+          $window.on('scroll', hide);
+          $window.on('keyup', handleKeyup);
+        } else {
+          activeCount > 0 && activeCount --;
+          $root.removeClass('modal--show');
+          $window.scrollTop(scrollTop);
+          activeCount === 0 && ($pageRoot.removeClass('show-modal'), $body.removeClass('of-hidden'));
+          $window.off('scroll', hide);
+          $window.off('keyup', handleKeyup);
+        }
+        onChange && onChange(visible);
+      }
+      function show() {
+        setState(true);
+      }
+      function hide() {
+        setState(false);
+      }
+      function handleKeyup(e) {
+        // Char Code: 27  ESC
+        if (e.which ===  27) {
+          hide();
+        }
+      }
+      setOptions(options);
+      init();
+      return {
+        show: show,
+        hide: hide
+      };
+    }
+    $.fn.modal = modal;
+  });
+})();/*(function () {
+
+})();*/</script><script>
+  /* toc must before affix, since affix need to konw toc' height. */(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  var TOC_SELECTOR = window.TEXT_VARIABLES.site.toc.selectors;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window);
+    var $articleContent = $('.js-article-content');
+    var $tocRoot = $('.js-toc-root'), $col2 = $('.js-col-aside');
+    var toc;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+    var hasToc = $articleContent.find(TOC_SELECTOR).length > 0;
+
+    function disabled() {
+      return $col2.css('display') === 'none' || !hasToc;
+    }
+
+    tocDisabled = disabled();
+
+    toc = $tocRoot.toc({
+      selectors: TOC_SELECTOR,
+      container: $articleContent,
+      scrollTarget: hasSidebar ? '.js-page-main' : null,
+      scroller: hasSidebar ? '.js-page-main' : null,
+      disabled: tocDisabled
+    });
+
+    $window.on('resize', window.throttle(function() {
+      tocDisabled = disabled();
+      toc && toc.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+  });
+})();(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window), $pageFooter = $('.js-page-footer');
+    var $pageAside = $('.js-page-aside');
+    var affix;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+
+    affix = $pageAside.affix({
+      offsetBottom: $pageFooter.outerHeight(),
+      scrollTarget: hasSidebar ? '.js-page-main' : null,
+      scroller: hasSidebar ? '.js-page-main' : null,
+      scroll: hasSidebar ? $('.js-page-main').children() : null,
+      disabled: tocDisabled
+    });
+
+    $window.on('resize', window.throttle(function() {
+      affix && affix.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+    window.pageAsideAffix = affix;
+  });
+})();</script><script>var SOURCES = window.TEXT_VARIABLES.sources;
+var PAHTS = window.TEXT_VARIABLES.paths;
+window.Lazyload.js([SOURCES.jquery, PAHTS.search_js], function() {
+  var searchData = window.TEXT_SEARCH_DATA ? initData(window.TEXT_SEARCH_DATA) : {};
+
+  function memorize(f) {
+    var cache = {};
+    return function () {
+      var key = Array.prototype.join.call(arguments, ',');
+      if (key in cache) return cache[key];
+      else return cache[key] = f.apply(this, arguments);
+    };
+  }
+
+  function initData(data) {
+    var _data = [], i, j, key, keys, cur;
+    keys = Object.keys(data);
+    for (i = 0; i < keys.length; i++) {
+      key = keys[i], _data[key] = [];
+      for (j = 0; j < data[key].length; j++) {
+        cur = data[key][j];
+        cur.title = window.decodeUrl(cur.title);
+        cur.url = window.decodeUrl(cur.url);
+        _data[key].push(cur);
+      }
+    }
+    return _data;
+  }
+
+  /// search
+  function searchByQuery(query) {
+    var i, j, key, keys, cur, _title, result = {};
+    keys = Object.keys(searchData);
+    for (i = 0; i < keys.length; i++) {
+      key = keys[i];
+      for (j = 0; j < searchData[key].length; j++) {
+        cur = searchData[key][j], _title = cur.title;
+        if ((result[key] === undefined || result[key] && result[key].length < 4 )
+          && _title.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
+          if (result[key] === undefined) {
+            result[key] = [];
+          }
+          result[key].push(cur);
+        }
+      }
+    }
+    return result;
+  }
+
+  var renderHeader = memorize(function(header) {
+    return $('<p class="search-result__header">' + header + '</p>');
+  });
+
+  var renderItem = function(index, title, url) {
+    return $('<li class="search-result__item" data-index="' + index + '"><a class="button" href="' + url + '">' + title + '</a></li>');
+  };
+
+  function render(data) {
+    if (!data) { return null; }
+    var $root = $('<ul></ul>'), i, j, key, keys, cur, itemIndex = 0;
+    keys = Object.keys(data);
+    for (i = 0; i < keys.length; i++) {
+      key = keys[i];
+      $root.append(renderHeader(key));
+      for (j = 0; j < data[key].length; j++) {
+        cur = data[key][j];
+        $root.append(renderItem(itemIndex++, cur.title, cur.url));
+      }
+    }
+    return $root;
+  }
+
+  // search box
+  var $searchBox = $('.js-search-box');
+  var $searchInput = $searchBox.children('input');
+  var $searchClear = $searchBox.children('.js-icon-clear');
+  var $result = $('.js-search-result'), $resultItems;
+  var lastActiveIndex, activeIndex;
+
+  function searchBoxEmpty() {
+    $searchBox.removeClass('not-empty'); $result.html(null);
+    $resultItems = $('.search-result__item'); activeIndex = 0;
+  }
+
+  $searchInput.on('input', window.throttle(function() {
+    var val = $(this).val();
+    if (val === '' || typeof val !== 'string') {
+      searchBoxEmpty();
+    } else {
+      $searchBox.addClass('not-empty'); $result.html(render(searchByQuery(val)));
+      $resultItems = $('.search-result__item'); activeIndex = 0;
+      $resultItems.eq(0).addClass('active');
+    }
+  }, 400));
+  $searchInput.on('focus', function() {
+    $(this).addClass('focus');
+  });
+  $searchInput.on('blur', function() {
+    $(this).removeClass('focus');
+  });
+  $searchClear.on('click', function() {
+    $searchInput.val(''); searchBoxEmpty();
+  });
+
+  // search panel
+  var $searchModal = $('.js-page-search-modal');
+  var $searchToggle = $('.js-search-toggle');
+  var modalVisible = false;
+
+  var searchModal = $searchModal.modal({ onChange: handleModalChange });
+
+  function handleModalChange(visible) {
+    modalVisible = visible;
+    if (visible) {
+      $searchInput[0].focus();
+    } else {
+      $searchInput[0].blur();
+      setTimeout(function() {
+        $searchInput.val(''); searchBoxEmpty();
+        window.pageAsideAffix && window.pageAsideAffix.refresh();
+      }, 400);
+    }
+  }
+
+  $searchToggle.on('click', function() {
+    modalVisible ? searchModal.hide() : searchModal.show();
+  });
+
+  function updateResultItems() {
+    lastActiveIndex >= 0 && $resultItems.eq(lastActiveIndex).removeClass('active');
+    activeIndex >= 0 && $resultItems.eq(activeIndex).addClass('active');
+  }
+
+  function moveActiveIndex(direction) {
+    var itemsCount = $resultItems ? $resultItems.length : 0;
+    if (itemsCount > 1) {
+      lastActiveIndex = activeIndex;
+      if (direction === 'up') {
+        activeIndex = (activeIndex - 1 + itemsCount) % itemsCount;
+      } else if (direction === 'down') {
+        activeIndex = (activeIndex + 1 + itemsCount) % itemsCount;
+      }
+      updateResultItems();
+    }
+  }
+
+  // Char Code: 13  Enter, 37  ⬅, 38  ⬆, 39  ➡, 40  ⬇, 83  S, 191 /
+  $(window).on('keyup', function(e) {
+    if (modalVisible) {
+      if (e.which === 38) {
+        modalVisible && moveActiveIndex('up');
+      } else if (e.which === 40) {
+        modalVisible && moveActiveIndex('down');
+      } else if (e.which === 13) {
+        modalVisible && $resultItems && activeIndex >= 0 && $resultItems.eq(activeIndex).children('a')[0].click();
+      }
+    } else {
+      if (!window.isFormElement(e.target || e.srcElement) && (e.which === 83 || e.which === 191)) {
+        modalVisible || searchModal.show();
+      }
+    }
+  });
+
+  $result.on('mouseover', '.search-result__item > a', function() {
+    var itemIndex = $(this).parent().data('index');
+    itemIndex >= 0 && (lastActiveIndex = activeIndex, activeIndex = itemIndex, updateResultItems());
+  });
+});</script>
+    </div>
+    <script>(function () {
+  var $root = document.getElementsByClassName('root')[0];
+  if (window.hasEvent('touchstart')) {
+    $root.dataset.isTouch = true;
+    document.addEventListener('touchstart', function(){}, false);
+  }
+})();</script>
+  </body>
 </html>

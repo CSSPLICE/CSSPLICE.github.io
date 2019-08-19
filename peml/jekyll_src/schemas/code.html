@@ -1,0 +1,100 @@
+---
+title: PEML Data Model for Code Assets
+---
+<section>
+  <h2 id="goals">Title</h2>
+  <p>blah blah blah ...
+  </p>
+<!--
+<pre>
+---
+
+starter:
+wrapper:
+library:
+(reference:)
+model_solution:
+multiple models?
+
+input generator?
+
+</pre>
+-->
+
+    <dl>
+
+    <dt><code>assets.*</code></dt>
+    <dd><p>
+    <pre>
+    assets.tests = url/location
+    assets.tests = array
+
+    .visibility
+
+    .stdin
+    .stdout
+    
+    .file.name
+    .file.content
+    .file.format
+    
+    .csv.pattern
+    .csv.content
+    .csv.delimiter = ,
+    .csv.trim = true/false
+
+
+    assets.build/.run/.test
+      .environment
+        .extends = (previous)
+        .type
+        .container
+
+        .data
+        .lib
+        .include
+        .scripts
+        .commands
+
+
+    assets.data = url/location
+    assets.data = array
+    .file.*
+    ## Need some way to indicate whether zip urls need to be unpacked or not
+    ## Maybe add "#unpack" on the end of an archive url to request unpacking?
+    ## Then it looks kind of like a URL anchor name
+    ##---
+    ## Instead, make compressed archives that aren't simple files auto-uncompress
+
+    assets.environment.type
+    assets.environment.container = url/location
+    
+    assets.code.starter = url/location
+    assets.code.starter = array
+    .file.*
+
+    assets.code.lib = url/location
+    assets.code.lib = array
+    .file.*
+
+    assets.code.include = url/location
+    assets.code.include = array
+    .file.*
+
+    assets.code.solutions = url/location
+    assets.code.solutions = array
+    .label (reference)
+    .description
+    [.files]
+
+    assets.code.unified = url/location
+    assets.code.unified = array
+    .file.*
+    </pre>
+    </p>
+<pre>
+</pre>
+    </dd>
+    </dl>
+
+</section>
