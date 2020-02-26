@@ -478,7 +478,7 @@ since it may reduce readability.
   <h3 id="includes">Splitting Up PEML Descriptions</h3>
   <p>
   In addition to allowing individual key values to be provided in external
-  files, PEML adds a <code>:include</code> directive that allows parts of
+  files, PEML adds an <code>:include</code> directive that allows parts of
   the PEML description to be included from another external location. While
   this directive is not strictly necessary, it might be used by some
   authors to factor out repeated key/value pairs (for the <code>license</code>,
@@ -517,28 +517,43 @@ since it may reduce readability.
   contents in instructions, tests, code, etc.
   </p>
   <p>
-  PEML uses a Ruby-inspired notation for string interpolation, which is also
-  very close to Python's string interpolation syntax, and similar to
+  PEML uses <a href="https://mustache.github.io/">mustache-compatible</a>
+  notation for string interpolation, which is also compatible with a number
+  of templating systems. It is analogous to Ruby's <code>#{...}</code> string
+  interpolation syntax, Python's string interpolation syntax, and similar to
   using braces in string interpolation in Perl. For any exercise, the
   author can use any desired number of user-defined variables, and
-  any occurrences of <code>#{<em>variable-name</em>}</code> in the title,
+  any occurrences of {% raw %}<code>{{<em>variable-name</em>}}</code>{% endraw %}
+  in the title,
   instructions, code assets, or test assets will be substituted when an
   instance of the exercise is needed.
   </p>
+  <p>{% raw %}
+  Since different tools implementing PEML may use different templating
+  implementations to achieve interpolation, extensions or variants of
+  {{mustache}} syntax might be supported, so check your tool's documentation
+  when in doubt.
+  {% endraw %}</p>
 <pre class="peml">
 <b>instructions</b>:
-Draw a square that is #{width} pixels wide by #{height} pixels tall.
+{% raw %}
+Draw a square that is {{width}} pixels wide by {{height}} pixels tall.
+{% endraw %}
 </pre>
-  <p>
-  PEML does not support escaping of such interpolated values. Instead,
-  literal #{...} sequences that do not match any provided variable name
-  are not interpolated (i.e., they are not transformed to empty strings,
-  as they might be in some programming languages where an undefined variable
-  is treated as a nil value) and are instead left unchanged. PEML authors
+  <p>{% raw %}
+  PEML does not support escaping of literal "{{" and "}}" marking interpolated
+  values (although PEML-supporting tools may support custom notational
+  extensions that allow this, it isn't part of the PEML definition).
+  PEML authors
   are then advised to ensure that if their instructions or code use
-  #{...} notation, they keep the variable names used for substitution in
+  <code>{{...}}</code> notation, they keep the variable names used for
+  substitution in
   the PEML description disjoint from those appearing natively in the text.
-  </p>
+  Where necessary, use the <a href="">options.interpolation.delimiters</a>
+  key to set the delimiters to something different (similar to the
+  mustache <a href="https://mustache.github.io/mustache.5.html">set
+  delimiter</a> feature).
+  {% endraw %}</p>
 
   <h3 id="structure">Nested Structure</h3>
   <p>
