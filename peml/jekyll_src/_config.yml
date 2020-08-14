@@ -6,9 +6,10 @@ description: >
   ultra-human-friendly authoring format for describing automatically graded
   programming assignments.
 baseurl: /peml # the subpath of your site, e.g. /blog
+#baseurl: .
 url: "https://cssplice.github.io"
 repository: cssplice/cssplice.github.io
-repository_tree: master/peml
+repository_tree: master/peml/jekyll_src
 lang: en
 permalink: none
 theme: jekyll-text-theme
@@ -31,7 +32,7 @@ search:
 author:
   type      : organization
   name      : Virginia Tech
-  url       : http://www.cs.vt.edu/
+  url       : http://cs.vt.edu/
   bio: >
     PEML, Web-CAT, and related projects are academic research projects
     developed at Virginia Tech. The project lead is Stephen Edwards.

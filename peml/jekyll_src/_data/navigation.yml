@@ -1,12 +1,12 @@
 header:
   - title: Introduction
     url: /
-  - title: Data Model
+  - title: Specification
     url: /schemas/
-  - title: PEMLtest
-    url: /PEMLtest/
   - title: Examples
     url: /examples/
+  - title: PEMLtest
+    url: /PEMLtest/
   - title: Software
     url: https://github.com/CSSPLICE/peml/
   - title: GitHub

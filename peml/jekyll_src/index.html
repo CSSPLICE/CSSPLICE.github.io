@@ -4,8 +4,8 @@ title: PEML
 
 <section>
   <h2 id="purpose">Purpose</h2>
-  <p>The <b>Programming Exercise Markup Language (PEML)</b> (feedback on
-  name choice is welcome!) is intended to be a simple, easy format for
+  <p>The <b>Programming Exercise Markup Language (PEML)</b> is intended
+  to be a simple, easy format for
   CS and IT instructors of all kinds (college, community college, high
   school, whatever) to describe programming assignments and activities.
   We want it to be so easy (and obvious) to use that instructors won't
@@ -21,201 +21,33 @@ title: PEML
   for <b>authors</b> of programming activities, not to fit into a specific
   auto-grader or simplify tasks for tool writers.
   </p>
-  <p>OK, so this is a new notation. That sucks. But there doesn't seem to
-  be an obvious alternative that meets our goals, so ...</p>
-  <p>
-  Also, in terms of scope of "programming activity", here we are trying
-  to capture everything from very small programming activities, such as
-  "here's a very short function, fill in the blank to make it work", to
-  very large programming activities, such as "write dozens of classes
-  spanning thousands of lines of code to implement this programming
-  language", or whatever. Yes, that is a very broad range, but the aim
-  is to cover the full range, rather than making simplifying assumptions
-  that limit PEML to a narrower subset. The reason for using "Exercise"
-  in the name of the language is to remind developers that it covers a
-  broader range of activities than what many instructors see as pure
-  "programming assignments".</p>
-</section>
-
-<section>
-  <h2 id="whynot">Why not YAML? or JSON?</h2>
-  <p>Actually, one of our design goals is for PEML descriptions to be
-  directly mappable to YAML <i>and</i> JSON, so that people who prefer
-  one of those notations (or tools that use those notations) can use
-  the data model. Converting PEML to YAML or JSON should be a direct/easy
-  tool translation that we expect will be provided as a service and/or
-  library at some point.</p>
-  <p>But why not just use YAML (or JSON) directly, since parsers already
-  exist?</p>
-  <p>The main reasons are:</p>
-  <ol type="a">
-    <li><p>These existing formats are not <b>writer-friendly enough</b> for
-    descriptions that contain large amounts of free-form text. Face it,
-    programming activities usually require
-    large-ish chunks of multi-line text to describe most of the interesting
-    properties, whether you're talking about the specification for a program,
-    or starter code to provide to a student, or reference tests to check a
-    solution, or a sample/reference solution to provide for other instructors
-    to look at, or whatever. In most cases, PEML is not about simple
-    key/value pairs where values are small pieces of data, or about deeply
-    structured nested object descriptions. It's about writer-friendly input
-    of structured text where most of the values are multi-line text written
-    by humans.
-    </p>
-    </li>
-    <li><p>Are not <b>syntax-friendly enough</b> to present a minimal-effort
-    entry path. Of course, this isn't an obstacle for programming-oriented
-    instructors who have already used YAML (or JSON) and are familiar with
-    working with them. However, the sticky bits of those formats do require
-    a small learning curve that we hope to minimize further.</p>
-    <p>
-    In particular, YAML's reliance on whitespace/indentation to indicate
-    nested structure can pose an obstacle to more free-form text input.
-    JSON's reliance on JavaScript quoting and lack of true multi-line values
-    makes it challenging for these tasks in similar ways.</p>
-    </li>
-  </ol>
-  <p> Of course, other practitioners have made the same complaints about both
-  YAML and JSON before, so "more human-friendly" alternatives to both
-  formats have been proposed by others (see
-  <a href="#influences">Influences</a> below). Naturally, we were unable to
-  find an existing format that exactly met the needs here ... If you happen
-  to know of one we've overlooked that would be a better fit, please say
-  so! What we are aiming for is a format that allows instructors to
-  copy-and-paste content from existing sources (existing assignment writeups,
-  program solutions, program text, whatever) with minimal additional
-  reformatting work in order to create a readable, streamlined programming
-  exercise representation.</p>
-</section>
-
-<section>
-  <h2 id="design">Design Goals</h2>
-  <p>OK, with the context for this description language out of the way,
-  here are the specific objectives we are hoping to achieve:</p>
+  <p>PEML is designed to achieve the following goals:</p>
   <ol>
-    <li><p><b>Minimal learning curve</b>:
-    To paraphrase Cay Horstmann, we are aiming for a format that an average
-    computing instructor can learn in under an hour. Further, after a little
-    practice, we hope that an instructor who has an existing assignment can
-    convert or map it to this representation in less than 10 minutes. We
-    want the syntax to be super simple/direct, so that instructors can focus
-    just on the specific properties they are describing.
-    </p></li>
-
-    <li><p><b>Plain-text file representation</b>:
-    PEML uses a plain-text format so that it is easy to edit with any text
-    editor. As mentioned above, we want instructors to be able to directly
-    copy plain-text content, including relevant code assets or instructions,
-    right into the PEML representation. For straightforward assignments
-    that do not require any external resources or a special execution
-    enviroment setup, the entire description can be written in one simple
-    text file. Only instructors with more advanced situations or requirements
-    need to use PEML's facility to connect with external resources.
-    </p></li>
-
-    <li><p><b>Reference to external resources</b>:
-    While the central representation for an exercise is a text file, we
-    recognize than instructors may run into situations where one or more
-    supporting resources are also necessary for a given exercise (such as
-    custom data files, a special library, existing PDF documents, etc.).
-    PEML provides a clean way for specifying values through relative and
-    absolute URLs. These URLs may refer to remote resources (located online,
-    including in git repositories or other locations, docker containers,
-    etc.), or local resources located alongside the PEML file.
-    </p></li>
-
-    <li><p><b>Directory structure</b>:
-    While exercises described as a single text file are easy to transport
-    and process, sometimes it may be useful for an exercise to refer to
-    external resources stored locally. This can be done by including
-    relative URLs in the exercise description (see below). In this situation,
-    we can view the subdirectory containing the PEML file as the root of
-    an exercise description, with relative URLs referring to other file
-    paths within that subdirectory (or subdirectory tree). This allows a
-    single PEML file along with its associated local resources to be
-    managed as a single local entity.
-    </p></li>
-
-    <li><p><b>Zip file packaging</b>:
-    Similarly, while a PEML file plus its associated local resources can
-    be represented as a subdirectory (or subdirectory tree), they can also
-    be packaged into a zip file. The PEML file should be in the root of
-    the zip file's internal directory structure, named
-    <code>exercise.peml</code>. Relative URLs inside the PEML file will
-    then be interpreted within the ZIP relative to the location of the
-    PEML file (i.e., relative to the ZIP's root). This makes it easy to
-    zip a subdirectory representing an exercise to make it easy to
-    transport or upload the PEML file and all of the associated local
-    resources, and also makes it easy to unzip a packaged exercise to
-    produce a subdirectory representation.
-    </p></li>
-
-    <li><p>
-    <b>Programming language neutral</b>: PEML should support descriptions
-    of programming activities in any programming language, rather than
-    being specific to just one. Some fields/assets within one exercise
-    description will naturally be programming-language-specific, but the
-    notation used to describe the exercise itself should not be.
-    </p></li>
-
-    <li><p><b>Minimal technology support</b>:
-    Basic PEML descriptions do not require the use of any specific
-    supporting technologies to manage build environments, execution
-    environments, or external dependencies. This follows from the goal
-    to use a simple text file representation (with no external resources)
-    for basic programming activities similar to those found in many
-    textbooks. We believe simple, low overhead assignments will be the
-    most common case. However, we also realize that
-    some exercise authors may prefer to use specific tools or technologies
-    to package or compartmentalize execution environment features,
-    supporting libraries, run-time dependencies, build environments,
-    custom testing tools, etc. As a result, PEML is set up to allow such
-    services to be used by exercise authors who desire it, but they
-    are <i>not</i> required for mainstream (or simple) exercise
-    descriptions. In other words, instructors who use "vanilla" assignments
-    without any special tooling or infrastructure should be able to hop in
-    and describe their existing exercises in PEML without having to learn
-    about new tools or technologies.
-    </p></li>
+    <li>Minimal learning curve</li>
+    <li>Plain-text file representation</li>
+    <li>Supports references to external resources</li>
+    <li>Directory-structured organization of associated assets</li>
+    <li>Zip file packaging of multi-file assets with description</li>
+    <li>Programming language neutral</li>
+    <li>Minimal technology support</li>
   </ol>
+  <p>For more information <a href="about.html">about PEML's goals and
+  influences</a>, read about:</p>
+  <ul>
+  <li><a href="about.html#whynot">Why not YAML? or JSON?</a></li>
+  <li><a href="about.html#design">PEML's Design Goals</a></li>
+  <li><a href="about.html#influences">PEML's Influences</a></li>
+  </ul>
 </section>
 
-<section>
-  <h2 id="influences">Influences</h2>
-  <p>In terms of inspiration, PEML has been influenced heavily by YAML
-  and its relatives (including HAML), as well as many alternative
-  notations that have been developed as alternatives for describing
-  structured textual data.</p>
-  <p>One of the most prominent influences has been
-  <a href="http://archieml.org/">ArchieML</a>, another format with some
-  overlapping goals used by the New York Times to write certain types of
-  online content. PEML reuses big chunks of ArchieML's design.</p>
-  <p>The <a href="https://github.com/burningtree/awesome-json">Awesome
-  JSON</a> page lists a nice collection of extensions to or alternatives
-  to JSON that address some of the shortcomings of using it as a
-  human-authored notation, including
-  <a href="https://github.com/bevry/cson">CSON</a>,
-  <a href="https://github.com/apiaryio/mson">MSON</a>, and
-  <a href="https://github.com/lightbend/config/blob/master/HOCON.md">HOCON</a>.
-  Other languages like <a href="https://github.com/toml-lang/toml">TOML</a>
-  and YAML variants have also influenced this design.
-  </p>
-  <p>
-  Finally, the data model and some of the packaging ideas have been
-  influenced by the work of an ITiCSE 2008 working group on the topic,
-  which produced this report:
-  <a href="https://doi.org/10.1145/1473195.1473240"><i>Developing a Common
-  Format for Sharing Programming Assignments</i></a>.
-  </p>
-</section>
 
 <section>
   <h2 id="format">Basic Format</h2>
   <p>The remainder of this description is split into two main parts:
   first, the format for describing key/value pairs (in this section), and
   second, the data model (in the following section). We view these two
-  as independent. As indicated in the <a href="#whynot">Why Not YAML?</a>
-  section above, we view the data described for a programming assignment
+  as independent. As indicated in the <a href="about.html#whynot">Why Not
+  YAML?</a>, we view the data described for a programming assignment
   as directly representable in PEML, YAML, JSON, etc. We also expect
   that most tools will support either YAML or JSON directly for tooling
   purposes, and that conversions between PEML&nbsp;&lt;=&gt;&nbsp;YAML or
@@ -226,19 +58,19 @@ title: PEML
   is warranted to make authoring easier for those who don't think/write
   in YAML or JSON regularly.</p>
   <p>OK, on to the format itself.</p>
-  
-<pre class="peml">
-<b>exercise_id</b>: edu.vt.cs.cs1114.palindromes
 
-<i># Single-line comments start with #
-# Comments must be on lines by themselves</i>
+{% highlight peml %}
+exercise_id: edu.vt.cs.cs1114.palindromes
 
-<b>title</b>: Palindromes (A Simple PEML Example)
+# Single-line comments start with #
+# Comments must be on lines by themselves
 
-<b>topics</b>: Strings, loops, conditions
-<b>prerequisites</b>: variables, assignment, boolean operators
+title: Palindromes (A Simple PEML Example)
 
-<b>instructions</b>:----------
+tag.topics: strings; loops; conditions
+tag.prerequisites: variables; assignment; boolean operators
+
+instructions:----------
 Write a program that reads a single string (in the form of one line
 of text) from its standard input, and determines whether the string is
 a _palindrome_. A palindrome is a string that reads the same way
@@ -247,36 +79,38 @@ program does not need to prompt for its input, and should only generate
 one line of output, in the following
 format:
 
-&lt;pre&gt;
+```
 "racecar" is a palindrome.
-&lt;/pre&gt;
+```
 
 Or:
 
-&lt;pre&gt;
+```
 "Flintstone" is not a palindrome.
-&lt;/pre&gt;
+```
 ----------
 
-<b>assets.test_format</b>: stdin-stdout
+[systems]
+language: java
+version: >= 1.5
+[]
 
-<b>[systems]</b>
-<b>language</b>: java
-<b>version</b>: >= 1.5
+[suites]
+[.cases]
+stdin: racecar
+stdout: "racecar" is a palindrome.
 
-<b>[assets.tests]</b>
-<b>stdin</b>: racecar
-<b>stdout</b>: "racecar" is a palindrome.
+stdin: Flintstone
+stdout: "Flintstone" is not a palindrome.
 
-<b>stdin</b>: Flintstone
-<b>stdout</b>: "Flintstone" is not a palindrome.
+stdin: url(some/local/input.txt)
+stdout: url(some/local/output.txt)
 
-<b>stdin</b>: url(some/local/input.txt)
-<b>stdout</b>: url(some/local/output.txt)
-
-<b>stdin</b>: url(http://my.school.edu/some/local/generator/input)
-<b>stdout</b>: url(http://my.school.edu/some/local/generator/output)
-</pre>
+stdin: url(http://my.school.edu/some/local/generator/input)
+stdout: url(http://my.school.edu/some/local/generator/output)
+[]
+[]
+{% endhighlight %}
   
   <p>PEML uses a plain-text representation for
   describing exercises.  This format is designed to be easy to edit in a
@@ -346,15 +180,15 @@ Or:
   syntax, adapted to be more like triple quotes in languages like Python,
   Scala, R, etc.:
   </p>
-<pre class="peml">
-<b>some_key</b>:"""
+{% highlight peml %}
+some_key:"""
 You can put any multi-line text inside
 here and it is treated as if it is
 quoted: even when it contains things
 that: look
 like: keys and values.
 """
-</pre>
+{% endhighlight %}
   <p>Any key where the colon is immediately followed by three or more
   repetitions of the same printing character is treated as having a
   HereDoc-style quoted value, with the provided sequence of repeated
@@ -368,8 +202,9 @@ like: keys and values.
   <p>As with HereDocs in many programming languages, the quoted value
   is terminated by the first subsequent occurrence of a line containing
   only the delimiter character sequence.</p>
-<pre class="peml">
-<b>yet_another_key</b>:~~~~~
+
+{% highlight peml %}
+yet_another_key:~~~~~
 You can use any printable character as the delimiter,
 as long as it is repeated at least three times. The ending
 delimiter must exactly match the starting one, and appear
@@ -379,9 +214,11 @@ Of course, using a punctuation symbol such as -, =, ~, +, etc.,
 is encouraged, and use of letters or digits is discouraged
 since it may reduce readability.
 ~~~~~
-</pre>
-  <p>Of course, many programming languages also use # as a comment character.
-  In PEML, # has no special meaning inside a quoted value.
+{% endhighlight %}
+
+  <p>Of course, many programming languages also use <code>#</code> as a
+  comment character.
+  In PEML, <code>#</code> has no special meaning inside a quoted value.
   As a result, we recommend HereDoc-quoting any values that contain source
   code from such a programming language, to prevent a program's comment lines
   from being interpreted as PEML comments.</p>
@@ -395,7 +232,8 @@ since it may reduce readability.
   unformatted text also works, when no special formatting markup is
   desired. Here, we specify git's flavor of markdown.</p>
   <p>
-  <i>Note:</i> It is easy to consider adding a key for "text_format:",
+  <span class="badge badge-warning">Note:</span>
+  It is easy to consider adding a key for <code>text_format:</code>,
   specifying markdown as the default but allowing individual users to
   use other markup formats (such as reStructuredText, AsciiDoc, POD,
   LaTeX, etc.). However, allowing this dialectic specialization risks
@@ -405,7 +243,7 @@ since it may reduce readability.
   Markdown, but public comments/debate on allowing other formats is welcome.
   </p>
   <p>
-  <i>Another Note:</i> Actually, by using
+  <span class="badge badge-warning">Another Note:</span> Actually, by using
   <a href="https://pandoc.org/">pandoc</a> and a PEML parsing wrapper, it
   should be possible to create a web service that can read
   a PEML document using a wide variety of text markup formats and normalize
@@ -413,12 +251,18 @@ since it may reduce readability.
   many dialects of markdown, many wiki markup languages, Docbook, LaTeX,
   and even Microsoft Word docx files (!). Unfortunately, this doesn't
   address AsciiDoc :-(. At this point, it is plausible to consider supporting
-  other markup formats along with an appropriate "text_format:" key if
-  community effort can generate the necessary support for adopting tools to
-  make use of it (i.e., through a translation web site for converting PEML
-  using a different text markup into PEML using github Markdown, for example).
+  other markup formats along with an appropriate <code>text_format:</code>
+  key if community effort can generate the necessary support for adopting
+  tools to make use of it (i.e., through a translation web site for converting
+  PEML using a different text markup into PEML using github Markdown, for
+  example).
   </p>
 
+</section>
+
+
+<section>
+  <h2 id="additional">Additional Structuring Features</h2>
   <h3 id="urls">External Resources</h3>
   <p>
   External resources might be referenced in two different ways in PEML.
@@ -429,10 +273,10 @@ since it may reduce readability.
   "<code>url(...)</code>" construct (similar to its use in CSS).
   </p>
 
-<pre class="peml">
-<i># An example of an external resource</i>
-<b>instructions</b>: url(some/directory/assignment.pdf)
-</pre>
+{% highlight peml %}
+# An example of an external resource
+instructions: url(some/directory/assignment.pdf)
+{% endhighlight %}
 
   <p>While we strongly discourage the use of PDF assignment descriptions,
   any key value can be farmed out into an external file (or directory of
@@ -443,7 +287,8 @@ since it may reduce readability.
   <p>Here, an absolute URL would specify the web location of the resource,
   while a relative URL would be resolved <em>relative to the location of
   the PEML file containing it</em>. As discussed above under
-  <a href="#design">Design Goals</a>, if a PEML description is packaged
+  <a href="about.html#design">Design Goals</a>, if a PEML description
+  is packaged
   in a zip file so that other resources can be transferred along with it,
   relative URLs could be used to refer to other contents within the zip
   file. Similarly, PEML files stored on local disk could refer to local
@@ -473,6 +318,27 @@ since it may reduce readability.
   feedback. Again, any such resources should be placed in the
   <code>public_html/</code> folder.
   </p>
+  <p>
+  <span class="badge badge-warning">Note:</span> We are considering using
+  a "convention over configuration" approach to saying that when a PEML
+  exercise is bundled with files into a single zip, contents for
+  nested keys can be provided implicitly by placing files under relative
+  pathnames that mirror the key structure. Path segments that correspond
+  to array indices can be taken from the <code>name</code>, <code>title</code>,
+  or <code>language</code> key (in that preferred order) of the dictionary
+  items inside the array, or numeric suffices can be used as path names.
+  This could be particularly useful for adding files in places where
+  file-based content is desirable (<code>src</code> and <code>environment</code>
+  keys, for example, or anywhere a <code>.files</code> nested key appears).
+  Avoiding the requirement that external files co-located with the PEML
+  description be explicitly declared inside the PEML is more desirable in
+  these cases. We need to work up some examples, though, and a more precise
+  description of what the implicit mapping is. A short example: a
+  <code>public_html/</code> folder located alongside the PEML file can
+  implicitly be interpreted as the set of resources/files attached to the
+  instructions, without requiring a redundant line inside the PEML itself
+  saying: "<code>public_html: url(public_html)</code>"
+  </p>
 
 
   <h3 id="includes">Splitting Up PEML Descriptions</h3>
@@ -487,10 +353,10 @@ since it may reduce readability.
   content.
   </p>
 
-<pre class="peml">
-<i># An example of an external resource</i>
-<b>:include</b> url(some/directory/cc-sa-license.peml)
-</pre>
+{% highlight peml %}
+# An example of an external resource
+:include url(some/directory/cc-sa-license.peml)
+{% endhighlight %}
 
   <p>
   Another use for <code>:include</code> is to allow an author to separate
@@ -525,7 +391,8 @@ since it may reduce readability.
   author can use any desired number of user-defined variables, and
   any occurrences of {% raw %}<code>{{<em>variable-name</em>}}</code>{% endraw %}
   in the title,
-  instructions, code assets, or test assets will be substituted when an
+  instructions, <code>src</code> code assets, or test <code>suites</code>
+  will be substituted when an
   instance of the exercise is needed.
   </p>
   <p>{% raw %}
@@ -534,12 +401,13 @@ since it may reduce readability.
   {{mustache}} syntax might be supported, so check your tool's documentation
   when in doubt.
   {% endraw %}</p>
-<pre class="peml">
-<b>instructions</b>:
-{% raw %}
-Draw a square that is {{width}} pixels wide by {{height}} pixels tall.
+
+{% highlight peml %}
+instructions:
+{% raw %}Draw a square that is {{width}} pixels wide by {{height}} pixels tall.
 {% endraw %}
-</pre>
+{% endhighlight %}
+
   <p>{% raw %}
   PEML does not support escaping of literal "{{" and "}}" marking interpolated
   values (although PEML-supporting tools may support custom notational
@@ -549,10 +417,15 @@ Draw a square that is {{width}} pixels wide by {{height}} pixels tall.
   <code>{{...}}</code> notation, they keep the variable names used for
   substitution in
   the PEML description disjoint from those appearing natively in the text.
-  Where necessary, use the <a href="">options.interpolation.delimiters</a>
+  Where necessary, use the
+  <a href="schema/exercise.html#options.interpolation.delimiters">options.interpolation.delimiters</a>
   key to set the delimiters to something different (similar to the
   mustache <a href="https://mustache.github.io/mustache.5.html">set
   delimiter</a> feature).
+  The
+  <a href="schema/exercise.html#options.interpolation.enable">options.interpolation.enable</a>
+  key can be used to enable/disable interpolation if necessary (default is
+  enabled, for tools that support this feature).
   {% endraw %}</p>
 
   <h3 id="structure">Nested Structure</h3>
@@ -567,43 +440,94 @@ Draw a square that is {{width}} pixels wide by {{height}} pixels tall.
   <div class="row">
     <div class="col-6">
       Nested keys:<br/>
-<pre class="peml">
-<b>assets.test_format</b>: stdin-stdout
-</pre>
+{% highlight peml %}
+tag.topics: strings; loops; conditions
+tag.prerequisites: variables; assignment; boolean operators
+{% endhighlight %}
     </div>
     <div class="col-6">
       JSON equivalent:<br/>
-<pre>
+{% highlight json %}
 {
-  "assets": {
-    "test_format": "stdin-stdout"
+  "tag": {
+    "topics": "strings; loops; conditions",
+    "prerequisites": "variables; assignment; boolean operators"
   }
 }
-</pre>
+{% endhighlight %}
     </div>
   </div>
 
   <div class="row">
     <div class="col-6">
       Array (list):<br/>
-<pre class="peml">
-<b>[assets.tests]</b>
-<b>stdin</b>: racecar
-<b>stdout</b>: "racecar" is a palindrome.
+{% highlight peml %}
+[systems]
+language: java
+version: >= 1.5
 
-<b>stdin</b>: Flintstone
-<b>stdout</b>: "Flintstone" is not a palindrome.
-
-<b>stdin</b>: url(some/local/input.txt)
-<b>stdout</b>: url(some/local/output.txt)
-</pre>
+language: python
+[]
+{% endhighlight %}
     </div>
     <div class="col-6">
       JSON equivalent:<br/>
-<pre>
+{% highlight json %}
 {
-  "assets": {
-    "tests": [
+  "systems": [
+    {
+      "language": "java",
+      "version": ">= 1.5"
+    },
+    {
+      "language": "python"
+    }
+  ]
+}
+{% endhighlight %}
+    </div>
+  </div>
+
+<p>
+As in ArchieML, an array is signified with a key enclosed in square brackets
+(<code>[...]</code>), and is terminated with a part of empty square brackets
+(<code>[]</code>). ArchieML allows any trailing empty bracket pairs (or brace
+pairs) at the end of the file to be omitted, but all closing array delimiters
+have been included here for clarity.
+</p>
+<p>
+As in YAML and JSON, structures can be arbitrarily nested in PEML. Array keys
+that start with a period (<code>.</code>) are used to indicate arrays
+nested inside other arrays (from ArchieML).
+</p>
+
+  <div class="row">
+    <div class="col-6">
+      Nested Arrays (list of lists):<br/>
+{% highlight peml %}
+[suites]
+[.cases]
+stdin: racecar
+stdout: "racecar" is a palindrome.
+
+stdin: Flintstone
+stdout: "Flintstone" is not a palindrome.
+
+stdin: url(some/local/input.txt)
+stdout: url(some/local/output.txt)
+
+stdin: url(http://my.school.edu/some/local/generator/input)
+stdout: url(http://my.school.edu/some/local/generator/output)
+[]
+[]
+{% endhighlight %}
+    </div>
+    <div class="col-6">
+      JSON equivalent:<br/>
+{% highlight json %}
+{
+  "suites": [
+    "cases": [
       {
         "stdin": "racecar",
         "stdout": "\"racecar\" is a palindrome."
@@ -617,12 +541,19 @@ Draw a square that is {{width}} pixels wide by {{height}} pixels tall.
         "stdout": "url(some/local/output.txt)"
       }
     ]
-  }
+  ]
 }
-</pre>
+{% endhighlight %}
     </div>
   </div>
 
+  <p>
+    When providing arrays, remember that PEML (like ArchieML) uses repeated
+    occurrences of the first key provided for the first array item to
+    mark where each new item starts, so which ever key is provided first
+    should consistently be used to start each new item in the array.
+  </p>
+  </p>
   <p>Further details about nested mappings and sequences (and how they
   are terminated) are available in the
   <a href="http://archieml.org/">ArchieML</a> definition.</p>
@@ -635,18 +566,19 @@ Draw a square that is {{width}} pixels wide by {{height}} pixels tall.
   <div class="row">
     <div class="col-6">
       PEML:<br/>
-<pre class="peml">
-<b>exercise_id</b>: edu.vt.cs.cs1114.sp2018.simple-PEML-example
+{% highlight peml %}
+exercise_id: edu.vt.cs.cs1114.sp2018.simple-PEML-example
 
-<i># Single-line comments start with #
-# Comments must be on lines by themselves</i>
+# Single-line comments start with #
+# Comments must be on lines by themselves
 
-<b>title</b>: Palindromes (A Simple PEML Example)
+title: Palindromes (A Simple PEML Example)
 
-<b>topics</b>: Strings, loops, conditions
-<b>prerequisites</b>: variables, assignment, boolean operators
+tag.topics: strings; loops; conditions
+tag.prerequisites: variables; assignment; boolean operators
 
-<b>instructions</b>:----------
+
+instructions:----------
 Write a program that reads a single string (in the form of one line
 of text) from its standard input, and determines whether the string is
 a _palindrome_. A palindrome is a string that reads the same way
@@ -655,61 +587,58 @@ program does not need to prompt for its input, and should only generate
 one line of output, in the following
 format:
 
-&lt;pre&gt;
+```
 "racecar" is a palindrome.
-&lt;/pre&gt;
+```
 
 Or:
 
-&lt;pre&gt;
+```
 "Flintstone" is not a palindrome.
-&lt;/pre&gt;
+```
 ----------
 
-<b>assets.test_format</b>: stdin-stdout
+[systems]
+
+language: java
+version: >= 1.5
+[]
+
+[suites]
+[.cases]
+
+stdin: racecar
+stdout: "racecar" is a palindrome.
 
 
-<b>[systems]</b>
-<b>language</b>: java
-<b>version</b>: >= 1.5
+stdin: Flintstone
+stdout: "Flintstone" is not a palindrome.
 
 
-
-<b>[assets.tests]</b>
-
-
-<b>stdin</b>: racecar
-<b>stdout</b>: "racecar" is a palindrome.
+stdin: url(some/local/input.txt)
+stdout: url(some/local/output.txt)
 
 
-<b>stdin</b>: Flintstone
-<b>stdout</b>: "Flintstone" is not a palindrome.
+stdin: url(http://my.school.edu/some/local/generator/input)
+stdout: url(http://my.school.edu/some/local/generator/output)
 
-
-<b>stdin</b>: url(some/local/input.txt)
-<b>stdout</b>: url(some/local/output.txt)
-
-
-<b>stdin</b>: url(http://my.school.edu/some/local/generator/input)
-<b>stdout</b>: url(http://my.school.edu/some/local/generator/output)
-
-
-
-
-</pre>
+[]
+[]
+{% endhighlight %}
     </div>
     <div class="col-6">
       JSON equivalent:<br/>
-<pre>
+{% highlight json %}
 {
   "exercise_id": "edu.vt.cs.cs1114.sp2018.simple-PEML-example",
 
 
 
   "title": "Palindromes (A Simple PEML Example)",
-
-  "topics": "Strings, loops, conditions",
-  "prerequisites": "variables, assignment, boolean operators",
+  "tag": {
+    "topics": "strings; loops; conditions",
+    "prerequisites": "variables; assignment; boolean operators"
+  },
 
   "instructions": "Write a program that reads a single string (in the form of one line\nof text) from its standard input, and determines whether the string is\na _palindrome_. A palindrome is a string that reads the same way\nbackward as it does forward, such as "racecar" or "madam". Your\nprogram does not need to prompt for its input, and should only generate\none line of output, in the following\nformat:\n\n&lt;pre&gt;\n"racecar" is a palindrome.\n&lt;/pre&gt;\n\nOr:\n\n&lt;pre&gt;\n"Flintstone" is not a palindrome.\n&lt;/pre&gt;\n",
 
@@ -731,17 +660,14 @@ Or:
 
 
 
-  "assets": {
-    "test_format": "stdin-stdout"
-  },
   "systems": [
     {
       "language": "java",
       "version": ">= 1.5"
     }
   ],
-  "assets": {
-    "tests": [
+  "suites": [
+    "cases": [
       {
         "stdin": "racecar",
         "stdout": "\"racecar\" is a palindrome."
@@ -759,20 +685,21 @@ Or:
         "stdout": "url(http://my.school.edu/some/local/generator/output)"
       }
     ]
-  }
+  ]
 }
-</pre>
+{% endhighlight %}
     </div>
   </div>
 </section>
 
 <section>
-  <h2 id="model">The Details</h2>
+  <h2 id="model">PEML Specification</h2>
 
   <ul>
+    <li><a href="schemas/exercise.html">The Data Model for Exercises</a></li>
     <li><a href="schemas/definitions.html">Building blocks: definitions of
       recurring model elements</a></li>
-    <li><a href="schemas/exercise.html">The Data Model for Exercises</a></li>
+    <li><a href="schemas/tagging.html">Tagging Exercises</a></li>
     <li><a href="schemas/code.html">The Data Model for Code Assets</a></li>
     <li><a href="schemas/tests.html">The Data Model for Software Tests</a></li>
     <li><a href="PEMLtest/">PEML-Test: a Language for Describing
