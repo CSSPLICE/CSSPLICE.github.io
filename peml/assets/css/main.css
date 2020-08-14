@@ -4887,6 +4887,10 @@ html,
   flex: 0 0 50%;
   max-width: 50%; }
 
+.badge-warning {
+  color: #212529;
+  background-color: #ffc107; }
+
 .badge-primary {
   color: #fff;
   background-color: #007bff; }
@@ -4909,15 +4913,36 @@ html,
 
 /* ---------- Custom content formatting ---------- */
 pre {
+  border-left: 5px solid #3f87a6;
+  font-size: 100%; }
+
+pre code {
+  font-size: inherit; }
+
+/*
+pre {
   background-color: #e4f0f5;
   padding: 1rem;
   border-left: 5px solid #3f87a6;
   color: black;
-  font-size: 100%; }
+  font-size: 100%;
+}
 
 pre.schema {
   background-color: #e2e3e5;
+  border-color: #383d41;
+}
+*/
+.article__content figure.highlight[data-lang="json"]::before,
+.highlight[data-lang="json"] > pre {
+  background-color: #e2e3e5 !important;
   border-color: #383d41; }
+
+.highlight > pre .cm,
+.highlight > pre .cp,
+.highlight > pre .c1,
+.highlight > pre .cs {
+  font-style: italic; }
 
 .article_content h2 {
   margin-top: 1.5rem;
@@ -4933,11 +4958,19 @@ code, pre {
 
 .article__content code {
   padding: 2px 4px;
-  font-size: 95%;
+  font-size: inherit;
   color: #c7254e;
   background-color: rgba(0, 0, 0, 0.05);
-  /*#f9f2f4;*/
+  /* #f9f2f4; */
   border-radius: 4px; }
+
+.article__content pre > code {
+  font-size: inherit;
+  color: inherit; }
+
+.article__content figure.highlight::before {
+  font-size: 70%;
+  border-left: 5px solid #3f87a6; }
 
 .navbar, .header, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "Overlock", "Helvetica Neue", Helvetica, Arial, sans-serif;
