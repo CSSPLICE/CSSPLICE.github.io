@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://cssplice.github.io/peml/schemas/peml.json",
+  "$id": "https://CSSPLICE.github.io/peml/schemas/PEML.json",
   "title": "PEML",
   "description": "This schema defines the data model for PEML, the Program Exercise Markup Language (https://cssplice.github.io/peml/). The data model is intended to be represented in PEML notation, but the same data model can easily be expressed in JSON or YAML or any similar structured data format, so this serves as a JSON Schema for the common data model behind the content.",
 

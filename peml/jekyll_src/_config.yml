@@ -17,9 +17,10 @@ theme: jekyll-text-theme
 # plugins:
   # - jekyll-feed
 
-# collections:
-#   projects:
-#     output: true
+collections:
+  examples:
+    output: true
+includes_dir: _examples
 
 
 # ----------------------------------------------------------------------

@@ -23,7 +23,7 @@ the PEML data model.</p>
         "content": { "type": "string" },
         "name": { "type": "string", "minLength": 1 },
         "type": { "type": "string", "minLength": 1 },
-        "content_transfer_encoding": { "type": "string", "minLength": 1 }
+        "content_encoding": { "type": "string", "minLength": 1 }
       }
     }
   ]
@@ -44,7 +44,7 @@ file: url(path/to/some/file.txt)
 {% highlight peml %}
 file.name: icon.gif
 file.type: image/gif
-file.content_transfer_encoding: base64
+file.content_encoding: base64
 content:-----
 R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAQAICTAEAOw==
 -----
@@ -77,13 +77,20 @@ R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAQAICTAEAOw==
             resource without requiring a zip archive containing multiple
             files. HereDoc-style quote may be useful for inline file content.
           </p>
-          <h4 id="file.content_transfer_encoding">file.content_transfer_encoding
+          <h4 id="file.content_encoding">file.content_encoding
             <small class="text-muted">optional: string</small></h4>
           <p>
-            The nested <code>content_transfer_encoding</code> key describes
-            the content encoding for binary file contents. For example, when
-            inlining the content of a binary file, <a href="">base64</a>
-            encoding is preferred.
+            The nested <code>content_encoding</code> key describes
+            the <a href="https://tools.ietf.org/html/rfc2045">content transfer
+            encoding</a> for binary file contents. For example, when
+            inlining the content of a binary file,
+            <a href="https://en.wikipedia.org/wiki/Base64">base64</a>
+            encoding is preferred. What content encodings beyond
+            <code>base64</code> are supported is tool-dependent
+             (such as <code>quoted-printable</code>, although non-text
+             encodings used in smtp and json seem unsuitable for
+             inlining files in a text representation, e.g.,
+             <code>7bit</code>, <code>8bit</code>, or <code>binary</code>).
           </p>
       </div>
     </div></div>

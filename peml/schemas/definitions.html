@@ -308,7 +308,7 @@ the PEML data model.</p>
         </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w">
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"content_transfer_encoding"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="nl">"content_encoding"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -325,7 +325,7 @@ the PEML data model.</p>
     <p><span class="badge badge-primary">PEML example:</span></p>
 <figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">file.name:</span><span class="w"> </span>icon.gif<span class="w">
 </span><span class="k">file.type:</span><span class="w"> </span>image/gif<span class="w">
-</span><span class="k">file.content_transfer_encoding:</span><span class="w"> </span>base64<span class="w">
+</span><span class="k">file.content_encoding:</span><span class="w"> </span>base64<span class="w">
 </span><span class="k">content:</span><span class="sh">-----
 R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAQAICTAEAOw==
 -----</span></code></pre></figure>
@@ -357,13 +357,20 @@ R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAQAICTAEAOw==
             resource without requiring a zip archive containing multiple
             files. HereDoc-style quote may be useful for inline file content.
           </p>
-          <h4 id="file.content_transfer_encoding">file.content_transfer_encoding
+          <h4 id="file.content_encoding">file.content_encoding
             <small class="text-muted">optional: string</small></h4>
           <p>
-            The nested <code>content_transfer_encoding</code> key describes
-            the content encoding for binary file contents. For example, when
-            inlining the content of a binary file, <a href="">base64</a>
-            encoding is preferred.
+            The nested <code>content_encoding</code> key describes
+            the <a href="https://tools.ietf.org/html/rfc2045">content transfer
+            encoding</a> for binary file contents. For example, when
+            inlining the content of a binary file,
+            <a href="https://en.wikipedia.org/wiki/Base64">base64</a>
+            encoding is preferred. What content encodings beyond
+            <code>base64</code> are supported is tool-dependent
+             (such as <code>quoted-printable</code>, although non-text
+             encodings used in smtp and json seem unsuitable for
+             inlining files in a text representation, e.g.,
+             <code>7bit</code>, <code>8bit</code>, or <code>binary</code>).
           </p>
       </div>
     </div></div>

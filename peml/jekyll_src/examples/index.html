@@ -1,4 +1,16 @@
 ---
 title: PEML Examples
 ---
-This will be the index page for the reference examples provided for PEML.
+
+{% for collection in site.collections %}
+{% if collection.label == "examples" %}
+{% for file in collection.files %}
+<h2>{{ file.name }}</h2>
+
+{% highlight peml %}
+{% include {{ file.name }}  %}
+{% endhighlight %}
+
+{% endfor %}
+{% endif %}
+{% endfor %}
