@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://cssplice.github.io/peml/about.html</loc>
+</url>
+<url>
 <loc>https://cssplice.github.io/peml/schemas/code.html</loc>
 </url>
 <url>
@@ -10,16 +13,19 @@
 <loc>https://cssplice.github.io/peml/schemas/exercise.html</loc>
 </url>
 <url>
-<loc>https://cssplice.github.io/peml/</loc>
+<loc>https://cssplice.github.io/peml/PEMLtest/</loc>
 </url>
 <url>
 <loc>https://cssplice.github.io/peml/schemas/</loc>
 </url>
 <url>
-<loc>https://cssplice.github.io/peml/PEMLtest/</loc>
+<loc>https://cssplice.github.io/peml/examples/</loc>
 </url>
 <url>
-<loc>https://cssplice.github.io/peml/examples/</loc>
+<loc>https://cssplice.github.io/peml/</loc>
+</url>
+<url>
+<loc>https://cssplice.github.io/peml/schemas/tagging.html</loc>
 </url>
 <url>
 <loc>https://cssplice.github.io/peml/schemas/tests.html</loc>

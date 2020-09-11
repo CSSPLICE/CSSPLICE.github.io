@@ -268,13 +268,13 @@
 </svg>
 <a title="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.
 " href="/peml/">PEML</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
-        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/schemas/">Data Model</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item navigation__item--active"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
+        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item navigation__item--active"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
       </nav></div>
   </header>
 </div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>PEML Examples</h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title="Edit on Github"
-            href="https://github.com/cssplice/cssplice.github.io/tree/master/peml/examples/index.html">
+            href="https://github.com/cssplice/cssplice.github.io/tree/master/peml/jekyll_src/examples/index.html">
             <i class="far fa-edit"></i></a></div><p class="overlay__excerpt">The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.</p></div>
               </div>
             </div><div class="grid grid--reverse">
@@ -288,7 +288,74 @@
 <article itemscope itemtype="http://schema.org/Article"><meta itemprop="headline" content="PEML Examples"><meta itemprop="author" content="Virginia Tech"/><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
 <!-- end custom article top snippet -->
-<div class="article__content" itemprop="articleBody">This will be the index page for the reference examples provided for PEML.
+<div class="article__content" itemprop="articleBody">
+
+
+<h2>palindrome.peml</h2>
+
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">exercise_id:</span><span class="w"> </span>edu.vt.cs.cs1114.palindromes<span class="w">
+
+</span><span class="c1"># Single-line comments start with #</span><span class="w">
+</span><span class="c1"># Comments must be on lines by themselves</span><span class="w">
+
+</span><span class="k">title:</span><span class="w"> </span>Palindromes<span class="w"> </span>(A<span class="w"> </span>Simple<span class="w"> </span>PEML<span class="w"> </span>Example)<span class="w">
+
+</span><span class="k">topics:</span><span class="w"> </span>Strings,<span class="w"> </span>loops,<span class="w"> </span>conditions<span class="w">
+</span><span class="k">prerequisites:</span><span class="w"> </span>variables,<span class="w"> </span>assignment,<span class="w"> </span>boolean<span class="w"> </span>operators<span class="w">
+
+</span><span class="k">instructions:</span><span class="sh">----------
+Write a program that reads a single string (in the form of one line
+of text) from its standard input, and determines whether the string is
+a _palindrome_. A palindrome is a string that reads the same way
+backward as it does forward, such as "racecar" or "madam". Your
+program does not need to prompt for its input, and should only generate
+one line of output, in the following
+format:
+
+```
+"racecar" is a palindrome.
+```
+
+Or:
+
+```
+"Flintstone" is not a palindrome.
+```
+----------</span><span class="w">
+
+</span><span class="k">assets.test_format:</span><span class="w"> </span>stdin-stdout<span class="w">
+
+</span><span class="kn">[systems]</span><span class="w">
+</span><span class="k">language:</span><span class="w"> </span>java<span class="w">
+</span><span class="k">version:</span><span class="w"> </span>&gt;=<span class="w"> </span>1.5<span class="w">
+</span><span class="kn">[]</span><span class="w">
+
+</span><span class="kn">[suites]</span><span class="w">
+</span><span class="kn">[.cases]</span><span class="w">
+
+</span><span class="k">stdin:</span><span class="w"> </span>racecar<span class="w">
+</span><span class="k">stdout:</span><span class="w"> </span>"racecar"<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>palindrome.<span class="w">
+
+
+</span><span class="k">stdin:</span><span class="w"> </span>Flintstone<span class="w">
+</span><span class="k">stdout:</span><span class="w"> </span>"Flintstone"<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>a<span class="w"> </span>palindrome.<span class="w">
+
+
+</span><span class="k">stdin:</span><span class="w"> </span><span class="no">url(some/local/input.txt)</span><span class="w">
+</span><span class="k">stdout:</span><span class="w"> </span><span class="no">url(some/local/output.txt)</span><span class="w">
+
+
+</span><span class="k">stdin:</span><span class="w"> </span><span class="no">url(http://my.school.edu/some/local/generator/input)</span><span class="w">
+</span><span class="k">stdout:</span><span class="w"> </span><span class="no">url(http://my.school.edu/some/local/generator/output)</span><span class="w">
+
+</span><span class="kn">[]</span><span class="w">
+</span><span class="kn">[]</span></code></pre></figure>
+
+
+
+
+
+
 </div><div class="d-print-none"><footer class="article__footer"><!-- start custom article footer snippet -->
 
 <!-- end custom article footer snippet -->
@@ -335,9 +402,9 @@
             </div></div><div class="page__footer d-print-none">
 <footer class="footer py-4 js-page-footer">
   <div class="main"><div itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Virginia Tech"><meta itemprop="url" content="http://www.cs.vt.edu/"><meta itemprop="description" content="PEML, Web-CAT, and related projects are academic research projects developed at Virginia Tech. The project lead is Stephen Edwards.
+      <meta itemprop="name" content="Virginia Tech"><meta itemprop="url" content="http://cs.vt.edu/"><meta itemprop="description" content="PEML, Web-CAT, and related projects are academic research projects developed at Virginia Tech. The project lead is Stephen Edwards.
 "><div class="footer__author-links"><div class="author-links">
-  <ul class="menu menu--nowrap menu--inline"><link itemprop="url" href="http://www.cs.vt.edu/"><li title="Send us an Email.">
+  <ul class="menu menu--nowrap menu--inline"><link itemprop="url" href="http://cs.vt.edu/"><li title="Send us an Email.">
       <a class="button button--circle mail-button" itemprop="email" href="mailto:webcat@vt.edu" target="_blank">
         <i class="fas fa-envelope"></i>
       </a><li title="Follow us on Github.">

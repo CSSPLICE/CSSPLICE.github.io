@@ -1,0 +1,352 @@
+---
+title: Tagging Exercises
+---
+<section>
+  <h2 id="intro">Describing Exercises through Tagging</h2>
+  <p>
+    This page describes the basics of tagging to label/categorize/describe
+    exercises. While tagging isn't intended to be hard or to require
+    specialized skill, some structure does provide added benefit to users
+    who want to find or understand exercises. Authors who don't intend to
+    share their PEML descriptions could omit tags entirely, since tags are
+    optional. However, the information provided here is intended to allow
+    authors who wish to provide descriptive information about their
+    exercises to aid other users.
+  </p>
+</section>
+
+<section>
+  <h2 id="basics">Basic Structure Common to All Tags</h2>
+  <p>
+    All tags are provided as part of a nested dictionary structure rooted
+    at the <code>tag</code> key.
+  </p>
+  <p>
+    The general content of all the tagging fields is the same: a
+    tag list is simply a sequence of strings. For convenience, lists of
+    tags can be written as a single text value, with tags separated by
+    delimiters. We recommend the use of semicolons as the most flexible
+    delimiter choice for authors, since semicolons provide support for
+    a wide range of tag styles and give maximum tool compatibility (for example,
+    supporting multi-word tags, or even tag phrases that include commas):
+  </p>
+{% highlight peml %}
+tag.topics: strings; loops; conditions
+{% endhighlight %}
+  <p>
+    While we recommend the use of semicolons, tools should be more flexible
+    in order to provide a more human-friendly authoring experience. If a
+    tag string contains semicolons, then semicolons should be used as
+    delimiters. Otherwise, if a tag string contains commas, then commas should
+    be used as delimiters instead. In all cases, leading and trailing whitespace
+    should be trimmed from individual tags in the list.
+  </p>
+{% highlight peml %}
+# The preferred form:
+tag.topics: strings; loops; conditions
+
+# But this version means the same thing
+tag.topics: strings, loops, conditions
+{% endhighlight %}
+  <p>
+    For even greater control (or for tools generating descriptions), the
+    ArchieML approach of defining an array of strings can even be used. Every
+    tag list can be written as a single semicolon-delimited (or comma-delimited)
+    string, or formulated as an array of strings:
+  </p>
+{% highlight peml %}
+# More verbose array encoding, but equivalent
+[tag.topics]
+* strings
+* loops
+* conditions
+[]
+{% endhighlight %}
+
+</section>
+
+<section>
+  <h2 id="topics">Describing the Topic of an Exercise</h2>
+
+  <section>
+    <h3 id="tag.topics" data-toc-title="tag.topics">tag.topics
+      <small class="text-muted">optional: string or array</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+{% highlight json %}
+"topics": { "oneOf": [
+  { "type": "string", "minLength": 1 },
+  {
+    "type": "array",
+    "items": { "type": "string", "minLength": 1 },
+    "minItems": 1
+  }
+  ]}
+{% endhighlight %}
+
+    <p>
+      The <code>tag.topics</code> tag list specifies the topic(s) that are
+      the focus of the exercise--that is, what topic(s) or skill(s) is the
+      learner supposed to be practicing in this exercise. This list is
+      not intended to include topics the learner is supposed to already
+      know or have mastered in order for them to understand the exercise
+      in the first place.
+    </p>
+    <p>
+      For topic vocabulary, we encourage authors to use commonly used terms
+      such as those that typically appear in textbooks associated with
+      the kinds of courses the exercise is targeting, or terms taken from
+      the <a href="https://www.acm.org/education/curricula-recommendations">ACM
+      Computing Curricula</a> guidelines (such as the topics listed in the
+      body of knowledge in <a href="https://www.acm.org/binaries/content/assets/education/cs2013_web_final.pdf">CS2013</a>).
+    </p>
+  </section>
+
+</section>
+
+<section>
+  <h2 id="topics">Describing Prerequisite Knowledge</h2>
+
+  <section>
+    <h3 id="tag.prerequisites" data-toc-title="tag.prerequisites">tag.prerequisites
+      <small class="text-muted">optional: string or array or object</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+{% highlight json %}
+"topics": { "oneOf": [
+  { "type": "string", "minLength": 1 },
+  {
+    "type": "array",
+    "items": { "type": "string", "minLength": 1 },
+    "minItems": 1
+  },
+  { "type": "string", "object" }
+  ]}
+{% endhighlight %}
+
+    <p>
+      The <code>tag.prerequisites</code> tag list specifies the topic(s) that
+      a learner is expected to already know in order to approach this exercise.
+      In other words, this tag covers topics that enable the student to
+      understand this exercise or its solution, but that are not the focus
+      of this exercise--instead, simply prerequisite materials that enable
+      the student to exercise the target knowledge/skills here.
+    </p>
+    <p>
+      If desired, an author can be more specific about the level of prior
+      knowledge needed in prerequisite topics. To do this, rather than
+      specifying tags using <code>tag.prerequisites</code>, the author can
+      use one or more of three nested keys.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="tag.prerequisites.exposure" data-toc-title="tag.prerequisites.exposure">tag.prerequisites.exposure
+      <small class="text-muted">optional: string or array</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+{% highlight json %}
+"exposure": { "oneOf": [
+  { "type": "string", "minLength": 1 },
+  {
+    "type": "array",
+    "items": { "type": "string", "minLength": 1 },
+    "minItems": 1
+  }
+  ]}
+{% endhighlight %}
+
+    <p>
+      The <code>tag.prerequisites.exposure</code> tag list is an optional
+      way to be more specific about prerequisite knowledge or skills. Here,
+      we're using a 3-category partitioning of how well a learner has mastered
+      a topic by characterizing it in terms of exposure, familiarity, or
+      mastery. A learner is said to have <strong>exposure to</strong> a topic
+      if they have heard the term and/or seen the procedure, but may not be
+      able to discuss or use it effectively without further instruction.
+      This represents a weak level of background knowledge.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="tag.prerequisites.familiarity" data-toc-title="tag.prerequisites.familiarity">tag.prerequisites.familiarity
+      <small class="text-muted">optional: string or array</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+{% highlight json %}
+"familiarity": { "oneOf": [
+  { "type": "string", "minLength": 1 },
+  {
+    "type": "array",
+    "items": { "type": "string", "minLength": 1 },
+    "minItems": 1
+  }
+  ]}
+{% endhighlight %}
+
+    <p>
+      The <code>tag.prerequisites.familiarity</code> tag list is an optional
+      way to be more specific about prerequisite knowledge or skills. Here,
+      we're using a 3-category partitioning of how well a learner has mastered
+      a topic by characterizing it in terms of exposure, familiarity, or
+      mastery. A learner is said to have <strong>familiarity with</strong> a
+      topic if they can
+      answer questions about or use the material/procedure, even in a new
+      context, when instructed to do so.
+      This represents a medium level of background knowledge.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="tag.prerequisites.mastery" data-toc-title="tag.prerequisites.mastery">tag.prerequisites.mastery
+      <small class="text-muted">optional: string or array</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+{% highlight json %}
+"mastery": { "oneOf": [
+  { "type": "string", "minLength": 1 },
+  {
+    "type": "array",
+    "items": { "type": "string", "minLength": 1 },
+    "minItems": 1
+  }
+  ]}
+{% endhighlight %}
+
+    <p>
+      The <code>tag.prerequisites.mastery</code> tag list is an optional
+      way to be more specific about prerequisite knowledge or skills. Here,
+      we're using a 3-category partitioning of how well a learner has mastered
+      a topic by characterizing it in terms of exposure, familiarity, or
+      mastery. A learner is said to have <strong>mastery of</strong> a
+      topic if they exhibit knowledge of or skill with the material/procedure,
+      even in a new context, and even when not instructed to do so.
+      This represents a high level of background knowledge.
+    </p>
+  </section>
+
+</section>
+
+<section>
+  <h2 id="topics">Describing Exercise Metadata</h2>
+  <p>
+  In addition to tags about topic areas, tags can also be used in other
+  ways to label exercises for various purposes, as described here. For
+  labeling exercises by difficulty, see the
+  <a href="exercise.html#difficulty">difficulty key</a>.
+  </p>
+
+  <section>
+    <h3 id="tag.style" data-toc-title="tag.style">tag.style
+      <small class="text-muted">optional: string or array or object</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+{% highlight json %}
+"style": { "oneOf": [
+  { "type": "string", "minLength": 1 },
+  {
+    "type": "array",
+    "items": { "type": "string", "minLength": 1 },
+    "minItems": 1
+  }
+  ]}
+{% endhighlight %}
+
+    <p>
+      The <code>tag.style</code> tag list specifies the "style" of exercise.
+      Suggested values include:
+    </p>
+    <ul>
+      <li>code-writing</li>
+      <li>multiple-choice</li>
+      <li>fill-in-the-blank</li>
+      <li>bug-identification</li>
+      <li>bug-fixing</li>
+      <li>symbolic-execution (e.g., predicting the output)</li>
+      <li>project</li>
+    </ul>
+    <p>
+      <span class="badge badge-warning">Note:</span> This list is likely
+      to be incomplete, so ideas for a more complete list, or more standardized
+      terms for these exercise styles, are definitely welcome.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="tag.course" data-toc-title="tag.course">tag.course
+      <small class="text-muted">optional: string or array or object</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+{% highlight json %}
+"course": { "oneOf": [
+  { "type": "string", "minLength": 1 },
+  {
+    "type": "array",
+    "items": { "type": "string", "minLength": 1 },
+    "minItems": 1
+  }
+  ]}
+{% endhighlight %}
+
+    <p>
+      The <code>tag.course</code> tag list is used to indicate the course(s)
+      associated with this exercise, if any. This could include anything from
+      fairly general categories of courses ("cs1" or "programming languages")
+      to specific institutional course numbers, or any combination.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="tag.book" data-toc-title="tag.book">tag.book
+      <small class="text-muted">optional: string or array or object</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+{% highlight json %}
+"book": { "oneOf": [
+  { "type": "string", "minLength": 1 },
+  {
+    "type": "array",
+    "items": { "type": "string", "minLength": 1 },
+    "minItems": 1
+  }
+  ]}
+{% endhighlight %}
+
+    <p>
+      The <code>tag.book</code> tag list is used to indicate the textbook(s)
+      associated with this exercise, if any. While exercises or programming
+      projects that are taken directly from a textbook (or a textbook's
+      associated question bank or lab manual) should already provide this
+      information in the
+      <a href="exercise.html#license.book">license.book key</a>,
+      the <code>tag.book</code> is more broadly applicable to independently-authored
+      exercises that use materials/examples associated with a book or that
+      expect the learner to have access to a book, even if they are not
+      owned by the same copyright owner as the book itself.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="tag.personal" data-toc-title="tag.personal">tag.personal
+      <small class="text-muted">optional: string or array or object</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+{% highlight json %}
+"personal": { "oneOf": [
+  { "type": "string", "minLength": 1 },
+  {
+    "type": "array",
+    "items": { "type": "string", "minLength": 1 },
+    "minItems": 1
+  }
+  ]}
+{% endhighlight %}
+
+    <p>
+      The <code>tag.personal</code> tag list is used to indicate personal
+      tags that may only be meaningful to the original author/tagger, and
+      are used for personal recall/categorization purposes. Values here may
+      not be as relevant for other users.
+    </p>
+  </section>
+</section>
