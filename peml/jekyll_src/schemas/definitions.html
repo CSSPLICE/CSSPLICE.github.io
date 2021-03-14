@@ -20,7 +20,13 @@ the PEML data model.</p>
       "type": "object",
       "required": ["content"],
       "properties": {
-        "content": { "type": "string" },
+        "content": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array" },
+            { "type": "object" }
+          ]
+        },
         "name": { "type": "string", "minLength": 1 },
         "type": { "type": "string", "minLength": 1 },
         "content_encoding": { "type": "string", "minLength": 1 }
@@ -45,7 +51,7 @@ file: url(path/to/some/file.txt)
 file.name: icon.gif
 file.type: image/gif
 file.content_encoding: base64
-content:-----
+file.content:-----
 R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAQAICTAEAOw==
 -----
 {% endhighlight %}
@@ -68,7 +74,7 @@ R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAQAICTAEAOw==
             use is tool-dependent.
           </p>
           <h4 id="file.content">file.content
-            <small class="text-muted">required: string</small></h4>
+            <small class="text-muted">required: string or array</small></h4>
           <p>
             The nested <code>content</code> key allows for the content of
             the file to be inlined as part of the PEML description in situations
@@ -76,6 +82,12 @@ R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAQAICTAEAOw==
             the PEML description to be used as a single self-contained
             resource without requiring a zip archive containing multiple
             files. HereDoc-style quote may be useful for inline file content.
+          </p>
+          <p>
+            In addition, if the <code>>content</code> is being represented
+            inline in the PEML description and actually consists of structured
+            data, the structured data can be represented directly in PEML
+            in the form of a nested hash or an array of records.
           </p>
           <h4 id="file.content_encoding">file.content_encoding
             <small class="text-muted">optional: string</small></h4>
@@ -119,7 +131,13 @@ R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAQAICTAEAOw==
       <code>url(...)</code> that defines the location of a directory (or
       just a single file, if the file set contains only a single element).
       When a URL is specified, the entire subtree is considered to be the
-      set of files intended. Alternatively, a file set can be a plain
+      set of files intended. If the URL actually refers to a file archive
+      (*.zip, *.jar, *.tar, *.tgz), and the file set is intended to be the
+      contents of the archive instead of that file itself, then use
+      <code>extract(...)</code> in place of <code>url(...)</code>.
+    </p>
+    <P>
+      Alternatively, a file set can be a plain
       array, where each item in the array is a single file. In most cases,
       the key name <code>files</code> is used when a file set should be
       provided.
@@ -162,7 +180,7 @@ content: ...
 
     <p><span class="badge badge-secondary">Schema:</span></p>
 {% highlight json %}
-"file": {
+"repository": {
   "type": "object",
   "required": ["url"],
   "properties": {
@@ -314,7 +332,8 @@ repository.path: peml/schemas
     "inherits": { "enum": ["start", "build", "run"] },
     "files": { "$ref": "#/definitions/file_set" },
     "repository": { "$ref": "#/definitions/repository" },
-    "image": { "type": "string", "minLength": 1 }
+    "image": { "type": "string", "minLength": 1 },
+    "registry": { "type": "string", "minLength": 1 }
   }
 }
 {% endhighlight %}
@@ -453,6 +472,21 @@ environment.test.image: codeworkout/python:0.0.1
       <code>docker run</code> command). 
           </p>
 
+        </section>
+
+        <section>
+          <h4 id="environment.registry">registry
+            <small class="text-muted">optional: string</small></h4>
+  <p>
+    If an <code>image</code> is specified for the environment, this
+    parameter can be used to specify the docker image registry where
+    the image can be pulled.
+  </p>
+  <p>
+    <span class="badge badge-warning">Note:</span> We need to add keys here
+    to specify authentication information and/or tokens to access non-public
+    repositories and/or registries.
+  </p>
         </section>
 
       </div>

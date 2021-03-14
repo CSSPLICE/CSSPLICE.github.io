@@ -171,11 +171,22 @@ title: Palindromes (A Simple PEML Example)
 
   <section>
     <h3 id="author" data-toc-text="author">author
-      <small class="text-muted">required: string</small></h3>
+      <small class="text-muted">required: string or object</small></h3>
 
     <p><span class="badge badge-secondary">Schema:</span></p>
 {% highlight json %}
-"author": { "type": "string", "minLength": 1 }
+"author": {
+  "oneOf": [
+    { "$ref": "#/definitions/email_address" },
+    {
+      "type": "object",
+      "required": ["email"],
+      "properties": {
+        "email": { "$ref": "#/definitions/email_address" },
+        "name": { "$ref": "#/definitions/nonempty_string" }
+      }
+  ]
+}
 {% endhighlight %}
 
     <p>
@@ -183,37 +194,41 @@ title: Palindromes (A Simple PEML Example)
       exercise (or at least of the PEML exercise description). Recommended
       practice is to identify the author by a unique e-mail address. This
       field can be used to provide a single e-mail address. Alternatively,
-      the key <code>authors</code> can be used to provide a list of one or
-      more author e-mail addresses to identify a set of multiple authors.
-      This can be a single string of comma-separated e-mail addresses, or
-      the e-mail addresses can actually be provided as a PEML array (list).
-      Both forms have the same meaning.
+      the key <code>authors</code> can be used to provide an array of
+      multiple authors.
     </p>
     <p>
       If the optional <code>license</code> key is provided and the
       <code>license.owner</code> is the same as the <code>author</code>, then
       the <code>author</code> key can be omitted.
     </p>
-    <p><span class="badge badge-warning">Note:</span> This does not
-    currently address author names (which can be ambiguous, and can follow
-    a variety of formats). However, providing a name seems useful, so some
-    concrete suggestions for how to do that are welcome. Also, should
-    a list of names support more flexible delimiters (e.g., semicolons or
-    commas or spaces)?</p>
+    <p>In addition to providing an email address, the <code>author</code>
+    tag can use sub-keys to specify both an email address and an author
+    name.</p>
     <p><span class="badge badge-primary">PEML example:</span></p>
 {% highlight peml %}
 author: edwards@cs.vt.edu
 {% endhighlight %}
     <p><span class="badge badge-primary">PEML example:</span></p>
 {% highlight peml %}
-# Just a comma-separated string
-authors: edwards@cs.vt.edu, ayaan@vt.edu
-
-
-# Alternatively, can use an array structure
+# Providing name and email (email is always required)
+author.name: Stephen Edwards
+author.email: edwards@cs.vt.edu
+{% endhighlight %}
+    <p><span class="badge badge-primary">PEML example:</span></p>
+{% highlight peml %}
+# Multiple authors, specifying email only:
 [authors]
 * edwards@cs.vt.edu
 * ayaan@vt.edu
+[]
+
+# Multiple authors with names:
+[authors]
+name: Stephen Edwards
+email: edwards@cs.vt.edu
+name: Ayaan Kazerouni
+email: ayaan@vt.edu
 []
 {% endhighlight %}
   </section>
@@ -503,11 +518,15 @@ license.id: cc-sa-4.0
         </section>
         <section>
           <h4 id="license.owner">license.owner
-            <small class="text-muted">required: string</small></h4>
+            <small class="text-muted">required: string or object</small></h4>
 
           <p><span class="badge badge-secondary">Schema:</span></p>
 {% highlight json %}
-"owner": { "type": "string", "minLength": 1 }
+"owner": {
+  "anyOf": [
+    { "$ref": "#person" },
+     { "$ref": "#nonempty_string" }
+  ]}
 {% endhighlight %}
           <p>
             The <code>license.owner</code> identifies the person who "owns"
@@ -516,11 +535,17 @@ license.id: cc-sa-4.0
             or whoever. For individual authors, unique e-mail addresses are
             preferred as a method of identification, although any string that
             unambiguously identifies the copyright holder/licenser for this
-            work can be used here.
+            work can be used here. A separate "email" sub-key and optional
+            "name" sub-key can be provided, as in the <code>author</code> tag.
           </p>
           <p><span class="badge badge-primary">PEML example:</span></p>
 {% highlight peml %}
+# simple form
 license.owner: edwards@cs.vt.edu
+
+# or provide email and name 
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
 {% endhighlight %}
         </section>
         <section>

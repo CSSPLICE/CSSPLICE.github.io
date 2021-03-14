@@ -5,6 +5,8 @@ exercise_id: edu.vt.cs.cs1114.palindromes
 
 title: Palindromes (A Simple PEML Example)
 
+author: edwards@cs.vt.edu
+
 topics: Strings, loops, conditions
 prerequisites: variables, assignment, boolean operators
 

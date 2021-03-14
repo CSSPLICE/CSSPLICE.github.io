@@ -113,15 +113,17 @@ tag.topics: strings, loops, conditions
 
     <p><span class="badge badge-secondary">Schema:</span></p>
 {% highlight json %}
-"topics": { "oneOf": [
-  { "type": "string", "minLength": 1 },
+"prerequisites": { "oneOf": [
+  { "$ref": "tag_list" },
   {
-    "type": "array",
-    "items": { "type": "string", "minLength": 1 },
-    "minItems": 1
-  },
-  { "type": "string", "object" }
-  ]}
+    "type": "object",
+    "properties": {
+      "exposure": { "$ref": "tag_list" },
+      "familiarity": { "$ref": "tag_list" },
+      "mastery": { "$ref": "tag_list" }
+    }
+  }
+]}
 {% endhighlight %}
 
     <p>

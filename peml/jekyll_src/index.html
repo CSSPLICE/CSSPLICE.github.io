@@ -341,6 +341,45 @@ instructions: url(some/directory/assignment.pdf)
   </p>
 
 
+  <h3 id="conventions">Convention Over Configuration</h3>
+  <p>
+  While all of the settings and resources associated with an exercise can
+  be directly embedded inside the PEML file itself, often it is easier to
+  provide file-like content as, well, separate files. While you can explicitly
+  list files as external references using the <code>url(...)</code> operator,
+  it is often easier and simpler to just provide files "alongside" the
+  PEML description as separate files themselves. To support this, PEML uses
+  a convention for naming subdirectories to locate sets of files (which can
+  always be overridden using an explicit <code>url(...)</code> expression as
+  the value for the file set).
+  </p>
+  <p>
+  For example, the <code>instructions</code> in an exercise might need to
+  refer to external images. The PEML format also provides a 
+  <code>public_html</code> key to refer to a set of files that are intended
+  to be public web resources referenced in the <code>instructions</code>.
+  Relative path names for images and links inside the <code>instructions</code>
+  refer to file resources in the <code>public_html</code> file set. While
+  all of these files could be explicitly listed, if no <code>public_html</code>
+  key is provided in the PEML description, then <strong>by convention</strong>
+  the subdirectory with the same name as this key "<code>public_html/"
+  located alongside/adjacent to this PEML description (for example, packaged
+  in the same zip file, or located in the same directory/folder) is
+  assumed to contain the files in the <code>public_html</code> file set.
+  </p>
+  <p>
+  Similarly, instead of specifying a <code>src.starter.files</code> file set,
+  the author can just place files in the <code>src/starter/files</code>
+  subdirectory adjacent to the PEML source. In most cases, we envision that
+  authors will generally provide external resources by convention, rather than
+  explicitly specifying them. In cases where the same set of physical files
+  will be shared across multiple exercises, explicit <code>url(...)</code>
+  locations can be used to refer to shared file sets without a huge effort.
+  Placing these in a PEML fragment and using the <code>:include</code>
+  directive (discussed in the next section) may also be useful.
+  </p>
+
+
   <h3 id="includes">Splitting Up PEML Descriptions</h3>
   <p>
   In addition to allowing individual key values to be provided in external
