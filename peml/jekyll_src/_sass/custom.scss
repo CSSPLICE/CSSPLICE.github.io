@@ -125,6 +125,13 @@ pre {
   border-left: 5px solid #3f87a6;
   font-size: 100%;
 }
+pre.dir {
+  border-color: #777;
+  line-height: 1;
+  border-radius: 4px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
 pre code { font-size: inherit; }
 /*
 pre {

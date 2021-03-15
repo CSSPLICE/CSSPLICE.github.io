@@ -20,6 +20,7 @@ theme: jekyll-text-theme
 collections:
   examples:
     output: true
+    sort_by: file.name
 includes_dir: _examples
 
 

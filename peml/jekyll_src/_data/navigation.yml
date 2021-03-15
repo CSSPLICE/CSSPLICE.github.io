@@ -1,6 +1,8 @@
 header:
   - title: Introduction
     url: /
+  - title: Tutorial
+    url: /tutorial.html
   - title: Specification
     url: /schemas/
   - title: Examples

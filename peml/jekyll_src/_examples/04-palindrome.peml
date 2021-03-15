@@ -5,7 +5,9 @@ exercise_id: edu.vt.cs.cs1114.palindromes
 
 title: Palindromes (A Simple PEML Example)
 
-author: edwards@cs.vt.edu
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
 
 topics: Strings, loops, conditions
 prerequisites: variables, assignment, boolean operators
@@ -37,6 +39,8 @@ language: java
 version: >= 1.5
 []
 
+# Test data/files/classes are probably located in separate files, but this
+# is a simple example of how to do something directly inline
 [suites]
 [.cases]
 
@@ -57,3 +61,7 @@ stdout: url(http://my.school.edu/some/local/generator/output)
 
 []
 []
+# The [] ends/closes a list of items, but they can be omitted at the
+# end of the file, since EOF auto-closes any open lists. The first []
+# closes the list of cases in one suite, while the second [] closes
+# the list of suites, which here includes only one suite.

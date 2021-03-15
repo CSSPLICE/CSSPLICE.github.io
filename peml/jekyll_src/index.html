@@ -38,6 +38,13 @@ title: PEML
   <li><a href="about.html#design">PEML's Design Goals</a></li>
   <li><a href="about.html#influences">PEML's Influences</a></li>
   </ul>
+  <p>Looking for <strong>software</strong> to add PEML support to your
+  application? Consider these:</p>
+  <ul>
+  <li><a href="https://github.com/CSSPLICE/peml/">PEML gem in Ruby</a></li>
+  <li><a href="https://skynet.cs.vt.edu/peml-live/api">REST micro-service for
+    parsing PEML</a></li>
+  </ul>
 </section>
 
 
@@ -45,13 +52,15 @@ title: PEML
   <h2 id="format">Basic Format</h2>
   <p>The remainder of this description is split into two main parts:
   first, the format for describing key/value pairs (in this section), and
-  second, the data model (in the following section). We view these two
+  second, the data model (on the following pages). We view these two
   as independent. As indicated in the <a href="about.html#whynot">Why Not
   YAML?</a>, we view the data described for a programming assignment
   as directly representable in PEML, YAML, JSON, etc. We also expect
   that most tools will support either YAML or JSON directly for tooling
   purposes, and that conversions between PEML&nbsp;&lt;=&gt;&nbsp;YAML or
-  PEML&nbsp;&lt;=&gt;&nbsp;JSON will be easy. So users who strongly
+  PEML&nbsp;&lt;=&gt;&nbsp;JSON will be easy (In fact, we already have
+  a <a href="https://skynet.cs.vt.edu/peml-live/api">REST service</a>
+  that will do it for you!). So users who strongly
   prefer an alternate notation can probably freely use one. However, we
   strongly believe that a representation optimized for human authoring
   of structured text consisting primarily of many multi-line text values
@@ -66,6 +75,11 @@ exercise_id: edu.vt.cs.cs1114.palindromes
 # Comments must be on lines by themselves
 
 title: Palindromes (A Simple PEML Example)
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
 
 tag.topics: strings; loops; conditions
 tag.prerequisites: variables; assignment; boolean operators
@@ -95,6 +109,8 @@ language: java
 version: >= 1.5
 []
 
+# Test data/files/classes are probably located in separate files, but this
+# is a simple example of how to do something directly inline
 [suites]
 [.cases]
 stdin: racecar
@@ -110,11 +126,22 @@ stdin: url(http://my.school.edu/some/local/generator/input)
 stdout: url(http://my.school.edu/some/local/generator/output)
 []
 []
+# The [] ends/closes a list of items, but they can be omitted at the
+# end of the file, since EOF auto-closes any open lists. The first []
+# closes the list of cases in one suite, while the second [] closes
+# the list of suites, which here includes only one suite.
 {% endhighlight %}
   
   <p>PEML uses a plain-text representation for
   describing exercises.  This format is designed to be easy to edit in a
-  plain text editor.</p>
+  plain text editor. It is based on <a href="http://archieml.org/">ArchieML</a>,
+  with a few minor modifications.</p>
+
+  <h3 id="kv-pairs">Want to Start with a Tutorial?</h3>
+  <p>If you'd rather dive in and learn PEML by following a tutorial,
+  then start here:</p>
+
+  <p><a href="tutorial.html">Tutorial: Get Started Writing PEML</a>!</p>
 
   <h3 id="kv-pairs">Key/Value Pairs</h3>
   <p>Like YAML, we describe a programming exercise as a series of
@@ -236,26 +263,24 @@ since it may reduce readability.
   It is easy to consider adding a key for <code>text_format:</code>,
   specifying markdown as the default but allowing individual users to
   use other markup formats (such as reStructuredText, AsciiDoc, POD,
-  LaTeX, etc.). However, allowing this dialectic specialization risks
-  making PEML descriptions harder to port among tools unless all tools
-  support the superset of all commonly used formats. Currently, in the
-  interests of interoperability, we're restricting text markup to using
-  Markdown, but public comments/debate on allowing other formats is welcome.
+  LaTeX, etc.). In fact, this is already blocked out in the
+  <code>options.text_format</code> field within the data model, although it
+  needs more refinement.
   </p>
   <p>
   <span class="badge badge-warning">Another Note:</span> Actually, by using
   <a href="https://pandoc.org/">pandoc</a> and a PEML parsing wrapper, it
   should be possible to create a web service that can read
-  a PEML document using a wide variety of text markup formats and normalize
-  any of them to using github-style Markdown, including reStructuredText,
+  a PEML document using a wide variety of text markup formats and render
+  any of them to HTML, including reStructuredText,
   many dialects of markdown, many wiki markup languages, Docbook, LaTeX,
   and even Microsoft Word docx files (!). Unfortunately, this doesn't
   address AsciiDoc :-(. At this point, it is plausible to consider supporting
-  other markup formats along with an appropriate <code>text_format:</code>
+  other markup formats along with the <code>options.text_format:</code>
   key if community effort can generate the necessary support for adopting
-  tools to make use of it (i.e., through a translation web site for converting
-  PEML using a different text markup into PEML using github Markdown, for
-  example).
+  tools to make use of it (i.e., adding support under the <code>render</code>
+  option of our <a href="https://skynet.cs.vt.edu/peml-live/api">PEML REST
+  micro-service</a>).
   </p>
 
 </section>
