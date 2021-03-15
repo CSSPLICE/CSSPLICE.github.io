@@ -394,8 +394,10 @@ instructions: url(some/directory/assignment.pdf)
   </p>
   <p>
   Similarly, instead of specifying a <code>src.starter.files</code> file set,
-  the author can just place files in the <code>src/starter/files</code>
-  subdirectory adjacent to the PEML source. In most cases, we envision that
+  the author can just place files in the <code>src/starter</code>
+  subdirectory adjacent to the PEML source (for any key representing a file set
+  with a name ending in ".files", that suffix is omitted from the corresponding
+  directory name). In most cases, we envision that
   authors will generally provide external resources by convention, rather than
   explicitly specifying them. In cases where the same set of physical files
   will be shared across multiple exercises, explicit <code>url(...)</code>

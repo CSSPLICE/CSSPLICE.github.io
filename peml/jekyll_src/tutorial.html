@@ -193,7 +193,7 @@ version: >= 3
   <h3>Starting Files Provided to the Student</h3>
   <p>
     Suppose you want to provide some file(s) to the student as the starting
-    point for their solution. Just add them in the <code>src/starter/files</code>
+    point for their solution. Just add them in the <code>src/starter</code>
     folder next to the PEML description itself. We recommend placing each
     exercise that uses additional resources in its own directory. This
     approach works whether the PEML description is located in a folder
@@ -209,10 +209,9 @@ dir
 |-- exercise.peml
 +-- src
     +-- starter
-        +-- files
-            |-- file1.ext
-            |-- file2.ext
-            +-- file3.ext
+        |-- file1.ext
+        |-- file2.ext
+        +-- file3.ext
 </pre>
 
   <h3>Images Used in the Instructions</h3>
@@ -236,10 +235,9 @@ dir
 |   +-- download_file.dat
 +-- src
     +-- starter
-        +-- files
-            |-- file1.ext
-            |-- file2.ext
-            +-- file3.ext
+        |-- file1.ext
+        |-- file2.ext
+        +-- file3.ext
 </pre>
 
   <h3>Test Case Files for Auto-grading</h3>
@@ -262,10 +260,9 @@ dir
 |   +-- download_file.dat
 +-- src
 |   +-- starter
-|       +-- files
-|           |-- file1.ext
-|           |-- file2.ext
-|           +-- file3.ext
+|       |-- file1.ext
+|       |-- file2.ext
+|       +-- file3.ext
 +-- suites
     |-- TestClass1.java
     +-- TestClass2.java
@@ -276,7 +273,7 @@ dir
     Suppose your auto-grading tests use additional data files or other
     resources that need to be available during execution of your tests.
     Not all grading tools support such resources, but if they do, you
-    can provide them in the <code>environment/test/files</code> folder,
+    can provide them in the <code>environment/test</code> folder,
     which corresponds to the <code>[environment.test.files]</code> key.
   </p>
   <p>
@@ -298,19 +295,17 @@ dir
 |   +-- download_file.dat
 +-- src
 |   +-- starter
-|       +-- files
-|           |-- file1.ext
-|           |-- file2.ext
-|           +-- file3.ext
+|       |-- file1.ext
+|       |-- file2.ext
+|       +-- file3.ext
 +-- suites
 |   |-- TestClass1.java
 |   +-- TestClass2.java
 +-- environment
     +-- test
-        +-- files
-            |-- file4.ext
-            |-- file5.ext
-            +-- file6.ext
+        |-- file4.ext
+        |-- file5.ext
+        +-- file6.ext
 </pre>
 
   <h3>System-specific Files</h3>
@@ -343,31 +338,27 @@ dir
     +-- Java
     |   +-- src
     |   |   +-- starter
-    |   |       +-- files
-    |   |           |-- Class1.java
-    |   |           +-- Class2.java
+    |   |       |-- Class1.java
+    |   |       +-- Class2.java
     |   +-- suites
     |   |   |-- TestClass1.java
     |   |   +-- TestClass2.java
     |   +-- environment
     |       +-- test
-    |           +-- files
-    |               |-- file3.ext
-    |               +-- file4.ext
+    |           |-- file3.ext
+    |           +-- file4.ext
     +-- python
         +-- src
         |   +-- starter
-        |       +-- files
-        |           |-- class1.py
-        |           +-- class2.py
+        |       |-- class1.py
+        |       +-- class2.py
         +-- suites
         |   |-- test_class1.py
         |   +-- test_class2.py
         +-- environment
             +-- test
-                +-- files
-                    |-- file3.ext
-                    +-- file4.ext
+                |-- file3.ext
+                +-- file4.ext
 </pre>
   <p>
   If files are specified at both the global and system-specific levels, the
