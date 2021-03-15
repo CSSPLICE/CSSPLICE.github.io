@@ -268,7 +268,7 @@
 </svg>
 <a title="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.
 " href="/peml/">PEML</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
-        <ul><li class="navigation__item navigation__item--active"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
+        <ul><li class="navigation__item navigation__item--active"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/tutorial.html">Tutorial</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
       </nav></div>
   </header>
 </div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>PEML</h1></header><span class="split-space">&nbsp;</span>
@@ -324,6 +324,13 @@
   <li><a href="about.html#design">PEML's Design Goals</a></li>
   <li><a href="about.html#influences">PEML's Influences</a></li>
   </ul>
+  <p>Looking for <strong>software</strong> to add PEML support to your
+  application? Consider these:</p>
+  <ul>
+  <li><a href="https://github.com/CSSPLICE/peml/">PEML gem in Ruby</a></li>
+  <li><a href="https://skynet.cs.vt.edu/peml-live/api">REST micro-service for
+    parsing PEML</a></li>
+  </ul>
 </section>
 
 
@@ -331,13 +338,15 @@
   <h2 id="format">Basic Format</h2>
   <p>The remainder of this description is split into two main parts:
   first, the format for describing key/value pairs (in this section), and
-  second, the data model (in the following section). We view these two
+  second, the data model (on the following pages). We view these two
   as independent. As indicated in the <a href="about.html#whynot">Why Not
   YAML?</a>, we view the data described for a programming assignment
   as directly representable in PEML, YAML, JSON, etc. We also expect
   that most tools will support either YAML or JSON directly for tooling
   purposes, and that conversions between PEML&nbsp;&lt;=&gt;&nbsp;YAML or
-  PEML&nbsp;&lt;=&gt;&nbsp;JSON will be easy. So users who strongly
+  PEML&nbsp;&lt;=&gt;&nbsp;JSON will be easy (In fact, we already have
+  a <a href="https://skynet.cs.vt.edu/peml-live/api">REST service</a>
+  that will do it for you!). So users who strongly
   prefer an alternate notation can probably freely use one. However, we
   strongly believe that a representation optimized for human authoring
   of structured text consisting primarily of many multi-line text values
@@ -351,6 +360,11 @@
 </span><span class="c1"># Comments must be on lines by themselves</span><span class="w">
 
 </span><span class="k">title:</span><span class="w"> </span>Palindromes<span class="w"> </span>(A<span class="w"> </span>Simple<span class="w"> </span>PEML<span class="w"> </span>Example)<span class="w">
+
+</span><span class="k">license.id:</span><span class="w"> </span>cc-sa-4.0<span class="w">
+</span><span class="k">license.owner.email:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
+</span><span class="k">license.owner.name:</span><span class="w"> </span>Stephen<span class="w"> </span>Edwards<span class="w">
+
 
 </span><span class="k">tag.topics:</span><span class="w"> </span>strings;<span class="w"> </span>loops;<span class="w"> </span>conditions<span class="w">
 </span><span class="k">tag.prerequisites:</span><span class="w"> </span>variables;<span class="w"> </span>assignment;<span class="w"> </span>boolean<span class="w"> </span>operators<span class="w">
@@ -380,6 +394,8 @@ Or:
 </span><span class="k">version:</span><span class="w"> </span>&gt;=<span class="w"> </span>1.5<span class="w">
 </span><span class="kn">[]</span><span class="w">
 
+</span><span class="c1"># Test data/files/classes are probably located in separate files, but this</span><span class="w">
+</span><span class="c1"># is a simple example of how to do something directly inline</span><span class="w">
 </span><span class="kn">[suites]</span><span class="w">
 </span><span class="kn">[.cases]</span><span class="w">
 </span><span class="k">stdin:</span><span class="w"> </span>racecar<span class="w">
@@ -394,11 +410,22 @@ Or:
 </span><span class="k">stdin:</span><span class="w"> </span><span class="no">url(http://my.school.edu/some/local/generator/input)</span><span class="w">
 </span><span class="k">stdout:</span><span class="w"> </span><span class="no">url(http://my.school.edu/some/local/generator/output)</span><span class="w">
 </span><span class="kn">[]</span><span class="w">
-</span><span class="kn">[]</span></code></pre></figure>
+</span><span class="kn">[]</span><span class="w">
+</span><span class="c1"># The [] ends/closes a list of items, but they can be omitted at the</span><span class="w">
+</span><span class="c1"># end of the file, since EOF auto-closes any open lists. The first []</span><span class="w">
+</span><span class="c1"># closes the list of cases in one suite, while the second [] closes</span><span class="w">
+</span><span class="c1"># the list of suites, which here includes only one suite.</span></code></pre></figure>
   
   <p>PEML uses a plain-text representation for
   describing exercises.  This format is designed to be easy to edit in a
-  plain text editor.</p>
+  plain text editor. It is based on <a href="http://archieml.org/">ArchieML</a>,
+  with a few minor modifications.</p>
+
+  <h3 id="kv-pairs">Want to Start with a Tutorial?</h3>
+  <p>If you'd rather dive in and learn PEML by following a tutorial,
+  then start here:</p>
+
+  <p><a href="tutorial.html">Tutorial: Get Started Writing PEML</a>!</p>
 
   <h3 id="kv-pairs">Key/Value Pairs</h3>
   <p>Like YAML, we describe a programming exercise as a series of
@@ -516,26 +543,24 @@ since it may reduce readability.
   It is easy to consider adding a key for <code>text_format:</code>,
   specifying markdown as the default but allowing individual users to
   use other markup formats (such as reStructuredText, AsciiDoc, POD,
-  LaTeX, etc.). However, allowing this dialectic specialization risks
-  making PEML descriptions harder to port among tools unless all tools
-  support the superset of all commonly used formats. Currently, in the
-  interests of interoperability, we're restricting text markup to using
-  Markdown, but public comments/debate on allowing other formats is welcome.
+  LaTeX, etc.). In fact, this is already blocked out in the
+  <code>options.text_format</code> field within the data model, although it
+  needs more refinement.
   </p>
   <p>
   <span class="badge badge-warning">Another Note:</span> Actually, by using
   <a href="https://pandoc.org/">pandoc</a> and a PEML parsing wrapper, it
   should be possible to create a web service that can read
-  a PEML document using a wide variety of text markup formats and normalize
-  any of them to using github-style Markdown, including reStructuredText,
+  a PEML document using a wide variety of text markup formats and render
+  any of them to HTML, including reStructuredText,
   many dialects of markdown, many wiki markup languages, Docbook, LaTeX,
   and even Microsoft Word docx files (!). Unfortunately, this doesn't
   address AsciiDoc :-(. At this point, it is plausible to consider supporting
-  other markup formats along with an appropriate <code>text_format:</code>
+  other markup formats along with the <code>options.text_format:</code>
   key if community effort can generate the necessary support for adopting
-  tools to make use of it (i.e., through a translation web site for converting
-  PEML using a different text markup into PEML using github Markdown, for
-  example).
+  tools to make use of it (i.e., adding support under the <code>render</code>
+  option of our <a href="https://skynet.cs.vt.edu/peml-live/api">PEML REST
+  micro-service</a>).
   </p>
 
 </section>
@@ -616,6 +641,45 @@ since it may reduce readability.
   implicitly be interpreted as the set of resources/files attached to the
   instructions, without requiring a redundant line inside the PEML itself
   saying: "<code>public_html: url(public_html)</code>"
+  </p>
+
+
+  <h3 id="conventions">Convention Over Configuration</h3>
+  <p>
+  While all of the settings and resources associated with an exercise can
+  be directly embedded inside the PEML file itself, often it is easier to
+  provide file-like content as, well, separate files. While you can explicitly
+  list files as external references using the <code>url(...)</code> operator,
+  it is often easier and simpler to just provide files "alongside" the
+  PEML description as separate files themselves. To support this, PEML uses
+  a convention for naming subdirectories to locate sets of files (which can
+  always be overridden using an explicit <code>url(...)</code> expression as
+  the value for the file set).
+  </p>
+  <p>
+  For example, the <code>instructions</code> in an exercise might need to
+  refer to external images. The PEML format also provides a 
+  <code>public_html</code> key to refer to a set of files that are intended
+  to be public web resources referenced in the <code>instructions</code>.
+  Relative path names for images and links inside the <code>instructions</code>
+  refer to file resources in the <code>public_html</code> file set. While
+  all of these files could be explicitly listed, if no <code>public_html</code>
+  key is provided in the PEML description, then <strong>by convention</strong>
+  the subdirectory with the same name as this key "<code>public_html/"
+  located alongside/adjacent to this PEML description (for example, packaged
+  in the same zip file, or located in the same directory/folder) is
+  assumed to contain the files in the <code>public_html</code> file set.
+  </p>
+  <p>
+  Similarly, instead of specifying a <code>src.starter.files</code> file set,
+  the author can just place files in the <code>src/starter/files</code>
+  subdirectory adjacent to the PEML source. In most cases, we envision that
+  authors will generally provide external resources by convention, rather than
+  explicitly specifying them. In cases where the same set of physical files
+  will be shared across multiple exercises, explicit <code>url(...)</code>
+  locations can be used to refer to shared file sets without a huge effort.
+  Placing these in a PEML fragment and using the <code>:include</code>
+  directive (discussed in the next section) may also be useful.
   </p>
 
 

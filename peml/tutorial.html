@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="en">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>PEML Data Model for Code Assets - PEML</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Tutorial: Get Started Writing PEML - PEML</title>
 
 <meta name="description" content="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programmi...">
-<link rel="canonical" href="https://cssplice.github.io/peml/schemas/code.html"><link rel="alternate" type="application/rss+xml" title="PEML" href="/peml/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/peml/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/peml/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/peml/assets/favicon-16x16.png"><link rel="manifest" href="/peml/assets/site.webmanifest"><link rel="mask-icon" href="/peml/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/peml/assets/favicon.ico">
+<link rel="canonical" href="https://cssplice.github.io/peml/tutorial.html"><link rel="alternate" type="application/rss+xml" title="PEML" href="/peml/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/peml/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/peml/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/peml/assets/favicon-16x16.png"><link rel="manifest" href="/peml/assets/site.webmanifest"><link rel="mask-icon" href="/peml/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/peml/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/peml/assets/browserconfig.xml">
 
@@ -268,13 +268,13 @@
 </svg>
 <a title="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.
 " href="/peml/">PEML</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
-        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/tutorial.html">Tutorial</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
+        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item navigation__item--active"><a href="/peml/tutorial.html">Tutorial</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
       </nav></div>
   </header>
-</div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>PEML Data Model for Code Assets</h1></header><span class="split-space">&nbsp;</span>
+</div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>Tutorial: Get Started Writing PEML</h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title="Edit on Github"
-            href="https://github.com/cssplice/cssplice.github.io/tree/master/peml/jekyll_src/schemas/code.html">
+            href="https://github.com/cssplice/cssplice.github.io/tree/master/peml/jekyll_src/tutorial.html">
             <i class="far fa-edit"></i></a></div><p class="overlay__excerpt">The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.</p></div>
               </div>
             </div><div class="grid grid--reverse">
@@ -285,105 +285,492 @@
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
 <!-- end custom main top snippet -->
-<article itemscope itemtype="http://schema.org/Article"><meta itemprop="headline" content="PEML Data Model for Code Assets"><meta itemprop="author" content="Virginia Tech"/><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+<article itemscope itemtype="http://schema.org/Article"><meta itemprop="headline" content="Tutorial: Get Started Writing PEML"><meta itemprop="author" content="Virginia Tech"/><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
 <!-- end custom article top snippet -->
 <div class="article__content" itemprop="articleBody"><section>
-  <h2 id="goals">Title</h2>
-  <p>blah blah blah ...
+  <h2 id="syntax">Core Syntax</h2>
+  <p>You probably already know a little about <a href="index.html">what
+  PEML is</a> and why it was created.
+  Some of the very rudimentary basics of PEML's syntax are shown here:</p>
+
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="c1"># Single-line comments start with #</span><span class="w">
+</span><span class="c1"># Comments must be on lines by themselves</span><span class="w">
+
+</span><span class="k">key:</span><span class="w"> </span>value<span class="w">
+
+</span><span class="c1"># keys start on the beginning of a line, and are followed by a colon.</span><span class="w">
+</span><span class="c1"># values follow the key (can start on the next line), and continue to</span><span class="w">
+</span><span class="c1"># the next key.</span><span class="w">
+
+</span><span class="k">nested.keys.define.structure:</span><span class="w"> </span>Nested<span class="w"> </span>keys<span class="w"> </span>use<span class="w"> </span>dotted<span class="w"> </span>notation<span class="w">
+
+</span><span class="k">quoted.value:</span><span class="sh">----------
+Quoted values act like "HereDocs". You can define your own
+delimiter (any printing character repeated 3+ times).
+----------</span></code></pre></figure>
+</section>
+<section>
+  <h2 id="first-file">Your First PEML File</h2>
+
+  <p>OK, enough with the syntax. Now start with this minimal version of an
+  exercise and fill in your own content (you
+  can <a href="examples/01-minimal.peml">download a slightly longer version
+  here</a>):
   </p>
-<!--
-<pre>
+
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">exercise_id:</span><span class="w"> </span><span class="kc">&lt;insert-your-globally-unique-id-here&gt;</span><span class="w">
+
+</span><span class="k">title:</span><span class="w"> </span><span class="kc">&lt;what title will you use?&gt;</span><span class="w">
+
+</span><span class="k">license.id:</span><span class="w"> </span>cc-sa-4.0<span class="w">
+</span><span class="k">license.owner.email:</span><span class="w"> </span><span class="kc">&lt;your email&gt;</span><span class="w">
+</span><span class="k">license.owner.name:</span><span class="w"> </span><span class="kc">&lt;your name&gt;</span><span class="w">
+
+</span><span class="k">instructions:</span><span class="sh">----------
+Write instructions for your exercise here.
+----------</span></code></pre></figure>
+
+  <p>You can edit your own PEML files locally using any text editor, or
+  you can edit PEML right in your web browser by opening our live
+  editing/validation site in a separate tab:</p>
+
+  <p><a href="https://skynet.cs.vt.edu/peml-live" target="_blank">PEML Live!</a></p>
+
+  <p>
+    The fields in this minimal document are:
+  </p>
+
+  <dl>
+  <dt>exercise_id</dl>
+  <dd>
+  <p>
+  Provide a unique identifier for your exercise. <em>Globally</em> unique.
+  Any sequence of non-whitespace characters is ok, but you may wish to
+  stick to existing naming conventions used in other domains. For example,
+  you could use a unique URL (perhaps where this exercise's home definition
+  lives), or something like a Java package name (a dotted name, perhaps
+  including a university's domain name as a prefix), or your email combined
+  with a unique exercise suffix of your own devising.
+  </p>
+  </dd>
+  <dt>title</dl>
+  <dd>
+  <p>
+  Provide a descriptive title that will be used as a human-readable label for
+  the exercise. The intent is for this to be the "title" shown to students in
+  various contexts, either when viewing a single exercise or when viewing
+  lists of exercises. While there is no specific length limit, ideally titles
+  should be no more than "one line" in size, because of the various contexts
+  where they might be displayed.
+  </p>
+  </dd>
+  <dt>license.id</dt>
+  <dd>
+  <p>
+  While a license isn't strictly required, it is strongly recommended.
+  The id can be specified by a URL that identifies the license, or by a
+  name (or abbreviated name) that is in common use, such as any of the
+  <a href="https://help.github.com/en/articles/licensing-a-repository">license
+  keywords used by github</a> (an excellent source for potential
+  license choices). You can even use "(C) 2021 <your name>, All rights reserved".
+  While you could just specify an author email using
+  <code>author:</code>, listing a license is better (everyone must
+  assume "all rights reserved" if you do not). See
+  <a href="schemas/exercise.html#author">author</a> or
+  <a href="schemas/exercise.html#license">license</a> for more details).
+  </p>
+  </dd>
+  <dt>license.owner</dt>
+  <dd>
+  <p>
+  Probably you. For an individual, either specify a unique, identifying
+  email address, or as shown here, an email address along with a name
+  using separate keys. For an organization, you can specify your information
+  as <code>author:</code>, and then provide <code>license.owner:</code> to
+  specify the organization owning the copyright.
+  </p>
+  </dd>
+  <dt>instructions</dt>
+  <dd>
+  <p>
+  Provide your exercise's instructions here. This isn't required in all contexts
+  (for example, if providing an auto-grading setup), but you probably want to.
+  </p>
+  </dd>
+  </dl>
+
+  <p>Now you have a PEML description!</p>
+</section>
+
+
+<section>
+  <h2 id="language">Identifying the Programming Language</h2>
+
+  <p>If your exercise is a programming exercise, you probably will find it
+  useful to identify the programming language it supports. PEML does this
+  by allowing you to define the "programming system".
+  </p>
+
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="kn">[systems]</span><span class="w">
+</span><span class="k">language:</span><span class="w"> </span>Java<span class="w">
+</span><span class="k">version:</span><span class="w"> </span>&gt;=<span class="w"> </span>1.9<span class="w">
+</span><span class="kn">[]</span></code></pre></figure>
+
+  <p>
+  The <code>language:</code> key is the required one--specify the language that
+  is supported using its common name (be careful of capitalization, since
+  some tools processing descriptions might not treat the name case-insensitively),
+  or its MIME type (to reduce ambiguity). Optionally, you can also specify
+  a version, if your supporting files are version-dependent. Feel free to
+  use <a href="https://guides.rubygems.org/patterns/#declaring-dependencies">gem-style
+  version dependency constraints</a>, although check with your educational
+  tool to determine what is supported. 
+  </p>
+  <p>
+  Note that the <code>language:</code> and <code>version:</code> keys here are
+  listed inside a <code>[systems]</code> array. There's only one element in
+  the array in this example, but PEML does allow authors to express exercises
+  that support multiple programming systems. You can ignore that for now.
+  However, this is a good chance to recap PEML's array notation.
+  </p>
+  <p>
+  In short, arrays (lists) in PEML have keys that are surrounded by square
+  brackets instead of using a colon. The end of the list is marked with a
+  pair of empty square brackets (which can be omitted if they are at the end
+  of the file). All the keys between these two markers are part of the list.
+  Like ArchieML, if you look at the keys inside, as soon as a key is duplicated,
+  that is taken as the start of a new entry in the list. So an array with
+  multiple entries might look like this:
+  </p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="kn">[systems]</span><span class="w">
+</span><span class="k">language:</span><span class="w"> </span>Java<span class="w">
+</span><span class="k">version:</span><span class="w"> </span>&gt;=<span class="w"> </span>1.9<span class="w">
+
+</span><span class="k">language:</span><span class="w"> </span>Python<span class="w">
+</span><span class="k">version:</span><span class="w"> </span>&gt;=<span class="w"> </span>3<span class="w">
+</span><span class="kn">[]</span></code></pre></figure>
+</section>
+
+
+<section>
+  <h2 id="format">Associating Supporting Files</h2>
+  <p>
+    OK, so where's all the cool stuff? Like auto-grader inputs and all that?
+  </p>
+  <p>
+    PEML provides a very rich model for structuring this information for
+    tool use. However, PEML relies heavily on
+    <a href="https://en.wikipedia.org/wiki/Convention_over_configuration">convention
+    over configuration</a>
+    to simplify the way those things are managed and to make it easier for
+    authors to learn the minimal amount they need, and gradually add onto
+    that core over time as more advanced situations arise.
+  </p>
+  
+  <h3>Starting Files Provided to the Student</h3>
+  <p>
+    Suppose you want to provide some file(s) to the student as the starting
+    point for their solution. Just add them in the <code>src/starter/files</code>
+    folder next to the PEML description itself. We recommend placing each
+    exercise that uses additional resources in its own directory. This
+    approach works whether the PEML description is located in a folder
+    on the local machine, is packaged in a zip file or another form of
+    archive, or hosted in a repository. You could also use the
+    <code>[src.starter.files]</code> array key to provide this information
+    in the PEML description itself, implicitly providing them by co-location
+    is often simpler.
+  </p>
+<pre class="dir">
+# Providing starter files for the user
+dir
+|-- exercise.peml
++-- src
+    +-- starter
+        +-- files
+            |-- file1.ext
+            |-- file2.ext
+            +-- file3.ext
+</pre>
+
+  <h3>Images Used in the Instructions</h3>
+  <p>
+    Suppose you want to provide images for use in your instructions.
+    Instructions are typically written in Markdown or vanilla HTML, but
+    can certainly refer to supplemental files, whether they be images,
+    separate pages describing APIs, examples students can download, etc.
+    While you could host these resources on your own website and use absolute
+    URLs, you may wish for them to be packaged with the exercise. You can
+    use the <code>[public_html]</code> key to specify these explicitly, or
+    simply place them in a <code>public_html</code> folder.
+  </p>
+<pre class="dir">
+# Providing images files for the instructions
+dir
+|-- exercise.peml
++-- public_html
+|   |-- image1.png
+|   |-- image2.png
+|   +-- download_file.dat
++-- src
+    +-- starter
+        +-- files
+            |-- file1.ext
+            |-- file2.ext
+            +-- file3.ext
+</pre>
+
+  <h3>Test Case Files for Auto-grading</h3>
+  <p>
+    Suppose you want to provide some file(s) specifying the tests you want
+    to use to check the behavior of answers to the exercise. These could be
+    in the form of compilable program code, scripts, data files, or whatever
+    notation/format is used by the auto-grading tool reading your PEML
+    description. You can provide these as separate files under the
+    <code>suites</code> folder, which corresponds to the <code>[suites]</code>
+    array key.
+  </p>
+<pre class="dir">
+# Providing test case files
+dir
+|-- exercise.peml
++-- public_html
+|   |-- image1.png
+|   |-- image2.png
+|   +-- download_file.dat
++-- src
+|   +-- starter
+|       +-- files
+|           |-- file1.ext
+|           |-- file2.ext
+|           +-- file3.ext
++-- suites
+    |-- TestClass1.java
+    +-- TestClass2.java
+</pre>
+
+  <h3>Other Supplemental Files for Auto-grading</h3>
+  <p>
+    Suppose your auto-grading tests use additional data files or other
+    resources that need to be available during execution of your tests.
+    Not all grading tools support such resources, but if they do, you
+    can provide them in the <code>environment/test/files</code> folder,
+    which corresponds to the <code>[environment.test.files]</code> key.
+  </p>
+  <p>
+  <span class="badge badge-warning">Note:</span>
+  If you'd rather use a docker image to provide the environmental setup
+  for environments (for building, running, testing, or even the student's
+  starting environmet) and your tool supports this kind of usage, you
+  probably want to just specify image information directly in the PEML
+  file--see <a href="schemas/definitions.html#environments">Environments</a>
+  in the data model).
+  </p>
+<pre class="dir">
+# Providing data resources for use in testing
+dir
+|-- exercise.peml
++-- public_html
+|   |-- image1.png
+|   |-- image2.png
+|   +-- download_file.dat
++-- src
+|   +-- starter
+|       +-- files
+|           |-- file1.ext
+|           |-- file2.ext
+|           +-- file3.ext
++-- suites
+|   |-- TestClass1.java
+|   +-- TestClass2.java
++-- environment
+    +-- test
+        +-- files
+            |-- file4.ext
+            |-- file5.ext
+            +-- file6.ext
+</pre>
+
+  <h3>System-specific Files</h3>
+  <p>
+    Top-level keys like <code>src.*</code>, <code>environment.*</code>, or
+    <code>[suites]</code> affect the whole exercise, which means they
+    apply to all programming systems that the exercise supports. When
+    the exercise only targets one programming language, that's probably
+    fine. If, however, you write your exercise so that it supports
+    multiple programming systems, you may wish to provide different
+    resources for each system. You can do that by using the same
+    directory structure for <code>src/</code>, <code>environment/</code>,
+    and <code>suites/</code>, but placing them underneath
+    <code>systems/&lt;language&gt;</code> (using the language name as
+    specified in the PEML file--if a MIME type is used, replace the '/'
+    in the MIME type with a '-').
+  </p>
+  <p>
+  <span class="badge badge-warning">Note:</span>
+  Most tools do not support exercises that support multiple programming
+  systems. However, they should still support the <em>first</em> system
+  listed, including system-specific settings provided in the way described
+  here.
+  </p>
+<pre class="dir">
+# Providing system-specific resources
+dir
+|-- exercise.peml
++-- systems
+    +-- Java
+    |   +-- src
+    |   |   +-- starter
+    |   |       +-- files
+    |   |           |-- Class1.java
+    |   |           +-- Class2.java
+    |   +-- suites
+    |   |   |-- TestClass1.java
+    |   |   +-- TestClass2.java
+    |   +-- environment
+    |       +-- test
+    |           +-- files
+    |               |-- file3.ext
+    |               +-- file4.ext
+    +-- python
+        +-- src
+        |   +-- starter
+        |       +-- files
+        |           |-- class1.py
+        |           +-- class2.py
+        +-- suites
+        |   |-- test_class1.py
+        |   +-- test_class2.py
+        +-- environment
+            +-- test
+                +-- files
+                    |-- file3.ext
+                    +-- file4.ext
+</pre>
+  <p>
+  If files are specified at both the global and system-specific levels, the
+  files available are the union of both, where files with the same path names
+  in both locations are overridden by the system-specific contents.
+  </p>
+</section>
+
+
+<section>
+  <h2 id="format">Using Data-driven Test Suites for Simple Cases</h2>
+  <p>
+    For exercises that have relatively simple scaffolding requirements for
+    testing--that is, most or all of the tests follow the same basic
+    format, but vary in some standardized ways such as different inputs
+    or outputs--you may find writing test data directly into your PEML
+    description to be more convenient than providing separate test cases.
+  </p>
+  <p>For example, maybe you are working with a tool that only tests
+  standard input/standard output behaviors, so every test you run
+  consists only of a pair of input/output values. Then you might be able to
+  describe your tests this way:
+  </p>
+
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="kn">[suites]</span><span class="w">
+</span><span class="kn">[.cases]</span><span class="w">
+
+</span><span class="k">stdin:</span><span class="w"> </span>racecar<span class="w">
+</span><span class="k">stdout:</span><span class="w"> </span>"racecar"<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>palindrome.<span class="w">
+
+</span><span class="k">stdin:</span><span class="w"> </span>Flintstone<span class="w">
+</span><span class="k">stdout:</span><span class="w"> </span>"Flintstone"<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>a<span class="w"> </span>palindrome.<span class="w">
+
+</span><span class="kn">[]</span><span class="w">
+</span><span class="kn">[]</span><span class="w">
+</span><span class="c1"># The [] ends/closes a list of items. The first []</span><span class="w">
+</span><span class="c1"># closes the list of cases in one suite, while the second [] closes</span><span class="w">
+</span><span class="c1"># the list of suites, which here includes only one suite.</span></code></pre></figure>
+
+  <p>
+  Here, the <code>[suites]</code> consist of a single test suite that contains two
+  test cases. Each test case here contains two values, named "stdin"
+  and "stdout". The tool translating this input into test cases would
+  need to recognize those names and know how to use them, so check with
+  your tool regarding support for this format and required naming conventions
+  for variables. However, this is a fairly simple way to mark up the values
+  when the situation permits.
+  </p>
+  <p>
+  In fact, the same content could be written in CSV, YAML, JSON, etc.,
+  depending on what your grading tool supports.
+  </p>
+
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="kn">[suites]</span><span class="w">
+
+</span><span class="k">name:</span><span class="w"> </span>csv-version.csv<span class="w">
+</span><span class="k">type:</span><span class="w"> </span>text/csv<span class="w">
+</span><span class="k">content:</span><span class="sh">----------
+stdin,stdout
+"racecar","""racecar"" is a palindrome."
+"Flintstone","""Flintstone"" is not a palindrome."
+----------</span><span class="w">
+
+</span><span class="k">name:</span><span class="w"> </span>yaml-version.yaml<span class="w">
+</span><span class="k">type:</span><span class="w"> </span>text/x-yaml<span class="w">
+</span><span class="k">content:</span><span class="sh">----------
 ---
+- stdin: racecar
+  stdout: "\"racecar\" is a palindrome."
+- stdin: Flintstone
+  stdout: "\"Flintstone\" is not a palindrome."
+----------</span><span class="w">
 
-starter:
-wrapper:
-library:
-(reference:)
-model_solution:
-multiple models?
+</span><span class="kn">[]</span></code></pre></figure>
 
-input generator?
+  <p>
+  Here, the MIME types for the files were specified, but they can also
+  be deduced from the file names, so the MIME type is redudant (not
+  required). Also, because of the error-prone nature of manually quoting
+  data in CSV format, PEML supports an alternative "text/x-unquoted-csv"
+  where values are written in the same notation that would be used in
+  the target programming system, allowing more natural use of expressions,
+  native literal constructs, escapes, etc.
+  </p>
+  <p>
+  If you are lucky enough to have a tool that supports it, you may be
+  able to provide a template used to translate a single test case record
+  into executable code. You might even be able to designate tests as
+  privately visible to instructors only, or publicly visible to students.
+  For example:
+  </p>  
 
-</pre>
--->
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="kn">[suites]</span><span class="w">
+</span><span class="k">name:</span><span class="w"> </span>csv-version.csv<span class="w">
+</span><span class="k">visibility:</span><span class="w"> </span>public<span class="w">
+</span><span class="k">template:</span><span class="w">
+    </span>assertEquals("<span class="w"> </span>*<span class="w">  </span>==<span class="w"> </span>",<span class="w">
+        </span>,<span class="w"> </span>Answer.multiply(,<span class="w"> </span>));<span class="w">
+</span><span class="k">content:</span><span class="sh">----------
+x,y,expected
+2,4,8
+1,1,1
+-2,3,-6
+----------</span><span class="w">
+</span><span class="kn">[]</span></code></pre></figure>
 
-    <dl>
-
-    <dt><code>assets.*</code></dt>
-    <dd><p>
-    <pre>
-    assets.tests = url/location
-    assets.tests = array
-
-    .visibility
-
-    .stdin
-    .stdout
-    
-    .file.name
-    .file.content
-    .file.format
-    
-    .csv.pattern
-    .csv.content
-    .csv.delimiter = ,
-    .csv.trim = true/false
-
-
-    assets.build/.run/.test
-      .environment
-        .extends = (previous)
-        .type
-        .container
-
-        .data
-        .lib
-        .include
-        .scripts
-        .commands
+</section>
 
 
-    assets.data = url/location
-    assets.data = array
-    .file.*
-    ## Need some way to indicate whether zip urls need to be unpacked or not
-    ## Maybe add "#unpack" on the end of an archive url to request unpacking?
-    ## Then it looks kind of like a URL anchor name
-    ##---
-    ## Instead, make compressed archives that aren't simple files auto-uncompress
-
-    assets.environment.type
-    assets.environment.container = url/location
-    
-    assets.code.starter = url/location
-    assets.code.starter = array
-    .file.*
-
-    assets.code.lib = url/location
-    assets.code.lib = array
-    .file.*
-
-    assets.code.include = url/location
-    assets.code.include = array
-    .file.*
-
-    assets.code.solutions = url/location
-    assets.code.solutions = array
-    .label (reference)
-    .description
-    [.files]
-
-    assets.code.unified = url/location
-    assets.code.unified = array
-    .file.*
-    </pre>
-    </p>
-<pre>
-</pre>
-    </dd>
-    </dl>
-
+<section>
+  <h2 id="next">What Next?</h2>
+  
+  <p>If you haven't read through the whole <a href="index.html">PEML
+  Introduction</a>, that is your next step.</p>
+  
+  <p>If you want to know more about how PEML came to be, why we're not using
+  straight YAML or JSON, PEML's design
+  goals, and its influences, read our
+  <a href="about.html">About PEML</a> page.
+  </p>
+  
+  <p>
+  Finally, start <a href="schemas/exercise.html">digging into the
+  PEML definition</a>.
+  </p>
 </section>
 </div><div class="d-print-none"><footer class="article__footer"><!-- start custom article footer snippet -->
 

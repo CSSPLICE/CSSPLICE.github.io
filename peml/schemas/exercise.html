@@ -268,7 +268,7 @@
 </svg>
 <a title="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.
 " href="/peml/">PEML</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
-        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
+        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/tutorial.html">Tutorial</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
       </nav></div>
   </header>
 </div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>PEML Exercise Data Model</h1></header><span class="split-space">&nbsp;</span>
@@ -450,44 +450,57 @@
 
   <section>
     <h3 id="author" data-toc-text="author">author
-      <small class="text-muted">required: string</small></h3>
+      <small class="text-muted">required: string or object</small></h3>
 
     <p><span class="badge badge-secondary">Schema:</span></p>
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"oneOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/email_address"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"email"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/email_address"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/nonempty_string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="err">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
 
     <p>
       The <code>author</code> tag is used to identify the author of the
       exercise (or at least of the PEML exercise description). Recommended
       practice is to identify the author by a unique e-mail address. This
       field can be used to provide a single e-mail address. Alternatively,
-      the key <code>authors</code> can be used to provide a list of one or
-      more author e-mail addresses to identify a set of multiple authors.
-      This can be a single string of comma-separated e-mail addresses, or
-      the e-mail addresses can actually be provided as a PEML array (list).
-      Both forms have the same meaning.
+      the key <code>authors</code> can be used to provide an array of
+      multiple authors.
     </p>
     <p>
       If the optional <code>license</code> key is provided and the
       <code>license.owner</code> is the same as the <code>author</code>, then
       the <code>author</code> key can be omitted.
     </p>
-    <p><span class="badge badge-warning">Note:</span> This does not
-    currently address author names (which can be ambiguous, and can follow
-    a variety of formats). However, providing a name seems useful, so some
-    concrete suggestions for how to do that are welcome. Also, should
-    a list of names support more flexible delimiters (e.g., semicolons or
-    commas or spaces)?</p>
+    <p>In addition to providing an email address, the <code>author</code>
+    tag can use sub-keys to specify both an email address and an author
+    name.</p>
     <p><span class="badge badge-primary">PEML example:</span></p>
 <figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">author:</span><span class="w"> </span>edwards@cs.vt.edu</code></pre></figure>
     <p><span class="badge badge-primary">PEML example:</span></p>
-<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="c1"># Just a comma-separated string</span><span class="w">
-</span><span class="k">authors:</span><span class="w"> </span>edwards@cs.vt.edu,<span class="w"> </span>ayaan@vt.edu<span class="w">
-
-
-</span><span class="c1"># Alternatively, can use an array structure</span><span class="w">
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="c1"># Providing name and email (email is always required)</span><span class="w">
+</span><span class="k">author.name:</span><span class="w"> </span>Stephen<span class="w"> </span>Edwards<span class="w">
+</span><span class="k">author.email:</span><span class="w"> </span>edwards@cs.vt.edu</code></pre></figure>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="c1"># Multiple authors, specifying email only:</span><span class="w">
 </span><span class="kn">[authors]</span><span class="w">
 </span>*<span class="w"> </span>edwards@cs.vt.edu<span class="w">
 </span>*<span class="w"> </span>ayaan@vt.edu<span class="w">
+</span><span class="kn">[]</span><span class="w">
+
+</span><span class="c1"># Multiple authors with names:</span><span class="w">
+</span><span class="kn">[authors]</span><span class="w">
+</span><span class="k">name:</span><span class="w"> </span>Stephen<span class="w"> </span>Edwards<span class="w">
+</span><span class="k">email:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
+</span><span class="k">name:</span><span class="w"> </span>Ayaan<span class="w"> </span>Kazerouni<span class="w">
+</span><span class="k">email:</span><span class="w"> </span>ayaan@vt.edu<span class="w">
 </span><span class="kn">[]</span></code></pre></figure>
   </section>
 </section>
@@ -746,10 +759,14 @@ a separate PDF resource is preferred.
         </section>
         <section>
           <h4 id="license.owner">license.owner
-            <small class="text-muted">required: string</small></h4>
+            <small class="text-muted">required: string or object</small></h4>
 
           <p><span class="badge badge-secondary">Schema:</span></p>
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"anyOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#person"</span><span class="w"> </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#nonempty_string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">]}</span></code></pre></figure>
           <p>
             The <code>license.owner</code> identifies the person who "owns"
             the exercise being described, in the sense of intellectual
@@ -757,10 +774,16 @@ a separate PDF resource is preferred.
             or whoever. For individual authors, unique e-mail addresses are
             preferred as a method of identification, although any string that
             unambiguously identifies the copyright holder/licenser for this
-            work can be used here.
+            work can be used here. A separate "email" sub-key and optional
+            "name" sub-key can be provided, as in the <code>author</code> tag.
           </p>
           <p><span class="badge badge-primary">PEML example:</span></p>
-<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">license.owner:</span><span class="w"> </span>edwards@cs.vt.edu</code></pre></figure>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="c1"># simple form</span><span class="w">
+</span><span class="k">license.owner:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
+
+</span><span class="c1"># or provide email and name </span><span class="w">
+</span><span class="k">license.owner.email:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
+</span><span class="k">license.owner.name:</span><span class="w"> </span>Stephen<span class="w"> </span>Edwards</code></pre></figure>
         </section>
         <section>
           <h4 id="license.book">license.book

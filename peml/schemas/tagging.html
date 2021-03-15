@@ -268,7 +268,7 @@
 </svg>
 <a title="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.
 " href="/peml/">PEML</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
-        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
+        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/tutorial.html">Tutorial</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
       </nav></div>
   </header>
 </div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>Tagging Exercises</h1></header><span class="split-space">&nbsp;</span>
@@ -391,15 +391,17 @@
       <small class="text-muted">optional: string or array or object</small></h3>
 
     <p><span class="badge badge-secondary">Schema:</span></p>
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"topics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"oneOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w">
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"prerequisites"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"oneOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag_list"</span><span class="w"> </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"minItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="s2">"object"</span><span class="w"> </span><span class="p">}</span><span class="w">
-  </span><span class="p">]}</span></code></pre></figure>
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"exposure"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag_list"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"familiarity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag_list"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"mastery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag_list"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]}</span></code></pre></figure>
 
     <p>
       The <code>tag.prerequisites</code> tag list specifies the topic(s) that

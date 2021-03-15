@@ -268,7 +268,7 @@
 </svg>
 <a title="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.
 " href="/peml/">PEML</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
-        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item navigation__item--active"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
+        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/tutorial.html">Tutorial</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item navigation__item--active"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
       </nav></div>
   </header>
 </div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>PEML Examples</h1></header><span class="split-space">&nbsp;</span>
@@ -291,7 +291,7 @@
 <div class="article__content" itemprop="articleBody">
 
 
-<h2>palindrome.peml</h2>
+<h2>04-palindrome.peml</h2>
 
 <figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">exercise_id:</span><span class="w"> </span>edu.vt.cs.cs1114.palindromes<span class="w">
 
@@ -299,6 +299,10 @@
 </span><span class="c1"># Comments must be on lines by themselves</span><span class="w">
 
 </span><span class="k">title:</span><span class="w"> </span>Palindromes<span class="w"> </span>(A<span class="w"> </span>Simple<span class="w"> </span>PEML<span class="w"> </span>Example)<span class="w">
+
+</span><span class="k">license.id:</span><span class="w"> </span>cc-sa-4.0<span class="w">
+</span><span class="k">license.owner.email:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
+</span><span class="k">license.owner.name:</span><span class="w"> </span>Stephen<span class="w"> </span>Edwards<span class="w">
 
 </span><span class="k">topics:</span><span class="w"> </span>Strings,<span class="w"> </span>loops,<span class="w"> </span>conditions<span class="w">
 </span><span class="k">prerequisites:</span><span class="w"> </span>variables,<span class="w"> </span>assignment,<span class="w"> </span>boolean<span class="w"> </span>operators<span class="w">
@@ -330,6 +334,8 @@ Or:
 </span><span class="k">version:</span><span class="w"> </span>&gt;=<span class="w"> </span>1.5<span class="w">
 </span><span class="kn">[]</span><span class="w">
 
+</span><span class="c1"># Test data/files/classes are probably located in separate files, but this</span><span class="w">
+</span><span class="c1"># is a simple example of how to do something directly inline</span><span class="w">
 </span><span class="kn">[suites]</span><span class="w">
 </span><span class="kn">[.cases]</span><span class="w">
 
@@ -349,7 +355,287 @@ Or:
 </span><span class="k">stdout:</span><span class="w"> </span><span class="no">url(http://my.school.edu/some/local/generator/output)</span><span class="w">
 
 </span><span class="kn">[]</span><span class="w">
-</span><span class="kn">[]</span></code></pre></figure>
+</span><span class="kn">[]</span><span class="w">
+</span><span class="c1"># The [] ends/closes a list of items, but they can be omitted at the</span><span class="w">
+</span><span class="c1"># end of the file, since EOF auto-closes any open lists. The first []</span><span class="w">
+</span><span class="c1"># closes the list of cases in one suite, while the second [] closes</span><span class="w">
+</span><span class="c1"># the list of suites, which here includes only one suite.</span></code></pre></figure>
+
+
+<h2>01-minimal.peml</h2>
+
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">exercise_id:</span><span class="w"> </span>https://cssplice.github.io/peml/examples/01-minimal.peml<span class="w">
+
+</span><span class="c1"># This is a minimalist example of the barest properties needed for</span><span class="w">
+</span><span class="c1"># an exercise description. It includes a license instead of author</span><span class="w">
+</span><span class="c1"># (you can provide both, if desired)</span><span class="w">
+
+</span><span class="c1"># title is required</span><span class="w">
+</span><span class="k">title:</span><span class="w"> </span>A<span class="w"> </span>Minimal<span class="w"> </span>PEML<span class="w"> </span>Description<span class="w">
+
+</span><span class="c1"># Listing the license is very strongly encouraged, but not mandatory</span><span class="w">
+</span><span class="c1"># See: https://cssplice.github.io/peml/schemas/exercise.html#license</span><span class="w">
+</span><span class="c1"># For id's, see keywords at:</span><span class="w">
+</span><span class="c1"># https://help.github.com/en/articles/licensing-a-repository</span><span class="w">
+</span><span class="k">license.id:</span><span class="w"> </span>cc-sa-4.0<span class="w">
+</span><span class="k">license.owner.email:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
+</span><span class="k">license.owner.name:</span><span class="w"> </span>Stephen<span class="w"> </span>Edwards<span class="w">
+
+</span><span class="c1"># Must include at least one of: instructions or systems or suites</span><span class="w">
+</span><span class="k">instructions:</span><span class="sh">----------
+Write instructions for your exercise here.
+----------</span></code></pre></figure>
+
+
+<h2>02-template.peml</h2>
+
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">exercise_id:</span><span class="w"> </span>https://cssplice.github.io/peml/examples/02-template.peml<span class="w">
+
+</span><span class="c1"># A basic template to fill in a new exercise description, including</span><span class="w">
+</span><span class="c1"># common fields you can use</span><span class="w">
+
+</span><span class="k">title:</span><span class="w"> </span><span class="kc">&lt;Insert your title here&gt;</span><span class="w">
+
+</span><span class="k">license.id:</span><span class="w"> </span>cc-sa-4.0<span class="w"> </span><span class="kc">&lt;pick your license&gt;</span><span class="w">
+</span><span class="k">license.owner.email:</span><span class="w"> 
+</span><span class="k">license.owner.name:</span><span class="w"> 
+
+</span><span class="c1"># tags describing this exercise. All are optional. Generally, a</span><span class="w">
+</span><span class="c1"># semi-colon-separated list of terms can be used for any tags. When</span><span class="w">
+</span><span class="c1"># in doubt, consider using terms from the ACM Computing Curricula</span><span class="w">
+</span><span class="c1"># recommendations at:</span><span class="w">
+</span><span class="c1"># https://www.acm.org/education/curricula-recommendations</span><span class="w">
+</span><span class="c1"># For example, refer to the Computer Science Curricula 2013</span><span class="w">
+</span><span class="c1"># (specifically, Appendix A: The Body of Knowledge):</span><span class="w">
+</span><span class="c1"># https://www.acm.org/binaries/content/assets/education/cs2013_web_final.pdf</span><span class="w">
+
+</span><span class="c1"># just remove the ones you do not want to use</span><span class="w">
+
+</span><span class="k">tags.topics:</span><span class="w"> </span><span class="kc">&lt;topic(s) this exercise focuses on practicing&gt;</span><span class="w">
+</span><span class="k">tags.prerequisites:</span><span class="w"> </span><span class="kc">&lt;should already know these, can specify: exposure, familiarity, mastery&gt;</span><span class="w">
+</span><span class="k">tags.style:</span><span class="w"> </span>code-writing<span class="w"> </span><span class="kc">&lt;or other choice&gt;</span><span class="w">
+</span><span class="k">tags.course:</span><span class="w"> </span><span class="kc">&lt;name your course, if relevant&gt;</span><span class="w">
+</span><span class="k">tags.book:</span><span class="w"> </span><span class="kc">&lt;name your textbook, if relevant&gt;</span><span class="w">
+</span><span class="k">tags.personal:</span><span class="w"> </span><span class="kc">&lt;optional personal/custom values that aren't topics&gt;</span><span class="w">
+
+
+</span><span class="k">instructions:</span><span class="sh">----------
+Write your instructions here (using markdown and/or html tags).
+
+Include images or resources using relative links, which are resolved relative
+to the "public_html" key.
+
+markdown-style image: ![my picture](image1.png)
+or html: &lt;img src="image2.png" alt="my second picture"/&gt;
+
+Use fenced code blocks:
+
+```java
+if (something.hasProperty())
+{
+  System.out.println("ok!");
+}
+```
+----------</span><span class="w">
+
+</span><span class="c1"># By convention, relative URLs in the instructions refer to contents</span><span class="w">
+</span><span class="c1"># in the subdirectory named "public_html" alongside</span><span class="w">
+</span><span class="c1"># this PEML description (or packaged in its zip file), or you can</span><span class="w">
+</span><span class="c1"># specify a different URL or file set</span><span class="w">
+</span><span class="c1"># public_html: url(public_html)</span><span class="w">
+
+
+</span><span class="c1"># Can support multiple languages/systems, but only one shown here for</span><span class="w">
+</span><span class="c1"># simplicity</span><span class="w">
+</span><span class="kn">[systems]</span><span class="w">
+</span><span class="k">language:</span><span class="w"> </span>Java<span class="w">
+</span><span class="k">version:</span><span class="w"> </span>&gt;=<span class="w"> </span>1.9<span class="w">
+
+</span><span class="c1"># All associated resources are, by convention, found in appropriately</span><span class="w">
+</span><span class="c1"># named subdirectories located alongside this PEML description (or</span><span class="w">
+</span><span class="c1"># packaged in its zip file).</span><span class="w">
+
+</span><span class="c1"># Place any initial source files that students are given as a starting</span><span class="w">
+</span><span class="c1"># point for creating their answer in:</span><span class="w">
+</span><span class="c1"># src/starter/files/...</span><span class="w">
+
+</span><span class="c1"># Place any (optional) test suite files in:</span><span class="w">
+</span><span class="c1"># suites/...</span><span class="w">
+
+</span><span class="c1"># Place any (optional) solution(s) you have in directories like:</span><span class="w">
+</span><span class="c1"># solutions/&lt;name-of-solution&gt;/...</span><span class="w">
+</span><span class="c1">#</span><span class="w">
+</span><span class="c1"># Use the solution name "reference" for a reference solution, if you</span><span class="w">
+</span><span class="c1"># have one.</span><span class="w">
+
+</span><span class="c1"># Place any additional files (set the discussion of environments) in:</span><span class="w">
+</span><span class="c1"># environment/start/files/...</span><span class="w">
+</span><span class="c1"># environment/build/files/...</span><span class="w">
+</span><span class="c1"># environment/run/files/...</span><span class="w">
+</span><span class="c1"># environment/test/files/...</span><span class="w">
+
+</span><span class="c1"># If multiple systems are listed, system-specific resources default to</span><span class="w">
+</span><span class="c1"># the following subdirectories by convention, adding to/replacing any</span><span class="w">
+</span><span class="c1"># from the non-system-specific directories listed above:</span><span class="w">
+</span><span class="c1"># systems/&lt;language-name&gt;/src/files/...</span><span class="w">
+</span><span class="c1"># systems/&lt;language-name&gt;/src/solutions/&lt;name-of-solution&gt;/...</span><span class="w">
+</span><span class="c1"># systems/&lt;language-name&gt;/suites/...</span><span class="w">
+</span><span class="c1"># systems/&lt;language-name&gt;/environment/start/files/...</span><span class="w">
+</span><span class="c1"># etc.</span></code></pre></figure>
+
+
+<h2>03-template-inline.peml</h2>
+
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">exercise_id:</span><span class="w"> </span>https://cssplice.github.io/peml/examples/03-template-inline.peml<span class="w">
+
+</span><span class="c1"># A basic template that shows how to inline some of the contents</span><span class="w">
+
+</span><span class="k">title:</span><span class="w"> </span><span class="kc">&lt;Insert your title here&gt;</span><span class="w">
+
+</span><span class="k">license.id:</span><span class="w"> </span>cc-sa-4.0<span class="w"> </span><span class="kc">&lt;pick your license&gt;</span><span class="w">
+</span><span class="k">license.owner.email:</span><span class="w"> 
+</span><span class="k">license.owner.name:</span><span class="w"> 
+
+</span><span class="c1"># tags describing this exercise. All are optional. Generally, a</span><span class="w">
+</span><span class="c1"># semi-colon-separated list of terms can be used for any tags. When</span><span class="w">
+</span><span class="c1"># in doubt, consider using terms from the ACM Computing Curricula</span><span class="w">
+</span><span class="c1"># recommendations at:</span><span class="w">
+</span><span class="c1"># https://www.acm.org/education/curricula-recommendations</span><span class="w">
+</span><span class="c1"># For example, refer to the Computer Science Curricula 2013</span><span class="w">
+</span><span class="c1"># (specifically, Appendix A: The Body of Knowledge):</span><span class="w">
+</span><span class="c1"># https://www.acm.org/binaries/content/assets/education/cs2013_web_final.pdf</span><span class="w">
+
+</span><span class="c1"># just remove the ones you do not want to use</span><span class="w">
+
+</span><span class="k">tags.topics:</span><span class="w"> </span><span class="kc">&lt;topic(s) this exercise focuses on practicing&gt;</span><span class="w">
+</span><span class="k">tags.prerequisites:</span><span class="w"> </span><span class="kc">&lt;should already know these, can specify: exposure, familiarity, mastery&gt;</span><span class="w">
+</span><span class="k">tags.style:</span><span class="w"> </span>code-writing<span class="w"> </span><span class="kc">&lt;or other choice&gt;</span><span class="w">
+</span><span class="k">tags.course:</span><span class="w"> </span><span class="kc">&lt;name your course, if relevant&gt;</span><span class="w">
+</span><span class="k">tags.book:</span><span class="w"> </span><span class="kc">&lt;name your textbook, if relevant&gt;</span><span class="w">
+</span><span class="k">tags.personal:</span><span class="w"> </span><span class="kc">&lt;optional personal/custom values that aren't topics&gt;</span><span class="w">
+
+
+</span><span class="k">instructions:</span><span class="sh">----------
+Write your instructions here (using markdown and/or html tags).
+
+Include images or resources using relative links, which are resolved relative
+to the "public_html" key.
+
+markdown-style image: ![my picture](image1.png)
+or html: &lt;img src="image2.png" alt="my second picture"/&gt;
+
+Use fenced code blocks:
+
+```java
+if (something.hasProperty())
+{
+  System.out.println("ok!");
+}
+```
+----------</span><span class="w">
+
+</span><span class="c1"># Specify an explicit location, instead of using the default</span><span class="w">
+</span><span class="k">public_html:</span><span class="w"> </span><span class="no">url(https://cssplice.github.io/peml/examples/images)</span><span class="w">
+
+
+</span><span class="c1"># Can support multiple languages/systems, but only one shown here for</span><span class="w">
+</span><span class="c1"># simplicity</span><span class="w">
+</span><span class="kn">[systems]</span><span class="w">
+</span><span class="k">language:</span><span class="w"> </span>Java<span class="w">
+</span><span class="k">version:</span><span class="w"> </span>&gt;=<span class="w"> </span>1.9<span class="w">
+
+</span><span class="c1"># Initial files provided to student to create their solution</span><span class="w">
+</span><span class="c1"># This value is being explicitly specified; otherwise, it would come from:</span><span class="w">
+</span><span class="c1"># systems/Java/src/files/...</span><span class="w">
+</span><span class="kn">[.src.files]</span><span class="w">
+
+</span><span class="c1"># Example of file included inline:</span><span class="w">
+</span><span class="k">name:</span><span class="w"> </span>Answer.java<span class="w">
+</span><span class="k">content:</span><span class="sh">----------
+public class Answer
+{
+    // Insert your answer here
+}
+----------</span><span class="w">
+
+</span><span class="c1"># Example of file included inline, URL relative to PEML description:</span><span class="w">
+</span><span class="k">name:</span><span class="w"> </span>AnswerTest.java<span class="w">
+</span><span class="k">content:</span><span class="w"> </span><span class="no">url(src/files/AnswerTest.java)</span><span class="w">
+
+</span><span class="kn">[]</span><span class="w">
+</span><span class="c1"># Empty square brackets above marks end of list of [.src.files]</span><span class="w">
+
+
+</span><span class="c1"># Solution(s) provided by author</span><span class="w">
+</span><span class="kn">[.src.solutions]</span><span class="w">
+</span><span class="k">name:</span><span class="w"> </span>reference<span class="w"> </span>solution<span class="w">
+</span><span class="k">description:</span><span class="w"> </span>an<span class="w"> </span>optional<span class="w"> </span>description<span class="w">
+</span><span class="k">reference:</span><span class="w"> </span>true<span class="w">
+</span><span class="c1"># "files" is a file set, and can be provided inline if needed</span><span class="w">
+</span><span class="k">files:</span><span class="w"> </span><span class="no">url(src/solutions/reference)</span><span class="w">
+</span><span class="kn">[]</span><span class="w">
+</span><span class="c1"># Empty square brackets above marks end of list of [.src.solutions]</span><span class="w">
+
+</span><span class="kn">[.suites]</span><span class="w">
+</span><span class="c1"># First suite includes tabular values specified in PEML directly</span><span class="w">
+</span><span class="k">name:</span><span class="w"> </span>peml_stdio_tests<span class="w">
+</span><span class="k">visibility:</span><span class="w"> </span>public<span class="w">
+</span><span class="k">pattern.description:</span><span class="w"> 
+</span><span class="k">template:</span><span class="w">
+  </span>//<span class="w"> </span>Here,<span class="w"> </span>the<span class="w"> </span>code<span class="w"> </span>is<span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>a<span class="w"> </span>specific<span class="w"> </span>tool<span class="w"> </span>that<span class="w"> </span>generates<span class="w"> </span>JUnit-style<span class="w">
+  </span>//<span class="w"> </span>tests<span class="w"> </span>using<span class="w"> </span>this<span class="w"> </span>as<span class="w"> </span>a<span class="w"> </span>template,<span class="w"> </span>and<span class="w"> </span>substituting<span class="w"> </span>variables<span class="w"> </span>based<span class="w"> </span>on<span class="w">
+  </span>//<span class="w"> </span>the<span class="w"> </span>"columns"<span class="w"> </span>in<span class="w"> </span>the<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>cases.<span class="w">
+
+  </span>setSystemIn();<span class="w">
+  </span>Answer.main();<span class="w">
+  </span>assertEquals(,<span class="w"> </span>,<span class="w"> </span>systemOut().getHistory());<span class="w">
+</span><span class="kn">[.cases]</span><span class="w">
+</span><span class="k">stdin:</span><span class="w"> </span>racecar<span class="w">
+</span><span class="k">stdout:</span><span class="w"> </span>"racecar"<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>palindrome.<span class="w">
+
+</span><span class="k">stdin:</span><span class="w"> </span>Flintstone<span class="w">
+</span><span class="k">stdout:</span><span class="w"> </span>"Flintstone"<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>a<span class="w"> </span>palindrome.<span class="w">
+</span><span class="kn">[]</span><span class="w">
+
+</span><span class="k">name:</span><span class="w"> </span>csv_stdio_tests<span class="w">
+</span><span class="k">type:</span><span class="w"> </span>text/x-unquoted-csv<span class="w">
+</span><span class="c1"># patterns are user-defined strings built by variable interpolation from the</span><span class="w">
+</span><span class="c1"># "columns"/fields in a test case.</span><span class="w">
+</span><span class="k">pattern.description:</span><span class="w"> </span>sumNumbers()<span class="w"> </span>-&gt;<span class="w"> 
+</span><span class="k">pattern.actual:</span><span class="w"> </span>subject.sumNumbers()<span class="w">
+</span><span class="c1"># Some tools may use a template, populated by variable substitution using</span><span class="w">
+</span><span class="c1"># the columns/fields/patterns for one test cases, to produce an executable test.</span><span class="w">
+</span><span class="c1"># whether and how this is supported is tool-dependent.</span><span class="w">
+</span><span class="k">template:</span><span class="w">
+    </span>assertEquals(,<span class="w"> </span>);<span class="w">
+</span><span class="k">content:</span><span class="sh">----------
+str,expected,description
+"abc123xyz",123,example
+"aa11b33",44,example
+"7 11",18,example
+"Chocolate",0
+"5hoco1a1e",7
+"5$$1;;1!!",7
+"a1234bb11",1245
+"",0
+"a22bbb3",25
+"FS3453g36fs25",3514,hidden
+"dfg64g21ge743",828,hidden
+"2sdf4523sdfsd7",4532,hidden
+"sdffherbwm",0,hidden
+----------</span><span class="w">
+</span><span class="kn">[]</span><span class="w">
+</span><span class="kn">[]</span><span class="w">
+
+</span><span class="c1"># environments can be specified through containers</span><span class="w">
+</span><span class="k">environment.build.image:</span><span class="w"> </span>cs1.vt.edu/java-1_9:1.1.0<span class="w">
+</span><span class="k">environment.build.registry:</span><span class="w"> </span>https://hub.docker.com/<span class="w">
+
+</span><span class="kn">[.environment.test.files]</span><span class="w">
+</span><span class="k">name:</span><span class="w"> </span>some-file-available-during-testing.txt<span class="w">
+</span><span class="k">content:</span><span class="sh">----------
+some data ...
+----------</span></code></pre></figure>
 
 
 
