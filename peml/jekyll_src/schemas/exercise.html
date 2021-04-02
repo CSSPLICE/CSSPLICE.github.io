@@ -20,7 +20,7 @@ title: PEML Exercise Data Model
   </p>
   <p>
     The main attributes of a PEML exercise description are broken down into
-    three groups: 
+    three groups:
   </p>
 
   <p><b>Required keys</b></p>
@@ -114,7 +114,7 @@ title: PEML Exercise Data Model
       programming package names or URLs. For example, the following ID includes
       a university and course identifier around an exercise name that is
       presumed to be unique within that context. By combining the context
-      and the name, a globally unique identifier can be formed: 
+      and the name, a globally unique identifier can be formed:
     </p>
     <p><span class="badge badge-primary">PEML example:</span></p>
 {% highlight peml %}
@@ -442,7 +442,7 @@ version.timestamp: 2018-08-25T15:23:22.635-05:00
 
         <section>
           <h4 id="version.repository">version.repository
-            <small class="text-muted">optional: object</small></h4>
+            <small class="text-muted">optional: object or string</small></h4>
 
           <p>
             The <code>version.repository</code> is is a string or object
@@ -463,7 +463,7 @@ version.timestamp: 2018-08-25T15:23:22.635-05:00
           </p>
           <p><span class="badge badge-primary">PEML example:</span></p>
 {% highlight peml %}
-version.repository: url(https://github.com/CSSPLICE/peml.git)
+version.repository.url: https://github.com/CSSPLICE/peml.git
 {% endhighlight %}
         </section>
 
@@ -489,7 +489,7 @@ version.repository: url(https://github.com/CSSPLICE/peml.git)
       and the <code>license.owner</code> are <strong>required</strong>.
     </p>
 
-    
+
     <div class="container-fluid"><div class="row">
       <div class="bracket col-1"></div>
       <div class="col-11">
@@ -543,7 +543,7 @@ license.id: cc-sa-4.0
 # simple form
 license.owner: edwards@cs.vt.edu
 
-# or provide email and name 
+# or provide email and name
 license.owner.email: edwards@cs.vt.edu
 license.owner.name: Stephen Edwards
 {% endhighlight %}

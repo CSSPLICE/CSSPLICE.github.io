@@ -307,7 +307,7 @@
   </p>
   <p>
     The main attributes of a PEML exercise description are broken down into
-    three groups: 
+    three groups:
   </p>
 
   <p><b>Required keys</b></p>
@@ -399,7 +399,7 @@
       programming package names or URLs. For example, the following ID includes
       a university and course identifier around an exercise name that is
       presumed to be unique within that context. By combining the context
-      and the name, a globally unique identifier can be formed: 
+      and the name, a globally unique identifier can be formed:
     </p>
     <p><span class="badge badge-primary">PEML example:</span></p>
 <figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">exercise_id:</span><span class="w"> </span>edu.vt.cs.cs1114.palindromes</code></pre></figure>
@@ -689,7 +689,7 @@ a separate PDF resource is preferred.
 
         <section>
           <h4 id="version.repository">version.repository
-            <small class="text-muted">optional: object</small></h4>
+            <small class="text-muted">optional: object or string</small></h4>
 
           <p>
             The <code>version.repository</code> is is a string or object
@@ -709,7 +709,7 @@ a separate PDF resource is preferred.
             definition</a>.
           </p>
           <p><span class="badge badge-primary">PEML example:</span></p>
-<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">version.repository:</span><span class="w"> </span><span class="no">url(https://github.com/CSSPLICE/peml.git)</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">version.repository.url:</span><span class="w"> </span>https://github.com/CSSPLICE/peml.git</code></pre></figure>
         </section>
 
       </div>
@@ -734,7 +734,7 @@ a separate PDF resource is preferred.
       and the <code>license.owner</code> are <strong>required</strong>.
     </p>
 
-    
+
     <div class="container-fluid"><div class="row">
       <div class="bracket col-1"></div>
       <div class="col-11">
@@ -781,7 +781,7 @@ a separate PDF resource is preferred.
 <figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="c1"># simple form</span><span class="w">
 </span><span class="k">license.owner:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
 
-</span><span class="c1"># or provide email and name </span><span class="w">
+</span><span class="c1"># or provide email and name</span><span class="w">
 </span><span class="k">license.owner.email:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
 </span><span class="k">license.owner.name:</span><span class="w"> </span>Stephen<span class="w"> </span>Edwards</code></pre></figure>
         </section>
