@@ -9,6 +9,8 @@ header:
     url: /examples/
   - title: PEMLtest
     url: /PEMLtest/
+  - title: Rest API
+    url: /api/
   - title: Software
     url: https://github.com/CSSPLICE/peml/
   - title: GitHub
