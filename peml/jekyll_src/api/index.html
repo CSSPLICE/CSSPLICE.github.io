@@ -25,7 +25,7 @@ excerpt: Examples of how to access the peml parser API.
     </p>
     <pre>
         <code>
-            String TARGET = "http://localhost:3001/api/parse";
+            String TARGET = "https://skynet.cs.vt.edu/peml-live/api/parse";
             String requestBody = objectMapper.writeValueAsString(values);
 
             URI uri = new URI(TARGET);
@@ -70,7 +70,7 @@ excerpt: Examples of how to access the peml parser API.
             import requests
             peml = "your peml description goes here"
             query = {"peml": peml, "output_format": "json"}
-            response = requests.get("http://localhost:3001/api/parse", params = query)
+            response = requests.get("https://skynet.cs.vt.edu/peml-live/api/parse", params = query)
             print(response.json())
         </code>
     </pre>
@@ -82,17 +82,14 @@ excerpt: Examples of how to access the peml parser API.
     </p>
     <pre>
         <code>
-            const parse = async () => {
-                payload = {"peml": "peml/text", "output_format": "json", "render_to_html": "true"}
-                const response = await fetch('http://localhost:3001/api/parse', {
-                  method: 'POST',
-                  body: payload,
-                  headers: {
-                    'Content-Type': 'application/json'
-                  }
-                });
-                const myJson = await response.json(); 
-              }
+              const url = "https://skynet.cs.vt.edu/peml-live/api/parse"
+              const payload = {"peml": "peml/text", "output_format": "json", "render_to_html": "true"}
+
+              $(.btn).click(function(){
+                  $.post(url, data, function(data, status){
+                      console.log(data)
+                  });
+              })
         </code>
     </pre>
 </section>
