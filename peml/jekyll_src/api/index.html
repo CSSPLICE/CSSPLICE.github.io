@@ -1,0 +1,95 @@
+---
+title: Rest API Examples
+excerpt: Examples of how to access the peml parser API.
+---
+
+<section>
+    <h2>PEML parser as a microservice</h2>
+    <p>Our goal when designing the PEML parser was to ensure the parsing capabilities 
+        could be offered to tools build using different languages and frameworks. 
+        While the parser exists as a Ruby gem,providing it as a library for different 
+        programming languages in use would be a mammoth task.</p>
+    
+    <p>It was thuse decided to offer the parsing capabilities through a Rest API.
+        The Rails application that offers this functionality provides it in two flavours:
+        a GET request that lets users send encoded PEML descriptions and a POST request 
+        that lets users send PEML descriptions as files.
+    </p>
+</section>
+
+<section>
+    <h2>Examples of how to access the API with common programming languages</h2>
+    <h3>Java</h3>
+    <p>We can use the HttpRequest and HttpResponse classes offered by the java.net package.
+        ObjectMapper has been used to map a PEML payload to JSON String which is our request body.
+    </p>
+    <pre>
+        <code>
+            String TARGET = "https://skynet.cs.vt.edu/peml-live/api/parse";
+            String requestBody = objectMapper.writeValueAsString(values);
+
+            URI uri = new URI(TARGET);
+            HttpRequest request = HttpRequest.newBuilder(uri)
+                    .header("Content-Type", "application/json")
+                    .timeout(Duration.ofMillis(3000))
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
+
+            HttpResponse<String> response = HttpClient.newHttpClient()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+        </code>
+    </pre>
+
+    <p>The variable "values" being parsed to a JSON string is essentially a map containing
+        arguments for the parser. The request cannot be made without the "peml" argument being
+        set however extra functionality in the form of variable substitution and automatic html
+        rendering is provided too. Following is an example of how you would generate "values" form
+        an XHTML/HTML page
+    </p>
+    <pre>
+        <code>
+            String peml = request.getParameter("peml");
+            String interpolate = request.getParameter("interpolate")!=null?"true":"false";
+            String html = request.getParameter("html")!=null?"true":"false";
+
+            Map<String, String> values = new HashMap&lt;&gt;();
+
+            values.put("peml", peml);
+            values.put("output_format", "json");
+            values.put("interpolate", "true");
+            values.put("render_to_html", "true");
+        </code>
+    </pre>
+
+    <h3>Python</h3>
+    <p>For python, we can simply use the requests library that offers both get and post methods.
+        The returned response can then be extracted as json and operated upon.
+    </p>
+    <pre>
+        <code>
+            import requests
+            peml = "your peml description goes here"
+            query = {"peml": peml, "output_format": "json"}
+            response = requests.get("https://skynet.cs.vt.edu/peml-live/api/parse", params = query)
+            print(response.json())
+        </code>
+    </pre>
+
+    <h3>JavaScript</h3>
+    <p>For JavaScript, much akin to python, we use the Fetch API to get a response. It must be noted however
+        that the Fetch API is not supported by IE11. Following is an example of hot to access the API using
+        JavaScript. You will probably need to embed the script in a page that collects user input. 
+    </p>
+    <pre>
+        <code>
+              const url = "https://skynet.cs.vt.edu/peml-live/api/parse"
+              const payload = {"peml": "peml/text", "output_format": "json", "render_to_html": "true"}
+
+              $(.btn).click(function(){
+                  $.post(url, data, function(data, status){
+                      console.log(data)
+                  });
+              })
+        </code>
+    </pre>
+</section>
