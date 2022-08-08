@@ -268,7 +268,7 @@
 </svg>
 <a title="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.
 " href="/peml/">PEML</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
-        <ul><li class="navigation__item navigation__item--active"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/tutorial.html">Tutorial</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
+        <ul><li class="navigation__item navigation__item--active"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/tutorial.html">Tutorial</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="/peml/api/">Rest API</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
       </nav></div>
   </header>
 </div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header><h1>PEML</h1></header><span class="split-space">&nbsp;</span>
@@ -415,7 +415,7 @@ Or:
 </span><span class="c1"># end of the file, since EOF auto-closes any open lists. The first []</span><span class="w">
 </span><span class="c1"># closes the list of cases in one suite, while the second [] closes</span><span class="w">
 </span><span class="c1"># the list of suites, which here includes only one suite.</span></code></pre></figure>
-  
+
   <p>PEML uses a plain-text representation for
   describing exercises.  This format is designed to be easy to edit in a
   plain text editor. It is based on <a href="http://archieml.org/">ArchieML</a>,
@@ -470,7 +470,7 @@ Or:
   the meaning of the PEML. Any line beginning with a # character (and any
   leading indentation) is interpreted as a comment line, except in quoted
   values.</p>
-  
+
   <p>
   Inspired by YAML's document start and end markers, PEML uses a specific
   comment line ("#---", a pound sign followed by three dashes) to signal
@@ -482,7 +482,7 @@ Or:
   of input.
   </p>
 
-  <h3 id="quoting">Quoting</h3>    
+  <h3 id="quoting">Quoting</h3>
   <p>
   On occasion, one may end up including text as part of a value that
   might also be recognizable as the start of a key. You can see this where
@@ -660,14 +660,14 @@ since it may reduce readability.
   </p>
   <p>
   For example, the <code>instructions</code> in an exercise might need to
-  refer to external images. The PEML format also provides a 
+  refer to external images. The PEML format also provides a
   <code>public_html</code> key to refer to a set of files that are intended
   to be public web resources referenced in the <code>instructions</code>.
   Relative path names for images and links inside the <code>instructions</code>
   refer to file resources in the <code>public_html</code> file set. While
   all of these files could be explicitly listed, if no <code>public_html</code>
   key is provided in the PEML description, then <strong>by convention</strong>
-  the subdirectory with the same name as this key "<code>public_html/"
+  the subdirectory with the same name as this key "<code>public_html/</code>"
   located alongside/adjacent to this PEML description (for example, packaged
   in the same zip file, or located in the same directory/folder) is
   assumed to contain the files in the <code>public_html</code> file set.
