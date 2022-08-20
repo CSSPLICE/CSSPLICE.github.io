@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3197d8ed-a39b-4d5e-964c-1fcab5ccee08" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/jekyll_src.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jekyll_src.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,12 +82,12 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "ruby.rails.projectView.checked": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ruby.rails.projectView.checked&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="CommandRunConfigurationType" factoryName="Gem Command">
       <module name="jekyll_src" />
@@ -129,6 +128,7 @@
       <workItem from="1618095433264" duration="371000" />
       <workItem from="1618161814309" duration="464000" />
       <workItem from="1659917323398" duration="538000" />
+      <workItem from="1661021549190" duration="211000" />
     </task>
     <servers />
   </component>
