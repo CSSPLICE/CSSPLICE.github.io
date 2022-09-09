@@ -42,7 +42,7 @@ title: PEML
   application? Consider these:</p>
   <ul>
   <li><a href="https://github.com/CSSPLICE/peml/">PEML gem in Ruby</a></li>
-  <li><a href="https://skynet.cs.vt.edu/peml-live/api">REST micro-service for
+  <li><a href="https://discovery.cs.vt.edu/peml-live/api">REST micro-service for
     parsing PEML</a></li>
   </ul>
 </section>
@@ -59,7 +59,7 @@ title: PEML
   that most tools will support either YAML or JSON directly for tooling
   purposes, and that conversions between PEML&nbsp;&lt;=&gt;&nbsp;YAML or
   PEML&nbsp;&lt;=&gt;&nbsp;JSON will be easy (In fact, we already have
-  a <a href="https://skynet.cs.vt.edu/peml-live/api">REST service</a>
+  a <a href="https://discovery.cs.vt.edu/peml-live/api">REST service</a>
   that will do it for you!). So users who strongly
   prefer an alternate notation can probably freely use one. However, we
   strongly believe that a representation optimized for human authoring
@@ -131,7 +131,7 @@ stdout: url(http://my.school.edu/some/local/generator/output)
 # closes the list of cases in one suite, while the second [] closes
 # the list of suites, which here includes only one suite.
 {% endhighlight %}
-  
+
   <p>PEML uses a plain-text representation for
   describing exercises.  This format is designed to be easy to edit in a
   plain text editor. It is based on <a href="http://archieml.org/">ArchieML</a>,
@@ -142,8 +142,8 @@ stdout: url(http://my.school.edu/some/local/generator/output)
   then start here:</p>
 
   <p><a href="tutorial.html">Tutorial: Get Started Writing PEML</a>!</p>
-  <p>Or try <a href="https://skynet.cs.vt.edu/peml-live">PEML Live!</a> and
-  edit PEML examples live in your browser.</p>
+  <p>Or try <a href="https://discovery.cs.vt.edu/peml-live">PEML Live!</a> and
+  edit PEML examples live in your browser. [temporarily down while we upgrade to the latest parser features. Back up by: 9/1.]</p>
 
   <h3 id="kv-pairs">Key/Value Pairs</h3>
   <p>Like YAML, we describe a programming exercise as a series of
@@ -186,7 +186,7 @@ stdout: url(http://my.school.edu/some/local/generator/output)
   the meaning of the PEML. Any line beginning with a # character (and any
   leading indentation) is interpreted as a comment line, except in quoted
   values.</p>
-  
+
   <p>
   Inspired by YAML's document start and end markers, PEML uses a specific
   comment line ("#---", a pound sign followed by three dashes) to signal
@@ -198,7 +198,7 @@ stdout: url(http://my.school.edu/some/local/generator/output)
   of input.
   </p>
 
-  <h3 id="quoting">Quoting</h3>    
+  <h3 id="quoting">Quoting</h3>
   <p>
   On occasion, one may end up including text as part of a value that
   might also be recognizable as the start of a key. You can see this where
@@ -281,7 +281,7 @@ since it may reduce readability.
   other markup formats along with the <code>options.text_format:</code>
   key if community effort can generate the necessary support for adopting
   tools to make use of it (i.e., adding support under the <code>render</code>
-  option of our <a href="https://skynet.cs.vt.edu/peml-live/api">PEML REST
+  option of our <a href="https://discovery.cs.vt.edu/peml-live/api">PEML REST
   micro-service</a>).
   </p>
 
@@ -382,14 +382,14 @@ instructions: url(some/directory/assignment.pdf)
   </p>
   <p>
   For example, the <code>instructions</code> in an exercise might need to
-  refer to external images. The PEML format also provides a 
+  refer to external images. The PEML format also provides a
   <code>public_html</code> key to refer to a set of files that are intended
   to be public web resources referenced in the <code>instructions</code>.
   Relative path names for images and links inside the <code>instructions</code>
   refer to file resources in the <code>public_html</code> file set. While
   all of these files could be explicitly listed, if no <code>public_html</code>
   key is provided in the PEML description, then <strong>by convention</strong>
-  the subdirectory with the same name as this key "<code>public_html/"
+  the subdirectory with the same name as this key "<code>public_html/</code>"
   located alongside/adjacent to this PEML description (for example, packaged
   in the same zip file, or located in the same directory/folder) is
   assumed to contain the files in the <code>public_html</code> file set.
