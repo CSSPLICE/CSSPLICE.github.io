@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Learning Tools Interoperabilty</title>
+    <link rel="stylesheet" href="../cssplice.css" type="text/css" />
+  </head>
+
+  <body>
+    <div id="content">
+        <h3>What It Is</h3>
+        <p>
+          <a href="https://www.imsglobal.org/activity/learning-tools-interoperability">
+          Learning Tools Interoperability</a> (LTI) is a specification
+          developed by <a href="https://www.imsglobal.org/">IMS Global Learning
+            Consortium</a>.
+          The purpose of LTI is to establish a standard way to integrate
+          remotely hosted learning applications with platforms like
+          learning management systems (LMS) and similar educational
+          environments.
+        </p>
+        <p>
+          Learning applications are called <strong>Tools</strong>, and they
+          are delivered by <strong>Tool Providers</strong>.
+          These are things like interactive exercises that a student might
+          do for a grade.
+          <br><br>
+          The LMS (systems
+          like <a href="https://www.canvaslms.com/">Canvas</a>,
+          <a href="https://moodle.org/">Moodle</a>, etc), or platform,
+          is called a <strong>Tool Consumer</strong>.
+          At the moment, Canvas is the LMS that is most advanced in its
+          support for LTI since Instructure is a major participant in the
+          IMS consortium.
+          But other LMS also support LTI, and so you can use the
+          techniques described at this site to integrate tools with many LMS.
+        </p>
+        <h3>Some Useful Examples</h3>
+        <p>
+          The LTI specification enhances the functionality provided by a
+          Tool Consumer and provides instructors with various applications
+          that they can embed into their course.
+          For example:
+        </p>
+        <ul>
+          <li>
+            <a href="https://codeworkout.cs.vt.edu/">Code Workout</a> is
+            a tool developed at Virginia Tech. It lets students answer and
+            get credit for small programming exercises.
+            As a third-party tool, Code Workout is hosted on Virginia Tech's
+            servers. Canvas (or another LTI-compliant LMS acting as a Tool
+            Consumer) integrates Code Workout seamlessly as a Canvas
+            Assignment embedded in a Canvas page. This enables students to
+            work coding exercises from within Canvas in the same way that
+            they might do any Canvas-native assignment, and receive a score
+            in the Canvas gradebook for doing that assignment.
+          </li>
+          <li>
+            The <a href="https://www.eduappcenter.com/apps/36#.WcFgotOGM0o"
+                   target="_blank">Wikipedia LTI application</a>
+            lets instructors search through English Wikipedia articles
+            and link to or embed these articles into course material.
+          </li>
+          <li>
+            The <a href="https://www.eduappcenter.com/apps/12#.WcFgotOGM0p"
+                   target="_blank">Piazza LTI application</a>
+            adds a link to Canvas course navigation for Piazza discussions,
+            and auto-logs the user into the piazza discussion area from
+            the LMS.
+          </li>
+        </ul>
+    
+        <h3 id="Introduction">How It Works (Simple Version)</h3>
+    
+        <p>
+          LTI enables the tool consumer to send a user to the tool
+          provider in a trusted way.
+          The trust assertion allows the user to be automatically signed
+          in to the tool provider and directed to the specific content
+          content being provided by the tool provider.<br>
+          <br>
+          <div class="thumbnail" style="float: right; width: 300px; margin-left: 10px;">
+            <%= image_tag "iframe.png" %>
+          </div>
+          <strong>Launch:</strong> The LMS (consumer) launches the tool
+          (provider) in an iframe, so it feels like a part of the LMS, as
+          shown in the picture.
+        </p>
+        <p>
+          <strong>Security:</strong> LTI Authentication uses the OAuth
+          standard, which is a secure protocol over HTTPS for
+          communication between different systems.
+          The consumer and a provider share a
+          <strong>consumer key</strong> and
+          <strong>shared secret</strong> via an HTTP POST request.
+          They are used to sign any messages passed between the two
+          systems.
+          The signature is done through OAuth, so that the signatures can
+          be verified by either party.
+        </p>
+    </div>
+
+    <div id="footer">
+      <hr />
+      <p class="footertext">
+        <a href="mailto:cssplice@gmail.com">Contact us</a>
+      </p>
+      <p class="footertext">
+        Last updated:
+        <script type="text/javascript">
+          document.write(document.lastModified);
+        </script>
+      </p>
+    </div>
+
+  </body>
+</html>
+ 

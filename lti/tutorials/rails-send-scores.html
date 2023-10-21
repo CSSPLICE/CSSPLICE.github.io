@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rails LTI Tool Provider - Send Scores back to Canvas</title>
+    <link rel="stylesheet" href="../cssplice.css" type="text/css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <p>
+        In our <%= link_to "previous tutorial", lti_tutorials_rails_path %>,
+        we showed how to create a basic LTI Tool Provider such as an
+        eBook or another application that works with a Tool Consumer
+        like Canvas.
+        But one of the major benefits of LTI is that it enables
+        Instructors to add different kinds of assessments (such as an
+        exercise of a unique type) that are not otherwise available in
+        Tool Consumers like Canvas.
+        In this tutorial, we show how to make your assessment
+        application LTI compatible, and send the scores back
+        to a Tool Consumer.
+        <br><br>
+        We have created a basic Ruby on Rails quiz application.
+        By following the steps below, you can take
+        the <a href="https://github.com/CSSPLICE/LTI/tree/master/Quiz">code
+        for the stand-alone quiz application</a>, or your own Rails
+        application, and make it LTI compatible, sending the results of
+        student's assessment back to any Tool Consumer.
+      </p>
+      <p>
+        This tutorial assumes that you have read through the
+        <%= link_to "basic steps", lti_building_lti_tool_path %>
+        for creating an LTI-compliant application, and that you have at
+        least a little familiarity with Ruby on Rails.
+      <p>
+        <strong>Step 1:</strong>
+        Add this <a href="https://github.com/instructure/ims-lti">Ruby
+          Gem</a> to the <i><strong>Gemfile</i></strong> of your Rails
+        application.
+        It helps in performing most LTI tasks,
+        such as validating and authenticating LTI requests.<br>
+        <pre>
+          gem 'ims-lti', '~> 1.1.8'</pre>
+      </p><br>
+      <p>
+        <strong>Step 2:</strong>
+        Before tool consumers can send a request to your tool, they
+        will have to add your app.
+        To do so, they need a key and a secret.
+        Create a new config
+        file <i><strong>config/lti_settings.yml</strong></i>, and add a
+        key and a secret to that file.
+        The lti_settings.yml file should contain the following:
+  
+        <pre>
+          production:
+            quizkey: 'FirstSecret'
+  
+          development:
+            quizkey: 'FirstSecret'</pre><br>
+  
+        Once you share your unique keys and secrets with a tool
+        consumer, it will be able to add your application.
+        Here is an example of the interface that Canvas uses:
+  
+        <br><br>
+        <div class="text-center">
+          <%= image_tag "quiz_keysecret.png", style:'width:40%' %>
+        </div><br><br>
+  
+        If you create a new settings file, you need to create a variable
+        that loads the content from your settings file. Add this line
+        in <i><strong>config/application.rb</i></strong><br><br>
+        <pre>
+          config.lti_settings = Rails.application.config_for(:lti_settings)
+        </pre>
+        This variable will load the key and secret from your settings
+        file.<br><br>
+  
+        You can change the <em>quizkey</em> and <em>FirstSecret</em> in this
+        example to what you like but each key/secret pair should be distinct for
+        each tool consumer.
+        If you knew that 10 different institutes/instructors
+        want to integrate your tool into their courses, you might create
+        10 key/pairs.
+      </p><br>
+  
+      <p>
+        <strong>Step 3:</strong>
+        Along with a key and a secret, the tool consumer will also need a
+        url where it can send a request. For that purpose, create a
+        controller named <i><strong>lti</i></strong> with
+        a <i><strong>launch</i></strong> endpoint (so the url can say
+        '..../lti/launch' for readability). This launch endpoint will
+        receive the post request from the tool consumer, and we will
+        validate and authenticate the LTI requests within this
+        endpoint.
+      </p><br>
+  
+      <p>
+        <strong>Step 4:</strong>
+        We need to keep a check if our application is
+        launched as an LTI application or not.
+        If it is launched as an LTI application, then we will have to
+        make a few changes to the normal behavior of our app.
+        Typically, we might need to hide the header and footer that we
+        display to other users, because the application will load in an
+        iframe.
+        In that context, it should look like a part of a Tool
+        Consumer.
+        Also, we will have to send scores back to the Tool Consumer.
+        This might imply that we don't want to show the results to the
+        user ourselves, such as displaying a results page.
+        For example, our simple Quiz application will
+        look like this if you do not remove the header from an
+        LTI launch:
+        <div class="text-center">
+          <%= image_tag "quiz_no_iframe.png", style:'width:40%' %>
+        </div><br><br>
+  
+        To fix this, add the following line at the beginning of the
+        <em>launch</em> endpoint.
+        <pre>
+          session[:isLTI]=true</pre>
+        To hide the header, add the following
+        in <em>views/layout/application.html.erb</em> after moving
+        header code in the <em>_header</em> partial.
+        <br><br>
+        <pre>
+          render "layouts/header" unless session[:isLTI]</pre>
+        Now, when your application is launched inside a tool provider
+        like Canvas, it will look like this:
+        <div class="text-center">
+          <%= image_tag "quiz_iframe.png", style:'width:40%' %>
+        </div><br><br>
+      </p><br>
+  
+      <p>
+        <strong>Step 5:</strong>
+        When your app is launched from a Tool Consumer (such as Canvas),
+        it will send a post request to your launch endpoint with a
+        bunch of parameters. One of the received parameters in the
+        request will be <i><strong>oauth_consumer_key</i></strong>.
+        This key should be exactly the same as the one we defined
+        in the <i><strong>settings.yml</i></strong> file.
+        The first step in a request validation is to check whether this
+        received key is present in your system.
+        If the key is not present, then throw an error.
+        Add the following code inside the launch endpoint for key
+        validation:
+        <pre>
+          if not Rails.configuration.lti_settings[params[:oauth_consumer_key]]
+            render :launch_error, status: 401
+            return
+          end </pre><br>
+  
+        The code above checks if the key is present in the settings
+        variable you created in step 2. If the key is not present, then
+        redirect the user to <strong>launch_error</strong> page. We will
+        create this page later in this tutorial.
+      </p><br>
+  
+      <p>
+        <strong>Step 6:</strong>
+        If the key is present, then we move to the second step of
+        validation, which is to (1) check whether the request is a valid LTI
+        request, and (2) verify the authenticity of the Tool Consumer. <br>
+        <ol>
+          <li>To check if the request is a valid LTI request, we need to
+            check if The POST request contains
+            <strong>lti_message_type</strong> with a value
+            of <em>basic-lti-launch-request</em>, <strong>lti_version</strong>
+            with a value of <em>LTI-1p0</em> for LTI 1, and
+            a <strong>resource_link_id</strong>. If any of these are
+            missing, then the request is not a valid LTI request.
+          </li>
+          <li>
+            If this is a valid LTI request, then we need to
+            validate its authenticity.
+            An authentic LTI request will have
+            <strong>oauth_signature</strong> along with
+            the <strong> oauth_consumer_key </strong>.
+            We have already validated in Step 4 if the key is present or not.
+            The next step is to generate a signature from this key and its
+            corresponding secret that we have stored, and compare it
+            with <strong>oauth_signature</strong>.
+            If the two signatures match, only then the request is valid.
+          </li>
+        </ol>
+        Fortunately, the IMS-LTI gem will do both of these steps for us.
+        It will validate the LTI request and will also perform OAuth
+        authentication.
+        Add the following code in the launch endpoint.
+        The first part creates a Tool provider object with a key and a
+        secret.
+        The second part validates the request.
+        If the validation or authentication fails, it will
+        redirect the user to <strong>launch_error</strong> page.<br><br>
+  
+        <pre>
+          require 'oauth/request_proxy/action_controller_request'
+          @provider = IMS::LTI::ToolProvider.new(
+            params[:oauth_consumer_key],
+            Rails.configuration.lti_settings[params[:oauth_consumer_key]],
+            params
+          )
+  
+          if not @provider.valid_request?(request)
+            # the request wasn't validated
+            render :launch_error, status: 401
+            return
+          end</pre>
+      </p><br>
+  
+      <p>
+        <strong>Step 7:</strong>
+        At this point, you have a valid and authentic LTI request.
+        Now, our quiz application requires a user to be logged in order
+        to take a quiz.
+        But this application will be launched through Canvas, and a key
+        goal of LTI is to provide a seamless experience to the user.
+        Therefore, we will have to create a user account and log
+        her in automatically.
+        To do so, add the following code.
+        <pre>
+          @@launch_params=params;
+          email = params[:lis_person_contact_email_primary]
+          @user = User.where(email: email).first
+          if @user.blank?
+            @user = User.new(:username => email,
+              :email => email,
+              :password => email,
+              :password_confirmation => email)
+            if !@user.save
+              puts @user.errors.full_messages.first
+            end
+          end
+  
+          #Login the user and create his session.
+          authorized_user = User.authenticate(email,email)
+          session[:user_id] = authorized_user.id
+  
+          #redirect the user to give quiz starting from question id 1
+          redirect_to(:controller => "questions", :action => "show", :id => 1)</pre>
+  
+        In the first line we save request parameters, because we will
+        need those to submit scores back to the Tool Consumer.
+        Then we check if any user with this email already exists in our
+        database.
+        If not, then we create a new user.
+        After that, we login the user and create his session.
+        Finally, we redirect the user to the quiz, starting from
+        question id 1.
+      </p><br>
+  
+      <p>
+        <strong>Step 8:</strong>
+        Our quiz application normally redirects the user to a results
+        page once she finishes all the questions.
+        But when launched via LTI from within a tool consumer, we
+        instead want to submit the score back without launching the
+        page.
+        T do this, modify the code at the end of
+        the <em>submitQuestion</em> endpoint
+        in the <em>Questions</em> controller to the following.
+        <pre>
+          if session[:isLTI]
+            @@result = @@count.to_f/(@@count+@@falseCount)
+            @@count = 0
+            @@falseCount = 0
+            redirect_to(:controller => "lti", :action => "submitscore", :result
+            => @@result)
+          else
+            @@result = @@count
+            @@count = 0
+            @@falseCount = 0
+            redirect_to(:action => "result")
+          end
+        </pre>
+        In this code, we check if the isLTI session variable is set.
+        If so, then submit the score back to tool consumer, otherwise
+        redirect the user to the results page.
+        The score that we pass back must be in range of 0 to 1, which
+        is why we divide total correct answers with total questions.
+      </p><br>
+      <p>
+        <strong>Step 9:</strong>
+        Now create a new end point <strong>submitscore</strong>
+        to submit the score back to tool consumer.
+        Add the following code in the <em>lti</em> controller.
+        <pre>
+          def submitscore
+            @tp = IMS::LTI::ToolProvider.new(
+              @@launch_params[:oauth_consumer_key],
+              Rails.configuration.lti_settings[@@launch_params
+              [:oauth_consumer_key]],
+              @@launch_params)
+            # add extension
+            @tp.extend IMS::LTI::Extensions::OutcomeData::ToolProvider
+  
+            if !@tp.outcome_service?
+              @message = "This tool wasn't lunched as an outcome service"
+              puts "This tool wasn't lunched as an outcome service"
+              render(:launch_error)
+            end
+  
+            res = @tp.post_extended_replace_result!(score: params[:result])
+  
+            if res.success?
+              puts "Score Submitted"
+            else
+              puts "Error during score submission"
+            end
+          end
+        </pre>
+        This code creates a tool provider object using the
+        parameters we received in our request.
+        We extend the tool provider object with the OutcomeData
+        extension provided by the IMS-LTI gem.
+        <br>
+        First we have to check whether the tool was launched as an
+        outcome service or not.
+        This means that if the tool was launched as an assignment,
+        then we have to send the final result of an assessment back to the tool
+        consumer.
+        Therefore, in its request it
+        sends <strong><em>lis_outcome_service_url</em></strong>
+        and <strong><em>lis_result_sourcedid</em></strong>.
+        The fist parameter is a URL used to send the score back, and
+        the second parameter identifies a unique row and column within
+        the Tool Consumer's gradebook.
+        If these two parameters are not present, then we redirect the
+        user to an error page.
+        Otherwise we post the result back to the tool consumer.
+        The IMS-LTI gem enables us to accomplish all
+        of this using 'post_extended_replace_result'.
+      </p><br>
+      <p>
+        <strong>Step 10:</strong>
+        The Tool Consumer also tells us in the request where we should
+        redirect the user once he completes the assessment
+        in <strong><em>launch_presentation_return_url</em></strong>.
+        Therefore, we redirect the user back to
+        <em>launch_presentation_return_url</em> once
+        we submit the scores.
+        Add the following line at the end
+        of the <em>submitscore</em> endpoint
+        <pre>
+          redirect_to @@launch_params[:launch_presentation_return_url]</pre>
+      <p>
+        <strong>Step 11:</strong>
+        If you want an instructor to be able to register your
+        application in Tool Consumer, you will need XML configuration for your
+        app.
+        Therefore, you should create a page that provides the XML
+        configuration for your app.
+        Following is the XML configuration for our quiz app.
+        <pre lang="xml">
+          <xmp>
+            <cartridge_basiclti_link
+              xmlns="http://www.imsglobal.org/xsd/imslticc_v1p0"
+              xmlns:blti = "http://www.imsglobal.org/xsd/imsbasiclti_v1p0"
+              xmlns:lticm ="http://www.imsglobal.org/xsd/imslticm_v1p0"
+              xmlns:lticp ="http://www.imsglobal.org/xsd/imslticp_v1p0"
+              xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation = "http://www.imsglobal.org/xsd/imslticc_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticc_v1p0.xsd
+              http://www.imsglobal.org/xsd/imsbasiclti_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imsbasiclti_v1p0.xsd
+              http://www.imsglobal.org/xsd/imslticm_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticm_v1p0.xsd
+              http://www.imsglobal.org/xsd/imslticp_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticp_v1p0.xsd">
+                <blti:title>Quiz</blti:title>
+                <blti:description> Quiz  LTI Application</blti:description>
+                <blti:icon></blti:icon>
+                <blti:launch_url> http://localhost:3000/lti/launch
+                </blti:launch_url>
+                <blti:extensions platform="canvas.instructure.com">
+                  <lticm:property name="privacy_level">public</lticm:property>
+                </blti:extensions>
+                <cartridge_bundle identifierref="BLTI001_Bundle"/>
+                <cartridge_icon identifierref="BLTI001_Icon"/>
+            </cartridge_basiclti_link>
+          </xmp>
+        </pre>
+      </p>
+      <br>
+      <p>
+        <strong>Step 12:</strong>
+        Now you have all of the things required to register an application
+        in Tool Consumer: key, secret and XML configuration.
+        After entering a URL of your XML file (In Canvas, you can also paste your
+        XML content) along with the key and a secret
+        in Tool Consumer, an instructor will be able see your application as an
+        "External Tool" while creating an assignment or quiz.
+        <br><br>
+        <div class="text-center">
+          <%= image_tag "quiz_ext.png", style:'width:20%' %>
+        </div><br><br>
+  
+      </p><br>
+      <p>
+        <strong>Step 13:</strong>
+        If you launch your application now to take an assessment, you
+        will receive the following error:
+        <br><br>
+        <div class="text-center">
+          <%= image_tag "invalid_authenticity.png", style:'width:40%' %>
+        </div><br><br>
+        To fix this, you need to tell Rails that it does not need to
+        verify the user before a launch request.
+        Add the following line in the <strong>application controller</strong>.
+        <br><br>
+        <pre>
+          skip_before_action :verify_authenticity_token, only: :launch</pre>
+      </p><br>
+      <p>
+        <strong>Step 14:</strong>
+        If you launch your application once again, you should see the
+        following warning if your application is not running on
+        HTTPS.<br><br>
+        <div class="text-center">
+          <%= image_tag "quiz_ssl_warning.png", style:'width:40%' %>
+        </div><br><br>
+        To add SSL certificate on localhost, follow the steps mentioned
+        <%= link_to "here", lti_building_lti_tool_path(anchor: 'ssl') %>.
+      </p><br>
+      <p>
+        <strong>Step 15:</strong>
+        Now, delete your application from Canvas, update your config
+        file with the <strong>https</strong> launch URL, and add your
+        application again.
+      </p><br>
+      <p>
+        <strong>Step 16:</strong>
+        Even now, if you launch your application, you will not see
+        anything, but rather you will see the following error in your
+        browser console:
+        <pre>
+          Refused to display 'https://localhost:3000/questions/1' in a frame
+          because it set 'X-Frame-Options' to 'sameorigin'.
+        </pre>
+        <br>
+  
+        You see this error because Canvas opens the
+        LTI Tool in an iframe, but Rails does not allow the application
+        to be embedded in an iframe by default.
+        Therefore, you need to add the following code in
+        the <strong>questions</strong> controller.<br><br>
+  
+        <pre>
+          after_action :allow_iframe, only: [:show, :result]
+  
+          def allow_iframe
+            response.headers.except! 'X-Frame-Options'
+          end</pre><br>
+  
+        In the first line of the code, we tell rails to only allow "show" and
+        "result"
+        endpoints to open in an iframe.
+      </p><br>
+  
+      <p>
+        <strong>Step 17:</strong>
+        The last step is to update routes and also to create
+        a <strong>launch_error</strong> page, because this is where we
+        are redirecting the user if the request is not validated or
+        authenticated.
+        Create <strong>views/lit/launch_error.html.erb</strong>
+        and add the following code to it:
+        <xmp>
+          <h1>Lunch Error</h1>
+          <p>Make sure you have a correct key and a secret to access the quiz
+            application.</p>
+        </xmp><br>
+  
+        Since Canvas will also open this launch error page in an iframe
+        and we redirect to this page within the launch endpoint, we need
+        to allow the launch endpoint to open in an iframe as well.
+        Add the following code in the <strong>lti</strong> controller.
+        <br><br>
+  
+        <pre>
+          after_action :allow_iframe, only: [:launch]
+  
+          def allow_iframe
+          response.headers.except! 'X-Frame-Options'
+          end
+        </pre><br>
+  
+        Now, if the request received is not validated or authenticated,
+        you will see the the following on Canvas:<br><br>
+        <div class="text-center">
+          <%= image_tag "quiz_launch_error.png", style:'width:40%' %>
+        </div>
+  
+        Your <strong>routes.rb</strong> file at the end should somewhat
+        look like this for our Quiz application:
+        <br><br>
+        <pre>
+          Rails.application.routes.draw do
+            get 'quiz/index'
+            resources :questions
+            post 'questions/submitQuestion'=>'questions#submitQuestion', as:
+            :submit_question
+            root 'sessions#login'
+            get "signup", :to => "users#new"
+            get "login", :to => "sessions#login"
+            get "logout", :to => "sessions#logout"
+            get "home", :to => "sessions#home"
+            get "profile", :to => "sessions#profile"
+            get "setting", :to => "sessions#setting"
+            post "signup", :to => "users#new"
+            post "login", :to => "sessions#login"
+            post "logout", :to => "sessions#logout"
+            post "login_attempt", :to => "sessions#login_attempt"
+            get "login_attempt", :to => "sessions#login_attempt"
+            post "user_create", :to => "users#create"
+            get "all", :to => "questions#index"
+            get "result", :to => "questions#result"
+            get 'lti/launch'
+            post 'lti/launch'
+            get 'lti/submitscore'
+            post 'lti/submitscore'
+          end
+        </pre>
+      </p><br>
+  
+      <p>
+        At this point you should have a working LTI-enabled quiz
+        application.
+        It will work as-is for non LTI launches (on your own domain),
+        and will also work as an LTI tool when launched from within a
+        tool consumer.
+        If it is launched from within a tool consumer,
+        then once a user submits an assessment, his scores can be
+        recorded in the tool consumer's gradebook.
+        On Canvas it will look like this:
+  
+        <div class="text-center">
+          <%= image_tag "quiz_result.png", style:'width:50%' %>
+        </div><br><br>
+        Here you can download the
+        <a href="https://github.com/CSSPLICE/LTI/tree/master/Quiz-LTI">
+          complete source code</a> for a version of the quiz application
+          with LTI support.
+      </p>
+    </div>
+
+  </body>
+</html>
+ 

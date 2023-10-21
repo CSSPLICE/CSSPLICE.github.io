@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Building an LTI Tool Provider</title>
+    <link rel="stylesheet" href="../cssplice.css" type="text/css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <p>
+        If you have a learning application that you want to make LTI
+        compatible, or if you want to create a new LTI Tool Provider,
+        you only need to implement the following steps.
+      </p>
+  
+      <strong>
+        Step 1: Setup a Launch URL
+      </strong><br>
+      <p>
+        Setup a receiving point at some URL that will accept an HTTP
+        POST message from a Tool Consumer.
+        The script at this page should first verify that the received
+        request is an LTI request.
+        The POST request should contain
+        <strong>lti_message_type</strong> with a value of
+        'basic-lti-launch-request', <strong>lti_version</strong> with a
+        value of LTI-1p0 for LTI 1, <strong>oauth_consumer_key</strong>,
+        and a <strong>resource_link_id</strong>, which is a unique id
+        referencing the link, or placement, of the tool within the
+        consumer's pages.
+        If any of these are missing, then the request is not
+        a valid LTI request.
+      </p>
+      <strong>
+        Step 2: Authenticate the request
+      </strong><br>
+      <p>
+        After verification that you got an LTI request, the next step is
+        to verify the authenticity of the Tool Consumer.
+        All LTI launch requests are signed using OAuth 1 in order to
+        ensure that the request is sent by the registered Consumer and
+        the data was not altered en-route to Provider.
+        This can also help in determining if this is a duplicate request.
+        The data received should have the following OAuth parameters
+        <ul>
+          <li>oauth_callback – about:blank</li>
+          <li>oauth_consumer_key – The unique key assigned to each Tool
+            Consumer.</li>
+          <li>oauth_nonce – A unique value identifying the message, which
+            helps to identify the duplicate messages.</li>
+          <li>oauth_signature – On the Provider's end, the key and
+            corresponding secret is used to generate a signature that is
+            matched this signature.</li>
+          <li>oauth_signature_method – The method used to generate the
+            signature.
+            LTI currently supports HMAC-SHA1.</li>
+          <li>oauth_timestamp – The time at which the message was
+            signed. It should be checked that the server time is within
+            a specific time interval of this timestamp (typically 5
+            minutes).</li>
+          <li>oauth_version – The OAuth version used</li>
+        </ul>
+      </p>
+  
+      <strong>
+        Step 3: Launch
+      </strong><br>
+      <p>
+        At this point, you now have a valid LTI request.
+        Now you need to determine what parameters you received in
+        the Consumer's request.
+        The LTI specification has few required parameters, the rest are
+        either recommended or optional.
+        If you are receiving user_id, and if your application requires
+        user login, you will have to start a session for that user.
+        If this is a new user, you will have to create an account first
+        before starting their session.
+        The request may contain many other parameters such as, Name of a
+        user, course id etc.
+        <br><br>
+        The following is a list of parameters that LTI provides.
+        There can be other parameters that Consumer may want
+        to send, and those parameters will have a prefix "custom". <br>
+        <ul>
+          <ol>
+            <li>Required Parameters</li>
+            <ul>
+              <li>lti_message_type</li>
+              <li>lti_version</li>
+              <li>resource_link_id</li>
+            </ul><br>
+            <li>Recommended Parameters</li>
+            <ul>
+              <li>user_id </li>
+              <li>roles </li>
+              <li>lis_person_name_full </li>
+              <li>lis_person_name_given </li>
+              <li>lis_person_name_family </li>
+              <li>lis_person_contact_email_primary </li>
+              <li>resource_link_title </li>
+              <li>context_id </li>
+              <li>context_title </li>
+              <li>context_label </li>
+              <li>launch_presentation_locale </li>
+              <li>launch_presentation_document_target </li>
+              <li>launch_presentation_width </li>
+              <li>launch_presentation_height </li>
+              <li>launch_presentation_return_url </li>
+              <li>tool_consumer_info_product_family_code </li>
+              <li>tool_consumer_info_version </li>
+              <li>tool_consumer_instance_guid     strongly </li>
+              <li>tool_consumer_instance_name </li>
+              <li>tool_consumer_instance_contact_email </li>
+            </ul><br>
+            <li>Optional Parameters</li>
+            <ul>
+              <li>lis_outcome_service_url </li>
+              <li>selection_directive </li>
+              <li>resource_link_description </li>
+              <li>context_type </li>
+              <li>launch_presentation_css_url </li>
+              <li>tool_consumer_instance_description </li>
+              <li>tool_consumer_instance_url </li>
+              <li>user_image</li>
+              <li>custom_* </li>
+            </ul><br>
+          </ol>
+        </ul>
+      </p>
+  
+      <strong>
+        Step 4: Provide Configuration for Tool Consumer
+      </strong><br>
+      <p>
+        Tool Consumer requires a launch URL, a key, and a secret, along
+        with the other settings such as placement of your application in
+        Tool Consumer.
+        The best practice is to provide an XML Configuration file, which
+        can be copied by the Tool Consumer to make your tool available
+        to instructors to use with the LMS.
+        You may use
+        <a href="https://www.edu-apps.org/build_xml.html">this link</a>
+        to generate your XML file.
+      </p>
+      <p>The XML File has the following structure
+        <pre><xmp>
+            <?xml version="1.0" encoding="UTF-8"?>
+            <cartridge_basiclti_link
+            xmlns="http://www.imsglobal.org/xsd/imslticc_v1p0"
+              xmlns:blti = "http://www.imsglobal.org/xsd/imsbasiclti_v1p0"
+              xmlns:lticm ="http://www.imsglobal.org/xsd/imslticm_v1p0"
+              xmlns:lticp ="http://www.imsglobal.org/xsd/imslticp_v1p0"
+              xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation = "http://www.imsglobal.org/xsd/imslticc_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticc_v1p0.xsd
+              http://www.imsglobal.org/xsd/imsbasiclti_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imsbasiclti_v1p0.xsd
+              http://www.imsglobal.org/xsd/imslticm_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticm_v1p0.xsd
+              http://www.imsglobal.org/xsd/imslticp_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticp_v1p0.xsd">
+            <blti:title>[Your App Title]</blti:title>
+            <blti:description>[Your App Description]</blti:description>
+            <blti:icon></blti:icon>
+            <blti:launch_url>[Your Launch URL]</blti:launch_url>
+            <blti:extensions platform="canvas.instructure.com">
+               <lticm:property name="privacy_level">public</lticm:property>
+            </blti:extensions>
+            <cartridge_bundle identifierref="BLTI001_Bundle"/>
+            <cartridge_icon identifierref="BLTI001_Icon"/>
+            </cartridge_basiclti_link>
+        </xmp></pre>
+        <br>
+        If you want your application to appear under course navigation
+        section of Canvas, you will have to add Canvas-specific
+        extensions in your XML file.
+        For example:
+        <br><br>
+        <pre><xmp>
+            <?xml version="1.0" encoding="UTF-8"?>
+            <cartridge_basiclti_link
+            xmlns="http://www.imsglobal.org/xsd/imslticc_v1p0"
+              xmlns:blti = "http://www.imsglobal.org/xsd/imsbasiclti_v1p0"
+              xmlns:lticm ="http://www.imsglobal.org/xsd/imslticm_v1p0"
+              xmlns:lticp ="http://www.imsglobal.org/xsd/imslticp_v1p0"
+              xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation = "http://www.imsglobal.org/xsd/imslticc_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticc_v1p0.xsd
+              http://www.imsglobal.org/xsd/imsbasiclti_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imsbasiclti_v1p0.xsd
+              http://www.imsglobal.org/xsd/imslticm_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticm_v1p0.xsd
+              http://www.imsglobal.org/xsd/imslticp_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticp_v1p0.xsd">
+            <blti:title>[Your App Title]</blti:title>
+            <blti:description>[Your App Description]</blti:description>
+            <blti:icon></blti:icon>
+            <blti:launch_url>[Your Launch URL]</blti:launch_url>
+            <blti:extensions platform="canvas.instructure.com">
+              <lticm:property name="privacy_level">public</lticm:property>
+              <lticm:options name="course_navigation">
+                <lticm:property name="url">[Your Launch URL]</lticm:property>
+                <lticm:property name="text">[Course Navigation
+                Text]</lticm:property>
+                <lticm:property name="visibility">public</lticm:property>
+                <lticm:property name="default">enabled</lticm:property>
+                <lticm:property name="enabled">true</lticm:property>
+              </lticm:options>
+            </blti:extensions>
+            <cartridge_bundle identifierref="BLTI001_Bundle"/>
+            <cartridge_icon identifierref="BLTI001_Icon"/>
+            </cartridge_basiclti_link>
+        </xmp></pre>
+      </p>
+      <br/>
+      <strong>
+        Step 5: Tool Consumer Registration
+      </strong><br>
+      <p>
+        Now that you have a Tool which can be added in the Tool Consumer,
+        you should now provide a link for Tool Consumers to register themselves.
+        While minimum data required for each Tool Consumer is a key
+        and a secret but you might want to add additional data fields
+        while registering a Tool Consumer. For example: an instructor from
+        Virginia Tech wants to add your tool into his course on Canvas, he should
+        be able to register himself on your URL to use your tool. After
+        registration, he should be provided with a key, a secret,
+        a launch URL and an XML config file.
+      </p>
+      <strong>
+        Step 6: Get SSL Certificate
+      </strong><br>
+      <p>
+        A Tool Consumer needs to have a secure connection with Tool Provider
+        inorder to open it in an iFrame. Tool Consumers like Canvas will open
+        your tool in a new window unless your application is running on a secure
+        server.
+      </p>
+      <div class="text-center">
+        <h1 id="ssl">Generating an SSL Certificate</h1>
+      </div><br>
+      <p>
+        If Canvas launches your unsecure application, it will show a
+        warning and will ask the user to open the application in a new
+        tab, which does not present a good user experience.
+        Therefore, you should get a SSL certificate so that your
+        application can run over HTTPS and open in an iframe.
+        Get a PEM certificate if you are developing locally.
+        You'll eventually need one for your production server as well.
+      </p>
+      <p>
+        Here are the steps for generating an SSL certificate locally
+        on a UNIX environment
+      </p>
+      <pre>
+        Step 1: Create your private key with any password.
+        $ openssl genrsa -des3 -out server.orig.key 2048
+  
+        Step 2: Remove the password
+        $ openssl rsa -in server.orig.key -out server.key
+  
+        Step 3: Generate the Certificate Signing Request and enter localhost.ssl
+        in Common Name
+        $ openssl req -new -key server.key -out server.csr
+  
+        Step 4: Generate self signed SSL certificate
+        $ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+  
+        Step 5) Add localhost.ssl to your hosts file
+        $ echo "127.0.0.1 localhost.ssl" | sudo tee -a /private/etc/hosts
+  
+        Step 6) To run a rails application, use following command
+        $ thin start --ssl --ssl-key-file server.key --ssl-cert-file server.crt</pre>
+  
+      <p>
+        When you run your application for the first time, you will have
+        to add it to the trusted system.
+      </p>
+      <br/>
+      At this point, your application should be integrated with the Tool
+      Consumer. 
+    </div>
+
+  </body>
+</html>
+ 

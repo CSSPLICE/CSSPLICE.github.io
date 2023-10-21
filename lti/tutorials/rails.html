@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rails LTI Tool Provider</title>
+    <link rel="stylesheet" href="../cssplice.css" type="text/css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <p>
+        This tutorial is intended to help you understand how to write a
+        Tool Provider that works with a Tool Consumer like Canvas.
+        We have created a basic Ruby on Rails application that
+        implements a basic calculator.
+        By following the steps below, you can
+        take the
+        <a href="https://github.com/CSSPLICE/LTI/tree/master/Calculator">code
+          for the stand-alone calculator</a>, or your own Rails
+        application, and make it
+        available to run from within an LTI-compliant LMS like Canvas.
+      </p>
+      <p>
+        This tutorial assumes that you have read through the
+        <%= link_to "basic steps", lti_building_lti_tool_path %>
+        for creating an LTI-compliant application, and that you have at
+        least a little familiarity with Ruby on Rails.
+      <p>
+        <strong>Step 1:</strong>
+        Add this <a href="https://github.com/instructure/ims-lti">Ruby
+          Gem</a> to the <i><strong>Gemfile</i></strong> of your Rails
+        application.
+        This helps in performing most LTI tasks
+        such as validating and authenticating LTI requests.<br>
+        <pre>
+          gem 'ims-lti', '~> 1.1.8'</pre>
+      </p><br>
+      <p>
+        <strong>Step 2:</strong>
+        Before tool consumers can send a request to your tool, they
+        will have to add your app.
+        To do so, they need a key and a secret.
+        Create a new config
+        file <i><strong>config/lti_settings.yml</strong></i>, and add a
+        key and a secret to that file.
+        The lti_settings.yml file should contain the following:
+  
+        <pre>
+          production:
+            calculatorkey: 'FirstSecret'
+  
+          development:
+            calculatorkey: 'FirstSecret'</pre><br>
+  
+        Once you share these unique keys and secrets with a tool
+        consumer, it will be able to add your application like this:
+  
+        <br><br>
+        <div class="text-center">
+          <%= image_tag "keysecret.png", style:'width:40%' %>
+        </div><br><br>
+  
+        If you create a new settings file, you need to create a variable
+        that loads the content from your settings file. Add this line
+        in <i><strong>config/application.rb</i></strong><br><br>
+        <pre>
+          config.lti_settings = Rails.application.config_for(:lti_settings)
+        </pre>
+        This variable will load the key and secret from your settings
+        file.<br><br>
+  
+        The key/secret pair should be distinct for each tool consumer.
+        If you knew that 10 different institutes/instructors
+        want to integrate your tool into their courses, you might create
+        10 key/pairs.
+        <!-- But generally, you do not have any idea who will use you apps,
+        so you should create a registration page,
+        generate key/secret pairs on-the-fly, and store them to a
+        database rather than a settings file. -->
+      </p><br>
+  
+      <p>
+        <strong>Step 3:</strong>
+        Along with a key and a secret, the tool consumer will also need a
+        url where it can send a request. For that purpose, create a
+        controller named <i><strong>lti</i></strong> with
+        a <i><strong>launch</i></strong> endpoint (so the url can say
+        '..../lti/launch' for readability). This launch endpoint will
+        receive the post request from the tool consumer and we will
+        validate and authenticate the LTI requests within this
+        endpoint.
+      </p><br>
+  
+      <p>
+        <strong>Step 4:</strong>
+        When your app is launched from a Tool Consumer (such as Canvas),
+        it will send a post request to your launch endpoint with a
+        bunch of parameters. One of the received parameters in the
+        request will be <i><strong>oauth_consumer_key</i></strong>. This
+        key should be exactly the same as the one we defined
+        in the <i><strong>settings.yml</i></strong> file.
+        The first step in a request validation is to check whether this
+        received key is present in your system.
+        If the key is not present, then throw an error.
+        Add the following code inside the launch endpoint for key
+        validation:
+        <pre>
+          if not Rails.configuration.lti_settings[params[:oauth_consumer_key]]
+            render :launch_error, status: 401
+            return
+          end </pre><br>
+  
+        The code above checks if the key is present in the settings
+        variable you created in step 2. If the key is not present, then
+        redirect the user to <strong>launch_error</strong> page. We will
+        create this page later in this tutorial.
+      </p><br>
+  
+      <p>
+        <strong>Step 5:</strong>
+        If the key is present, then we move to the second step of
+        validation, which is to (1) check whether the request is a valid LTI
+        request, and (2) verify the authenticity of the Tool Consumer. <br>
+        <ol>
+          <li>To check if the request is a valid LTI request, we need to
+            check if The POST request contains
+            <strong>lti_message_type</strong> with a value
+            of <em>basic-lti-launch-request</em>, <strong>lti_version</strong>
+            with a value of <em>LTI-1p0</em> for LTI 1, and
+            a <strong>resource_link_id</strong>. If any of these are
+            missing, then the request is not a valid LTI request.
+          </li>
+          <li>
+            If this is a valid LTI request, then we need to
+            validate its authenticity.
+            An authentic LTI request will have
+            <strong>oauth_signature</strong> along with
+            the <strong> oauth_consumer_key </strong>.
+            We have already validated in Step 4 if the key is present or not.
+            The next step is to generate a signature from this key and its
+            corresponding secret that we have stored, and compare it
+            with <strong>oauth_signature</strong>.
+            If the two signatures match, only then the request is valid.
+          </li>
+        </ol>
+        Fortunately for us, IMS-LTI gem will do both of these steps for
+        us. It will validate the LTI request and will also perform OAuth
+        authentication.
+        Add the following code in the launch endpoint.
+        The first part creates a Tool provider object with a key and a
+        secret.
+        The second part validates the request.
+        If the validation or authentication fails, it will
+        redirect the user to <strong>launch_error</strong> page.<br><br>
+  
+        <pre>
+          require 'oauth/request_proxy/action_controller_request'
+          @provider = IMS::LTI::ToolProvider.new(
+            params[:oauth_consumer_key],
+            Rails.configuration.lti_settings[params[:oauth_consumer_key]],
+            params
+          )
+  
+          if not @provider.valid_request?(request)
+            # the request wasn't validated
+            render :launch_error, status: 401
+            return
+          end</pre>
+      </p><br>
+  
+      <p>
+        <strong>Step 6:</strong>
+        At this point, you have a valid and authentic LTI request. In
+        our example, we store the user id and name in a session and
+        redirect the user to use calculator application.
+        To do so, add the following code below the code of Step 5.
+        <pre>
+          session[:user_id] = params.require :user_id
+          session[:lis_person_name_full] = params.require :lis_person_name_full
+          @lis_person_name_full = session[:lis_person_name_full]
+          redirect_to calculator_path</pre>
+      </p><br>
+  
+      <p>
+        <strong>Step 7:</strong>
+        Now, if you try to register your application in Canvas, you will
+        need XML configuration for your app. Therefore, you should
+        create a page which provides XML configuration of your
+        app. Following is the XML configuration of this calculator
+        app. In our XML, we tell Canvas under <em>lticm:options</em> tag
+        that we need our Calculator application on Course Navigation.
+        <pre lang="xml">
+          <xmp>
+            <cartridge_basiclti_link
+              xmlns="http://www.imsglobal.org/xsd/imslticc_v1p0"
+              xmlns:blti = "http://www.imsglobal.org/xsd/imsbasiclti_v1p0"
+              xmlns:lticm ="http://www.imsglobal.org/xsd/imslticm_v1p0"
+              xmlns:lticp ="http://www.imsglobal.org/xsd/imslticp_v1p0"
+              xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation = "http://www.imsglobal.org/xsd/imslticc_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticc_v1p0.xsd
+              http://www.imsglobal.org/xsd/imsbasiclti_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imsbasiclti_v1p0.xsd
+              http://www.imsglobal.org/xsd/imslticm_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticm_v1p0.xsd
+              http://www.imsglobal.org/xsd/imslticp_v1p0
+              http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticp_v1p0.xsd">
+                <blti:title>Calculator</blti:title>
+                <blti:description> Calculator  LTI Application</blti:description>
+                <blti:icon></blti:icon>
+                <blti:launch_url> http://localhost:3000/lti/launch
+                </blti:launch_url>
+                <blti:extensions platform="canvas.instructure.com">
+                    <lticm:property name="privacy_level">public</lticm:property>
+                    <lticm:options name="course_navigation">
+                        <lticm:property name="url">
+                        http://localhost:3000/lti/launch </lticm:property>
+                        <lticm:property name="text"> Calculator </lticm:property>
+                        <lticm:property name="visibility">public</lticm:property>
+                        <lticm:property name="default">enabled</lticm:property>
+                        <lticm:property name="enabled">true</lticm:property>
+                    </lticm:options>
+                </blti:extensions>
+                <cartridge_bundle identifierref="BLTI001_Bundle"/>
+                <cartridge_icon identifierref="BLTI001_Icon"/>
+            </cartridge_basiclti_link>
+          </xmp>
+        </pre>
+      </p><br>
+      <p>
+        <strong>Step 8:</strong>
+        Now, you have all the things required to register an application
+        on Canvas: key, secret and XML configuration.
+        After pasting your XML configuration along with key and a secret
+        in Canvas, you should see your application in course navigation. <br><br>
+  
+        <div class="text-center">
+          <%= image_tag "navigation.png", style:'width:40%' %>
+        </div><br><br>
+  
+        You can see here that the Calculator application is added above
+        Settings in the navigation menu.
+      </p><br>
+      <p>
+        <strong>Step 9:</strong>
+        If you launch your application now, you will receive the
+        following error:
+        <br><br>
+        <div class="text-center">
+          <%= image_tag "invalid_authenticity.png", style:'width:40%' %>
+        </div><br><br>
+        To fix this, you need to tell Rails that it does not need to
+        verify user before launch request. Add the following line in
+        the <strong>application controller</strong>.<br><br>
+        <pre>
+          skip_before_action :verify_authenticity_token, only: :launch</pre>
+      </p><br>
+      <p>
+        <strong>Step 10:</strong>
+        If you launch your application once again, you should see the
+        following warning if your application is not running on
+        HTTPS.<br><br>
+        <div class="text-center">
+          <%= image_tag "ssl_warning.png", style:'width:40%' %>
+        </div><br><br>
+        To add SSL certificate on localhost, follow the steps mentioned
+        <%= link_to "here", lti_building_lti_tool_path(anchor: 'ssl') %>.
+      </p><br>
+      <p>
+        <strong>Step 11:</strong>
+        Now, delete your application from Canvas and update your config
+        file with <strong>https</strong> launch URL and add your
+        application again.
+      </p><br>
+      <p>
+        <strong>Step 12:</strong>
+        Even now, if you launch your application from Course Navigation
+        menu, you will not see anything and rather you will see the
+        following error in your browser console:
+        <pre>
+          Refused to display 'https://localhost:3000/calculator' in a frame
+          because it set 'X-Frame-Options' to 'sameorigin'.
+        </pre><br>
+  
+        You see this error because Canvas opens the
+        LTI Tool in an iframe, but Rails does not allow the application
+        to be embedded in an iframe by default.
+        Therefore, you need to add the following code in
+        the <strong>calculator</strong> controller.<br><br>
+  
+        <pre>
+          after_action :allow_iframe, only: [:calculator]
+  
+          def allow_iframe
+            response.headers.except! 'X-Frame-Options'
+          end</pre><br>
+  
+        In the first line of the code, we tell rails to only allow one
+        endpoint named <strong>calculator</strong> to open in an
+        iframe.
+      </p><br>
+  
+      <p>
+        <strong>Step 13:</strong>
+        The last step is to update routes and also to create
+        a <strong>launch_error</strong> page, because this is where we
+        are redirecting the user if the request is not validated or
+        authenticated.
+        Create <strong>views/lit/launch_error.html.erb</strong>
+        and add the following code to it:
+        <xmp>
+          <h1>Lunch Error</h1>
+          <p>Make sure you have a correct key and a secret to access the
+            calculator application.</p>
+        </xmp><br>
+  
+        Since Canvas will also open this launch error page in an iframe and we
+        redirect to this page within the launch endpoint, we need to
+        allow the launch endpoint to open in an iframe as well.
+        Add the following code in <strong>lti</strong> controller.
+        <br><br>
+  
+        <pre>
+          after_action :allow_iframe, only: [:launch]
+  
+          def allow_iframe
+            response.headers.except! 'X-Frame-Options'
+          end
+        </pre><br>
+  
+        Now, if the request received is not validated or authenticated,
+        you will see the the following on Canvas:
+        <div class="text-center">
+          <%= image_tag "launch_error.png", style:'width:40%' %>
+        </div>
+  
+        Your <strong>routes.rb</strong> file should look like this:<br><br>
+        <pre>
+          Rails.application.routes.draw do
+            get 'lti/launch'
+            post 'lti/launch'
+            get 'calculator', to: 'calculator#calculator'
+            root 'calculator#calculator'
+          end
+        </pre>
+      </p><br>
+  
+      <p>
+        Once you are done with all these steps, and Canvas has a valid
+        key and a secret, then you should see your application working
+        in Canvas. <br><br>
+  
+        <div class="text-center">
+          <%= image_tag "calculator_lti.png", style:'width:40%' %>
+        </div><br><br>
+        You can download the
+        <a href="https://github.com/CSSPLICE/LTI/tree/master/Calculator-LTI">
+          complete source code</a> for a version of the calculator with
+          LTI support.
+      </p>
+      <br>
+      <p>
+        Read our <%= link_to "next tutorial", lti_tutorials_rails2_path %> to
+        learn how to send scores back to a tool consumer.
+      </p> 
+    </div>
+
+  </body>
+</html>
+ 
