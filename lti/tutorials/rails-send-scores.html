@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Rails LTI Tool Provider - Send Scores back to Canvas</title>
-    <link rel="stylesheet" href="../cssplice.css" type="text/css" />
+    <link rel="stylesheet" href="../../cssplice.css" type="text/css" />
   </head>
 
   <body>
@@ -11,7 +11,7 @@
         <h1>Rails LTI Tool Provider - Send Scores back to Canvas</h1>
       </div>
       <p>
-        In our <%= link_to "previous tutorial", lti_tutorials_rails_path %>,
+        In our <a href="lti/exercises/rails.html">previous tutorial</a>,
         we showed how to create a basic LTI Tool Provider such as an
         eBook or another application that works with a Tool Consumer
         like Canvas.
@@ -32,7 +32,7 @@
       </p>
       <p>
         This tutorial assumes that you have read through the
-        <%= link_to "basic steps", lti_building_lti_tool_path %>
+        <a href="lti/building-lti-tool.html">basic steps</a>
         for creating an LTI-compliant application, and that you have at
         least a little familiarity with Ruby on Rails.
       <p>
@@ -68,7 +68,7 @@
   
         <br><br>
         <div class="text-center">
-          <%= image_tag "quiz_keysecret.png", style:'width:40%' %>
+          <img src="lti/quiz_keysecret.png", style:'width:40%' >
         </div><br><br>
   
         If you create a new settings file, you need to create a variable
@@ -118,7 +118,7 @@
         look like this if you do not remove the header from an
         LTI launch:
         <div class="text-center">
-          <%= image_tag "quiz_no_iframe.png", style:'width:40%' %>
+          <img src="lti/quiz_no_iframe.png", style:'width:40%' >
         </div><br><br>
   
         To fix this, add the following line at the beginning of the
@@ -134,7 +134,7 @@
         Now, when your application is launched inside a tool provider
         like Canvas, it will look like this:
         <div class="text-center">
-          <%= image_tag "quiz_iframe.png", style:'width:40%' %>
+          <img src="lti/quiz_iframe.png", style:'width:40%' >
         </div><br><br>
       </p><br>
   
@@ -399,7 +399,7 @@
         "External Tool" while creating an assignment or quiz.
         <br><br>
         <div class="text-center">
-          <%= image_tag "quiz_ext.png", style:'width:20%' %>
+          <img src="lti/quiz_ext.png", style:'width:20%' >
         </div><br><br>
   
       </p><br>
@@ -409,7 +409,7 @@
         will receive the following error:
         <br><br>
         <div class="text-center">
-          <%= image_tag "invalid_authenticity.png", style:'width:40%' %>
+          <img src="lti/invalid_authenticity.png", style:'width:40%' >
         </div><br><br>
         To fix this, you need to tell Rails that it does not need to
         verify the user before a launch request.
@@ -424,10 +424,10 @@
         following warning if your application is not running on
         HTTPS.<br><br>
         <div class="text-center">
-          <%= image_tag "quiz_ssl_warning.png", style:'width:40%' %>
+          <img src="lti/quiz_ssl_warning.png", style:'width:40%' >
         </div><br><br>
         To add SSL certificate on localhost, follow the steps mentioned
-        <%= link_to "here", lti_building_lti_tool_path(anchor: 'ssl') %>.
+        <a href="lti/building-lti-tool.html#ssl">here</a>.
       </p><br>
       <p>
         <strong>Step 15:</strong>
@@ -495,7 +495,7 @@
         Now, if the request received is not validated or authenticated,
         you will see the the following on Canvas:<br><br>
         <div class="text-center">
-          <%= image_tag "quiz_launch_error.png", style:'width:40%' %>
+          <img src="lti/quiz_launch_error.png", style:'width:40%' >
         </div>
   
         Your <strong>routes.rb</strong> file at the end should somewhat
@@ -542,7 +542,7 @@
         On Canvas it will look like this:
   
         <div class="text-center">
-          <%= image_tag "quiz_result.png", style:'width:50%' %>
+          <img src="lti/quiz_result.png", style:'width:50%' >
         </div><br><br>
         Here you can download the
         <a href="https://github.com/CSSPLICE/LTI/tree/master/Quiz-LTI">

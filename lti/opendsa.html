@@ -14,16 +14,16 @@
       <p>
         There are two ways to add OpenDSA content to
         Canvas. One is to add a standalone exercise through LMS External
-        Tools option. <%= link_to "Click here",
-        lti_instructions_opendsa_path
-        %> for instructions on how to add OpenDSA standalone exercises to Canvas.
+        Tools option. 
+        <a href="https://opendsa-server.cs.vt.edu/guides/opendsa-canvas">Click here</a><a href="https://opendsa-server.cs.vt.edu/guides/opendsa-canvas">Click here</a>
+        for instructions on how to add OpenDSA standalone exercises to Canvas.
         The second method is to go to the OpenDSA website and create a
         book instance, this automatically creates the OpenDSA textbook as Modules
         and Assignments in Canvas. But this feature is only available for Canvas,
         because OpenDSA uses the Canvas API to provide the links from modules in
-        Canvas to the OpenDSA HTML pages. <%= link_to "Click here",
-        lti_instructions_opendsa_book_instance_path
-        %> for instructions on how to create an OpenDSA book instance. Once the
+        Canvas to the OpenDSA HTML pages. 
+        <a href="https://opendsa-server.cs.vt.edu/guides/opendsa-bookinstance">Click here</a>
+        for instructions on how to create an OpenDSA book instance. Once the
         OpenDSA content is added to the course with either of the methods
         mentioned above, then Canvas uses LTI to launch, show, and grade an
         exercise in the normal way as a tool consumer.
@@ -33,15 +33,16 @@
         being an LTI content provider, allowing it to expose materials to an LMS
         that acts as an LTI consumer, such as Canvas or Moodle. We detail how
         OpenDSA supports a student who sees an individual exercise or
-        visualization from within the LMS. See <%= link_to "here",
-        lti_opendsa_instructor_path %> for details on how OpenDSA supports an
+        visualization from within the LMS. See 
+        <a href="https://opendsa-server.cs.vt.edu/guides/opendsa-embed">here</a>
+        for details on how OpenDSA supports an
         instructor who wants to include individual visualizations or exercises in
         the LMS. To better understand this example, the image below shows what a
         student might see from within an LMS. In the LMS, the student sees an
         exercise or visualization as though these materials were native to that
         LMS.
         <div class="text-center">
-          <%= image_tag "OpenDSA/tree_exercise.png", style:'width:40%' %>
+          <img src="lti/opendsa/tree_exercise.png", style:'width:40%' >
         </div>
       </p>
       <p>
@@ -84,7 +85,8 @@
       which if available means that the OpenDSA book instance was created on
       OpenDSA's website and modules were created in Canvas using the Canvas API.
       In other words, this exercise belongs to an OpenDSA book instance. (This is
-      an <%= link_to "alternative", lti_opendsa_bookinstance_path %> way that
+      an <a href="https://opendsa-server.cs.vt.edu/guides/opendsa-bookinstance">alternative</a> 
+      way that
       OpenDSA materials are presented in Canvas, and is not the subject of this
       tutorial). If the book instance is not present, it means that this is a
       standalone exercise and OpenDSA calls the "launch_ex" endpoint to handle
@@ -99,9 +101,9 @@
       <!-- In this tutorial, we will first cover launch_ex endpoint <strong> that
       handles standalone exercises</strong>. To add standalone graded
       exercises in your course follow the steps mentioned
-      <%= link_to "here", lti_instructions_opendsa_path %>. Furthermore, to read
+      <%= link_to "here", lti_instructions_opendsa_path >. Furthermore, to read
       how OpenDSA handles LTI requests for a book instance exercise, click
-      <%= link_to "here", lti_opendsa_bookinstance_path %>. <br><br>
+      <%= link_to "here", lti_opendsa_bookinstance_path >. <br><br>
   
       <h1 id="stand-alone">LTI in OpenDSA - Stand-alone Exercises</h1> -->
   
@@ -290,7 +292,7 @@
       At this point, the student will view an exercise. Here the
       OpenDSA Binary Tree exercise appears as an assignment in Canvas.
       <div class="text-center">
-        <%= image_tag "OpenDSA/single_exercise.png", style:'width:40%' %>
+        <img src="lti/opendsa/single_exercise.png", style:'width:40%' >
       </div>
     </p>
   
@@ -374,7 +376,7 @@
         -> [Name of Assignment]. Here is how this result is shown in tabular
         form in Canvas.
         <div class="text-center">
-          <%= image_tag "OpenDSA/exercise_progress.png", style:'width:50%' %>
+          <img src="lti/opendsa/exercise_progress.png", style:'width:50%' >
         </div>
       </p>
   
@@ -479,21 +481,21 @@
         clicks on the grade, the "<em>assessment</em>"" endpoint is called and
         the user will see her score as shown in the image below.
         <div class="text-center">
-          <%= image_tag "OpenDSA/single_exercise_result.png", style:'width:50%' %>
+          <img src="lti/opendsa/single_exercise_result.png", style:'width:50%' >
         </div>
         <br><br>
         This result is also recorded in the gradebook of Tool Consumer. Following
         is an example of gradebook of Canvas.<br><br>
         <div class="text-center">
-          <%= image_tag "OpenDSA/single_exercise_grade.png", style:'width:50%' %>
+          <img src="lti/opendsa/single_exercise_grade.png", style:'width:50%' >
         </div>
       </p>
       <br>
   
       This is how LTI is implemented in OpenDSA when a student tries to access a
-      standalone OpenDSA exercise through a learning management system. Click <%=
-      link_to "here", lti_opendsa_bookinstance_path %> to read how OpenDSA
-      implements LTI for an exercise within a book instance.  
+      standalone OpenDSA exercise through a learning management system. Click 
+      <a href="https://opendsa-server.cs.vt.edu/guides/opendsa-bookinstance">here</a> 
+      to read how OpenDSA implements LTI for an exercise within a book instance.  
     </div>
 
   </body>
