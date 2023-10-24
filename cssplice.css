@@ -64,3 +64,8 @@ p.footertext {
 .rightimg {
   float: right;
 }
+
+img {
+  max-width: 50%;
+  margin: auto;
+}
