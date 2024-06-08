@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SPLICE Working Group: Smart Learning Content Protocols</title>
+    <link rel="stylesheet" href="../cssplice.css" type="text/css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <h1>SPLICE Working Group: Smart Learning Content Protocols</h1>
+
+      <p><b>Leaders</b>: Cay Horstmann, Steve Edwards, Cliff Shaffer</p>
+
+      <p><b>Rationale</b>
+        Standard learning system APIs such as LTI are complex and often
+        incorporate server-side components. Too often systems that
+        integrate smart learning content use proprietary APIs that
+        restrict interoperability. This proposal aims to enable learning
+        systems to make use of compliant smart content by lowering the
+        cost of entry through simple minimalistic APIs. The purpose of 
+        this working group is to formulate an API that allows smart 
+        learning content authors to signal user activity, and learning
+        system implemebters to record it. Learning system implementors
+        can also choose to offer a state restoration service to the
+        smart learning content. Specifically, we aim to standardize two
+        parts:
+        <ul>
+          <li>
+            A JavaScript API that the smart content implementor invokes
+            for communicating with learning systems
+          </li>
+          <li>
+            The postMessage protocol that is used when the content is
+            embedded in an iframe
+          </li>
+        </ul>
+        We provide a reference implementation for a client library that
+        turns the JavaScript API into the message protocol. We also provide
+        a reference server implementation that produces an LTI launch,
+        embedding an arbitrary web page as an iframe and bridging the message
+        protocol to LTI. With this server, pages containing smart learning
+        content can be included in standard learning management systems such
+        as Canvas.</p>
+
+      <p><b>Draft proposal working document:</b>
+        <a href="https://docs.google.com/document/d/1X6Vx6Em67t8Vp4Vecnmc-7OblVewJJKDFIJUrvRAvdc/edit?usp=sharing">Google Doc</a></p>
+
+      <p><b>Draft Implementation:</b>
+        <a href="https://horstmann.com/private/splice/splice-iframe.js">Document</a></p>
+
+      <p><b>Get in Contact: </b>
+        <a href="https://groups.google.com/g/splice-smart-learning-content-protocol">Google Group</a></p>
+      
+    </div>
+
+    <div id="footer">
+      <hr />
+      <p class="footertext">
+        <a href="mailto:cssplice@gmail.com">Contact us</a>
+      </p>
+      <p class="footertext">
+        Last updated:
+        <script type="text/javascript">
+          document.write(document.lastModified);
+        </script>
+      </p>
+    </div>
+
+  </body>
+</html>
+      
