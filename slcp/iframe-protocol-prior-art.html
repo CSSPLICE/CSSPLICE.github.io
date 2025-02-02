@@ -1,0 +1,177 @@
+<html>
+  <head>
+    <title>SPLICE Working Group: Smart Learning Content Protocols</title> 
+    <meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
+    <link rel='stylesheet' href='../cssplice.css' type='text/css'/> 
+  </head> 
+  <body>
+    <div id='content'>
+      <h1>SPLICE iframe Protocol: Prior Art</h1>
+
+
+
+<p>The following sections enumerate known JavaScript APIs and postMessage protocols in existing systems.
+</p>
+      <p>TLDR; There are three takeaways:</p>
+      <ol><li>Two JavaScript calls suffice, to send and receive scores and state</li>
+<li>One needs an iframe message for each of these calls, and another to inform the parent about size changes</li>
+<li>To nobody’s surprise, everyone’s implementation has minor naming differences</li>
+</ol>
+      <h2>EPUB for Education</h2>
+<p>A proposed <a href='https://idpf.org/epub/profiles/edu/spec/#h.dxf1o3gw16x0'>EPUB for Education</a> standard contains a JavaScript API for sending score and state to an EPUB reading system, and for retrieving previously sent scores and state:</p>
+<pre>EPUB.Education.reportScores([scores], callback)
+EPUB.Education.getScores([location], callback)</pre>
+<p>Each scores object has the form</p>
+<pre>{ 
+   score: number,
+   location: string,
+   metadata: { /* arbitrary element-specific state */ }
+}
+</pre>
+      <p>When scores are retrieved, the callback function is called with an array of
+</p><pre>{ 
+   score: number,
+   location: string,
+   timestamp: UTCTimeStamp,
+   metadata: { ... }
+}</pre>
+<h2>VitalSource</h2>
+<p>VitalSource provides an EPUB reading system that is used by prominent textbook publishers including Pearson and Wiley. That reading system implements an earlier version of the EPUB for Education API, where the score information also contained:</p>
+<ul><li>A client-side creation timestamp</li>
+<li>A progress percentage</li>
+<li>A success flag to indicate completion</li>
+<li>A response string (in addition to the state metadata)</li>
+</ul>
+      <p>VitalSource participated in the EPUB for Education process and presumably found these items unnecessary as standardization progressed.</p>
+<h2>LTI Client Side postMessages</h2>
+<p>IMS Global has a <a href='https://www.imsglobal.org/spec/lti-cs-pm/v0p1'>proposal</a>, at version 0.1 as of October 17, 2022, for messaging between an iframe containing smart learning content and its parent in the learning platform. </p>
+<p>Request structure:</p>
+<pre>{
+  "subject": "lti.example",
+  "message_id": "12345",
+  …
+}</pre>
+<p>Response structure: </p>
+<pre>{
+  "subject": "lti.example.response",
+  "message_id": "12345",
+  …
+}
+<p></p>Error responses have the format</pre>
+<pre>{
+  "subject": "lti.example.response",
+  "message_id": "12345",
+  "error": {
+    "code": "bad_request",
+    "message": "A specific useful error message"
+  }
+}
+</pre>
+      <p>Defined services include:</p>
+<ul><li>Enumeration of available services (lti.capabilities)</li>
+<li><a href='https://www.imsglobal.org/spec/lti-pm-s/v0p1'>Storage and retrieval of keyed strings</a> (lti.put_data, lti.get_data)</li>
+</ul>
+      <h2>lti_messaging</h2>
+<p>The <a href='https://canvas.instructure.com/doc/api/file.lti_window_post_message.html'>Canvas LMS</a> and <a href='https://github.com/bracken/lti_messaging'>others</a> implement a postMessage protocol that is an extension of the preceding proposal. In addition to the capabilities and put_data/get_data messages, there are messages for window sizing and scrolling, alerts, and managing parts of the ambient Canvas UI.</p>
+<h2>Acos</h2>
+<p>The <a href='https://github.com/acos-server/acos-server'>Acos server</a> distributes smart learning content to learning management systems using different protocols. </p>
+<p>Content can <a href='https://github.com/acos-server/acos-server/blob/master/doc/development.md#events'>send events</a> by calling </p>
+<pre>ACOS.sendEvent(eventName, payload, callback)</pre>
+<p>Two events are defined with names grade and log. The grade event sends an object</p>
+<pre>{
+  points: …,
+  max_points: …
+}
+</pre>
+      <p>The log event can send any JSON object.</p>
+<p>Events are sent with HTTP POST, not postMessage.</p>
+<p>The Acos server does not support saving and restoring state.</p>
+<h2>TODO: edX XBlock</h2>
+<p><a href='https://edx.readthedocs.io/projects/xblock-tutorial/en/latest/overview/introduction.html'>https://edx.readthedocs.io/projects/xblock-tutorial/en/latest/overview/introduction.html</a></p>
+<p><a href='https://edx.readthedocs.io/projects/xblock-tutorial/en/latest/concepts/events.html'>https://edx.readthedocs.io/projects/xblock-tutorial/en/latest/concepts/events.html</a></p>
+<pre>self.runtime.publish(self, "grade",
+                    { value: submission_result
+                      max_value: 1.0 })
+</pre>
+<h2>JSAV</h2>
+<p>The <a href='https://opendsa.cs.vt.edu/'>OpenDSA textbooks</a> contain smart learning content in iframes, such as <a href='http://jsav.io/'>JSAV</a> instances. JSAV is a library for authoring interactive exercises involving data structures such as graphs, trees, and linked lists. 
+JSAV has a <a href='http://jsav.io/otherapis/logging/'><code>logEvent</code></a> method that can be configured to send messages to the parent frame. Here is a typical message:</p>
+<pre>{ 
+   type: "jsav-exercise-step-fixed", 
+   tstamp: "2023-03-20T17:53:37.325Z", 
+   av: "DijkstraPE",
+   currentStep: 2,
+   desc: { score: 0, complete: 0.17 },
+   ​​score: { total: 6, correct: 0, undo: 0, fix: 1, student: 0 },
+   seed: "580379635345",
+   totalTime: 576179,
+   tstamp: "2023-03-20T17:53:37.325Z",
+   uiid: 1679334241146
+}</pre>
+<h2>Codio</h2>
+<p>Codio is a system for delivering interactive computing courses. It has an internal API for smart learning content with these calls:</p>
+      <pre>codio.assessments.send(iid, state, result)
+codio.assessments.get(iid, callback)</pre>
+<p>Here, <code>state</code> is an arbitrary object, and <code>result</code> a number between 0 and 100. The callback is invoked with an error or <code>{ answer: state }</code>.</p>
+<h2>zyBooks</h2>
+<p>Zybooks has an IframeWithApi tool that includes an iframe into a book. The iframe is expected to use the <a href='https://github.com/Aaronius/penpal'>PenPal</a> library and make these three calls:</p>
+<pre>parent.submit(score, state)
+state = await parent.getState()
+parent.resize(docHeight, docWidth)
+</pre>
+      <h2>CodeCheck Assignments</h2>
+<p>The <a href='http://horstmann.com/codecheck/assignments.html'>CodeCheck Assignments</a> system used to have a proprietary JavaScript API and postMessage API for aggregating content into LTI assignments. It now uses the SPLICE content protocol.</p>
+<p>The JavaScript API:</p>
+<pre>horstmann_config.score_change_listener(element, state, score)
+horstmann_config.retrieve_state = function(element, callback)</pre>
+<ul><li><code>element</code> is the root DOM element of the activity, which must have an id</li>
+<li><code>state</code> is an arbitrary object</li>
+<li><code>score</code> is a number between 0.0 and 1.0</li></ul>
+<p>Upon successful retrieval, <code>callback(element, state)</code> is invoked.</p>
+<p>The postMessage format had three query types:</p>
+<pre>{ query: 'docHeight', param: { docHeight: ... }}
+{ query: 'send', param: { id: ..., state: ..., score: ... }} 
+{ query: 'retrieve', param: { id: ... }, nonce }</pre>
+<p>The first two queries have no response. The <code>retrieve</code> query returns <code>{ request: /* the entire request */, param: state }</code></p>
+<h2>PAWS Cumulate-Adapt2 Protocol</h2>
+<p>CUMULATE (Centralized User Modeling Architecture for TEaching) collects evidence (events) about student learning from multiple applications. CUMULATE supports a protocol that allows external applications to send learner interaction events for student modeling purposes. In short, to report student activity, the external application should indicate what learning object the student (user) is working on, who the student is, and what the outcome of this interaction is (success/failure). 
+</p>
+      <p>External applications send the interaction logs using HTTP GET requests to the CUMULATE’s report servlet using the following URL format:</p>
+<pre>http://&lt;server&gt;?app=&lt;application&gt;&amp;act=&lt;learning_object&gt;&amp;sub=&lt;learning_object_step&gt;
+&amp;usr=&lt;learner&gt;&amp;grp=&lt;group&gt;&amp;sid=&lt;session_id&gt;&amp;res=&lt;result&gt;&amp;svc=&lt;service_parameters&gt;</pre>
+
+      <ul><li>app – application id denoting the application that the student is working with (required)</li>
+<li>act – learning object, the student is working with (required)</li>
+<li>sub – the step of the learning object (mandatory/optional depending on application)</li>
+<li>usr – student id whose activity is reported (mandatory)</li>
+<li>grp – group or class or section that student belongs to (mandatory)</li>
+<li>sid – session id, a token of up to 5 characters (mandatory)</li>
+<li>res – result of the interaction, 0 if unsuccessful, 1 if successful, or any value in between in case of partial success, -1 is reserved for "no credit" activities such as viewing a worked example (mandatory)</li>
+<li>svc – an arbitrary string the application might want to store for later (e.g. capturing context), not parsed by user modeling server (optional)</li>
+</ul>
+      <p>Example request URL:</p>
+<pre>http://adapt2.sis.pitt.edu/cbum/um?app=3&amp;act=helloworld.c&amp;sub=12&amp;usr=myudelson&amp;grp=200721&amp;sid=FD34A&amp;res=1&amp;svc=adaptive_link</pre>
+<p>For more details, please visit these pages: <a href='http://adapt2.sis.pitt.edu/wiki/CUMULATE'>Cumulate</a> and <a href='http://adapt2.sis.pitt.edu/wiki/CUMULATE_protocol#Protocol_for_reporting_user_activity'>Cumulate Protocol</a>
+Related publications:</p>
+<ol><li>Zadorozhny, V., Yudelson, M., and Brusilovsky, P. (2008) A Framework for Performance Evaluation of User Modeling Servers for Web Applications. Web Intelligence and Agent Systems 6(2), 175-191. <a href='http://dx.doi.org/10.3233/WIA-2008-0136'>DOI</a></li>
+<li>Yudelson, M., Brusilovsky, P., and Zadorozhny, V. (2007) A user modeling server for contemporary adaptive hypermedia: An evaluation of the push approach to evidence propagation. In Conati, C., McCoy, K. F., and Paliouras, G. Eds., User Modeling, volume 4511 of Lecture Notes in Computer Science, pp 27-36. Springer, 2007. <a href='http://www.pitt.edu/~mvy3/assets/YudelsonUM2007.pdf'>PDF</a> <a href='http://dx.doi.org/10.1007/978-3-540-73078-1_6'>DOI</a></li>
+<li>Brusilovsky, P., Sosnovsky, S. A., and Shcherbinina, O. (2005). User Modeling in a Distributed E-Learning Architecture. Paper presented at the 10th International Conference on User Modeling (UM 2005), Edinburgh, Scotland, UK, July 24-29, 2005. <a href='http://www2.sis.pitt.edu/%7Epeterb/papers/cumulateUM05.pdf'>PDF</a> <a href='http://dx.doi.org/10.1007/11527886_50'>DOI</a></li>
+</ol>
+      <h2>OpenDSA Implementation:</h2>
+<p>OpenDSA is an interactive eTextbook platform that provides comprehensive support for a range of Computer Science-related topics such as Data Structures and Algorithms, Formal Languages, Programming Languages, and more. OpenDSA is LTI powered and also supports a seamless communication of scores, progress tracking, and student data between the tool and the LMS.
+OpenDSA offers a collection of exercise types, with the most commonly used being Khan Academy-style exercises and JSAV exercises. The light weight protocol has been integrated to collect scores, state and interactions from both exercise types currently and can be sent back to maybe a server or a  parent page.</p>
+<p>These are some potential use cases for the light weight protocol for OpenDSA
+</p><ol><li><b>External Tool Integration:</b> OpenDSA can act as an external tool, the exercises can be embedded within other systems via an iframe. In this scenario, the scores and student progress data collected from OpenDSA exercises can be transmitted back to the parent HTML or any server.</li>
+<li><b>Server Interaction and Grade Passback:</b> The lightweight protocol can also facilitate server-side communication. In this use case, student scores are sent directly to OpenDSA server and then to the LTI service for grade passback in the LMS.</li></ol>
+      
+    </div> 
+    <div id='footer'>
+      <hr/> 
+      <p class='footertext'><a href='mailto:cssplice@gmail.com'>Contact us</a> </p> 
+      <p class='footertext'>Last updated: 
+        <script type='text/javascript'>document.write(document.lastModified);
+        </script> 
+      </p> 
+    </div> 
+  </body> 
+</html>

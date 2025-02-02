@@ -1,71 +1,33 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <title>SPLICE Working Group: Smart Learning Content Protocols</title>
-    <link rel="stylesheet" href="../cssplice.css" type="text/css" />
-  </head>
-
+    <title>SPLICE Working Group: Smart Learning Content Protocols</title> 
+    <meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
+    <link rel='stylesheet' href='../cssplice.css' type='text/css'/> 
+  </head> 
   <body>
-    <div id="content">
-      <h1>SPLICE Working Group: Smart Learning Content Protocols</h1>
-
-      <p><b>Leaders</b>: Cay Horstmann, Steve Edwards, Cliff Shaffer</p>
-
-      <p><b>Rationale</b>
-        Standard learning system APIs such as LTI are complex and often
-        incorporate server-side components. Too often systems that
-        integrate smart learning content use proprietary APIs that
-        restrict interoperability. This proposal aims to enable learning
-        systems to make use of compliant smart content by lowering the
-        cost of entry through simple minimalistic APIs. The purpose of 
-        this working group is to formulate an API that allows smart 
-        learning content authors to signal user activity, and learning
-        system implemebters to record it. Learning system implementors
-        can also choose to offer a state restoration service to the
-        smart learning content. Specifically, we aim to standardize two
-        parts:
-        <ul>
-          <li>
-            A JavaScript API that the smart content implementor invokes
-            for communicating with learning systems
-          </li>
-          <li>
-            The postMessage protocol that is used when the content is
-            embedded in an iframe
-          </li>
-        </ul>
-        We provide a reference implementation for a client library that
-        turns the JavaScript API into the message protocol. We also provide
-        a reference server implementation that produces an LTI launch,
-        embedding an arbitrary web page as an iframe and bridging the message
-        protocol to LTI. With this server, pages containing smart learning
-        content can be included in standard learning management systems such
-        as Canvas.</p>
-
-      <p><b>Draft proposal working document:</b>
-        <a href="https://docs.google.com/document/d/1X6Vx6Em67t8Vp4Vecnmc-7OblVewJJKDFIJUrvRAvdc/edit?usp=sharing">Google Doc</a></p>
-
-      <p><b>Draft Implementation:</b>
-        <a href="https://horstmann.com/private/splice/splice-iframe.js">Document</a></p>
-
-      <p><b>Get in Contact: </b>
-        <a href="https://groups.google.com/g/splice-smart-learning-content-protocol">Google Group</a></p>
-      
-    </div>
-
-    <div id="footer">
-      <hr />
-      <p class="footertext">
-        <a href="mailto:cssplice@gmail.com">Contact us</a>
-      </p>
-      <p class="footertext">
-        Last updated:
-        <script type="text/javascript">
-          document.write(document.lastModified);
-        </script>
-      </p>
-    </div>
-
-  </body>
+    <div id='content'>
+      <h1>SPLICE Working Group: Smart Learning Content Protocols</h1> 
+      <p><b>Leaders</b>: Cay Horstmann, Cliff Shaffer</p> 
+      <p><b>Active Participants</b>: Adeyemi Aina, Kamil Akhuseyinoglu, Peter Brusilovsky, Alex Hicks, Brad Miller</p> 
+      <p><b>Purpose</b> Standard learning system APIs such as LTI are complex and often incorporate server-side components. Too often systems that integrate smart learning content use proprietary APIs that restrict interoperability. Our goal is to enable learning systems to make use of compliant smart content by lowering the cost of entry through simple APIs. The purpose of this working group is to formulate and test APIs that allow smart learning content authors to signal user activity, and learning system implementers to record scores, and optionally store logging information and student work.</p>
+      <p><b>The iframe protocol</b> Commonly, learning systtems embed smart learning content in iframes, in order to isolate the JavaScript for the learning content from the JavaScript for the learning system. We have specified a <a href='iframe-protocol.html'>standard postMessage protocol</a> for communicating between the learning content and the learning system. See the following documents for details.</p>
+      <ul><li><a href='iframe-protocol-rationale.html'>Rationale</a></li>
+        <li><a href='iframe-protocol-specification.html'>Specification</a></li>
+        <li><a href='iframe-protocol-prior-art.html'>Prior art</a></li>
+        <li><a href='iframe-protocol-demos.html'>Demos</a></li>
+      </ul>
+      <p>We encourage all implementors of smart learning content and of learning systems to implement this protocol. Please contact us with any questions and suggestions.</p>
+      <p><b>Future directions</b> While iframes provide isolation, they are not optimal for pages that embed many content elements. We would like to explore a standard approach of assembling smart content from disparate sources without the use of iframes.</p>
+      <p>We are also interested in standardizing communication that goes beyond scores and state, such as learner models.</p>
+      <p><b>Get in Contact: </b> <a href='https://groups.google.com/g/splice-smart-learning-content-protocol'>Google Group</a></p> 
+    </div> 
+    <div id='footer'>
+      <hr/> 
+      <p class='footertext'><a href='mailto:cssplice@gmail.com'>Contact us</a> </p> 
+      <p class='footertext'>Last updated: 
+        <script type='text/javascript'>document.write(document.lastModified);
+        </script> 
+      </p> 
+    </div> 
+  </body> 
 </html>
-      

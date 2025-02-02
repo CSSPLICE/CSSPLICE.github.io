@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>SPLICE Working Group: Smart Learning Content Protocols</title> 
+    <meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
+    <link rel='stylesheet' href='../cssplice.css' type='text/css'/> 
+    <script type='text/javascript' charset='utf-8' src='splice-parent.js'></script>
+  </head> 
+  <body>
+    <div id='content'>
+      <h1>SPLICE iframe Protocol: Demos</h1>
+      <p>Look at the console log in the development tools (Ctrl+Shift+J or ⌘+Shift+J).</p>
+      <h2>CodeCheck</h2>
+      <iframe width='100%' src='https://codecheck.io/files/wiley/ch-bj4cc-c06_exp_6_105'></iframe>
+      <h2>JSAV</h2>
+      <p>Uses this <a href='jsav-to-splice.js'>simple adapter</a></p>
+      <iframe width='100%' src='https://horstmann.com/private/jsav/AV/Graph/DijkstraPE.html'></iframe>
+      <h2>JS-Parsons</h2>
+      <p>The widget setup is modified as follows:</p>
+      
+      <pre>parson = new ParsonsWidget({
+  action_cb: logData =&gt; {
+    if (logData.type === 'feedback') 
+      SPLICE.reportScoreAndState('turtle-test', logData.success ? 1 : 0, logData.output)
+  },
+  . . .
+})
+</pre>
+      <iframe width='100%' src='https://horstmann.com/private/js-parsons/examples/turtle-test.html'></iframe>
+    </div>   
+    <div id='footer'>
+      <hr/> 
+      <p class='footertext'><a href='mailto:cssplice@gmail.com'>Contact us</a> </p> 
+      <p class='footertext'>Last updated: 
+        <script type='text/javascript'>document.write(document.lastModified);
+        </script> 
+      </p> 
+    </div> 
+  </body> 
+</html>
