@@ -1,6 +1,7 @@
 #Temp files
 *~
 *.swp
+*.ch
 
 # Ignore /_site directory when doing temporary preview
 # with jekyll
