@@ -1,0 +1,170 @@
+<html>
+  <head>
+    <title>SPLICE Working Group: Smart Learning Content Protocols</title> 
+    <meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
+    <link rel='stylesheet' href='../cssplice.css' type='text/css'/> 
+  </head> 
+  <body>
+    <div id='content'>
+      <h1>SPLICE iframe Protocol: Specification</h1>
+      <p>If you read this as the implementer of a learning system that embeds smart learning content as iframes, you only need to care about the message protocol. You may find <a href='splice-parent.js'>this starter code</a> helpful.</p>  
+      <p>If you read this as the implementer of smart learning content, which you would like to make available to learning systems, you may want to make use of <a href='splice-iframe'>this reference implementation</a> that provides a friendly JavaScript interface for the message protocol.</p>
+
+
+
+      <h2>Messages</h2>
+      <p>These messages are supported:
+</p>
+      <h3>The reportScoreAndState Message</h3>
+      <p>The smart learning content sends this message whenever the activity’s state and/or score changes.</p>
+      <pre>{ 
+   subject: 'SPLICE.reportScoreAndState', 
+   message_id: a unique string ID for this message,
+   score: a floating-point number between 0 and 1
+   state: an arbitrary JavaScript object
+}</pre>
+      <p>The learning system should update the user’s score and optionally store the state.</p>
+      <h3>The getState Message</h3>
+      <pre>{ 
+   subject: 'SPLICE.getState', 
+   message_id: a unique string ID for this message,
+   domain_id: an optional globally unique domain chosen by the content provider,
+   content_id: an optional unique ID in the domain,
+}
+</pre>
+      <p>If the <code>domain_id</code> is not specified, it is implied to be the host domain that serves the iframe of this activity. If the <code>content_id</code> is not specified, it is implied to be the part of the iframe URL after the scheme, host, and port. </p>
+      <p>
+Use these IDs if you want to provide an identifier for the smart learning content that is more canonical than the iframe URL.</p>
+      <p>
+The <code>getState</code> message has a response:
+</p>
+      
+      <pre>{
+    subject: "SPLICE.getState.response",
+    message_id: the same ID as the request,
+    state: the previously reported state,
+    user_id: an optional unique and opaque user ID    
+}
+</pre>
+      <p>If you do not support state restoration, reply to the <code>getState</code> message with a state of <code>null</code>.</p><p>
+The response may contain more information about the user that the smart learning content can interpret, such as their prior skill level. This information is not currently standardized.</p><p>
+If there is an error in the request, the response must contain, with key <code>error</code>, a JavaScript object 
+</p>
+      
+      <pre>{
+    code: a text string with an error code
+    message: optionally, a text string with a humanly readable message
+}
+</pre>
+      <p>NOTE: We don’t use the lti.get_data, lti.put_data message from LTI for state storage because those data are described to be “short lived”</p>
+      <h3>The sendEvent Message</h3>
+      <p>
+This message informs about interactions with the smart learning content that are unrelated to scoring and state restoration. The learning system may choose to log or store them, and to make them available to interested parties, such as education researchers. The message content is not currently standardized. 
+</p>
+      
+      <pre>{ 
+   subject: 'SPLICE.sendEvent', 
+   message_id: a unique string ID for this message,
+   name: ...,
+   data: ...
+}
+</pre>
+
+      <h3>The lti.frameResize Message</h3>
+      <p>The embedded iframe sends this message whenever its size changes. This allows the embedding page to display the iframe without scroll bars.
+</p>
+      <pre>{ 
+   subject: lti.frameResize', 
+   message_id: a unique string ID for this message,
+   height: ...,
+   width: ... 
+}
+</pre>
+      <h2>Protocol Implementation Notes</h2>
+
+      <p>If you implement a smart learning system that embeds iframes with smart learning content, you need to be aware of a couple of issues with iframe communication. </p><p>
+When receiving a message from an iframe, and if you have more than one, you want to know which iframe sent it. Unfortunately, you cannot do the obvious and consult <code>event.source.location.href</code>. That’s a CORS violation. Instead, use code similar to the following:
+</p>
+      
+      <pre>function sendingIframe(event) {
+  for (const f of document.getElementsByTagName('iframe'))
+  if (f.contentWindow === event.source) return f
+  return undefined
+}
+
+window.addEventListener("message", event =&gt; {
+  let iframe = sendingIframe(event)
+  let url = iframe.src
+  . . .
+})
+
+</pre>
+      <p>
+When sending a message to an iframe, use
+</p>
+
+      
+      <pre>event.source.postMessage({
+  message_id: event.data.message_id,
+  subject: "SPLICE.getState.response",
+  state: state,
+}, "*");
+
+</pre>
+      <p>with a "*" for the <a href='https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#targetorigin'>targetOrigin</a> parameter. Otherwise your message may not be delivered: 
+</p><p>Listen to the lti.frameResize messages and adjust the size of the iframe, using code such as the following:
+</p>
+      
+      <pre>Let newHeight = event.data.height
+if ('chrome' in window) {
+  const CHROME_FUDGE = 32 // to prevent scroll bars in Chrome
+  newHeight += CHROME_FUDGE
+}
+if (iframe.scrollHeight &lt; newHeight)
+  iframe.style.height = newHeight + 'px'
+</pre>
+      <h2>JavaScript Reference Implementation</h2>
+<p>This section is addressed to authors of smart learning content, served as an HTML page, ready for inclusion as an iframe. 
+</p><p>A <a href='splice-iframe.js'>reference implementation</a> provides a simple JavaScript API that is easier to use than sending and receiving messages. You can use the JavaScript code as is, modify it for your situation, or provide your own messaging code.
+</p><p>The implementation supports multiple interactive elements on the page. Each of them has a location ID, which must be unique to the page. If you only have one element, simply provide an empty string as the ID.
+</p><p>The following calls are provided:
+</p>
+<pre>SPLICE.reportScoreAndState(location, score, state)
+SPLICE.getState(location, callback)
+SPLICE.sendEvent(location, name, data)
+SPLICE.configure(params)
+</pre>
+      <ul><li>location: an ID string for the activity that is unique to this page. </li>
+<li>score: a floating-point number between 0 and 1</li>
+<li>state:  an arbitrary JavaScript object</li>
+<li>callback: a function that is called with parameters location and state</li>
+<li>name: the event name</li>
+<li>data: an arbitrary JavaScript object</li>
+<li>params: a JavaScript object that is described below</li>
+
+      </ul>
+
+      <p>Call <code>SPLICE.reportScoreAndState</code> whenever an activity’s score changes. 
+</p><p>If restoration of student work from a prior launch is desired, provide state information in each call to <code>SPLICE.reportScoreAndState</code>. 
+</p><p>Call the <code>SPLICE.getScores</code> method when loading the page to retrieve the state information. Not all learning systems have the ability to save and restore state, so be prepared that this call may yield no information, or it may not even return. Call this method even if you are not interested in getting scores, to notify the learning system that your element is ready. 
+</p>
+      <p>Optionally call <code>SPLICE.configure</code> before making any other calls. You can specify the following parameters:</p>
+      <ul><li><code>domain_id</code>: an optional globally unique domain chosen by the content provider</li>
+<li><code>content_id</code>: an optional unique ID in the domain,</li>
+<li><code>weights</code>: a map from locations to weights, for combining the scores of each location </li>
+      </ul>
+
+      <p>The reference implementation emits <code>lti.frameResize</code> messages when the document size changes.</p>
+      <p>NOTE: We may want to standardize this API at some point in the future. Then we might want to replace the <code>SPLICE</code> identifier with something like <code>org.cssplice.content</code>. 
+</p>
+    </div> 
+    <div id='footer'>
+      <hr/> 
+      <p class='footertext'><a href='mailto:cssplice@gmail.com'>Contact us</a> </p> 
+      <p class='footertext'>Last updated: 
+        <script type='text/javascript'>document.write(document.lastModified);
+        </script> 
+      </p> 
+    </div> 
+  </body> 
+</html>
