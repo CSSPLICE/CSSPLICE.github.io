@@ -1,7 +1,4 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const responseDiv = document.getElementById('response')
-  const savedCopyCheckbox = document.querySelector('#savedcopy > input')
-
   function sendingIframe(event) {
     for (const f of document.getElementsByTagName('iframe'))
       if (f.contentWindow === event.source) return f
