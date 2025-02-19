@@ -1,22 +1,62 @@
 <html>
   <head>
     <title>SPLICE Working Group: Smart Learning Content Protocols</title> 
-    <meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
-    <link rel='stylesheet' href='../cssplice.css' type='text/css'/> 
+    <meta http-equiv='content-type' content='text/html; charset=UTF-8'/> 
+    <link rel='stylesheet' href='../cssplice.css' type='text/css'/>
+    <style>pre.message {
+      background: white;
+      border: thin dotted gray;
+      margin: 1em;
+      padding: 1em;
+}
+    </style>
     <script type='text/javascript' charset='utf-8' src='splice-parent.js'></script>
+    <script>//<![CDATA[
+window.addEventListener('DOMContentLoaded', () => {
+  function sendingIframe(event) {
+    for (const f of document.getElementsByTagName('iframe'))
+      if (f.contentWindow === event.source) return f
+    return undefined
+  }
+  const button = document.getElementById('add')
+  button.addEventListener('click', () => {
+    const parent = button.parentElement
+    const iframe = document.createElement('iframe')
+    iframe.width = '100%'
+    iframe.src = document.getElementById('url').value
+    const pre = document.createElement('pre')
+    pre.classList.add('message')
+    parent.after(iframe, pre)
+  })
+
+  window.addEventListener("message", event => {
+    const iframe = sendingIframe(event)
+    const pre = iframe.nextElementSibling
+    pre.textContent += JSON.stringify(event.data) + '\n'
+    if (event.data.subject === 'SPLICE.getState') {
+      // TODO Demo state sending?
+      const state = null // getStateOfProblem(iframe)
+      iframe.contentWindow.postMessage({ subject: 'SPLICE.getState.response', message_id: event.data.message_id, state }, '*')      
+      }
+  }, false);
+})
+    //]]></script>
+
   </head> 
   <body>
     <div id='content'>
       <h1>SPLICE iframe Protocol: Demos</h1>
-      <p>Look at the console log in the development tools (Ctrl+Shift+J or ⌘+Shift+J).</p>
-      <h2>CodeCheck</h2>
+      <p>Below each element, you can see the messages that each iframe sends to its parent (that is, this page).</p>
+      <p>Also look at the console log in the development tools (Ctrl+Shift+J or ⌘+Shift+J).</p> 
+      <h2>CodeCheck</h2> 
       <iframe width='100%' src='https://codecheck.io/files/wiley/ch-bj4cc-c06_exp_6_105'></iframe>
-      <h2>JSAV</h2>
-      <p>Uses this <a href='jsav-to-splice.js'>simple adapter</a></p>
-      <iframe width='100%' src='https://horstmann.com/private/jsav/AV/Graph/DijkstraPE.html'></iframe>
-      <h2>JS-Parsons</h2>
-      <p>The widget setup is modified as follows:</p>
-      
+      <pre class='message'></pre>
+      <h2>JSAV</h2> 
+      <p>Uses this <a href='jsav-to-splice.js'>simple adapter</a></p> 
+      <iframe width='100%' src='https://horstmann.com/private/jsav/AV/Graph/DijkstraPE.html'></iframe> 
+      <pre class='message'></pre>
+      <h2>JS-Parsons</h2> 
+      <p>The widget setup is modified as follows:</p> 
       <pre>parson = new ParsonsWidget({
   action_cb: logData =&gt; {
     if (logData.type === 'feedback') 
@@ -24,9 +64,14 @@
   },
   . . .
 })
-</pre>
-      <iframe width='100%' src='https://horstmann.com/private/js-parsons/examples/turtle-test.html'></iframe>
-    </div>   
+</pre> 
+      <iframe width='100%' src='https://horstmann.com/private/js-parsons/examples/turtle-test.html'></iframe> 
+      <pre class='message'></pre>
+      <h2>Add Your Own</h2>
+      <p>Enter the address of any element and click the “Add” button. If the element supports the SPLICE iframe protocol, you will see a message whose <code>subject</code> is <code>lti.frameResize</code>. As you interact with the element, watch for <code>SPLICE.reportScoreAndState</code> messages.</p>
+      <p>iframe URL: <input id='url' width='50'/> <button id='add'>Add</button></p>
+
+    </div> 
     <div id='footer'>
       <hr/> 
       <p class='footertext'><a href='mailto:cssplice@gmail.com'>Contact us</a> </p> 
