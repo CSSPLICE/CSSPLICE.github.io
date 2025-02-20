@@ -11,11 +11,35 @@
     <div id="content">
         <h1>SPLICE: Smart Content</h1>
 
-        <p><b>Introduction:</b> [in construction].</p>
+        <p>A team of CS Education researchers gathered together as a Working Group at ACM
+            SIGCSE 2014 and introduced the term “Smart Learning Content” to describe a diverse
+            set of interactive learning resources that were becoming increasingly more popular in
+            CS Education [1]. It became one of the key goals of the SPLICE project to promote
+            broader development and reuse of smart learning content (SLC) in CS educational
+            research and practice. Over the years, SPLICE team has been studying best practices
+            in SLC and collecting various types of SLC for its live catalog of SLC [2]. This work
+            encouraged us to develop the first taxonomy of smart learning content that we are
+            presenting here. This taxonomy attempted to classify SLC by its type (worked examples
+            vs problems), the knowledge that it helps to develop (code tracing vs program
+            construction), and the target domain (i.e., Java, Python, SQL, algorithms, etc). Since the
+            majority of the SLC types covered in this taxonomy are now available in the new version
+            of <a href="https://cssplice.org/portal/index.html">SPLICE SLC catalog</a>, we also specify the
+            protocols that each specific type of SLC supports and infrastructures where this content
+            can be re-used. We hope that this taxonomy will be useful for researchers and
+            practitioners to understand which types of SLC are available for various kind of re-use
+            and to integrate reusable SLC in their courses.
+        </p>
+
+        <p>
+            We understand that being the first attempt to classify and catalog SLC, this taxonomy
+            misses many specific types of SLC and probably some whole categories. Are you a
+            user or a developer of an SLC that is not mentioned in this taxonomy? Please use <a href="">this
+                form</a> to contribute!
+        </p>
 
 
         <div class="input">
-            <label for="summary-selection">Show smart content by: </label>
+            <label for="summary-selection"><b>Show smart content by: </b></label>
             <select id="summary-selection" onchange="selectSummaryType()">
                 <option value="institution" selected>Institution</option>
                 <option value="domain">Domain</option>
@@ -59,9 +83,46 @@
                     <li><a
                             href="https://docs.google.com/document/d/1GZ1RpTOWUTK4A9DcYcGY4fVyeYOaJuEntRPgKHieOTo/edit?usp=sharing">
                             Epplets</a></li>
+                </ul>
+
+                <li><b>San Jose State University:</b></li>
+                <ul>
                     <li><a
-                            href="https://docs.google.com/document/d/1u9ZLQxf2owsMkO8YdTeyUpGW-s9TIDphJwdAEBOJQpc/edit?usp=sharing">
-                            Problets</a></li>
+                            href="https://docs.google.com/document/d/1txidmFZ46VM6j6QQj_LJNBu2YVO1dZPCERgPidoQQVY/edit?usp=sharing">
+                            CodeCheck
+                        </a></li>
+                </ul>
+
+                <li><b>Stanford University:</b></li>
+                <ul>
+                    <li><a
+                            href="https://docs.google.com/document/d/19hAkz21p4fok60tEP8k-AuNUJkirNIN2CBTzHVAh5H0/edit?usp=sharing">
+                            CodingBat
+                        </a></li>
+                </ul>
+
+                <li><b>University of California San Diego:</b></li>
+                <ul>
+                    <li><a
+                            href="https://docs.google.com/document/d/1WW_G0rmo577OTvHUejgyxkTj59ndAu7Ki28ci-zpsbo/edit?usp=sharing">
+                            Python Tutor
+                        </a></li>
+                </ul>
+
+                <li><b>University of Canterbury:</b></li>
+                <ul>
+                    <li><a
+                            href="https://docs.google.com/document/d/1JFA_wsrQw8xIHybxTMgUCVawhLQDZxthLPHbOZrHPp0/edit?usp=sharing">
+                            SQL-Tutor
+                        </a></li>
+                </ul>
+
+                <li><b>University of Helsinki:</b></li>
+                <ul>
+                    <li><a
+                            href="https://docs.google.com/document/d/1HPTzXSIxu_FtTHX4-ausPbT3zi444zRX1BUvlew73ns/edit?usp=sharing">
+                            TestMyCode
+                        </a></li>
                 </ul>
 
                 <li><b>University of Michigan:</b></li>
@@ -99,6 +160,10 @@
                     <li><a
                             href="https://docs.google.com/document/d/1o37XrdtuCYkI3mnMo8Py-vbw2QJtyXNEkr50oud-AbA/edit?usp=sharing">
                             QuizPET
+                        </a></li>
+                    <li><a
+                            href="https://docs.google.com/document/d/1EgBV33V_1AsxuynXDaRnqfj6lmE2LpO5L79U7Jo5KRY/edit?usp=sharing">
+                            Table Tracer
                         </a></li>
                 </ul>
 
@@ -144,7 +209,7 @@
         <div id="summary-domain">
             <h2>Summary by Domain</h2>
             <ul>
-                <li><b>C/C++</b></li>
+                <li><b>C/C++:</b></li>
                 <ul>
                     <li><a
                             href="https://docs.google.com/document/d/1TL8Hr-ZgivNMjveyakXh_mdDtlr9oPfZbDtwXvk2t00/edit?usp=sharing">
@@ -155,18 +220,25 @@
                             CloudCoder
                         </a></li>
                     <li><a
+                            href="https://docs.google.com/document/d/1txidmFZ46VM6j6QQj_LJNBu2YVO1dZPCERgPidoQQVY/edit?usp=sharing">
+                            CodeCheck
+                        </a></li>
+                    <li><a
                             href="https://docs.google.com/document/d/1GZ1RpTOWUTK4A9DcYcGY4fVyeYOaJuEntRPgKHieOTo/edit?usp=sharing">
-                            Epplets</a></li>
+                            Epplets
+                        </a></li>
                     <li><a
                             href="https://docs.google.com/document/d/1dpmJSQA8aoEIq5GdG1T8bGXg9gnkC0IDlprTAk9-XFg/edit?usp=sharing">
                             Parsons Problems
                         </a></li>
                     <li><a
                             href="https://docs.google.com/document/d/1DBQMBUUgwqCxb8A4GE9nrIf2-W3QuPdPRG4fvRvC0WI/edit?usp=sharing">
-                            PCRS</a></li>
+                            PCRS
+                        </a></li>
                     <li><a
-                            href="https://docs.google.com/document/d/1u9ZLQxf2owsMkO8YdTeyUpGW-s9TIDphJwdAEBOJQpc/edit?usp=sharing">
-                            Problets</a></li>
+                            href="https://docs.google.com/document/d/1WW_G0rmo577OTvHUejgyxkTj59ndAu7Ki28ci-zpsbo/edit?usp=sharing">
+                            Python Tutor
+                        </a></li>
                 </ul>
 
                 <li><b>C#:</b></li>
@@ -174,9 +246,6 @@
                     <li><a
                             href="https://docs.google.com/document/d/1GZ1RpTOWUTK4A9DcYcGY4fVyeYOaJuEntRPgKHieOTo/edit?usp=sharing">
                             Epplets</a></li>
-                    <li><a
-                            href="https://docs.google.com/document/d/1u9ZLQxf2owsMkO8YdTeyUpGW-s9TIDphJwdAEBOJQpc/edit?usp=sharing">
-                            Problets</a></li>
                 </ul>
 
                 <li><b>Java:</b></li>
@@ -190,12 +259,20 @@
                             CloudCoder
                         </a></li>
                     <li><a
+                            href="https://docs.google.com/document/d/1txidmFZ46VM6j6QQj_LJNBu2YVO1dZPCERgPidoQQVY/edit?usp=sharing">
+                            CodeCheck
+                        </a></li>
+                    <li><a
                             href="https://docs.google.com/document/d/1veHs8b5TCU3F3diDTebCcgaDg1bK9JjrXntAJco220Y/edit?usp=sharing">
                             CodeOcean
                         </a></li>
                     <li><a
                             href="https://docs.google.com/document/d/1x9lILS3RbCKc-X7xyuYhXRTwsUklMtmjT05baE-lL0Q/edit?usp=sharing">
                             CodeWorkout
+                        </a></li>
+                    <li><a
+                            href="https://docs.google.com/document/d/19hAkz21p4fok60tEP8k-AuNUJkirNIN2CBTzHVAh5H0/edit?usp=sharing">
+                            CodingBat
                         </a></li>
                     <li><a
                             href="https://docs.google.com/document/d/1GZ1RpTOWUTK4A9DcYcGY4fVyeYOaJuEntRPgKHieOTo/edit?usp=sharing">
@@ -212,15 +289,36 @@
                             href="https://docs.google.com/document/d/1DBQMBUUgwqCxb8A4GE9nrIf2-W3QuPdPRG4fvRvC0WI/edit?usp=sharing">
                             PCRS</a></li>
                     <li><a
-                            href="https://docs.google.com/document/d/1u9ZLQxf2owsMkO8YdTeyUpGW-s9TIDphJwdAEBOJQpc/edit?usp=sharing">
-                            Problets</a></li>
-                    <li><a
                             href="https://docs.google.com/document/d/14jdmf3sAZNvFghM_-5Gq6tOPnc9jviFl-2jbie-lNHg/edit?usp=sharing">
                             Program Construction Examples - PCEX
                         </a></li>
                     <li><a
+                            href="https://docs.google.com/document/d/1WW_G0rmo577OTvHUejgyxkTj59ndAu7Ki28ci-zpsbo/edit?usp=sharing">
+                            Python Tutor
+                        </a></li>
+                    <li><a
                             href="https://docs.google.com/document/d/1qz0ReLRoUt-RplzteyAV6CPkE-WrxYZ9zEL8IAZ2Ixw/edit?usp=sharing">
                             QuizJET
+                        </a></li>
+                    <li><a
+                            href="https://docs.google.com/document/d/1EgBV33V_1AsxuynXDaRnqfj6lmE2LpO5L79U7Jo5KRY/edit?usp=sharing">
+                            Table Tracer
+                        </a></li>
+                    <li><a
+                            href="https://docs.google.com/document/d/1HPTzXSIxu_FtTHX4-ausPbT3zi444zRX1BUvlew73ns/edit?usp=sharing">
+                            TestMyCode
+                        </a></li>
+                </ul>
+
+                <li><b>JavaScript:</b></li>
+                <ul>
+                    <li><a
+                            href="https://docs.google.com/document/d/1WW_G0rmo577OTvHUejgyxkTj59ndAu7Ki28ci-zpsbo/edit?usp=sharing">
+                            Python Tutor
+                        </a></li>
+                    <li><a
+                            href="https://docs.google.com/document/d/1HPTzXSIxu_FtTHX4-ausPbT3zi444zRX1BUvlew73ns/edit?usp=sharing">
+                            TestMyCode
                         </a></li>
                 </ul>
 
@@ -235,12 +333,20 @@
                             CloudCoder
                         </a></li>
                     <li><a
+                            href="https://docs.google.com/document/d/1txidmFZ46VM6j6QQj_LJNBu2YVO1dZPCERgPidoQQVY/edit?usp=sharing">
+                            CodeCheck
+                        </a></li>
+                    <li><a
                             href="https://docs.google.com/document/d/1veHs8b5TCU3F3diDTebCcgaDg1bK9JjrXntAJco220Y/edit?usp=sharing">
                             CodeOcean
                         </a></li>
                     <li><a
                             href="https://docs.google.com/document/d/1x9lILS3RbCKc-X7xyuYhXRTwsUklMtmjT05baE-lL0Q/edit?usp=sharing">
                             CodeWorkout
+                        </a></li>
+                    <li><a
+                            href="https://docs.google.com/document/d/19hAkz21p4fok60tEP8k-AuNUJkirNIN2CBTzHVAh5H0/edit?usp=sharing">
+                            CodingBat
                         </a></li>
                     <li><a
                             href="https://docs.google.com/document/d/1F6LRAedtLLCXQOp7tDPMsisRjUHoiXA3VEY0ml1Rhyo/edit?usp=sharing">
@@ -264,6 +370,10 @@
                     <li><a
                             href="https://docs.google.com/document/d/14WAZffmq9i-aurnKNyUrkvJMfYUSZvmkh4PvaDCuEXw/edit?usp=sharing">
                             Python Trace Table Tutor (T3)
+                        </a></li>
+                    <li><a
+                            href="https://docs.google.com/document/d/1WW_G0rmo577OTvHUejgyxkTj59ndAu7Ki28ci-zpsbo/edit?usp=sharing">
+                            Python Tutor
                         </a></li>
                     <li><a
                             href="https://docs.google.com/document/d/1o37XrdtuCYkI3mnMo8Py-vbw2QJtyXNEkr50oud-AbA/edit?usp=sharing">
@@ -292,6 +402,10 @@
                             href="https://docs.google.com/document/d/1x9lILS3RbCKc-X7xyuYhXRTwsUklMtmjT05baE-lL0Q/edit?usp=sharing">
                             CodeWorkout
                         </a></li>
+                    <li><a
+                            href="https://docs.google.com/document/d/1HPTzXSIxu_FtTHX4-ausPbT3zi444zRX1BUvlew73ns/edit?usp=sharing">
+                            TestMyCode
+                        </a></li>
                 </ul>
 
                 <li><b>SQL:</b></li>
@@ -314,6 +428,10 @@
                     <li><a
                             href="https://docs.google.com/document/d/1DBQMBUUgwqCxb8A4GE9nrIf2-W3QuPdPRG4fvRvC0WI/edit?usp=sharing">
                             PCRS</a></li>
+                    <li><a
+                            href="https://docs.google.com/document/d/1JFA_wsrQw8xIHybxTMgUCVawhLQDZxthLPHbOZrHPp0/edit?usp=sharing">
+                            SQL-Tutor
+                        </a></li>
                 </ul>
             </ul>
         </div>
@@ -328,17 +446,29 @@
                         <li>Code animations:</li>
                         <ul>
                             <li><a
+                                    href="https://docs.google.com/document/d/14zw74BJZ7dIXW8NERjKV8_R0PbGAnzKKkxOunt0dzxc/edit?usp=sharings">
+                                    Animated Examples for SQL
+                                </a></li>
+                            <li><a
+                                    href="https://docs.google.com/document/d/13EZLi2mCr8sexjubTNvZRxn7yFpoRSDgmjOzvH-hA4E/edit?usp=sharing">
+                                    Database Query Analyzer (DBQA)
+                                </a></li>
+                            <li><a
                                     href="https://docs.google.com/document/d/1urJ6ff5zmifw4qp5VtD0q3vzHYZuahIPRd_fXJI1fjM/edit?usp=sharing">
                                     jsvee Animated Examples
                                 </a></li>
-                            <li> Python Tutor (Philip Guo)
-                            </li>
+                            <li><a
+                                    href="https://docs.google.com/document/d/1WW_G0rmo577OTvHUejgyxkTj59ndAu7Ki28ci-zpsbo/edit?usp=sharing">
+                                    Python Tutor
+                                </a></li>
                         </ul>
 
                         <li>Table tracing demos:</li>
                         <ul>
-                            <li>Table Tracer (Zak Risha, PAWS)
-                            </li>
+                            <li><a
+                                    href="https://docs.google.com/document/d/1EgBV33V_1AsxuynXDaRnqfj6lmE2LpO5L79U7Jo5KRY/edit?usp=sharing">
+                                    Table Tracer
+                                </a></li>
                         </ul>
                     </ul>
 
@@ -373,72 +503,111 @@
                         </ul>
                         <li>Step-by-step tracing:</li>
                         <ul>
-                            <li>Codecheck Tracer</li>
+                            <li><a
+                                    href="https://docs.google.com/document/d/1txidmFZ46VM6j6QQj_LJNBu2YVO1dZPCERgPidoQQVY/edit?usp=sharing">
+                                    CodeCheck (Tracer)
+                                </a></li>
+                            <li><a
+                                    href="https://docs.google.com/document/d/13EZLi2mCr8sexjubTNvZRxn7yFpoRSDgmjOzvH-hA4E/edit?usp=sharing">
+                                    Database Query Analyzer (DBQA)</a></li>
                             <li><a
                                     href="https://docs.google.com/document/d/14WAZffmq9i-aurnKNyUrkvJMfYUSZvmkh4PvaDCuEXw/edit?usp=sharing">
                                     Python Trace Table Tutor (T3)
                                 </a></li>
-                            <li>Table Tracer</li>
                             <li><a
-                                    href="https://docs.google.com/document/d/13EZLi2mCr8sexjubTNvZRxn7yFpoRSDgmjOzvH-hA4E/edit?usp=sharing">
-                                    Database Query Analyzer (DBQA)</a></li>
-
-                        </ul>
-                    </ul>
-                    <li>Program construction:</li>
-                    <ul>
-                        <li>Completion problems:</li>
-                        <ul>
-                            <li><a
-                                    href="https://docs.google.com/document/d/14jdmf3sAZNvFghM_-5Gq6tOPnc9jviFl-2jbie-lNHg/edit?usp=sharing">
-                                    Program Construction Examples - PCEX (Challenges)
+                                    href="https://docs.google.com/document/d/1EgBV33V_1AsxuynXDaRnqfj6lmE2LpO5L79U7Jo5KRY/edit?usp=sharing">
+                                    Table Tracer
                                 </a></li>
                         </ul>
-                        <li>Parson’s problems:</li>
+                        <li>Program construction:</li>
                         <ul>
-                            <li><a
-                                    href="https://docs.google.com/document/d/1F6LRAedtLLCXQOp7tDPMsisRjUHoiXA3VEY0ml1Rhyo/edit?usp=sharing">
-                                    jsParsons
-                                </a></li>
-                            <li><a
-                                    href="https://docs.google.com/document/d/1dpmJSQA8aoEIq5GdG1T8bGXg9gnkC0IDlprTAk9-XFg/edit?usp=sharing">
-                                    Parsons Problems
-                                </a></li>
-                            <li>CodeCheck Parson’s Puzzles</li>
-                            <li><a
-                                    href="https://docs.google.com/document/d/1GZ1RpTOWUTK4A9DcYcGY4fVyeYOaJuEntRPgKHieOTo/edit?usp=sharing">
-                                    Epplets</a></li>
-                        </ul>
-                        <li>Restricted coding problems:</li>
-                        <ul>
-                            <li>SQL Tutor</li>
-                        </ul>
-                        <li>Free coding problems:</li>
-                        <ul>
-                            <li><a
-                                    href="https://docs.google.com/document/d/1DBQMBUUgwqCxb8A4GE9nrIf2-W3QuPdPRG4fvRvC0WI/edit?usp=sharing">
-                                    PCRS</a></li>
-                            <li><a
-                                    href="https://docs.google.com/document/d/1x9lILS3RbCKc-X7xyuYhXRTwsUklMtmjT05baE-lL0Q/edit?usp=sharing">
-                                    CodeWorkout
-                                </a>
-                            </li>
-                            <li>CodeCheck</li>
-                            <li><a
-                                    href="https://docs.google.com/document/d/1veHs8b5TCU3F3diDTebCcgaDg1bK9JjrXntAJco220Y/edit?usp=sharing">
-                                    CodeOcean
-                                </a></li>
-                            <li>CheckMyCode</li>
-                            <li><a
-                                    href="https://docs.google.com/document/d/1tTliRtpCdV45yUToKlzIgR64nCXzF05eU7T53d8ebKw/edit?usp=sharing">
-                                    Parameterized SQL Problems - SQL-KnoT
-                                </a></li>
-                            <li>PCRS-SQL</li>
+                            <li>Completion problems:</li>
+                            <ul>
+                                <li><a
+                                        href="https://docs.google.com/document/d/14jdmf3sAZNvFghM_-5Gq6tOPnc9jviFl-2jbie-lNHg/edit?usp=sharing">
+                                        Program Construction Examples - PCEX (Challenges)
+                                    </a></li>
+                            </ul>
+                            <li>Parson’s problems:</li>
+                            <ul>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1txidmFZ46VM6j6QQj_LJNBu2YVO1dZPCERgPidoQQVY/edit?usp=sharing">
+                                        CodeCheck (Parson’s Puzzles)
+                                    </a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1GZ1RpTOWUTK4A9DcYcGY4fVyeYOaJuEntRPgKHieOTo/edit?usp=sharing">
+                                        Epplets</a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1F6LRAedtLLCXQOp7tDPMsisRjUHoiXA3VEY0ml1Rhyo/edit?usp=sharing">
+                                        jsParsons
+                                    </a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1dpmJSQA8aoEIq5GdG1T8bGXg9gnkC0IDlprTAk9-XFg/edit?usp=sharing">
+                                        Parsons Problems
+                                    </a></li>
+                            </ul>
+                            <li>Restricted coding problems:</li>
+                            <ul>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1JFA_wsrQw8xIHybxTMgUCVawhLQDZxthLPHbOZrHPp0/edit?usp=sharing">
+                                        SQL-Tutor
+                                    </a></li>
+                            </ul>
+                            <li>Free coding problems:</li>
+                            <ul>
+                                <li><a
+                                        href="https://docs.google.com/document/d/13PHGid0lGC1-J7i9oOdl4d1o4k_r8HzMwL-4HlZ2770/edit?usp=sharing">
+                                        CloudCoder
+                                    </a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1veHs8b5TCU3F3diDTebCcgaDg1bK9JjrXntAJco220Y/edit?usp=sharing">
+                                        CodeOcean
+                                    </a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1txidmFZ46VM6j6QQj_LJNBu2YVO1dZPCERgPidoQQVY/edit?usp=sharing">
+                                        CodeCheck
+                                    </a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1x9lILS3RbCKc-X7xyuYhXRTwsUklMtmjT05baE-lL0Q/edit?usp=sharing">
+                                        CodeWorkout
+                                    </a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/19hAkz21p4fok60tEP8k-AuNUJkirNIN2CBTzHVAh5H0/edit?usp=sharing">
+                                        CodingBat
+                                    </a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1tTliRtpCdV45yUToKlzIgR64nCXzF05eU7T53d8ebKw/edit?usp=sharing">
+                                        Parameterized SQL Problems - SQL-KnoT
+                                    </a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1DBQMBUUgwqCxb8A4GE9nrIf2-W3QuPdPRG4fvRvC0WI/edit?usp=sharing">
+                                        PCRS</a></li>
+                                <li><a
+                                        href="https://docs.google.com/document/d/1HPTzXSIxu_FtTHX4-ausPbT3zi444zRX1BUvlew73ns/edit?usp=sharing">
+                                        TestMyCode
+                                    </a></li>
+                            </ul>
                         </ul>
                     </ul>
                 </ul>
-            </ul>
         </div>
+
+        <p>
+            [1] <b>Brusilovsky, P., Edwards, S., Kumar, A., Malmi, L., Benotti, L., Buck, D.,
+                Ihantola, P., Prince, R., Sirkiä, T., Sosnovsky, S., Urquiza, J., Vihavainen,
+                A., and Wollowski, M.</b> (2014). &quot;Increasing Adoption of Smart Learning Content for Computer
+            Science
+            Education&quot;. In: Proceedings of Working Group Reports of the 2014 on Innovation and Technology in
+            Computer
+            Science Education Conference, Uppsala, Sweden, ACM, pp. 31-57.
+        </p>
+        <p>
+            [2] <b>Hicks, A., Akhuseyinoglu, K., Shaffer, C., and Brusilovsky, P.</b> (2020).
+            Live Catalog of Smart Learning Objects for Computer Science Education.
+            In: Proceedings of Sixth SPLICE Workshop &quot;Building an Infrastructure for
+            Computer Science Education Research and Practice at Scale&quot; at ACM
+            Learning at Scale 2020, Virtual, August 12, 2020.
+        </p>
 
         <p><b>Get in Contact: </b>
             <a href="mailto:cssplice@gmail.com">cssplice@gmail.com</a>
