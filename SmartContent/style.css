@@ -1,0 +1,14 @@
+#summary-institution {
+    visibility: visible;
+    display: block;
+}
+
+#summary-domain {
+    visibility: hidden;
+    display: none;
+}
+
+#summary-type {
+    visibility: hidden;
+    display: none;
+}
