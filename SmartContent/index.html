@@ -33,14 +33,15 @@
         <p>
             We understand that being the first attempt to classify and catalog SLC, this taxonomy
             misses many specific types of SLC and probably some whole categories. Are you a
-            user or a developer of an SLC that is not mentioned in this taxonomy? Please use <a href="">this
+            user or a developer of an SLC that is not mentioned in this taxonomy? Please use <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfpAjfjJzkPdFV1HWYKbcBjqoFp7hgS4abF0OcXMHXOvqA7-g/viewform?usp=dialog">this
                 form</a> to contribute!
         </p>
 
 
         <div class="input">
             <label for="summary-selection"><b>Show smart content by: </b></label>
-            <select id="summary-selection" onchange="selectSummaryType()">
+            <select id="summary-selection" onchange="selectSummaryType()" autocomplete="off">
                 <option value="institution" selected>Institution</option>
                 <option value="domain">Domain</option>
                 <option value="type">Content Type</option>
