@@ -46,6 +46,7 @@ if (window.self !== window.top) { // iframe
     const states = {}
     let callbacks = []
     let docHeight = 0
+    let docWidth = 0
     let config = {}
 
     function sendDocHeight () {
@@ -55,9 +56,11 @@ if (window.self !== window.top) { // iframe
       const SEND_DOCHEIGHT_DELAY = 100
       setTimeout(() => {
         const newDocHeight = document.body.scrollHeight + document.body.offsetTop
-        if (docHeight !== newDocHeight) {
+        const newDocWidth = document.body.scrollWidth + document.body.offsetLeft
+        if (docHeight !== newDocHeight || docWidth !== newDocWidth) {
           docHeight = newDocHeight
-          const data = { subject: 'lti.frameResize', message_id: generateUUID(), height: docHeight }
+          docWidth = newDocWidth
+          const data = { subject: 'lti.frameResize', message_id: generateUUID(), height: docHeight, width: docWidth }
           window.parent.postMessage(data, '*')
           if (window.SPLICE.logging) console.log('postMessage to parent', data)
         }
