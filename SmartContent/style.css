@@ -1,6 +1,6 @@
 #summary-institution {
-    visibility: visible;
-    display: block;
+    visibility: hidden;
+    display: none;
 }
 
 #summary-domain {
@@ -9,6 +9,24 @@
 }
 
 #summary-type {
-    visibility: hidden;
-    display: none;
+    visibility: visible;
+    display: block;
+}
+
+.summary-columns {
+    display: flex;
+}
+
+.summary-columns> :last-child {
+    width: 60%;
+}
+
+.summary-columns a,
+.summary-columns img {
+    width: 100%;
+    max-width: 100%;
+}
+
+.summary-columns img {
+    border: 2px solid #336299;
 }
