@@ -55,8 +55,8 @@ if (window.self !== window.top) { // iframe
       // window.scrollTo(0, 0)
       const SEND_DOCHEIGHT_DELAY = 100
       setTimeout(() => {
-        const newDocHeight = document.body.scrollHeight + document.body.offsetTop
-        const newDocWidth = document.body.scrollWidth + document.body.offsetLeft
+        const newDocHeight = document.documentElement.scrollHeight + document.documentElement.offsetTop
+        const newDocWidth = document.documentElement.scrollWidth + document.documentElement.offsetLeft
         if (docHeight !== newDocHeight || docWidth !== newDocWidth) {
           docHeight = newDocHeight
           docWidth = newDocWidth

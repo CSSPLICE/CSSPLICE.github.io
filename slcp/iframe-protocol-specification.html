@@ -43,7 +43,12 @@ The <code>getState</code> message has a response:
     subject: "SPLICE.getState.response",
     message_id: the same ID as the request,
     state: the previously reported state,
-    user_id: an optional unique and opaque user ID    
+    user_id: an optional unique and opaque user ID,
+    user_model: an optional JSON object describing information about the user
+        in a format that is specific to the embedding system 
+        or that may be standardized in the future
+    context_id: an optional unique and opaque ID of the context 
+        (such as a s course assignment or ebook section)
 }
 </pre>
       <p>If you do not support state restoration, reply to the <code>getState</code> message with a state of <code>null</code>.</p><p>
@@ -66,10 +71,18 @@ This message informs about interactions with the smart learning content that are
    subject: 'SPLICE.sendEvent', 
    message_id: a unique string ID for this message,
    name: ...,
-   data: ...
+   data: ...,
+   error: an optional error that may be of interest to the embedding page
 }
 </pre>
-
+<p>An error contains, with key <code>error</code>, a JavaScript object 
+</p>
+      
+      <pre>{
+    code: a text string with an error code
+    message: optionally, a text string with a humanly readable message
+}
+</pre>
       <h3>The lti.frameResize Message</h3>
       <p>The embedded iframe sends this message whenever its size changes. This allows the embedding page to display the iframe without scroll bars.
 </p>
