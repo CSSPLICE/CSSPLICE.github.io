@@ -52,7 +52,6 @@ if (window.self !== window.top) { // iframe
     function sendDocHeight () {
       if (window.self === window.top) return // not iframe
 
-      // window.scrollTo(0, 0)
       const SEND_DOCHEIGHT_DELAY = 100
       setTimeout(() => {
         const newDocHeight = document.documentElement.scrollHeight + document.documentElement.offsetTop
