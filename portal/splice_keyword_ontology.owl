@@ -1,0 +1,1931 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Java">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Languages"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Memory_Allocation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Memory_Management"/>
+    <rdfs:label>Memory Allocation</rdfs:label>
+    <rdfs:comment>In a memory manager, the act of honoring a request for memory.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#External_Sorting">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#File_Processing"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>External Sorting</rdfs:label>
+    <rdfs:comment>Sorting methods that involve data stored outside of main memory, such as on disk.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Heapsort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Heapsort</rdfs:label>
+    <rdfs:comment>A comparison-based sorting algorithm that uses a binary heap</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Fast_Fourier_Transform">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Numerical_Algorithm"/>
+    <rdfs:label>Fast Fourier Transform</rdfs:label>
+    <rdfs:comment>An O(n log n) algorithm to compute the discrete Fourier transform, used for example to speed up polynomial multiplication.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Hashing_Cost_Analysis">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Hashing"/>
+    <rdfs:label>Hashing Cost Analysis</rdfs:label>
+    <rdfs:comment>Evaluating the efficiency of hashing operations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Recurrence_Relation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:label>Recurrence Relation</rdfs:label>
+    <rdfs:comment>Equations that define sequences recursively using previous terms.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#First_Fit_Memory_Manager">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Memory_Management"/>
+    <rdfs:label>First Fit Memory Manager</rdfs:label>
+    <rdfs:comment>In a memory manager, first fit is a heuristic for deciding which free block to use when allocating memory from a memory pool. First fit will always allocate the first free block on the free block list that is large enough to service the memory request. The advantage of this approach is that it is typically not necessary to look at all free blocks on the free block list to find a suitable free block. The disadvantage is that it is not “intelligently” selecting what might be a better choice of free block.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Heap_Memory">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Memory_Management"/>
+    <rdfs:label>Heap Memory</rdfs:label>
+    <rdfs:comment>Memory used for dynamic memory allocation.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Array-Based_List">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#List"/>
+    <rdfs:label>Array-Based List</rdfs:label>
+    <rdfs:comment>Implementing a list using an array.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Source_Level_Debugging">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Debugging"/>
+    <rdfs:label>Source Level Debugging</rdfs:label>
+    <rdfs:comment>A technique that allows developers to debug programs using the original source code, making it easier to identify and fix issues. It provides a way to see the correspondence between the source code and the executable code, helping to track down bugs more effectively.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Merge_Insertion_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Merge Insertion Sort</rdfs:label>
+    <rdfs:comment>A synonym for the Ford and Johnson sort.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Bucket_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>Distributes elements into buckets and sorts each bucket individually. </rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Mutation_Testing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Testing"/>
+    <rdfs:label>Mutation Testing</rdfs:label>
+    <rdfs:comment>A method of testing software by introducing small changes (mutations) to the code and evaluating the effectiveness of test cases.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Freelist">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Lists"/>
+    <rdfs:label>Freelist</rdfs:label>
+    <rdfs:comment>A list of free memory blocks.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Disk_Drive">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Computer_Architecture"/>
+    <rdfs:label>Disk Drive</rdfs:label>
+    <rdfs:comment>A device for storing and retrieving digital data using magnetic storage or other media.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#PR_Quadtree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Spatial_Data_Structure"/>
+    <rdfs:label>PR Quadtree</rdfs:label>
+    <rdfs:comment>A tree data structure used to partition a two-dimensional space.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Software_Testing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Testing"/>
+    <rdfs:label>Software Testing</rdfs:label>
+    <rdfs:comment>The process of determining if a program does or does not have bugs.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Command_Line_Parameter">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming"/>
+    <rdfs:label>Command Line Parameter</rdfs:label>
+    <rdfs:comment>Arguments passed to a program at the command line, used to customize program behavior.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Buffer_Pool">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Memory_Management"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A data structure that caches frequently accessed data in memory to improve access times.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Null">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Null</rdfs:label>
+    <rdfs:comment>A value used in many programming languages for a pointer that currently has no target address.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Turing_Machine">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Finite_State_Machine"/>
+    <rdfs:label>Turing Machine</rdfs:label>
+    <rdfs:comment>A mathematical model of computation that defines an abstract machine. A finite state machine.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Pumping_Lemma_Proof">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Language_Classification"/>
+    <rdfs:label>Pumping Lemma Proof</rdfs:label>
+    <rdfs:comment>A proof that makes use of the pumping lemma to prove that certain languages are not regular, or not context-free.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#List_ADT">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#List"/>
+    <rdfs:label>List ADT</rdfs:label>
+    <rdfs:comment>An abstract data type defining list operations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Linear_Probing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Hashing"/>
+    <rdfs:label>Linear Probing</rdfs:label>
+    <rdfs:comment>In hashing, this is the simplest collision resolution method. Term i of the probe sequence is simply i, meaning that collision resolution works by moving sequentially through the hash table from the home slot. While simple, it is also inefficient, since it quickly leads to certain free slots in the hash table having higher probability of being selected during insertion or search.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binary_Search">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search"/>
+    <rdfs:label>Binary Search</rdfs:label>
+    <rdfs:comment>A divide-and-conquer algorithm that finds the position of a target value within a sorted array.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Skip_List">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Randomized_Algorithm"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Probabilistic_Algorithm"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Probabilistic_Data_Structure"/>
+    <rdfs:label>Skip List</rdfs:label>
+    <rdfs:comment>A data structure that allows generally fast search, insertion, and deletion operations. It's performance is dependent on chance, rather than on data input order, which is normally considered an advantage.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Limits_to_Computing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Theory_of_Computation"/>
+    <rdfs:label>Limits to Computing</rdfs:label>
+    <rdfs:comment>Theoretical limits on what can be computed or solved efficiently.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Priority_Queue">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+    <rdfs:label>Priority Queue</rdfs:label>
+    <rdfs:comment>An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Set">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:label>Set</rdfs:label>
+    <rdfs:comment>A collection of distinguishable members or elements.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Big_Theta">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Big Theta</rdfs:label>
+    <rdfs:comment>Notation used to describe performance of an algorithm, indicating that the upper and lower bounds are the same within a constant factor.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Collision_Resolution">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Hashing"/>
+    <rdfs:label>Collision Resolution</rdfs:label>
+    <rdfs:comment>Techniques used to handle collisions in hashing.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Parameter">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Parameter</rdfs:label>
+    <rdfs:comment>The values making up an input to a function.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Deductive_Proof">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Proof"/>
+    <rdfs:label>Deductive Proof</rdfs:label>
+    <rdfs:comment>The process of reasoning from general principles to derive specific instances.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Towers_of_Hanoi">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problems"/>
+    <rdfs:label>Towers of Hanoi</rdfs:label>
+    <rdfs:comment>A mathematical puzzle consisting of three rods and a number of disks of different sizes, which must be moved according to specific rules to solve the puzzle.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binary_Tree_Traversal">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree"/>
+    <rdfs:label>Binary Tree Traversal</rdfs:label>
+    <rdfs:comment>Technique for visiting all nodes in a binary.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Bit_Vector">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+    <rdfs:label>Bit Vector</rdfs:label>
+    <rdfs:comment>A data structure that assigns each key to a position in an array that stroes a single bit to indicate if that key is in the represented set or not.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Memory">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Computer_Architecture"/>
+    <rdfs:label>Memory</rdfs:label>
+    <rdfs:comment>Hardware that stores data temporarily or permanently, providing data to the CPU as needed.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Deterministic_Pushdown_Automaton">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Pushdown_Automaton"/>
+    <rdfs:label>Deterministic Pushdown Automaton</rdfs:label>
+    <rdfs:comment>A theoretical machine used to recognize context-free languages by accepting or rejecting strings. A pair of states has at most a single transition between them for a given symbol.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Modulus">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:label>Modulus</rdfs:label>
+    <rdfs:comment>The remainder operation in division, often used in modular arithmetic.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Container">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Abstract_Data_Type"/>
+    <rdfs:label>Container</rdfs:label>
+    <rdfs:comment>An abstract data type that stores multiple elements, providing methods for accessing and modifying them.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Overhead">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Space_Analysis"/>
+    <rdfs:label>Overhead</rdfs:label>
+    <rdfs:comment>The additional memory required by an algorithm, beyond the data it processes, often due to data structures or recursive calls.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#K-ary_Tree_Implementation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Tree"/>
+    <rdfs:label>K-ary Tree Implementation</rdfs:label>
+    <rdfs:comment>Methods for implementing trees where each node has up to k children, used for organizing hierarchical data.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Adversary_Argument">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Lower_Bound_Proof"/>
+    <rdfs:label>Adversary Argument</rdfs:label>
+    <rdfs:comment>Techniques that use hypothetical adversaries to establish lower bounds on algorithm complexity, demonstrating the minimal resources required.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Queue">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Linear_Structure"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A linear data structure that supports first in/first out processing.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Transform">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Transform</rdfs:label>
+    <rdfs:comment>Mathematical techniques used to change data representation in order to improve performance.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Parser_Generator">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Parsing"/>
+    <rdfs:label>Parser Generator</rdfs:label>
+    <rdfs:comment>A computer program that generates a parser (program) for a given grammar.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#List_Element_Implementation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#List"/>
+    <rdfs:label>List Element Implementation</rdfs:label>
+    <rdfs:comment>Methods for implementing list elements.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Shellsort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Shellsort</rdfs:label>
+    <rdfs:comment>An in-place comparison-based sorting algorithm.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Programming">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Engineering"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Expression_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Tree"/>
+    <rdfs:label>Expression Tree</rdfs:label>
+    <rdfs:comment>A tree structure meant to represent a mathematical expression. Internal nodes of the expression tree are operators in the expression, with the subtrees being the sub-expressions that are its operand. All leaf nodes are operands.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Signature">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Signature</rdfs:label>
+    <rdfs:comment>In a programming language, the signature for a function is its return type and its list of parameters and their types.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Sorting">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Strassen's_Algorithm">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Matrix_Multiplication"/>
+    <rdfs:label>Strassen's Algorithm</rdfs:label>
+    <rdfs:comment>A recursive algorithm for matrix multiplication that is faster than the standard algorithm.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Getters_and_Setters">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:label>Getters and Setters</rdfs:label>
+    <rdfs:comment>Simple methods for getting or setting the value of a field in an opbject.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#List">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Linear_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Boolean_Operator">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Boolean Operator</rdfs:label>
+    <rdfs:comment>A mathematical operator whose parameters are boolean variables.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Record_Comparison">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Record_Keys"/>
+    <rdfs:label>Record Comparison</rdfs:label>
+    <rdfs:comment>Techniques used to compare records in a dataset, often involving key fields to determine sorting or equalit</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Prime_Number_Algorithms">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:label>Prime Number Algorithms</rdfs:label>
+    <rdfs:comment>Algorithms designed to identify or verify prime numbers, which are integers greater than 1 that have no positive divisors other than 1 and themselves.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binomial_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Tree"/>
+    <rdfs:label>Binomial Tree</rdfs:label>
+    <rdfs:comment>A Binomial Tree of order 0 has 1 node. A Binomial Tree of order k can be constructed by taking two binomial trees of order k-1 and making one the leftmost child of the other. </rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Boyer-Moore_String_Match_Algorithm">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#String_Matching"/>
+    <rdfs:label>Boyer-Moore String Match Algorithm</rdfs:label>
+    <rdfs:comment>An algorithm for performing string matching.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Eclipse_IDE">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Development"/>
+    <rdfs:label>Eclipse IDE</rdfs:label>
+    <rdfs:comment>The Eclipse integrated programming environment.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Java_Scanner_Class">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Java"/>
+    <rdfs:label>Java Scanner Class</rdfs:label>
+    <rdfs:comment>A Java utility class used to parse primitive types and strings using regular expressions.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#List_Cost_Analysis">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#List"/>
+    <rdfs:label>List Cost Analysis</rdfs:label>
+    <rdfs:comment>Evaluating the efficiency of list operations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Grammar">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Formal_Languages"/>
+    <rdfs:label>Grammar</rdfs:label>
+    <rdfs:comment>Formal structures that define the syntax of languages.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Search_in_Sorted_Lists">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Lower_Bound_Proof"/>
+    <rdfs:label>Search in Sorted Lists</rdfs:label>
+    <rdfs:comment>Establishing the minimum number of comparisons needed to search in sorted lists.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Exponentiation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Numerical_Algorithm"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Mathematical_Problem"/>
+    <rdfs:label>Exponentiation</rdfs:label>
+    <rdfs:comment>The operation of computing a value to a given power.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Replacement_Selection">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#External_Sorting"/>
+    <rdfs:label>Replacement Selection</rdfs:label>
+    <rdfs:comment>A variant of heapsort most often used as one phase of an external sort. Given a collection of records stored in an array, and a stream of additional records too large to fit into working memory, replacement selection will unload the heap by sending records to an output stream, and seek to bring new records into the heap from the input stream in preference to shrinking the heap size whenever possible.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Aggregation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>The process of creating a collection of records.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Average_Case">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Average Case</rdfs:label>
+    <rdfs:comment>Scenario describing algorithm performance for the weighted average of all inputs for a given size.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Memory_Management">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Subclass">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Object-Oriented_Programming"/>
+    <rdfs:label>Subclass</rdfs:label>
+    <rdfs:comment>In Object-Oriented Programming, a class that inherits from another class.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Summation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:label>Summation</rdfs:label>
+    <rdfs:comment>The operation of adding a sequence of numbers.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Polynomial_Interpolation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:label>Polynomial Interpolation</rdfs:label>
+    <rdfs:comment>The operation of constructing a polynomial from a set of points.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Non-Comparison_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Non-Comparison Sort</rdfs:label>
+    <rdfs:comment>Sorting algorithms that do not rely on element comparisons, such as counting sort and radix sort.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binary_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Tree"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Interpolation_Search">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search"/>
+    <rdfs:label>Interpolation Search</rdfs:label>
+    <rdfs:comment>Given a sorted array, and knowing the first and last key values stored in some subarray known to contain search key K, interpolation search will compute the expected location of K in the subarray as a fraction of the distance between the known key values. So it will next check that computed location, thus narrowing the search for the next iteration.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Linked_Stack">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Stack"/>
+    <rdfs:label>Linked Stack</rdfs:label>
+    <rdfs:comment>Implements a stack using a linked list.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Median_Finding">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:label>Median Finding</rdfs:label>
+    <rdfs:comment>The problem of finding the median value in a collection of values.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Random_Access_File">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#File_Processing"/>
+    <rdfs:label>Random Access File</rdfs:label>
+    <rdfs:comment>A file that can be read or written in any order, allowing for non-sequential access.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Context-Free_Language">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Language_Classification"/>
+    <rdfs:label>Context-Free Language</rdfs:label>
+    <rdfs:comment>A language generated by a context-free grammar.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Hashing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Programming_Language_Construct">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Languages"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Boolean_Expression">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Boolean Expression</rdfs:label>
+    <rdfs:comment>A mathematical expression where boolean variables are combined using boolean operators.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Quicksort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Quicksort</rdfs:label>
+    <rdfs:comment>An efficient sorting algorithm using divide-and-conquer.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Unified_Modeling_Language">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Engineering"/>
+    <rdfs:label>Unified Modeling Language</rdfs:label>
+    <rdfs:comment>A standardized modeling language used to visualize the design of software systems.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Polynomial_Evaluation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:label>Polynomial Evaluation</rdfs:label>
+    <rdfs:comment>The operation of computing the value of a polynomial on a given set of values for its variables.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Shortest_Path">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Graph"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Open_Hashing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Hashing"/>
+    <rdfs:label>Open Hashing</rdfs:label>
+    <rdfs:comment>A method of handling collisions by using linked lists.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Ford_and_Johnson_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Ford and Johnson Sort</rdfs:label>
+    <rdfs:comment>A sorting algorithm that is close to the theoretical minimum number of key comparisons necessary to sort. Generally not considered practical in practice due to the fact that it is not efficient in terms of the number of records that need to be moved. It consists of first sorting pairs of nodes into winners and losers (of the pairs comparisons), then (recursively) sorting the winners of the pairs, and then finally carefully selecting the order in which the losers are added to the chain of sorted items.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Pumping_Lemma">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Language_Classification"/>
+    <rdfs:label>Pumping Lemma</rdfs:label>
+    <rdfs:comment>A method used to prove that certain languages are not regular.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Pointer">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Pointer</rdfs:label>
+    <rdfs:comment>Variable that stores memory addresses, used for dynamic memory management.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Garbage_Collection">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Memory_Management"/>
+    <rdfs:label>Garbage Collection</rdfs:label>
+    <rdfs:comment>An automated process that periodically runs to reclaim memory that is no longer in use.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Sorting_Problem_Lower_Bound">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Lower_Bound_Proof"/>
+    <rdfs:label>Sorting Problem Lower Bound</rdfs:label>
+    <rdfs:comment>A proof for the lower bound cost of sorting.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Depth-First_Search">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Graph"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Tree"/>
+    <rdfs:label>Depth-First Search</rdfs:label>
+    <rdfs:comment>A graph traversal algorithm. Whenever vertex v is visited during a traversal, DFS will recursively visit all of v's unvisted neighbors. In a tree, this results in a preorder traversal.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Selection_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Selection Sort</rdfs:label>
+    <rdfs:comment>A simple comparison-based sorting algorithm that selects the smallest element and places it at the beginning.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Compiler">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Languages"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A program that takes a program as input and converts it to another form for more efficient processing.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#KD_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Spatial_Data_Structures"/>
+    <rdfs:label>KD Tree</rdfs:label>
+    <rdfs:comment>A space-partitioning data structure for organizing points in a k-dimensional space.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Perfect_Hashing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Hashing"/>
+    <rdfs:label>Perfect Hashing</rdfs:label>
+    <rdfs:comment>A hashing technique that ensures no collisions.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Full_Binary_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree"/>
+    <rdfs:label>Full Binary Tree</rdfs:label>
+    <rdfs:comment>A binary tree where every node has no children or two children.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Red-Black_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+    <rdfs:label>Red-Black Tree</rdfs:label>
+    <rdfs:comment>A self-balancing binary search tree structure.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Search_Structures">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Functional_Programming">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Functional Programming</rdfs:label>
+    <rdfs:comment>A programming paradigm where programs are constructed by applying and composing functions.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Floyd's_Algorithm">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Shortest_Path"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Dynamic_Programming"/>
+    <rdfs:label>Floyd's Algorithm</rdfs:label>
+    <rdfs:comment>An algorithm for finding shortest paths in a weighted graph with positive or negative edge weights (but no negative cycles).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Parse_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Parsing"/>
+    <rdfs:label>Parse Tree</rdfs:label>
+    <rdfs:comment>A tree that represents the syntactic structure of an input string, making it easy to compare against a grammar to see if it is syntactically correct.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Shortest_Path_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Graph"/>
+    <rdfs:label>Shortest Path Problem</rdfs:label>
+    <rdfs:comment>Various problems that require finding shortest paths between pair of nodes in a graph.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#NP-completeness">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Complexity_Theory"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Abstract_Data_Type">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:label>Abstract Data Type</rdfs:label>
+    <rdfs:comment>A conceptual model that defines object in terms of a set of operations (their inputs and outputs).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#KMP_String_Match_Algorithm">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#String_Matching"/>
+    <rdfs:label>KMP String Match Algorithm</rdfs:label>
+    <rdfs:comment>An efficient string matching algorithm that uses prefix functions.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Sorting_Notation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Sorting Notation</rdfs:label>
+    <rdfs:comment>Terminology used to discuss the sorting problem and algorithms.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Full_Binary_Tree_Theorem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree"/>
+    <rdfs:label>Full Binary Tree Theorem</rdfs:label>
+    <rdfs:comment>Theorem related to properties of full binary trees.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Loop">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Iteration"/>
+    <rdfs:label>Loop</rdfs:label>
+    <rdfs:comment>Generic term for a programming construct to do iteration, such as a for or while statement.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#String">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>String</rdfs:label>
+    <rdfs:comment>A series of symbols.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#ISAM">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Indexing"/>
+    <rdfs:label>ISAM</rdfs:label>
+    <rdfs:comment>(Indexed Sequential Access Method). A file organization method that combines sequential access with indexing to improve data retrieval.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Proof"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Conditional_Statement">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Conditional Statement</rdfs:label>
+    <rdfs:comment>A branch statement like an IF or CASE statement.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Independent_Set_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#NP-completeness"/>
+    <rdfs:label>Independent Set Problem</rdfs:label>
+    <rdfs:comment>Finding the largest set of vertices in a graph, no two of which are adjacent.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Array_Representation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Sequential_Tree_Representation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#General_Tree"/>
+    <rdfs:label>Sequential Tree Representation</rdfs:label>
+    <rdfs:comment>Serialization of a tree structure.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Data_Type">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:label>Data Type</rdfs:label>
+    <rdfs:comment>A type together with a collection of operations to manipulate the type.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Web-CAT">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Development"/>
+    <rdfs:label>Web-CAT</rdfs:label>
+    <rdfs:comment>An automated assessment tool -- it takes program submissions and automatically grades them for correctness (as defined by passing unit tests) and style (as defined by a collection of style rules).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Least_Recently_Used">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Buffer_Pool"/>
+    <rdfs:label>Least Recently Used</rdfs:label>
+    <rdfs:comment>Abbreviated LRU, it is a popular heuristic to use for deciding which buffer in a buffer pool to flush when data in the buffer pool must be replaced by new data being read into a cache. Analogous to the move-to-front heuristic for maintaining a self-organizing list.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Analyzing_Problems">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Analyzing Problems</rdfs:label>
+    <rdfs:comment>Methods for assessing the complexity of different computational problems.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#List_Implementation_Comparison">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#List"/>
+    <rdfs:label>List Implementation Comparison</rdfs:label>
+    <rdfs:comment>Comparing the cost of two or more list implementations (time for various operations, space for an element or the entire list).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Language_Classification">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Formal_Languages"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>The process of determining the classification for a langauge, such as regular, context free, etc.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Polynomial_Multiplication">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Mathematical_Problem"/>
+    <rdfs:label>Polynomial Multiplication</rdfs:label>
+    <rdfs:comment>The operation of multiplying two polynomials together.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Method">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Object-Oriented_Programming"/>
+    <rdfs:label>Method</rdfs:label>
+    <rdfs:comment>In the object-oriented programming paradigm, a method is an operation on a class. A synonym for member function.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#File_Processing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Systems"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Poset">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:label>Poset</rdfs:label>
+    <rdfs:comment>Shorthand for Partially Ordered Set. In set notation, a binary relation is called a partial order if it is antisymmetric and transitive.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Regular_Language">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Formal_Languages"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Language_Classification"/>
+    <rdfs:label>Regular Language</rdfs:label>
+    <rdfs:comment>A language that can be expressed with a regular expression, regular grammar, or a finite automata.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#JUnit_Testing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Testing"/>
+    <rdfs:label>JUnit Testing</rdfs:label>
+    <rdfs:comment>A framework for writing and running automated tests in Java.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Non-Regular_Language">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Language_Classification"/>
+    <rdfs:label>Non-Regular Language</rdfs:label>
+    <rdfs:comment>Any language that is not regular. </rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#I'th_Element_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:label>I'th Element Problem</rdfs:label>
+    <rdfs:comment>Determine the ith greatest (or smallest) value in a collection.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Key">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:label>Key</rdfs:label>
+    <rdfs:comment>A field or part of a larger record used to represent that record for the purpose of searching or comparing. Another term for search key.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Clique_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#NP-completeness"/>
+    <rdfs:label>Clique Problem</rdfs:label>
+    <rdfs:comment>Identifying the largest clique within a graph.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Buddy_Method_Memory_Manager">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Memory_Management"/>
+    <rdfs:label>Buddy Method Memory Manager</rdfs:label>
+    <rdfs:comment>A memory allocation algorithm that splits blocks of memory in half, with the two halves defined to be buddies.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Problem_Solving_Heuristics">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Learning"/>
+    <rdfs:label>Problem Solving Heuristics</rdfs:label>
+    <rdfs:comment>Techniques or strategies used to simplify and solve complex problems.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Relation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:label>Relation</rdfs:label>
+    <rdfs:comment>In set notation, a relation R over set S is a set of tuples from S.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Amortized_Analysis">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Lower_Bound_Proof"/>
+    <rdfs:label>Amortized Analysis</rdfs:label>
+    <rdfs:comment>A technique in algorithm analysis used to average the running time of operations over a sequence of operations, providing a better understanding of the overall efficiency than analyzing individual operations in isolatio</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#File_System">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#File_Processing"/>
+    <rdfs:label>File System</rdfs:label>
+    <rdfs:comment>The organization of data on peripheral storage, such as a disk drive or DVD drive.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Lists">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Linear_Structures"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Test_Case">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Testing"/>
+    <rdfs:label>Test Case</rdfs:label>
+    <rdfs:comment>An individual input scenario normally used to test a specific piece of functionality in a program.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Main_Method">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Main Method</rdfs:label>
+    <rdfs:comment>By default, the method in a class that gets called when the associated program is invoked.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Language">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Formal_Languages"/>
+    <rdfs:label>Language</rdfs:label>
+    <rdfs:comment>A set of strings whose symbols are taken from a set called the alphabet.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Search_in_Unsorted_Lists">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Lower_Bound_Proof"/>
+    <rdfs:label>Search in Unsorted Lists</rdfs:label>
+    <rdfs:comment>Establishing the minimum number of comparisons needed to search in unsorted lists.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Quadratic_Binary_Search">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search"/>
+    <rdfs:label>Quadratic Binary Search</rdfs:label>
+    <rdfs:comment>A form of interpolation search that (on each iteration) first computes an expected position for the key value, then makes a series of jumps by a root of the array size until the search key is bracketed.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Program">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Languages"/>
+    <rdfs:label>Program</rdfs:label>
+    <rdfs:comment>An instance, or concrete representation, of an algorithm in some programming language.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Randomized_Algorithm">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+    <rdfs:label>Randomized Algorithm</rdfs:label>
+    <rdfs:comment>An algorithm that makes use of random numbers at some point in its decision making.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Random_Number_Generator">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Numerical_Algorithm"/>
+    <rdfs:label>Random Number Generator</rdfs:label>
+    <rdfs:comment>A process for generating a random number.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Equivalance_Class">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Data_Structure">
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A data representation and its associated operations. Alternatively, the implementation for an ADT.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Upper_Bound">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Upper Bound</rdfs:label>
+    <rdfs:comment>Theoretical limits on the maximum performance of an algorithm.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Class_Hierarchy">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Object-Oriented_Programming"/>
+    <rdfs:label>Class Hierarchy</rdfs:label>
+    <rdfs:comment>A classification of object types with super-class/sub-class relationships.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Best_Case">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Best Case</rdfs:label>
+    <rdfs:comment>Scenario describing algorithm performance for the best of all inputs for a given size.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Radix_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Radix Sort</rdfs:label>
+    <rdfs:comment>A (supposed) non-comparison-based sorting algorithm that sorts numbers digit by digit.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Big_Omega">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Big Omega</rdfs:label>
+    <rdfs:comment>Notation used to describe a lower bound on performance of an algorithm.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Optimal_Sorting_Algorithms">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Optimal Sorting Algorithms</rdfs:label>
+    <rdfs:comment>Sorting algorithms that achieve the best possible time complexity for specific datasets.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binary_Trees">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Disjoint_Set">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Set"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Equivalance_Class"/>
+    <rdfs:label>Disjoint Set</rdfs:label>
+    <rdfs:comment>A collection of sets that are mutually exclusive, supporting efficient union and find operations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Complexity_Theory">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Theory_of_Computation"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Proof"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Code_Coverage">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Testing"/>
+    <rdfs:label>Code Coverage</rdfs:label>
+    <rdfs:comment>A measure of the extent to which a program is executed during testing.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Linear_Structure">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Matrix_Multiplication">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Numerical_Algorithm"/>
+    <rdfs:label>Matrix Multiplication</rdfs:label>
+    <rdfs:comment>The problem of multiplying two matrices together.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Unit_Testing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Testing"/>
+    <rdfs:label>Unit Testing</rdfs:label>
+    <rdfs:comment>A type of testing that uses a collection of individual tests (called Unit Tests) to test various parts of the program.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Postorder_Traversal">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree_Traversals"/>
+    <rdfs:label>Postorder Traversal</rdfs:label>
+    <rdfs:comment>A traversal method where the left subtree is visited first, then the right subtree, and the node is visited last.&#13;</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#AVL_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+    <rdfs:label>AVL Tree</rdfs:label>
+    <rdfs:comment>A self-balancing binary search tree.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Vertex_Cover_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#NP-completeness"/>
+    <rdfs:label>Vertex Cover Problem</rdfs:label>
+    <rdfs:comment>Find the smallest set of vertices such that every edge in the graph is incident to at least one vertex in the set.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Edit_Distance_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:label>Edit Distance Problem</rdfs:label>
+    <rdfs:comment>A measure of the similarity between two strings, calculated by counting the minimum number of operations required to transform one string into another.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Largest_Common_Factor">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:label>Largest Common Factor</rdfs:label>
+    <rdfs:comment>The problem of finding the largest common factor for two values.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binary_Search_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree"/>
+    <rdfs:label>Binary Search Tree</rdfs:label>
+    <rdfs:comment>A binary tree where each node has a key greater than its left child and less than its right child.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Inorder_Traversal">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree_Traversal"/>
+    <rdfs:label>Inorder Traversal</rdfs:label>
+    <rdfs:comment>A traversal method where the left subtree is visited first, then the node, and finally the right subtree.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Variable">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Variable</rdfs:label>
+    <rdfs:comment>In a program, an identifier for an object or primitive.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Minimum-Cost_Spanning_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Graph"/>
+    <rdfs:label>Minimum-Cost Spanning Tree</rdfs:label>
+    <rdfs:comment>A spanning tree of a graph that minimizes the total edge weight.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#String_Matching_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:label>String Matching Problem</rdfs:label>
+    <rdfs:comment>The problem of finding occurrences of a substring (pattern) within a main string (text).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Version_Control">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Development"/>
+    <rdfs:label>Version Control</rdfs:label>
+    <rdfs:comment>A process of maintaining snapshots of a program during development.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binary_Insertion_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Binary Insertion Sort</rdfs:label>
+    <rdfs:comment>A (largely theoretical) variant on insertion sort where the location for inserting the next object into the sorted portion of the list is found using binary search. This minimizes the number of comparisons required, but in practice does not improve the amount of swaps required.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Linear_Indexing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Indexing"/>
+    <rdfs:label>Linear Indexing</rdfs:label>
+    <rdfs:comment>A method of organizing large amounts of data on disk in a sequential manner, allowing for efficient search. Simpler than a B-tree, but does not support efficient database updates.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Worst_Case">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Worst Case</rdfs:label>
+    <rdfs:comment>Scenario describing algorithm performance for the best of all inputs for a given size.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Algorithm_Analysis">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Proof"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A analytic process to determine the runtime cost of an algorithm.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Testing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Development"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>The process for determining whether a program has bugs.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Knapsack_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Dynamic_Programming"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#NP-completeness"/>
+    <rdfs:label>Knapsack Problem</rdfs:label>
+    <rdfs:comment>An optimization problem that seeks to maximize the value of items placed in a knapsack without exceeding its capacity.</rdfs:comment>
+    <rdfs:comment>An optimization problem that seeks to maximize the value of items placed in a knapsack without exceeding its capacity. There are many variations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Closure_Property">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Relations"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Language_Classification"/>
+    <rdfs:label>Closure Property</rdfs:label>
+    <rdfs:comment>A property of a relation that ensure the relation is closed under certain operations.</rdfs:comment>
+    <rdfs:comment>Use of a closure property to help prove whether a given language is included or excluded as a member of a particular language classification.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#For_Loop">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Iteration"/>
+    <rdfs:label>For Loop</rdfs:label>
+    <rdfs:comment>The basic iteration keyword in many programming languages.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Fibonacci_Sequence">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:label>Fibonacci Sequence</rdfs:label>
+    <rdfs:comment>A series of numbers where each number is the sum of the two preceding ones, starting from 0 and 1. It appears in many natural phenomena and is used in algorithms.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Hash_Function">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Hashing"/>
+    <rdfs:label>Hash Function</rdfs:label>
+    <rdfs:comment>A function used to compute the hash value for a key.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Breadth-First_Search">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Graph"/>
+    <rdfs:label>Breadth-First Search</rdfs:label>
+    <rdfs:comment>An organized process to visit all nodes in a graph by first visiting all nodes one step from the source, then two steps, and so on. If the graph were actually a tree, this would be visitng nodes level by level.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Polymorphism">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Object-Oriented_Programming"/>
+    <rdfs:label>Polymorphism</rdfs:label>
+    <rdfs:comment>An object-oriented programming term meaning one name, many forms. It describes the ability of software to change its behavior dynamically. Two basic forms exist: run-time polymorphism and compile-time polymorphism.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Pushdown_Automata">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Finite_State_Machines"/>
+    <rdfs:label>Pushdown Automata</rdfs:label>
+    <rdfs:comment>A type of Finite State Automata that adds a stack memory to the basic Deterministic Finite Automata machine. This extends the set of languages that can be recognize to the context-free languages.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Huffman_Coding_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Tree_Structure"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Compression"/>
+    <rdfs:label>Huffman Coding Tree</rdfs:label>
+    <rdfs:comment>A tree used for encoding symbols based on frequency, achieving efficient compression.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Finite_State_Machine">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Formal_Languages"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Theory_of_Computation"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A theoretical machine representation based on states and transitions between them. Finite refers to the number of states.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Object-Oriented_Programming">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Languages"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A programming paradigm based on the concept of objects, encapsulating data and behavior.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#NP-Complete">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#NP-Complete"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Complexity_Theory"/>
+    <rdfs:label>NP-Complete</rdfs:label>
+    <rdfs:comment>A class of decision problems for which no polynomial algorithm is known, and where each problem is as hard as the hardest problems in NP. Generally, any problem where a proposed solution can be verified in polynomial time.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Composition">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:label>Composition</rdfs:label>
+    <rdfs:comment>The combining of distinct parts or elements to form a whole.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Array">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Linear_Structure"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Aggregation"/>
+    <rdfs:label>Array</rdfs:label>
+    <rdfs:comment>A contiguous collection of same-sized objects in memory.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Dirty_Bit">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Buffer_Pool"/>
+    <rdfs:label>Dirty Bit</rdfs:label>
+    <rdfs:comment>Within a buffer pool, a piece of information associated with each buffer that indicates whether the contents of the buffer have changed since being read in from backing storage.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Master_Theorem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Recurrence_Relation"/>
+    <rdfs:label>Master Theorem</rdfs:label>
+    <rdfs:comment>A theorem that makes it easy to solve divide-and-conquer recurrences.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Unsolvable_Problems">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Computability"/>
+    <rdfs:label>Unsolvable Problems</rdfs:label>
+    <rdfs:comment>Problems that cannot be solved by any algorithm, often serving as examples of the limits of computation.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#NP-Completeness_Proof">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#NP-Complete"/>
+    <rdfs:label>NP-Completeness Proof</rdfs:label>
+    <rdfs:comment>Techniques used to demonstrate that a problem is NP-complete, indicating it is as hard as the hardest problems in NP.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Permuation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+    <rdfs:label>Permuation</rdfs:label>
+    <rdfs:comment>The arrangement of elements in a specific order.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Lower_Bound_Proof">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Proof"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:label>Lower Bound Proof</rdfs:label>
+    <rdfs:comment>Proof of the theoretical limit on the minimum cost of an algorithm.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Indexing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structures"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Automata">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Finite_State_Machine"/>
+    <rdfs:label>Automata</rdfs:label>
+    <rdfs:comment>A generic term for a finite state machine.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Parameter_Passing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Parameter Passing</rdfs:label>
+    <rdfs:comment>A mechanism for passing a parameter to a method or function. There are many variations on this.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Record_Keys">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Lambda_Calculus">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Languages"/>
+    <rdfs:label>Lambda Calculus</rdfs:label>
+    <rdfs:comment>A formal system in mathematical logic for expressing computation through function abstraction and application.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Induction_Proof">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Proof"/>
+    <rdfs:label>Induction Proof</rdfs:label>
+    <rdfs:comment>A method of mathematical proof used to prove statements about sets and natural numbers. Closely corresponds to recursion.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binary_Tree_Node_Implementation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree"/>
+    <rdfs:label>Binary Tree Node Implementation</rdfs:label>
+    <rdfs:comment>Design techniques for the node of a binary tree.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Scope">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Scope</rdfs:label>
+    <rdfs:comment>The parts of a program that can see and access a variable.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Software_Development">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Engineering"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Linked_List">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#List"/>
+    <rdfs:label>Linked List</rdfs:label>
+    <rdfs:comment>A sequence of nodes where each node points to the next.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Formal_Languages">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Theory_of_Computation"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Sequential_Fit_Memory_Manager">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Memory_Management"/>
+    <rdfs:label>Sequential Fit Memory Manager</rdfs:label>
+    <rdfs:comment>Allocates memory blocks by processing the free block list sequentially and deciding which is the most approrpriate to pick depending on its strategy.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#For-Each_Loop">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Iteration"/>
+    <rdfs:label>For-Each Loop</rdfs:label>
+    <rdfs:comment>A type of for loop that iterates over the objects in a collection.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Topological_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Graph"/>
+    <rdfs:label>Topological Sort</rdfs:label>
+    <rdfs:comment>Linear ordering of vertices in a directed acyclic graph, ensuring that for every directed edge, the start vertex comes before the end vertex.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#2-3_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+    <rdfs:label>2-3 Tree</rdfs:label>
+    <rdfs:comment>A balanced search tree where each node can have two or three children, maintaining efficient search, insertion, and deletion operations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Tree-Based_Indexing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Indexing"/>
+    <rdfs:label>Tree-Based Indexing</rdfs:label>
+    <rdfs:comment>Using tree structures, such as B-trees, to index and access large amounts of data efficiently.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Variable_Scope">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Variable Scope</rdfs:label>
+    <rdfs:comment>The parts of a program that can see and access a variable.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#General_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Tree"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+    <rdfs:label>General Tree</rdfs:label>
+    <rdfs:comment>A tree structure where any node is permitted to have any number of children.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Image_Representation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+    <rdfs:label>Image Representation</rdfs:label>
+    <rdfs:comment>Representations for images</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binary_Tree_Space_Analysis">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree"/>
+    <rdfs:label>Binary Tree Space Analysis</rdfs:label>
+    <rdfs:comment>Evaluating the memory requirements for storing and processing binary trees.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Generics">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Generics</rdfs:label>
+    <rdfs:comment>Parameterized types or methods.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Rabin-Karp_String_Match_Algorithm">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#String_Matching"/>
+    <rdfs:label>Rabin-Karp String Match Algorithm</rdfs:label>
+    <rdfs:comment>A string searching algorithm using hashing</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Local_Variable">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:label>Local Variable</rdfs:label>
+    <rdfs:comment>A variable defined within a function or block, accessible only within that scope.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Non-Deterministic_Finite_Automata">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Finite_State_Machines"/>
+    <rdfs:label>Non-Deterministic Finite Automata</rdfs:label>
+    <rdfs:comment>A finite automaton where each state can have zero, one, or multiple transitions for each symbol.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Parsing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Compiler"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Splay_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+    <rdfs:label>Splay Tree</rdfs:label>
+    <rdfs:comment>A self-adjusting binary search tree that is meant to improve access time over the standard BST.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binary_Tree_Terminology">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree"/>
+    <rdfs:label>Binary Tree Terminology</rdfs:label>
+    <rdfs:comment>Terms and definitions related to binary trees.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Map">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Map</rdfs:label>
+    <rdfs:comment>A data structure that relates a key to a record.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Context-Free_Grammar">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Language_Classification"/>
+    <rdfs:label>Context-Free Grammar</rdfs:label>
+    <rdfs:comment>A grammar for a language that is confext free. </rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Complete_Binary_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree"/>
+    <rdfs:label>Complete Binary Tree</rdfs:label>
+    <rdfs:comment>Binary trees where all levels except possibly the last are completely filled.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Command_Line_Interface">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming"/>
+    <rdfs:label>Command Line Interface</rdfs:label>
+    <rdfs:comment>A text-based interface for interacting with computer programs by entering commands</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Bucket_Hashing">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Hashing"/>
+    <rdfs:label>Bucket Hashing</rdfs:label>
+    <rdfs:comment>A type of hashing where keys are hashed to a bucket that might store multiple records.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Graph_Traversal">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Graph"/>
+    <rdfs:label>Graph Traversal</rdfs:label>
+    <rdfs:comment>Technique for visiting all nodes in a graph.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Spatial_Data_Structure">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A data structure designed to support efficient processing when a spatial attribute is used as the key. In particular, a data structure that supports efficient search by location, or finds all records within a given region in two or more dimensions. Examples of spatial data structures to store point data include the bintree, the PR quadtree and the kd tree.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#State_Space_Lower_Bound">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Lower_Bound_Proof"/>
+    <rdfs:label>State Space Lower Bound</rdfs:label>
+    <rdfs:comment>Methods for proving lower bounds by examining the state space of algorithms and exploring possible configurations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binary_Tree_Traversals">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Trees"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Number_Problems">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Mathematical_Problem"/>
+    <rdfs:label>Number Problems</rdfs:label>
+    <rdfs:comment>Addressing mathematical problems related to numbers, such as prime finding or factorization.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Hamiltonian_Cycle_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#NP-completeness"/>
+    <rdfs:label>Hamiltonian Cycle Problem</rdfs:label>
+    <rdfs:comment>Find a cycle in a graph that visits every vertex exactly once.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Inheritance">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Object-Oriented_Programming"/>
+    <rdfs:label>Inheritance</rdfs:label>
+    <rdfs:comment>In Object-Oriented Programming, the mechanism of basing an object or class upon another object or class, retaining similar implementation.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Return_Statement">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Return Statement</rdfs:label>
+    <rdfs:comment>A programming construct for returning from a method or function to its caller.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Spatial_Data_Structures">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Type">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Type</rdfs:label>
+    <rdfs:comment>A collection of values.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Backus-Naur_Form">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Compilers"/>
+    <rdfs:label>Backus-Naur Form</rdfs:label>
+    <rdfs:comment>A notation used to express context-free grammars, commonly used in the description of programming languages.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Static">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Static</rdfs:label>
+    <rdfs:comment>Something that is not changing (in contrast to dynamic). In computer programming, static normally refers to something that happens at compile time. For example, static analysis is analysis of the program’s text or structure, as opposed to its run-time behavior. Static binding or static memory allocation occurs at compile time.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Recursive_Tree_Functions">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Recursion"/>
+    <rdfs:label>Recursive Tree Functions</rdfs:label>
+    <rdfs:comment>Functions that call themselves to solve tree-related problems.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Tree_Structure">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Exchange_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Exchange Sort</rdfs:label>
+    <rdfs:comment>Any sorting algorithm that can only reorder the list by swapping adjacent records.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#B-Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Indexing"/>
+    <rdfs:label>B-Tree</rdfs:label>
+    <rdfs:comment>A balanced tree data structure that maintains large sorted lists and allows for efficient insertion, deletion, and search operations. Widely used to store datbases on disk.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Maximum_Value_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Lower_Bound_Proof"/>
+    <rdfs:label>Maximum Value Problem</rdfs:label>
+    <rdfs:comment>Determine the maximum value in a dataset.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Composite_Design">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Design_Pattern"/>
+    <rdfs:label>Composite Design</rdfs:label>
+    <rdfs:comment>A structural design pattern that composes objects into tree structures to represent part-whole hierarchies, allowing clients to treat individual objects and compositions uniformly.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Search">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Compilers">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Languages"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Random_Number">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Numerical_Algorithm"/>
+    <rdfs:label>Random Number</rdfs:label>
+    <rdfs:comment>Ideally, a number picked from some range such that all values in the range have equal probability of being selected next.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Chained_Matrix_Multplication_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:label>Chained Matrix Multplication Problem</rdfs:label>
+    <rdfs:comment>A series of matricies are multiplied together. While the order in which adjacent matricies are multiplied will not change the final answer, it can greatly affect the cost if the matricies are of different sizes.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Pushdown_Automaton">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Finite_State_Machine"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Inversion">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Inversion</rdfs:label>
+    <rdfs:comment>A measure of how disordered a series of values is. For each element X in the series, count one inversion for each element to the left of X that is greater than the value of X (and so must ultimately be moved to the right of X during a sorting process).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Array-Based_Stack">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Stack"/>
+    <rdfs:label>Array-Based Stack</rdfs:label>
+    <rdfs:comment>Implementing a stack using an array.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Linked_Queue">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Queue"/>
+    <rdfs:label>Linked Queue</rdfs:label>
+    <rdfs:comment>Implements a queue using a linked list.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Insertion_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Insertion Sort</rdfs:label>
+    <rdfs:comment>A simple sorting algorithm that builds the final sorted array one item at a time.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Union/Find_Algorithm">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Disjoint_Set"/>
+    <rdfs:label>Union/Find Algorithm</rdfs:label>
+    <rdfs:comment>An algorithm used to keep track of disjoint sets and perform union and find operations efficiently.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Equivalence_Class">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Relations"/>
+    <rdfs:label>Equivalence Class</rdfs:label>
+    <rdfs:comment>A distint subset that results from partitioning a set based on an equivalence relation.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Growth_Rate">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Growth Rate</rdfs:label>
+    <rdfs:comment>The rate at which an algorithm's runtime increases as the input size increases.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Dictionary">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Abstract_Data_Type"/>
+    <rdfs:label>Dictionary</rdfs:label>
+    <rdfs:comment>An abstract data type representing a collection of key-value pairs.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Bubble_Sort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Bubble Sort</rdfs:label>
+    <rdfs:comment>A simple, but inefficient, comparison-based sorting algorithm.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Iteration">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Debugging">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Development"/>
+    <rdfs:label>Debugging</rdfs:label>
+    <rdfs:comment>Techniques used to identify and correct errors in software.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Reference">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Java"/>
+    <rdfs:label>Reference</rdfs:label>
+    <rdfs:comment>A restricted form of pointer that may hold only addresses of objects or the null value.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Finite_State_Machines">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Theory_of_Computation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Dynamic_Storage_Allocation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Memory_Management"/>
+    <rdfs:label>Dynamic Storage Allocation</rdfs:label>
+    <rdfs:comment>Allocates memory from a pool as needed</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Array-Based_Queue">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Queue"/>
+    <rdfs:label>Array-Based Queue</rdfs:label>
+    <rdfs:comment>Implementing a queue using an array.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Deterministic_Finite_Automata">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Finite_State_Machine"/>
+    <rdfs:label>Deterministic Finite Automata</rdfs:label>
+    <rdfs:comment>A theoretical machine used to recognize regular languages by accepting or rejecting strings. A pair of states has at most a single transition between them for a given symbol.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Graph">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problems"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Sparse_Matrix">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Array_Representation"/>
+    <rdfs:label>Sparse Matrix</rdfs:label>
+    <rdfs:comment>A matrix in which most elements are zero. Sparse matrices are stored efficiently using specialized storage formats to save space and reduce computational costs.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Lower_Bound">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Lower Bound</rdfs:label>
+    <rdfs:comment>Theoretical limit on the minimum cost of an algorithm.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Mergesort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>Mergesort</rdfs:label>
+    <rdfs:comment>A stable sorting algorithm that divides the array into halves, sorts, and merges them.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Traveling_Salesman_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#NP-completeness"/>
+    <rdfs:label>Traveling Salesman Problem</rdfs:label>
+    <rdfs:comment>Find the shortest possible route that visits each node in a graph once and returns to the origin node.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Regular_Grammar">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Language_Classification"/>
+    <rdfs:label>Regular Grammar</rdfs:label>
+    <rdfs:comment>A grammar that generates a regular language.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Empirical_Comparison">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Development"/>
+    <rdfs:label>Empirical Comparison</rdfs:label>
+    <rdfs:comment>An approach to comparing to things by actually seeing how they perform. Most typically, we are referring to the comparison of two programs by running each on a suite of test data and measuring the actual running times. Empirical comparison is subject to many possible complications, including unfair selection of test data, and inaccuracies in the time measurements due to variations in the computing environment between various executions of the programs.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Mathematical_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Circuit_Satisfiability_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#NP-completeness"/>
+    <rdfs:label>Circuit Satisfiability Problem</rdfs:label>
+    <rdfs:comment>Determining the inputs to a Boolean circuit that result in a true output.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Self-Organizing_List">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search"/>
+    <rdfs:label>Self-Organizing List</rdfs:label>
+    <rdfs:comment>Lists that reorder themselves based on access patterns to improve average access time.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Binsort">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Bucket_Sort"/>
+    <rdfs:label>Binsort</rdfs:label>
+    <rdfs:comment>A type of bucket sort, where a bucket stores only one key value (though it might store multiple records with that key value).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Balanced_Binary_Tree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Tree"/>
+    <rdfs:label>Balanced Binary Tree</rdfs:label>
+    <rdfs:comment>Binary tree that maintains balance to improve performance.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Proof_by_Contradiction">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Proof"/>
+    <rdfs:label>Proof by Contradiction</rdfs:label>
+    <rdfs:comment>A proof method where the negation of the statement to be proved is shown to lead to a contradiction.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Design_Pattern">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:label>Design Pattern</rdfs:label>
+    <rdfs:comment>Reusable solutions to common design problems in software development.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Satisfiability_Problem">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Problem"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#NP-completeness"/>
+    <rdfs:label>Satisfiability Problem</rdfs:label>
+    <rdfs:comment>Determine if there is a satisfying assignment for a Boolean formula.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Link_Node">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Linear_Structure"/>
+    <rdfs:label>Link Node</rdfs:label>
+    <rdfs:comment>The fundamental building blocks of linked lists, where each node contains data and a reference to the next node.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Heap">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Priority_Queue"/>
+    <rdfs:label>Heap</rdfs:label>
+    <rdfs:comment>A specialized tree-based data structure that satisfies the heap property.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Doubly_Linked_List">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#List"/>
+    <rdfs:label>Doubly Linked List</rdfs:label>
+    <rdfs:comment>A linked list where each node has pointers to both the previous and next nodes.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Comparator">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:label>Comparator</rdfs:label>
+    <rdfs:comment>A function that compares two objects (generally records in a collection for sorting or searching purposes).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Probabilistic_Data_Structure">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Analyzing_Programs">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Analyzing Programs</rdfs:label>
+    <rdfs:comment>Techniques for examining the performance and behavior of computer programs.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Object">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Object-Oriented_Programming"/>
+    <rdfs:label>Object</rdfs:label>
+    <rdfs:comment>An instance of a class, that is, something that is created and takes up storage during the execution of a computer program. In the object-oriented programming paradigm, objects are the basic units of operation. Objects have state in the form of data members, and they know how to perform certain actions (methods).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Preorder_Traversal">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Binary_Tree_Traversals"/>
+    <rdfs:label>Preorder Traversal</rdfs:label>
+    <rdfs:comment>A traversal method where the node is visited first, followed by the left subtree, and then the right subtree.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Trie">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search_Structures"/>
+    <rdfs:label>Trie</rdfs:label>
+    <rdfs:comment>A tree-like data structure used to store dynamic sets of strings, supporting efficient string search operations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Code_Tuning">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Design"/>
+    <rdfs:label>Code Tuning</rdfs:label>
+    <rdfs:comment>The process of optimizing code to improve performance and efficiency, separate from improving the underlying algorithm.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Stack">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Linear_Structure"/>
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A list-like structure in which elements may be inserted or removed from only one end.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Space_Analysis">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Space Analysis</rdfs:label>
+    <rdfs:comment>Evaluating the memory usage of algorithms.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Problem">
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A task to be performed. In theoretical computer science, it is best thought of as a function or a mapping of inputs to outputs.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Graph_Representation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Graph"/>
+    <rdfs:label>Graph Representation</rdfs:label>
+    <rdfs:comment>Various ways to represent graphs in memory. The two most typical are the adjacency list and adjacency matrix representations.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Delegation">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Design_Pattern"/>
+    <rdfs:label>Delegation</rdfs:label>
+    <rdfs:comment>One object (the delegating object) passes responsibility for a task to another object (the delegate).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Algorithm">
+    <rdfs:label></rdfs:label>
+    <rdfs:comment>A formal description for a process taken by a computer program.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Data_Compression">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Search_Structure">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Interface">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Java"/>
+    <rdfs:label>Interface</rdfs:label>
+    <rdfs:comment>In Java, a definition for required operations (and their signatures) to be implemented by the adopting object.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#DFA_Minimization">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Formal_Languages"/>
+    <rdfs:label>DFA Minimization</rdfs:label>
+    <rdfs:comment>An algorithm to minimize the number of nodes in a DFA.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Bintree">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Spatial_Data_Structure"/>
+    <rdfs:label>Bintree</rdfs:label>
+    <rdfs:comment>A spatial data structure with the shape of a binary tree, that splits the key space in half, alternating through each dimension.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Lazy_List">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Programming_Language_Construct"/>
+    <rdfs:label>Lazy List</rdfs:label>
+    <rdfs:comment>Computes the value of a position in a list only when needed.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Ambiguity">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Parsing"/>
+    <rdfs:label>Ambiguity</rdfs:label>
+    <rdfs:comment>In parsing, the property that a given string can be interpreted in multiple ways under the associated grammar.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Dynamic_Programming">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#String_Matching">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#ArrayList_Class">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Java"/>
+    <rdfs:label>ArrayList Class</rdfs:label>
+    <rdfs:comment>An array-based list implementation in Java</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Linear_Structures">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Data_Structure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Reduction">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Proof"/>
+    <rdfs:label>Reduction</rdfs:label>
+    <rdfs:comment>Techniques for transforming one problem into another, used in complexity theory.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Recursion">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Numerical_Algorithm">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Regular_Expression">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Regular_Language"/>
+    <rdfs:label>Regular Expression</rdfs:label>
+    <rdfs:comment>A sequence of characters that define a search pattern, often used for pattern matching within strings.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Big_O">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm_Analysis"/>
+    <rdfs:label>Big O</rdfs:label>
+    <rdfs:comment>Notation used to describe an upper bound on performance of an algorithm.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Computability">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Partial_Order">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Relation"/>
+    <rdfs:label>Partial Order</rdfs:label>
+    <rdfs:comment>A binary relation over a set that is reflexive, antisymmetric, and transitive.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Misconception">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Learning"/>
+    <rdfs:label>Misconception</rdfs:label>
+    <rdfs:comment>A misunderstanding about something.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Relations">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Math_Topic"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Search_Key">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Search"/>
+    <rdfs:label>Search Key</rdfs:label>
+    <rdfs:comment>A field in a record that is used to order the records during a sort.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Serialization">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+    <rdfs:label>Serialization</rdfs:label>
+    <rdfs:comment>Convert the information in a compound object into a sequential series of bytes or symbols for storage such as in an array or on disk.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Probabilistic_Algorithm">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Algorithm"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#While_Loop">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Iteration"/>
+    <rdfs:label>While Loop</rdfs:label>
+    <rdfs:comment>A standard programming construct for iteration.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#N-squared_Sorts">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Sorting"/>
+    <rdfs:label>N-squared Sorts</rdfs:label>
+    <rdfs:comment>Sorting algorithms with time complexity proportional to the square of the number of elements, such as bubble sort and insertion sort.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Software_Design">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Software_Engineering"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://opendsa.org/ontology#Scanner">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    <rdfs:subClassOf rdf:resource="http://opendsa.org/ontology#Compiler"/>
+    <rdfs:label>Scanner</rdfs:label>
+    <rdfs:comment>The part of a compiler that is responsible for doing lexical analysis.</rdfs:comment>
+  </rdf:Description>
+</rdf:RDF>
