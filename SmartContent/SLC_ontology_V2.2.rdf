@@ -1,0 +1,489 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#"
+     xml:base="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/description -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/description"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://webprotege.stanford.edu/Exercise -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/Exercise">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#type"/>
+        <rdfs:label>Exercise</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R74z2WheKisastdv7j77SQn -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R74z2WheKisastdv7j77SQn">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RFBAm9LMV5lI1TBpgA7mts"/>
+        <rdfs:label>Code Tracing Presentation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R83In102SVQjdPJxJuoYEZo -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R83In102SVQjdPJxJuoYEZo">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ConstructionExercise"/>
+        <rdfs:label>Program Construction</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RB9qGefvBgrwUkecsRB8y1F -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RB9qGefvBgrwUkecsRB8y1F">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDfv3FoKcAmkd6llZmlNNFP"/>
+        <rdfs:label>Code Construction</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBgNXNRGusvPWMY2a9oteA0 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RBgNXNRGusvPWMY2a9oteA0">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R83In102SVQjdPJxJuoYEZo"/>
+        <rdfs:label>Free Coding Problem</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBuMKZyo68O5ee8jkNGpMaN -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RBuMKZyo68O5ee8jkNGpMaN">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#TracingExercise"/>
+        <rdfs:label>Step By Step Tracing</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCePToJKEvCi0FJtI4qJpeR -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCePToJKEvCi0FJtI4qJpeR">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#TracingExercise"/>
+        <rdfs:label>Predicting Final Result</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCmsNZuY5P2dYLwtA0dZNpJ -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCmsNZuY5P2dYLwtA0dZNpJ">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R83In102SVQjdPJxJuoYEZo"/>
+        <rdfs:label>Restricted Coding Problem</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDfv3FoKcAmkd6llZmlNNFP -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RDfv3FoKcAmkd6llZmlNNFP">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Presentation"/>
+        <rdfs:label>Worked Example</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDusiX0OlQKQrmyDZPbYtCB -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RDusiX0OlQKQrmyDZPbYtCB">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R83In102SVQjdPJxJuoYEZo"/>
+        <rdfs:label>Code Completion Problem</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RFBAm9LMV5lI1TBpgA7mts -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RFBAm9LMV5lI1TBpgA7mts">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDfv3FoKcAmkd6llZmlNNFP"/>
+        <rdfs:label>Behavior Example</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RTSY64emu56WTfxFeSjc1M -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RTSY64emu56WTfxFeSjc1M">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R83In102SVQjdPJxJuoYEZo"/>
+        <rdfs:label>Parsons Problem</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#AlgorithmAnalysisPresentation -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#AlgorithmAnalysisPresentation">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Visualization"/>
+        <rdfs:label>Algorithm Analysis Presentation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#AlgorithmVisualization -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#AlgorithmVisualization">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Visualization"/>
+        <rdfs:label>Algorithm Visualization</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#AutomataConstructionExercise -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#AutomataConstructionExercise">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ConstructionExercise"/>
+        <rdfs:label>Automata Construction Exercise</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Battery -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Battery">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Decorator"/>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Calculation -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Calculation">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Presentation"/>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#CalculationExercise -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#CalculationExercise">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Exercise"/>
+        <rdfs:label>Calculation Exercise</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#CodeTestingExercise -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#CodeTestingExercise">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Exercise"/>
+        <rdfs:label>Code Testing Exercise</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ConceptMap -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ConceptMap">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Visualization"/>
+        <rdfs:label>Concept Map</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ConstructionExercise -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ConstructionExercise">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Exercise"/>
+        <rdfs:label>Construction Exercise</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#DatabaseQueryVisualization -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#DatabaseQueryVisualization">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RFBAm9LMV5lI1TBpgA7mts"/>
+        <rdfs:label>Database Query Visualization</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Decorator -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Decorator"/>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#FillInBlankQuestion -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#FillInBlankQuestion">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Question"/>
+        <rdfs:label>Fill In Blank Question</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#GrammarConstructionExercise -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#GrammarConstructionExercise">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ConstructionExercise"/>
+        <rdfs:label>Grammar Construction Exercise</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#MultipleChoiceQuestion -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#MultipleChoiceQuestion">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Question"/>
+        <rdfs:label>Multiple Choice Question</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Presentation -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Presentation">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#type"/>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ProficiencyExercise -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ProficiencyExercise">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Exercise"/>
+        <rdfs:label>Proficiency Exercise</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ProgrammedInstruction -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ProgrammedInstruction">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#type"/>
+        <rdfs:label>Programmed Instruction</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ProofVisualization -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ProofVisualization">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Visualization"/>
+        <rdfs:label>Proof Visualization</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Question -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Question">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Exercise"/>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#RegExWritingExercise -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#RegExWritingExercise">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#ConstructionExercise"/>
+        <rdfs:label>RegEx Wrting Exercise</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#TracingExercise -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#TracingExercise">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Exercise"/>
+        <rdfs:label>Tracing Exercise</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#TrueFalseQuestion -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#TrueFalseQuestion">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Question"/>
+        <rdfs:label>True/False Question</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#UserSuppliedData -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#UserSuppliedData">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Decorator"/>
+        <rdfs:label>User Supplied Data</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Visualization -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Visualization">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Presentation"/>
+    </owl:Class>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#type -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#type"/>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Example+Challenge -->
+
+    <owl:Class rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Example+Challenge">
+        <rdfs:subClassOf rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Decorator"/>
+        <rdfs:label>Example + Challenge</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCUrmq4qu6VpShX4nA0IVw -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/RCUrmq4qu6VpShX4nA0IVw">
+        <rdf:type rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#DatabaseQueryVisualization"/>
+        <dc:description rdf:resource="https://docs.google.com/document/d/13EZLi2mCr8sexjubTNvZRxn7yFpoRSDgmjOzvH-hA4E/edit?usp=sharing"/>
+        <rdfs:label>Query Visualization in DBQA</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCnqBO2joh4idKNj5JlraPS -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/RCnqBO2joh4idKNj5JlraPS">
+        <dc:description rdf:resource="https://docs.google.com/document/d/1urJ6ff5zmifw4qp5VtD0q3vzHYZuahIPRd_fXJI1fjM/edit?usp=sharing"/>
+        <rdfs:label>Animated Examples in jsvee</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RD0hmq69JoaHbwjz5SVtAln -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/RD0hmq69JoaHbwjz5SVtAln">
+        <dc:description rdf:resource="https://docs.google.com/document/d/14zw74BJZ7dIXW8NERjKV8_R0PbGAnzKKkxOunt0dzxc/edit?usp=sharings"/>
+        <rdfs:label>Animated Examples for SQL</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RGTBFY5P4iv6qVrJzDlVkQ -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/RGTBFY5P4iv6qVrJzDlVkQ">
+        <dc:description rdf:resource="https://pythontutor.com/"/>
+        <rdfs:label>Python Tutor</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Annotated_Worked_Example_in_WebEx -->
+
+    <owl:NamedIndividual rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Annotated_Worked_Example_in_WebEx">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/RB9qGefvBgrwUkecsRB8y1F"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Code_Tracing_Demo_in_Table_Tracer -->
+
+    <owl:NamedIndividual rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Code_Tracing_Demo_in_Table_Tracer">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/R74z2WheKisastdv7j77SQn"/>
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/RBuMKZyo68O5ee8jkNGpMaN"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Parameterized_Problem_in_QuizJET -->
+
+    <owl:NamedIndividual rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Parameterized_Problem_in_QuizJET">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/RCePToJKEvCi0FJtI4qJpeR"/>
+        <owl:differentFrom rdf:resource="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Parameterized_Problem_in_QuizPET"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Parameterized_Problem_in_QuizPET -->
+
+    <owl:NamedIndividual rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Parameterized_Problem_in_QuizPET">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/RCePToJKEvCi0FJtI4qJpeR"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Parsons_Puzzles_in_CodeCheck -->
+
+    <owl:NamedIndividual rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Parsons_Puzzles_in_CodeCheck">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/RTSY64emu56WTfxFeSjc1M"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Program_Construction_Example_in_PCEX -->
+
+    <owl:NamedIndividual rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#Program_Construction_Example_in_PCEX">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/RB9qGefvBgrwUkecsRB8y1F"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#SQL_Tutor -->
+
+    <owl:NamedIndividual rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#SQL_Tutor">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/RCmsNZuY5P2dYLwtA0dZNpJ"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#jsParsons -->
+
+    <owl:NamedIndividual rdf:about="urn:webprotege:ontology:cc4f795d-6110-44bb-a7d1-de9713689e01#jsParsons">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/RTSY64emu56WTfxFeSjc1M"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
