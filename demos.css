@@ -62,34 +62,16 @@ body.demo-page {
 }
 
 .demo-header {
-  position: relative;
-  overflow: hidden;
-  padding: 1.25rem 0 4.5rem;
-  background:
-    radial-gradient(circle at 85% 10%, rgba(111, 183, 235, 0.36), transparent 32rem),
-    linear-gradient(135deg, #102e4c 0%, #225c90 58%, #337bad 100%);
+  padding: 1rem 0 2.2rem;
+  background: linear-gradient(135deg, #102e4c 0%, #225c90 68%, #337bad 100%);
   color: white;
 }
 
-.demo-header::after {
-  position: absolute;
-  right: -7rem;
-  bottom: -11rem;
-  width: 28rem;
-  height: 28rem;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  border-radius: 50%;
-  box-shadow: 0 0 0 4rem rgba(255, 255, 255, 0.035), 0 0 0 8rem rgba(255, 255, 255, 0.025);
-  content: "";
-}
-
-.demo-nav {
-  position: relative;
-  z-index: 1;
+.demo-header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .demo-brand {
@@ -97,47 +79,27 @@ body.demo-page {
   font-size: 1.05rem;
   font-weight: 760;
   letter-spacing: 0.04em;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
 }
 
-.demo-home {
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 0.95rem;
-  font-weight: 650;
-  text-underline-offset: 0.25em;
-}
-
-.demo-hero {
-  position: relative;
-  z-index: 1;
-  max-width: 780px;
-  padding-top: clamp(3.5rem, 8vw, 6.5rem);
+.demo-header-row h1 {
+  margin: 0;
+  color: white;
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  font-weight: 760;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
 }
 
 .demo-eyebrow {
   margin: 0 0 0.65rem;
-  color: #bfe3ff;
+  color: var(--demo-brand);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.13em;
   text-transform: uppercase;
-}
-
-.demo-hero h1 {
-  max-width: 760px;
-  margin: 0;
-  color: white;
-  font-size: clamp(2.45rem, 6vw, 3.8rem);
-  font-weight: 760;
-  letter-spacing: -0.045em;
-  line-height: 0.99;
-}
-
-.demo-intro {
-  max-width: 670px;
-  margin: 1.4rem 0 0;
-  color: rgba(255, 255, 255, 0.86);
-  font-size: clamp(1.02rem, 2vw, 1.2rem);
 }
 
 .demo-main {
@@ -151,7 +113,7 @@ body.demo-page {
   grid-template-columns: minmax(15rem, 1fr) auto;
   gap: 1rem;
   align-items: center;
-  margin-top: -2rem;
+  margin-top: -1.2rem;
   padding: 1rem;
   border: 1px solid rgba(219, 227, 238, 0.8);
   border-radius: 16px;
@@ -413,6 +375,62 @@ body.demo-page {
   color: var(--demo-muted);
 }
 
+.demo-resources {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 3.5rem;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--demo-line);
+  border-radius: var(--demo-radius);
+  background: var(--demo-surface);
+  box-shadow: 0 3px 12px rgba(27, 48, 77, 0.04);
+}
+
+.demo-resources h2,
+.demo-resources p {
+  margin: 0;
+}
+
+.demo-resources h2 {
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.demo-resources h2 + p {
+  margin-top: 0.25rem;
+  color: var(--demo-muted);
+  font-size: 0.9rem;
+}
+
+.demo-resources .demo-eyebrow {
+  margin-bottom: 0.2rem;
+}
+
+.demo-resource-links {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.demo-resource-links a {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--demo-line);
+  border-radius: 9px;
+  color: var(--demo-brand-dark);
+  font-size: 0.86rem;
+  font-weight: 720;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.demo-resource-links a:hover {
+  border-color: var(--demo-brand);
+  background: var(--demo-accent);
+}
+
 .demo-footer {
   padding: 2.2rem 0;
   border-top: 1px solid var(--demo-line);
@@ -422,13 +440,15 @@ body.demo-page {
 }
 
 .demo-footer .demo-shell {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  text-align: center;
 }
 
 .demo-footer p {
   margin: 0;
+}
+
+.demo-footer p + p {
+  margin-top: 0.35rem;
 }
 
 .demo-footer a {
@@ -454,17 +474,12 @@ input:focus-visible {
 }
 
 @media (max-width: 600px) {
-  .demo-header {
-    padding-bottom: 4rem;
-  }
-
   .demo-shell {
     width: min(100% - 1.25rem, 1180px);
   }
 
-  .demo-nav,
-  .demo-footer .demo-shell,
-  .demo-summary {
+  .demo-summary,
+  .demo-resources {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -474,7 +489,15 @@ input:focus-visible {
   }
 
   .demo-controls {
-    margin-top: -1.5rem;
+    margin-top: -1rem;
+  }
+
+  .demo-resource-links {
+    width: 100%;
+  }
+
+  .demo-resource-links a {
+    width: 100%;
   }
 }
 
