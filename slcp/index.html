@@ -1,40 +1,10 @@
-<html>
-  <head>
-    <title>SPLICE Working Group: Smart Learning Content Protocols</title> 
-    <meta http-equiv='content-type' content='text/html; charset=UTF-8'/> 
-    <link rel='stylesheet' href='../cssplice.css' type='text/css'/> 
-  </head> 
-  <body>
-    <div id='content'>
-      <h1>SPLICE Working Group: Smart Learning Content Protocols</h1> 
-      <p><b>Leaders</b>: Cay Horstmann, Cliff Shaffer</p> 
-      <p><b>Active Participants</b>: Adeyemi Aina, Kamil Akhuseyinoglu, Peter Brusilovsky, Alex Hicks, Brad Miller</p> 
-      <p><b>Purpose</b> Standard learning system APIs such as LTI are complex and often incorporate server-side components. Too often systems that integrate smart learning content use proprietary APIs that restrict interoperability. Our goal is to enable learning systems to make use of compliant smart content by lowering the cost of entry through simple APIs. The purpose of this working group is to formulate and test APIs that allow smart learning content authors to signal user activity, and learning system implementers to record scores, and optionally store logging information and student work.</p> 
-      <p><b>The iframe protocol</b> Commonly, learning systems embed smart learning content in iframes, in order to isolate the JavaScript for the learning content from the JavaScript for the learning system. We have specified a standard postMessage protocol for communicating between the learning content and the learning system. See the following documents for details.</p> 
-      <ul>
-        <li><a href='iframe-protocol-rationale.html'>Rationale</a></li> 
-        <li><a href='iframe-protocol-specification.html'>Specification</a></li> 
-        <li><a href='iframe-protocol-prior-art.html'>Prior art</a></li> 
-        <li>Demos
-          <ul><li><a href='iframe-protocol-demos.html'>The protocol in action</a></li>
-            <li><a href='https://runestone.academy/ns/books/published/PTXSB/splice-integration.html'>Runestone SPLICE Integration</a></li>
-            <li><a href='https://codecheck.io/assignment/25021814487iu9y1s4ygv1pyek7p9dv953s'>A CodeCheck assignment</a></li>
-            <li><a href='https://opendsax.cs.vt.edu/ODSA/Books/splice/html/SpliceCollections.html'>OpenDSA Integration</a></li>
-          </ul>
-        </li> 
-      </ul> 
-      <p>We encourage all implementors of smart learning content and of learning systems to implement this protocol. Please contact us with any questions and suggestions.</p> 
-      <p><b>Future directions</b> While iframes provide isolation, they are not optimal for pages that embed many content elements. We would like to explore a standard approach of assembling smart content from disparate sources without the use of iframes.</p> 
-      <p>We are also interested in standardizing communication that goes beyond scores and state, such as learner models.</p> 
-      <p><b>Get in Contact: </b> <a href='https://groups.google.com/g/splice-smart-learning-content-protocol'>Google Group</a></p> 
-    </div> 
-    <div id='footer'>
-      <hr/> 
-      <p class='footertext'><a href='mailto:cssplice@gmail.com'>Contact us</a> </p> 
-      <p class='footertext'>Last updated: 
-        <script type='text/javascript'>document.write(document.lastModified);
-        </script> 
-      </p> 
-    </div> 
-  </body> 
-</html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="The SPLICE Smart Learning Content Protocols Working Group develops simple interoperable APIs for smart content and learning systems."><title>Smart Learning Content Protocols | SPLICE</title><link rel="stylesheet" href="../site.css"></head>
+<body><a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header"><div class="site-shell demo-page-heading"><a class="site-brand" href="../index.html">SPLICE</a><h1>Smart Learning Content Protocols</h1></div></header>
+<main id="main-content" class="working-group-main"><div class="site-shell working-group-layout"><div class="working-group-content">
+<section class="wg-card wg-card-featured"><p class="card-label">Working Group</p><h2>Purpose</h2><p>Standard learning system APIs such as LTI are complex and often incorporate server-side components. Too often systems that integrate smart learning content use proprietary APIs that restrict interoperability. Our goal is to enable learning systems to make use of compliant smart content by lowering the cost of entry through simple APIs. This working group formulates and tests APIs that allow smart learning content authors to signal user activity and learning system implementers to record scores and optionally store logging information and student work.</p></section>
+<section class="wg-card"><h2>The iframe Protocol</h2><p>Learning systems commonly embed smart learning content in iframes to isolate the learning content’s JavaScript from the learning system’s JavaScript. We have specified a standard <code>postMessage</code> protocol for communication between the content and system.</p><ul class="wg-resource-list"><li><a href="iframe-protocol-rationale.html">Rationale</a></li><li><a href="iframe-protocol-specification.html">Specification</a></li><li><a href="iframe-protocol-prior-art.html">Prior art</a></li></ul></section>
+<section class="wg-card"><h2>Protocol Demonstrations</h2><ul class="wg-resource-list"><li><a href="iframe-protocol-demos.html">The protocol in action</a></li><li><a href="https://runestone.academy/ns/books/published/PTXSB/splice-integration.html">Runestone SPLICE Integration</a></li><li><a href="https://codecheck.io/assignment/25021814487iu9y1s4ygv1pyek7p9dv953s">A CodeCheck assignment</a></li><li><a href="https://opendsax.cs.vt.edu/ODSA/Books/splice/html/SpliceCollections.html">OpenDSA Integration</a></li></ul><p>We encourage all implementors of smart learning content and learning systems to implement this protocol. Please contact us with questions and suggestions.</p></section>
+<section class="wg-card"><h2>Future Directions</h2><p>While iframes provide isolation, they are not optimal for pages that embed many content elements. We would like to explore a standard approach to assembling smart content from disparate sources without iframes.</p><p>We are also interested in standardizing communication that goes beyond scores and state, such as learner models.</p></section>
+</div><aside class="working-group-sidebar"><section class="wg-card"><h2>Leadership</h2><ul class="wg-people"><li>Cay Horstmann</li><li>Cliff Shaffer</li></ul></section><section class="wg-card"><h2>Active Participants</h2><ul class="wg-people"><li>Adeyemi Aina</li><li>Kamil Akhuseyinoglu</li><li>Peter Brusilovsky</li><li>Alex Hicks</li><li>Brad Miller</li></ul></section><section class="wg-card"><h2>Participate</h2><a class="wg-action" href="https://groups.google.com/g/splice-smart-learning-content-protocol">Join the Google Group</a></section><a class="wg-action" href="../WorkingGroups.html">All Working Groups</a></aside></div></main>
+<footer class="site-footer"><div class="site-shell"><p><a href="mailto:cssplice@gmail.com">Contact Us</a></p><p>Last updated: <time datetime="2026-07-27">July 27, 2026</time></p></div></footer></body></html>

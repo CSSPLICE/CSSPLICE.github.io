@@ -1,0 +1,1847 @@
+<!DOCTYPE html><html lang="en">
+  <head>
+    <base href="../../../peml/schemas/"><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>PEML Exercise Data Model - PEML</title>
+
+<meta name="description" content="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programmi...">
+<link rel="canonical" href="https://cssplice.github.io/peml/schemas/exercise.html"><link rel="alternate" type="application/rss+xml" title="PEML" href="/peml/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/peml/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/peml/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/peml/assets/favicon-16x16.png"><link rel="manifest" href="/peml/assets/site.webmanifest"><link rel="mask-icon" href="/peml/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/peml/assets/favicon.ico">
+
+<meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/peml/assets/browserconfig.xml">
+
+<meta name="theme-color" content="#ffffff">
+<!-- end favicons snippet --><link rel="stylesheet" href="/peml/assets/css/main.css"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" ><!-- start custom head snippets -->
+
+<!-- end custom head snippets -->
+<script>(function() {
+  window.isArray = function(val) {
+    return Object.prototype.toString.call(val) === '[object Array]';
+  };
+  window.isString = function(val) {
+    return typeof val === 'string';
+  };
+
+  window.hasEvent = function(event) {
+    return 'on'.concat(event) in window.document;
+  };
+
+  window.isOverallScroller = function(node) {
+    return node === document.documentElement || node === document.body || node === window;
+  };
+
+  window.isFormElement = function(node) {
+    var tagName = node.tagName;
+    return tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA';
+  };
+
+  window.pageLoad = (function () {
+    var loaded = false, cbs = [];
+    window.addEventListener('load', function () {
+      var i;
+      loaded = true;
+      if (cbs.length > 0) {
+        for (i = 0; i < cbs.length; i++) {
+          cbs[i]();
+        }
+      }
+    });
+    return {
+      then: function(cb) {
+        cb && (loaded ? cb() : (cbs.push(cb)));
+      }
+    };
+  })();
+})();
+(function() {
+  window.throttle = function(func, wait) {
+    var args, result, thisArg, timeoutId, lastCalled = 0;
+
+    function trailingCall() {
+      lastCalled = new Date;
+      timeoutId = null;
+      result = func.apply(thisArg, args);
+    }
+    return function() {
+      var now = new Date,
+        remaining = wait - (now - lastCalled);
+
+      args = arguments;
+      thisArg = this;
+
+      if (remaining <= 0) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+        lastCalled = now;
+        result = func.apply(thisArg, args);
+      } else if (!timeoutId) {
+        timeoutId = setTimeout(trailingCall, remaining);
+      }
+      return result;
+    };
+  };
+})();
+(function() {
+  var Set = (function() {
+    var add = function(item) {
+      var i, data = this._data;
+      for (i = 0; i < data.length; i++) {
+        if (data[i] === item) {
+          return;
+        }
+      }
+      this.size ++;
+      data.push(item);
+      return data;
+    };
+
+    var Set = function(data) {
+      this.size = 0;
+      this._data = [];
+      var i;
+      if (data.length > 0) {
+        for (i = 0; i < data.length; i++) {
+          add.call(this, data[i]);
+        }
+      }
+    };
+    Set.prototype.add = add;
+    Set.prototype.get = function(index) { return this._data[index]; };
+    Set.prototype.has = function(item) {
+      var i, data = this._data;
+      for (i = 0; i < data.length; i++) {
+        if (this.get(i) === item) {
+          return true;
+        }
+      }
+      return false;
+    };
+    Set.prototype.is = function(map) {
+      if (map._data.length !== this._data.length) { return false; }
+      var i, j, flag, tData = this._data, mData = map._data;
+      for (i = 0; i < tData.length; i++) {
+        for (flag = false, j = 0; j < mData.length; j++) {
+          if (tData[i] === mData[j]) {
+            flag = true;
+            break;
+          }
+        }
+        if (!flag) { return false; }
+      }
+      return true;
+    };
+    Set.prototype.values = function() {
+      return this._data;
+    };
+    return Set;
+  })();
+
+  window.Lazyload = (function(doc) {
+    var queue = {js: [], css: []}, sources = {js: {}, css: {}}, context = this;
+    var createNode = function(name, attrs) {
+      var node = doc.createElement(name), attr;
+      for (attr in attrs) {
+        if (attrs.hasOwnProperty(attr)) {
+          node.setAttribute(attr, attrs[attr]);
+        }
+      }
+      return node;
+    };
+    var end = function(type, url) {
+      var s, q, qi, cbs, i, j, cur, val, flag;
+      if (type === 'js' || type ==='css') {
+        s = sources[type], q = queue[type];
+        s[url] = true;
+        for (i = 0; i < q.length; i++) {
+          cur = q[i];
+          if (cur.urls.has(url)) {
+            qi = cur, val = qi.urls.values();
+            qi && (cbs = qi.callbacks);
+            for (flag = true, j = 0; j < val.length; j++) {
+              cur = val[j];
+              if (!s[cur]) {
+                flag = false;
+              }
+            }
+            if (flag && cbs && cbs.length > 0) {
+              for (j = 0; j < cbs.length; j++) {
+                cbs[j].call(context);
+              }
+              qi.load = true;
+            }
+          }
+        }
+      }
+    };
+    var load = function(type, urls, callback) {
+      var s, q, qi, node, i, cur,
+        _urls = typeof urls === 'string' ? new Set([urls]) : new Set(urls), val, url;
+      if (type === 'js' || type ==='css') {
+        s = sources[type], q = queue[type];
+        for (i = 0; i < q.length; i++) {
+          cur = q[i];
+          if (_urls.is(cur.urls)) {
+            qi = cur;
+            break;
+          }
+        }
+        val = _urls.values();
+        if (qi) {
+          callback && (qi.load || qi.callbacks.push(callback));
+          callback && (qi.load && callback());
+        } else {
+          q.push({
+            urls: _urls,
+            callbacks: callback ? [callback] : [],
+            load: false
+          });
+          for (i = 0; i < val.length; i++) {
+            node = null, url = val[i];
+            if (s[url] === undefined) {
+              (type === 'js' ) && (node = createNode('script', { src: url }));
+              (type === 'css') && (node = createNode('link', { rel: 'stylesheet', href: url }));
+              if (node) {
+                node.onload = (function(type, url) {
+                  return function() {
+                    end(type, url);
+                  };
+                })(type, url);
+                (doc.head || doc.body).appendChild(node);
+                s[url] = false;
+              }
+            }
+          }
+        }
+      }
+    };
+    return {
+      js: function(url, callback) {
+        load('js', url, callback);
+      },
+      css: function(url, callback) {
+        load('css', url, callback);
+      }
+    };
+  })(this.document);
+})();
+</script><script>
+  (function() {
+    var TEXT_VARIABLES = {
+      version: '2.2.6',
+      sources: {
+        font_awesome: 'https://use.fontawesome.com/releases/v5.0.13/css/all.css',
+        jquery: 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js',
+        leancloud_js_sdk: '//cdn1.lncld.net/static/js/3.4.1/av-min.js',
+        chart: 'https://cdn.bootcss.com/Chart.js/2.7.2/Chart.bundle.min.js',
+        gitalk: {
+          js: 'https://cdn.bootcss.com/gitalk/1.2.2/gitalk.min.js',
+          css: 'https://cdn.bootcss.com/gitalk/1.2.2/gitalk.min.css'
+        },
+        valine: 'https://unpkg.com/valine/dist/Valine.min.js',
+        mathjax: 'https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML',
+        mermaid: 'https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js'
+      },
+      site: {
+        toc: {
+          selectors: 'h2,h3,h4'
+        }
+      },
+      paths: {
+        search_js: '/peml/assets/search.js'
+      }
+    };
+    window.TEXT_VARIABLES = TEXT_VARIABLES;
+  })();
+</script>
+</head>
+  <body>
+    <div class="root" data-is-touch="false">
+      <div class="layout--page js-page-root"><div class="page__main js-page-main page__viewport has-aside cell cell--auto">
+
+      <div class="page__main-inner"><div class="page__header d-print-none"><header class="header">
+    <base href="../../../peml/schemas/"><div class="main">
+      <div class="header__title">
+        <div class="header__brand"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="24px" height="24px" viewBox="0 0 24 24">
+<style type="text/css">
+	.st0{fill:#515151;}
+</style>
+<path class="st0" d="M1.7,22.3c5.7-5.7,11.3-5.7,17,0c3.3-3.3,3.5-5.3,0.8-6c2.7,0.7,3.5-1.1,2.3-5.6s-3.3-5.2-6.3-2.1
+	c3-3,2.3-5.2-2.1-6.3S7,1.8,7.7,4.6C7,1.8,5,2.1,1.7,5.3C7.3,11,7.3,16.7,1.7,22.3"/>
+</svg>
+<a title="The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.
+" href="/peml/">PEML</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
+        <ul><li class="navigation__item"><a href="/peml/">Introduction</a></li><li class="navigation__item"><a href="/peml/tutorial.html">Tutorial</a></li><li class="navigation__item"><a href="/peml/schemas/">Specification</a></li><li class="navigation__item"><a href="/peml/examples/">Examples</a></li><li class="navigation__item"><a href="/peml/PEMLtest/">PEMLtest</a></li><li class="navigation__item"><a href="/peml/api/">Rest API</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/peml/">Software</a></li><li class="navigation__item"><a href="https://github.com/CSSPLICE/CSSPLICE.github.io/tree/master/peml/">GitHub</a></li><li class="navigation__item"><a href="https://cssplice.github.io/">SPLICE</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
+      </nav></div>
+  </header>
+</div><div class="page__content"><div class="article__header--overlay"><div class="hero hero--center hero--dark overlay" style="background-image:;background-color:#007bff;"><div class="hero__content"><div class="article__header"><header>
+    <base href="../../../peml/schemas/"><h1>PEML Exercise Data Model</h1></header><span class="split-space">&nbsp;</span>
+          <a class="edit-on-github"
+            title="Edit on Github"
+            href="https://github.com/cssplice/cssplice.github.io/tree/master/peml/jekyll_src/schemas/exercise.html">
+            <i class="far fa-edit"></i></a></div><p class="overlay__excerpt">The Programming Exercise Markup Language (PEML) is designed to provide an ultra-human-friendly authoring format for describing automatically graded programming assignments.</p></div>
+              </div>
+            </div><div class="grid grid--reverse">
+
+              <div class="col-aside d-print-none js-col-aside"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div>
+</aside></div>
+
+              <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
+
+<!-- end custom main top snippet -->
+<article itemscope itemtype="http://schema.org/Article"><meta itemprop="headline" content="PEML Exercise Data Model"><meta itemprop="author" content="Virginia Tech"/><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+
+<!-- end custom article top snippet -->
+<div class="article__content" itemprop="articleBody"><section>
+  <h2 id="intro">Data Model Schema for PEML Exercises</h2>
+  <p>
+    This page presents the data model for PEML. While PEML is its own notation,
+    the data model's structure is also described in the form of a
+    <a href="http://json-schema.org/">JSON Schema</a> for PEML:
+  </p>
+  <p><a href="PEML.json">http://cssplice.github.io/peml/schemas/PEML.json</a></p>
+  <p>
+    Even though PEML uses its own notation, the data model's structure can
+    easily be mapped into JSON or YAML, and a JSON Schema provides a
+    program-checkable way of expressing the intended data model structure.
+    Snippets from the schema are included below to show the definitions
+    for each key/value field in PEML. PEML fields that have their own
+    substructure are described separately as building blocks in the
+    <a href="definitions.html">definitions of recurring model elements</a>.
+  </p>
+  <p>
+    The main attributes of a PEML exercise description are broken down into
+    three groups:
+  </p>
+
+  <p><b>Required keys</b></p>
+  <ul>
+    <li><a href="#exercise_id">exercise_id</a></li>
+    <li><a href="#title">title</a></li>
+    <li><a href="#author">author</a> (or <code>authors</code>) (at least one
+      of <code>author</code> or <code>authors</code> or
+      <code>license.owner</code> is required)</li>
+  </ul>
+
+  <p><b>Recommended keys</b></p>
+  <ul>
+    <li><a href="#instructions">instructions</a>
+      (at least one of <code>instructions</code> or <code>suites</code>
+      or <code>systems</code> is required)
+    </li>
+    <li><a href="#systems">systems</a></li>
+    <li><a href="#version">version</a>
+      <ul>
+        <li><a href="#version.timestamp">version.timestamp</a></li>
+        <li><a href="#version.type">version.type</a></li>
+        <li><a href="#version.id">version.id</a></li>
+        <li><a href="#version.timestamp">version.timestamp</a></li>
+        <li><a href="#version.repository">version.repository</a></li>
+      </ul></li>
+    <li><a href="#license">license</a>
+      <ul>
+        <li><a href="#license.id">license.id</a></li>
+        <li><a href="#license.owner">license.owner</a></li>
+        <li><a href="#license.book">license.book</a></li>
+        <li><a href="#license.attribution">license.attribution</a></li>
+        <li><a href="#license.acknowledgements">license.acknowledgements</a></li>
+        <li><a href="#license.permissions">license.permissions</a></li>
+      </ul></li>
+  </ul>
+
+  <p><b>Optional keys</b></p>
+  <ul>
+    <li><a href="#tag">tag</a></li>
+    <li><a href="#src">src</a></li>
+    <li><a href="#suites">suites</a></li>
+    <li><a href="#difficulty">difficulty</a></li>
+    <li><a href="#vendor">vendor</a></li>
+  </ul>
+
+  <p><b>Keys under development</b></p>
+  <ul>
+    <li><a href="#options">options</a></li>
+    <li><a href="#origin">origin</a></li>
+  </ul>
+
+  <p>It is important to note that PEML allows the use of additional keys
+    beyond those described here, which may be custom-supported by specific
+    tools. THe list of keys described here is intended to provide a
+    <b>common vocabulary</b> that can be used by many tools for
+    <b>representing</b> programming exercises, to facilitate <b>authoring</b>,
+    <b>importing</b>, and <b>exporting</b> these exercises. Some
+    keys may relate to features or content that is not supported in every
+    tool, but the goal is to streamline the ability of instructors (or "people"
+    in general) to get exercises into (and potentially out of) educational
+    tools.
+  </p>
+</section>
+
+<section>
+  <h2 id="required">Required Keys</h2>
+  <p>
+    <strong>Required</strong> keys must be present in each PEML description.
+    We keep these to a minimum. However, to promote some aspects of
+    interoperability and data management, considering these required elements
+    on every exercise will help authors keep information organized when it
+    is imported into tools.
+  </p>
+
+  <section>
+    <h3 id="exercise_id" data-toc-title="exercise_id">exercise_id
+      <small class="text-muted">required: string</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"exercise_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nl">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^[^</span><span class="se">\s</span><span class="s2">]+$"</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+
+    <p>
+      The <code>exercise_id</code> is a globally unique, human-written
+      identifier created by the exercise
+      author to uniquely identify this exercise on any system. Any non-empty
+      sequence of non-whitespace unicode characters can be used. We imagine
+      that authors might construct these identifiers in similar ways to
+      programming package names or URLs. For example, the following ID includes
+      a university and course identifier around an exercise name that is
+      presumed to be unique within that context. By combining the context
+      and the name, a globally unique identifier can be formed:
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">exercise_id:</span><span class="w"> </span>edu.vt.cs.cs1114.palindromes</code></pre></figure>
+    <p>
+      By convention, exercises should start with the <code>exercise_id</code>
+      key first, so that multiple exercises can be concatenated together in a
+      single file but still sliced/parsed as separate exercises easily.
+    </p>
+    <p>
+      The purpose of the <code>exercise_id</code> is to serve as an external
+      identifier that tools (and people) can use to determine whether two
+      PEML descriptions describe "the same thing". Exercises with different
+      ids should be considered as distinct entities, rather than as different
+      versions of the "same thing". The <code>version</code> key is used to
+      identify basic version info for long-lived exercises.
+    </p>
+    <p>
+      When a user externally edits an exercise representation and re-imports
+      it into a tool, or exports an exercise from one tool to use in another
+      context, tools can use the <code>exercise_id</code> to determine whether
+      imported information is an update to an existing artifact or whether it
+      defines a new exercise.
+    </p>
+  </section>
+
+
+  <section>
+    <h3 id="title" data-toc-text="title">title
+      <small class="text-muted">required: string</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+
+    <p>
+      The <code>title</code> is a string name or title used as a human-readable
+      label for the
+      exercise. The intent is for this to be the "title" shown to students
+      in various contexts, either when viewing a single exercise or when
+      viewing lists of exercises.  While there is no specific length limit,
+      ideally titles should be no more than "one line" in size, because of
+      the various contexts where they might be displayed. How much of the
+      title is displayed (or truncated) when collections of exercises are
+      shown is tool-dependent.
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">title:</span><span class="w"> </span>Palindromes<span class="w"> </span>(A<span class="w"> </span>Simple<span class="w"> </span>PEML<span class="w"> </span>Example)</code></pre></figure>
+  </section>
+
+  <section>
+    <h3 id="author" data-toc-text="author">author
+      <small class="text-muted">required: string or object</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"oneOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/email_address"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"email"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/email_address"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/nonempty_string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="err">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+    <p>
+      The <code>author</code> tag is used to identify the author of the
+      exercise (or at least of the PEML exercise description). Recommended
+      practice is to identify the author by a unique e-mail address. This
+      field can be used to provide a single e-mail address. Alternatively,
+      the key <code>authors</code> can be used to provide an array of
+      multiple authors.
+    </p>
+    <p>
+      If the optional <code>license</code> key is provided and the
+      <code>license.owner</code> is the same as the <code>author</code>, then
+      the <code>author</code> key can be omitted.
+    </p>
+    <p>In addition to providing an email address, the <code>author</code>
+    tag can use sub-keys to specify both an email address and an author
+    name.</p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">author:</span><span class="w"> </span>edwards@cs.vt.edu</code></pre></figure>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="c1"># Providing name and email (email is always required)</span><span class="w">
+</span><span class="k">author.name:</span><span class="w"> </span>Stephen<span class="w"> </span>Edwards<span class="w">
+</span><span class="k">author.email:</span><span class="w"> </span>edwards@cs.vt.edu</code></pre></figure>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="c1"># Multiple authors, specifying email only:</span><span class="w">
+</span><span class="kn">[authors]</span><span class="w">
+</span>*<span class="w"> </span>edwards@cs.vt.edu<span class="w">
+</span>*<span class="w"> </span>ayaan@vt.edu<span class="w">
+</span><span class="kn">[]</span><span class="w">
+
+</span><span class="c1"># Multiple authors with names:</span><span class="w">
+</span><span class="kn">[authors]</span><span class="w">
+</span><span class="k">name:</span><span class="w"> </span>Stephen<span class="w"> </span>Edwards<span class="w">
+</span><span class="k">email:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
+</span><span class="k">name:</span><span class="w"> </span>Ayaan<span class="w"> </span>Kazerouni<span class="w">
+</span><span class="k">email:</span><span class="w"> </span>ayaan@vt.edu<span class="w">
+</span><span class="kn">[]</span></code></pre></figure>
+  </section>
+</section>
+
+
+<section>
+  <h2 id="recommended">Recommended Keys</h2>
+
+  <section>
+    <h3 id="instructions" data-toc-text="instructions">instructions
+      <small class="text-muted">recommended: string</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+
+    <p>
+      The <code>instructions</code> is where you can provide the exercise's
+      instructions for the student describing the task to complete. This
+      is the meat of the "assignment" or "exercise" in many cases. The value
+      associated with this key is a string, but probably a long one. As with
+      any key/value pairs in PEML, <a href="../index.html#quoting">quoting can
+      be used</a>. Instructions <a href="../index.html#embedding-markup">written
+      in Markdown</a> (or, as a subset, vanilla HTML) are useful, and some
+      tools <a href="../index.html#embedding-markup">may support other
+      markup formats</a>.
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">instructions:</span><span class="sh">----------
+Write your full assignment instructions here. Inline text instead of
+a separate PDF resource is preferred.
+...
+----------</span></code></pre></figure>
+    <p>
+      Note that some educational tools that support PEML may not use the
+      instructions, or may expect that the instructions are provided through
+      some means external to the tool. In these cases, the
+      <code>instructions</code> field can be omitted, although in practice
+      either <code>instructions</code> (describing the assignment) or
+      <code>suites</code> (describing how a solution would be tested,
+      either as a top-level key or nested inside one of the
+      <code>systems</code> supported) are required.
+    </p>
+    <p>
+      If in a specific situation the exercise's instructions are intended to
+      be accessible through a course management system, an instructor-provided
+      website, or some other mechanism, a URL can be used:
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">instructions:</span><span class="w"> </span><span class="no">url(https://canvas.myschool.edu/courses/12345/assignments/12345)</span></code></pre></figure>
+    <p>
+      While assignments can be farmed out into external files or web pages
+      in this way,
+      we strongly discourage the use of PDF assignment descriptions as
+      limiting the value/utility of a PEML resource. However, in many
+      cases that may be the fastest/cleanest way for an author to get started,
+      and who then may move more into embedding markup in PEML descriptions
+      on future assignments as time permits.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="systems" data-toc-text="systems">systems
+      <small class="text-muted">recommended: object</small></h3>
+
+    <p>
+      The <code>systems</code> key maps to an array of nested dictionaries
+      (objects) that
+      describe the programming language(s) or system(s) in which the exercise
+      can be conducted. The full
+      definition of what is included under <code>systems</code> is described
+      in the <a href="code.html">code data model</a>.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="version" data-toc-text="version">version
+      <small class="text-muted">recommended: object</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+    <p>
+      Just as in YAML or JSON, a PEML description represents a set of key/value
+      pairs (a dictionary, hash, or map, also called an "object" in JSON terms),
+      where keys can map to nested structured values. In PEML, dotted names
+      represent nesting structure.
+      The <code>version</code> key maps to a nested dictionary (object) that
+      identifies the version of this exercise that is described.
+      Many authors may use forms of
+      version control to manage their sources (which is recommended), so
+      fields under <code>version</code> can be provided to
+      capture access paths to an exercise description's version history.
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">version.timestamp:</span><span class="w"> </span>2018-08-25T15:23:22.635-05:00<span class="w">
+</span><span class="k">version.type:</span><span class="w"> </span>git<span class="w">
+</span><span class="k">version.id:</span><span class="w"> </span>2ab880a<span class="w">
+</span><span class="k">version.repository.url:</span><span class="w"> </span><span class="no">url(https://github.com/CSSPLICE/peml.git)</span><span class="w">
+</span><span class="k">version.repository.path:</span><span class="w"> </span><span class="no">url(test/peml/palindrome.peml)</span></code></pre></figure>
+    <p>
+      Some tools may be able to deduce the type, repository, id, and location
+      all from a single URL, such as with direct URLs to files on github.com.
+      In such a situation, only the full location URL needs to be specified:
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">version.timestamp:</span><span class="w"> </span>2018-08-25T15:23:22.635-05:00<span class="w">
+</span><span class="k">version.repository:</span><span class="w"> </span><span class="no">url(https://github.com/CSSPLICE/peml/blob/master/test/peml/palindrome.peml)</span></code></pre></figure>
+
+    <div class="container-fluid"><div class="row">
+      <div class="bracket col-1"></div>
+      <div class="col-11">
+
+        <section>
+          <h4 id="version.type" data-toc-text="version.type">version.type
+            <small class="text-muted">optional: string</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>version.type</code> captures the kind of version control
+            system or repository format used for this PEML description's
+            version history. Examples include: git, mercurial, CVS, Visual
+            SourceSafe, etc.
+          </p>
+          <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">version.type:</span><span class="w"> </span>git</code></pre></figure>
+        </section>
+
+        <section>
+          <h4 id="version.id" data-toc-text="version.id">version.id
+            <small class="text-muted">optional: string</small></h3>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>version.id</code> is intended as a way to identify the
+            commit within the repository holding this description's contents.
+            It could be a tag, a branch name, a version number, a commit hash,
+            etc. It's exact meaning is dependent on the nature of the version
+            control system being used.
+          </p>
+          <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">version.id:</span><span class="w"> </span>2ab880a</code></pre></figure>
+        </section>
+
+  <section>
+    <h3 id="version.timestamp" data-toc-text="version.timestamp">version.timestamp
+      <small class="text-muted">recommended: string</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^(?:[1-9]</span><span class="se">\\</span><span class="s2">d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1</span><span class="se">\\</span><span class="s2">d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]</span><span class="se">\\</span><span class="s2">d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]</span><span class="se">\\</span><span class="s2">d|2[0-3]):[0-5]</span><span class="se">\\</span><span class="s2">d:[0-5]</span><span class="se">\\</span><span class="s2">d(?:</span><span class="se">\\</span><span class="s2">.</span><span class="se">\\</span><span class="s2">d{1,9})?(?:Z|[+-][01]</span><span class="se">\\</span><span class="s2">d:[0-5]</span><span class="se">\\</span><span class="s2">d)$"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+    <p>
+      The <code>version.timestamp</code>
+      is a human-readable timestamp indicating the time at which this version
+      of the exercise was last modified. For lack of a better option, at
+      the moment this should be an RFC 3339/ISO 8601 UTC timestamp (if you
+      know of something more user-friendly but equally unambiguous, let
+      us know!). That format is: YYYY-MM-DDThh:mm:ss.nnn±hh:mm.
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">version.timestamp:</span><span class="w"> </span>2018-08-25T15:23:22.635-05:00</code></pre></figure>
+    <p>
+      We expect that tool-edited exercise descriptions will likely generate
+      this field's contents automatically. Also, tools will no doubt have to
+      cope with the fact that authors who externally edit PEML representations
+      might make multiple edits and re-import an exercise multiple times,
+      while "forgetting" to manually update the timestamp. The point of the
+      timestamp is to help authors (and tools) to distinguish between multiple
+      edits/versions of a single exercise (with one <code>exercise_id</code>).
+      However, tool developers are encouraged to keep hash fingerprints of
+      exercise descriptions internally so that when externally edited/modified
+      PEML descriptions are re-uploaded, they can (a) detect meaningful content
+      changes, (b) use <code>version.timestamp</code> values to determine
+      whether an import is a "newer" revision and inform users if the internally
+      stored version is newer than what is being imported, and (c) in the
+      case of <code>version.timestamp</code> "ties", prompt the author/user
+      for more information (for example, suspecting failure to update the
+      timestamp in a changed PEML description for an exercise that has already
+      been imported).
+    </p>
+  </section>
+
+        <section>
+          <h4 id="version.repository">version.repository
+            <small class="text-muted">optional: object or string</small></h4>
+
+          <p>
+            The <code>version.repository</code> is is a string or object
+            intended to provide an
+            access path to the repository containing this PEML description's
+            version history. This is most likely a URL (see the discussion of
+            URLs in
+            <a href="../about.html#design">Design Goals</a>), although
+            relative URLs that are resolved relative to the location of this
+            PEML description can be used.
+          </p>
+          <p>
+            Repositories are a recurring structure that can appear in multiple
+            places in a PEML description. For details of how a repository
+            can be described, see the
+            <a href="definitions.html#repository">common repository substructure
+            definition</a>.
+          </p>
+          <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">version.repository.url:</span><span class="w"> </span>https://github.com/CSSPLICE/peml.git</code></pre></figure>
+        </section>
+
+      </div>
+    </div></div>
+
+  </section>
+
+  <section>
+    <h3 id="license" data-toc-text="license">license
+      <small class="text-muted">recommended: object</small></h3>
+
+    <p>
+      The <code>license</code> key maps to a nested dictionary (object) that
+      identifies the license that applies to use of the exercise. At a minimum,
+      the <code>license</code> should include an
+      <a href="#license.id">id</a> identifying which license governs use
+      of the exercise. Additional information can be provided in the other
+      optional fields if desired.
+    </p>
+    <p>
+      If the <code>license</code> is provided, both the <code>license.id</code>
+      and the <code>license.owner</code> are <strong>required</strong>.
+    </p>
+
+
+    <div class="container-fluid"><div class="row">
+      <div class="bracket col-1"></div>
+      <div class="col-11">
+
+        <section>
+          <h4 id="license.id">license.id
+            <small class="text-muted">required: string</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>license.id</code> identifies the license used for this
+            exercise. The id can be specified by a URL that identifies the
+            license, or by a name (or abbreviated name) that is in common
+            use, such as any of the
+            <a href="https://help.github.com/en/articles/licensing-a-repository">license
+            keywords used by github</a> (an excellent source for potential
+            license choices).
+          </p>
+          <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">license.id:</span><span class="w"> </span>cc-sa-4.0</code></pre></figure>
+        </section>
+        <section>
+          <h4 id="license.owner">license.owner
+            <small class="text-muted">required: string or object</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"anyOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#person"</span><span class="w"> </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w"> </span><span class="nl">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#nonempty_string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">]}</span></code></pre></figure>
+          <p>
+            The <code>license.owner</code> identifies the person who "owns"
+            the exercise being described, in the sense of intellectual
+            property. This could be an individual, a publisher, a corporation,
+            or whoever. For individual authors, unique e-mail addresses are
+            preferred as a method of identification, although any string that
+            unambiguously identifies the copyright holder/licenser for this
+            work can be used here. A separate "email" sub-key and optional
+            "name" sub-key can be provided, as in the <code>author</code> tag.
+          </p>
+          <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="c1"># simple form</span><span class="w">
+</span><span class="k">license.owner:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
+
+</span><span class="c1"># or provide email and name</span><span class="w">
+</span><span class="k">license.owner.email:</span><span class="w"> </span>edwards@cs.vt.edu<span class="w">
+</span><span class="k">license.owner.name:</span><span class="w"> </span>Stephen<span class="w"> </span>Edwards</code></pre></figure>
+        </section>
+        <section>
+          <h4 id="license.book">license.book
+            <small class="text-muted">optional: string</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"book"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            In a situation where an exercise is part of a textbook or another
+            copyrighted resource, the <code>license.book</code> key can
+            be used to identify the source. In such cases, the "license" for
+            use of the exercise is presumably the same as the license for
+            the corresponding book or containing work. For most textbooks,
+            reuse of resources from the book presumably requires owning a
+            copy of the book. Such exercises should normally be limited to
+            use in situations where the textbook is required or optional for
+            a given pool of users (e.g., students in a course that use that
+            textbook). The value of the <code>license.book</code> can either
+            be a bibliographic-style citation for the book, or a URL
+            that identifies the book.
+          </p>
+          <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">license.book:</span><span class="w">
+</span>Cay<span class="w"> </span>S.<span class="w"> </span>Hortsmann,<span class="w"> </span>_Big<span class="w"> </span>Java:<span class="w"> </span>Early<span class="w"> </span>Objects,<span class="w"> </span>5th<span class="w"> </span>Edition_,<span class="w">
+</span>Wiley,<span class="w"> </span>2013.<span class="w"> </span>ISBN:<span class="w"> </span>9788126554010</code></pre></figure>
+          <p>
+            Tool developers are expected to be flexible and forgiving in terms
+            of allowing for a wide variety of human-authored variations in
+            specifying books, although tools should be free to "normalize"
+            these to a standard representation internally (and even for
+            presentation).
+          </p>
+        </section>
+        <section>
+          <h4 id="license.attribution">license.attribution
+            <small class="text-muted">optional: string</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"attribution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>license.attribution</code>, if provided, contains an
+            acknowledgement string that the license owner wishes for users
+            of the exercise to include when using the work. The
+            <code>license.attribution</code> should be provided for licenses
+            that require users to provide attribution (such as Creative
+            Commons licenses that include the "BY" requirement, or other
+            licenses that require attribution).
+          </p>
+          <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">license.attribution:</span><span class="w">
+</span>"Palindromes<span class="w"> </span>(A<span class="w"> </span>Simple<span class="w"> </span>PEML<span class="w"> </span>Example)"<span class="w"> </span>by<span class="w"> </span>edwards@cs.vt.edu<span class="w"> </span>is<span class="w"> </span>licensed<span class="w">
+</span>under<span class="w"> </span>&amp;lt;a<span class="w"> </span>href="https://creativecommons.org/licenses/by/4.0/"&amp;gt;CC<span class="w"> </span>BY<span class="w"> </span>4.0&amp;lt;/a&amp;gt;</code></pre></figure>
+        </section>
+        <section>
+          <h4 id="license.acknowledgements">license.acknowledgements
+            <small class="text-muted">optional: string</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"acknowledgements"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>license.acknowledgements</code>, if provided, contains
+            <i>all the attributions</i> this exercise makes for licensed
+            use of other (separate) content. While the
+            <code>license.attribution</code> contains content for the <i>users
+            of this exercise</i> to include in derived works, the
+            <code>license.acknowledgements</code> contains attributions
+            acknowledging <i>other content this exercise uses</i>.
+          </p>
+          <p>
+            Both the spelling "acknowledgments" (more common in the U.S.) and
+            "acknowledgements" (more common in Britain and elsewhere) should
+            be supported by tools (as synonyms).
+          </p>
+        </section>
+        <section>
+          <h4 id="license.permissions">license.permissions
+            <small class="text-muted">recommended: string</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"read"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"fork"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"fork-with-tests"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"contribute"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"all"</span><span class="w">
+</span><span class="p">]</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            Although the license (as identified by the <code>license.id</code>
+            governs the rights that other users have with this exercise, the
+            <code>license.permissions</code> field provides a tool-processable
+            shorthand notation to capture the access permissions granted to
+            others by the license terms. The value should be one of:
+          </p>
+          <ul>
+            <li><p><code>none</code>: "all rights reserved" (for the
+              author(s)).</p></li>
+            <li><p><code>read</code>: all other users can read/practice the
+              exercise, use it in assignments, etc., but may not create any
+            <li><p><code>fork</code>: In addition to <code>read</code>
+              permissions, other users can "fork" this one--that is, use this
+              exercise as a starting point to create a new derived exercise.
+              Forking includes access to all aspects of the exercise except
+              the test suites and the test environment definition. Users are
+              expected to be aware of and obey any licensing restrictions
+              imposed by the license associated with the original exercise.
+            </p></li>
+            <li><p><code>fork-with-tests</code>: Implies the same access
+              permissions as <code>fork</code> but all test suites and test
+              environment details are also included.</p></li>
+            <li><p><code>contribute</code>: In addition to full
+              <code>fork-with-tests</code> access, <code>contribute</code> adds
+              the ability to edit and/or import updated versions of the original
+              exercise.</p></li>
+            <li><p><code>all</code>: Implies full access, which is the
+              permissions level of the author(s) and/or license owner.</p></li>
+          </ul>
+        </section>
+      </div>
+    </div></div>
+
+  </section>
+
+</section>
+
+<section>
+  <h2 id="optional">Optional Keys</h2>
+
+  <section>
+    <h3 id="tag" data-toc-text="tag">tag
+      <small class="text-muted">optional: object</small></h3>
+
+    <p>
+      The <code>tag</code> key maps to a nested dictionary (object) that
+      defines categorical/classification/metadata about the exercise. The full
+      definition of what is included under <code>tag</code> is described
+      in the <a href="tagging.html">tagging definitions</a>.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="src" data-toc-text="src">src
+      <small class="text-muted">optional: object</small></h3>
+
+    <p>
+      The <code>src</code> key maps to a nested dictionary (object) that
+      defines the source code assets associated with the exercise. The full
+      definition of what is included under <code>src</code> is described
+      in the <a href="code.html">code data model</a>.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="suites" data-toc-text="suites">suites
+      <small class="text-muted">recommended: object</small></h3>
+
+    <p>
+      The <code>suites</code> key maps to a nested dictionary (object) that
+      defines the test suites associated with the exercise. The full
+      definition of what is included under <code>suites</code> is described
+      in the <a href="code.html">code data model</a>.
+    </p>
+  </section>
+
+  <section>
+    <h3 id="difficulty" data-toc-text="difficulty">difficulty
+      <small class="text-muted">optional: string</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"difficulty"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minimum"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nl">"maximum"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+
+    <p>
+      The <code>difficulty</code> is a subjective rating of question
+      difficulty on an integer scale from 0 (easiest) to 100 (hardest).
+      <strong>Difficulty is relative</strong> to the presumed level of
+      the target audience intended for the exercise. Typically, an author
+      might use <code>tags</code> to indicate the topics/skills that they
+      expect the user to be familiar with, and also use <code>tags</code>
+      to indicate the topics/skills that the intended audience would be
+      <em>practicing</em> through this exercise. Together, the prerequisites
+      and the topics for the exercise communicate the author's idea of the
+      target audience, and difficulty should be interpreted relative to
+      that target audience.
+    </p>
+    <p>
+      Intuitively, the <code>difficulty</code> can be thought of as a rough
+      approximation of <strong>the percentage of the target audience who
+      might be unable to complete the exercise successfully</strong>. One
+      would normally
+      imagine that extreme values of 0 or 100 would not typically be used,
+      since exercises no one can complete (difficulty == 100), or that
+      everyone can trivially succeed at (difficulty == 0)) may have little
+      value. Instead, a <code>difficulty</code> of 50 should be thought of
+      as "average" difficulty, where an average student may have a 50/50
+      chance of completing the exercise successfully.
+    </p>
+    <p>
+      However, don't overthink it, since difficulty ratings are both
+      subjective and relative. The author's intuitive reaction to the question
+      of "how hard or easy is this exercise compared to an 'average' exercise
+      for this target audience" is a better way to quickly assign a
+      difficulty value that can still be of value to others reading the
+      exercise description.
+    </p>
+    <p><span class="badge badge-primary">PEML example:</span></p>
+<figure class="highlight"><pre><code class="language-peml" data-lang="peml"><span class="k">difficulty:</span><span class="w"> </span>60</code></pre></figure>
+  </section>
+
+  <section>
+    <h3 id="vendor" data-toc-text="vendor">vendor
+      <small class="text-muted">optional: object</small></h3>
+
+<p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"vendor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+
+    <p>
+      The <code>vendor</code> key is intended to be a nested map containing
+      any tool-specific keys or extension properties that individual
+      educational tools might support, but that are not intended to be
+      portable across a wide range of tools. The vocabulary and structure for
+      the contents within this dictionary/map do not have any restrictions
+      on how they are modeled.
+    </p>
+    <p>
+      <span class="badge badge-warning">Note:</span>
+      This is a great place to build out keys/properties that identify
+      grading schemes, late policies, submission contraints, options for
+      processing pipelines, etc. It would be nice if there were examples of
+      tool-specific encodings of these kinds of details that might be
+      used here.
+    </p>
+  </section>
+
+</section>
+
+<section>
+  <h2 id="optional">Keys Under Development</h2>
+  <p>
+    The keys in this section are still under active development and are
+    not fully defined or implemented. Consider them as ideas for future
+    work.
+  </p>
+
+  <section>
+    <h3 id="options" data-toc-text="options">options
+      <small class="text-muted">optional: object</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+
+    <p>
+      The <code>options</code> key represents option settings that affect
+      the interpretation of the PEML exercise description itself. These
+      control things like what markup notation is used in text fields,
+      whether mustache-style variable substitution is performed, support
+      for random exercise generation, etc.
+    </p>
+    <div class="container-fluid"><div class="row">
+      <div class="bracket col-1"></div>
+      <div class="col-11">
+
+        <section>
+          <h4 id="options.text_format">options.text_format
+            <small class="text-muted">optional: string</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"text_format"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>options.text_format</code> ...
+          </p>
+        </section>
+        <section>
+          <h4 id="options.interpolation.enable">options.interpolation.enable
+            <small class="text-muted">optional: boolean</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"enable"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>options.interpolation.enable</code> ...
+          </p>
+        </section>
+        <section>
+          <h4 id="options.interpolation.delimiters">options.interpolation.delimiters
+            <small class="text-muted">optional: string</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"delimiters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>options.interpolation.delimiters</code> ...
+          </p>
+        </section>
+        <section>
+          <h4 id="options.variables">options.variables
+            <small class="text-muted">optional: object</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"variables"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>options.variables</code> ...
+          </p>
+        </section>
+        <section>
+          <h4 id="options.generator">options.generator
+            <small class="text-muted">optional: object</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"generator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>options.generator</code> ...
+          </p>
+        </section>
+        <section>
+          <h4 id="options.instances">options.instances
+            <small class="text-muted">optional: array</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"instances"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w"> </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nl">"minItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            The <code>options.instances</code> ...
+          </p>
+        </section>
+      </div>
+    </div></div>
+  </section>
+
+  <section>
+    <h3 id="origin" data-toc-text="origin">origin
+      <small class="text-muted">optional: object</small></h3>
+
+    <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+
+    <p>
+      The <code>origin</code> key is intended to be a nested map for
+      exercises that are derived from (or forked from) others. It is
+      intended to contain information about the original upstream
+      exercise that was used as the starting point for this one.
+    </p>
+
+    <div class="container-fluid"><div class="row">
+      <div class="bracket col-1"></div>
+      <div class="col-11">
+        <section>
+          <h4 id="origin.derived_from">origin.derived_from
+            <small class="text-muted">optional: string</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"derived_from"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            Contains the <code>exercise_id</code> of the exercise this
+            one was "forked" from, used when one exercise is created as
+            a derived work based on another existing exercise.
+          </p>
+        </section>
+        <section>
+          <h4 id="origin.family">origin.family
+            <small class="text-muted">optional: string</small></h4>
+
+          <p><span class="badge badge-secondary">Schema:</span></p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="nl">"family"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nl">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span></code></pre></figure>
+          <p>
+            One exercise might be created from another by changing the form
+            of the question. For example, one exercise might be a code-writing
+            exercise that asks "implement code that solves the following
+            problem". From that, one might create a different style of
+            exercise, such as "here's a buggy implementation for this problem,
+            find and fix the bug". Or yet a third style of exercise: "what
+            output does this code produce on the following input(s)?"
+          </p>
+          <p>
+            At the same time, all these exercises are related in some way if
+            the underlying task being performed by the artifact is the same,
+            even if the skills the user is exercising are different. We can
+            say these different styles of questions are all part of a related
+            "family", where the relation is the underlying task being achieved
+            by the code artifact at the heart of the question.
+          </p>
+          <p>
+            Different styles of questions might commonly be created by forking
+            an existing question and creating a derived version using a
+            different style (code-writing, multiple-choice, output prediction,
+            bug finding, bug fixing, etc.). The purpose of this key is
+            to identify the family this exercise belongs to using some
+            kind of unique identifier.
+          </p>
+          <p>
+            <span class="badge badge-warning">Note:</span>
+            We could use some nice ideas here about how to identify these.
+          </p>
+        </section>
+
+      </div>
+    </div></div>
+  </section>
+
+</section>
+</div><div class="d-print-none"><footer class="article__footer"><!-- start custom article footer snippet -->
+
+<!-- end custom article footer snippet -->
+<div class="article__license"><div class="license">
+    <p>This work is licensed under a <a itemprop="license" rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Attribution-ShareAlike 4.0 International</a> license.
+      <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
+        <img alt="Attribution-ShareAlike 4.0 International" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+      </a>
+    </p>
+  </div></div></footer>
+</div>
+
+</div>
+
+<script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    $(function() {
+      var $this ,$scroll;
+      var $articleContent = $('.js-article-content');
+      var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+      var scroll = hasSidebar ? '.js-page-main' : 'html, body';
+      $scroll = $(scroll);
+
+      $articleContent.find('.highlight').each(function() {
+        $this = $(this);
+        $this.attr('data-lang', $this.find('code').attr('data-lang'));
+      });
+      $articleContent.find('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]').each(function() {
+        $this = $(this);
+        $this.append($('<a class="anchor d-print-none" aria-hidden="true"></a>').html('<i class="fas fa-anchor"></i>'));
+      });
+      $articleContent.on('click', '.anchor', function() {
+        $scroll.scrollToAnchor('#' + $(this).parent().attr('id'), 400);
+      });
+    });
+  });
+})();
+</script>
+</div><section class="page__comments d-print-none"></section></article><!-- start custom main bottom snippet -->
+
+<!-- end custom main bottom snippet -->
+</div>
+            </div></div><div class="page__footer d-print-none">
+<footer class="footer py-4 js-page-footer">
+  <div class="main"><div itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Virginia Tech"><meta itemprop="url" content="http://cs.vt.edu/"><meta itemprop="description" content="PEML, Web-CAT, and related projects are academic research projects developed at Virginia Tech. The project lead is Stephen Edwards.
+"><div class="footer__author-links"><div class="author-links">
+  <ul class="menu menu--nowrap menu--inline"><link itemprop="url" href="http://cs.vt.edu/"><li title="Send us an Email.">
+      <a class="button button--circle mail-button" itemprop="email" href="mailto:webcat@vt.edu" target="_blank">
+        <i class="fas fa-envelope"></i>
+      </a><li title="Follow us on Github.">
+        <a class="button button--circle github-button" itemprop="sameAs" href="https://github.com/CSSPLICE" target="_blank">
+          <div class="icon"><svg fill="#000000" width="24px" height="24px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path class="svgpath" data-index="path_0" fill="#272636" d="M0 525.2c0 223.6 143.3 413.7 343 483.5 26.9 6.8 22.8-12.4 22.8-25.4l0-88.7c-155.3 18.2-161.5-84.6-172-101.7-21.1-36-70.8-45.2-56-62.3 35.4-18.2 71.4 4.6 113.1 66.3 30.2 44.7 89.1 37.2 119 29.7 6.5-26.9 20.5-50.9 39.7-69.6C248.8 728.2 181.7 630 181.7 513.2c0-56.6 18.7-108.7 55.3-150.7-23.3-69.3 2.2-128.5 5.6-137.3 66.5-6 135.5 47.6 140.9 51.8 37.8-10.2 80.9-15.6 129.1-15.6 48.5 0 91.8 5.6 129.8 15.9 12.9-9.8 77-55.8 138.8-50.2 3.3 8.8 28.2 66.7 6.3 135 37.1 42.1 56 94.6 56 151.4 0 117-67.5 215.3-228.8 243.7 26.9 26.6 43.6 63.4 43.6 104.2l0 128.8c0.9 10.3 0 20.5 17.2 20.5C878.1 942.4 1024 750.9 1024 525.3c0-282.9-229.3-512-512-512C229.1 13.2 0 242.3 0 525.2L0 525.2z" />
+</svg>
+</div>
+        </a>
+      </li></ul>
+</div>
+</div>
+    </div><div class="site-info mt-2">
+      <div>© PEML 2019,
+        Powered by <a title="Jekyll is a simple, blog-aware, static site generator." href="http://jekyllrb.com/">Jekyll</a> & <a
+        title="TeXt is a super customizable Jekyll theme." href="https://github.com/kitian616/jekyll-TeXt-theme">TeXt Theme</a>.
+      </div>
+    </div>
+  </div>
+</footer>
+</div></div>
+    </div><script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $body = $('body'), $window = $(window);
+    var $pageRoot = $('.js-page-root'), $pageMain = $('.js-page-main');
+    var activeCount = 0;
+    function modal(options) {
+      var $root = this, visible, onChange, hideWhenWindowScroll = false;
+      var scrollTop;
+      function setOptions(options) {
+        var _options = options || {};
+        visible = _options.initialVisible === undefined ? false : show;
+        onChange = _options.onChange;
+        hideWhenWindowScroll = _options.hideWhenWindowScroll;
+      }
+      function init() {
+        setState(visible);
+      }
+      function setState(isShow) {
+        if (isShow === visible) {
+          return;
+        }
+        visible = isShow;
+        if (visible) {
+          activeCount++;
+          scrollTop = $(window).scrollTop() || $pageMain.scrollTop();
+          $root.addClass('modal--show');
+          $pageMain.scrollTop(scrollTop);
+          activeCount === 1 && ($pageRoot.addClass('show-modal'), $body.addClass('of-hidden'));
+          hideWhenWindowScroll && window.hasEvent('touchstart') && $window.on('scroll', hide);
+          $window.on('keyup', handleKeyup);
+        } else {
+          activeCount > 0 && activeCount--;
+          $root.removeClass('modal--show');
+          $window.scrollTop(scrollTop);
+          activeCount === 0 && ($pageRoot.removeClass('show-modal'), $body.removeClass('of-hidden'));
+          hideWhenWindowScroll && window.hasEvent('touchstart') && $window.off('scroll', hide);
+          $window.off('keyup', handleKeyup);
+        }
+        onChange && onChange(visible);
+      }
+      function show() {
+        setState(true);
+      }
+      function hide() {
+        setState(false);
+      }
+      function handleKeyup(e) {
+        // Char Code: 27  ESC
+        if (e.which ===  27) {
+          hide();
+        }
+      }
+      setOptions(options);
+      init();
+      return {
+        show: show,
+        hide: hide,
+        $el: $root
+      };
+    }
+    $.fn.modal = modal;
+  });
+})();
+</script><div class="modal modal--overflow page__search-modal d-print-none js-page-search-modal"><script>
+(function () {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    // search panel
+    var search = (window.search || (window.search = {}));
+    var useDefaultSearchBox = window.useDefaultSearchBox === undefined ?
+      true : window.useDefaultSearchBox ;
+
+    var $searchModal = $('.js-page-search-modal');
+    var $searchToggle = $('.js-search-toggle');
+    var searchModal = $searchModal.modal({ onChange: handleModalChange, hideWhenWindowScroll: true });
+    var modalVisible = false;
+    search.searchModal = searchModal;
+
+    var $searchBox = null;
+    var $searchInput = null;
+    var $searchClear = null;
+
+    function getModalVisible() {
+      return modalVisible;
+    }
+    search.getModalVisible = getModalVisible;
+
+    function handleModalChange(visible) {
+      modalVisible = visible;
+      if (visible) {
+        search.onShow && search.onShow();
+        useDefaultSearchBox && $searchInput[0] && $searchInput[0].focus();
+      } else {
+        search.onShow && search.onHide();
+        useDefaultSearchBox && $searchInput[0] && $searchInput[0].blur();
+        setTimeout(function() {
+          useDefaultSearchBox && ($searchInput.val(''), $searchBox.removeClass('not-empty'));
+          search.clear && search.clear();
+          window.pageAsideAffix && window.pageAsideAffix.refresh();
+        }, 400);
+      }
+    }
+
+    $searchToggle.on('click', function() {
+      modalVisible ? searchModal.hide() : searchModal.show();
+    });
+    // Char Code: 83  S, 191 /
+    $(window).on('keyup', function(e) {
+      if (!modalVisible && !window.isFormElement(e.target || e.srcElement) && (e.which === 83 || e.which === 191)) {
+        modalVisible || searchModal.show();
+      }
+    });
+
+    if (useDefaultSearchBox) {
+      $searchBox = $('.js-search-box');
+      $searchInput = $searchBox.children('input');
+      $searchClear = $searchBox.children('.js-icon-clear');
+      search.getSearchInput = function() {
+        return $searchInput.get(0);
+      };
+      search.getVal = function() {
+        return $searchInput.val();
+      };
+      search.setVal = function(val) {
+        $searchInput.val(val);
+      };
+
+      $searchInput.on('focus', function() {
+        $(this).addClass('focus');
+      });
+      $searchInput.on('blur', function() {
+        $(this).removeClass('focus');
+      });
+      $searchInput.on('input', window.throttle(function() {
+        var val = $(this).val();
+        if (val === '' || typeof val !== 'string') {
+          search.clear && search.clear();
+        } else {
+          $searchBox.addClass('not-empty');
+          search.onInputNotEmpty && search.onInputNotEmpty(val);
+        }
+      }, 400));
+      $searchClear.on('click', function() {
+        $searchInput.val(''); $searchBox.removeClass('not-empty');
+        search.clear && search.clear();
+      });
+    }
+  });
+})();
+</script><div class="search search--dark">
+  <div class="main">
+    <div class="search__header">Search</div>
+    <div class="search-bar">
+      <div class="search-box js-search-box">
+        <div class="search-box__icon-search"><i class="fas fa-search"></i></div>
+        <input type="text" />
+        <div class="search-box__icon-clear js-icon-clear">
+          <a><i class="fas fa-times"></i></a>
+        </div>
+      </div>
+      <button class="button button--theme-dark button--pill search__cancel js-search-toggle">
+        Cancel</button>
+    </div>
+    <div class="search-result js-search-result"></div>
+  </div>
+</div>
+<script>var SOURCES = window.TEXT_VARIABLES.sources;
+var PAHTS = window.TEXT_VARIABLES.paths;
+window.Lazyload.js([SOURCES.jquery, PAHTS.search_js], function() {
+  var search = (window.search || (window.search = {}));
+  var searchData = window.TEXT_SEARCH_DATA || {};
+
+  function memorize(f) {
+    var cache = {};
+    return function () {
+      var key = Array.prototype.join.call(arguments, ',');
+      if (key in cache) return cache[key];
+      else return cache[key] = f.apply(this, arguments);
+    };
+  }
+
+  /// search
+  function searchByQuery(query) {
+    var i, j, key, keys, cur, _title, result = {};
+    keys = Object.keys(searchData);
+    for (i = 0; i < keys.length; i++) {
+      key = keys[i];
+      for (j = 0; j < searchData[key].length; j++) {
+        cur = searchData[key][j], _title = cur.title;
+        if ((result[key] === undefined || result[key] && result[key].length < 4 )
+          && _title.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
+          if (result[key] === undefined) {
+            result[key] = [];
+          }
+          result[key].push(cur);
+        }
+      }
+    }
+    return result;
+  }
+
+  var renderHeader = memorize(function(header) {
+    return $('<p class="search-result__header">' + header + '</p>');
+  });
+
+  var renderItem = function(index, title, url) {
+    return $('<li class="search-result__item" data-index="' + index + '"><a class="button" href="' + url + '">' + title + '</a></li>');
+  };
+
+  function render(data) {
+    if (!data) { return null; }
+    var $root = $('<ul></ul>'), i, j, key, keys, cur, itemIndex = 0;
+    keys = Object.keys(data);
+    for (i = 0; i < keys.length; i++) {
+      key = keys[i];
+      $root.append(renderHeader(key));
+      for (j = 0; j < data[key].length; j++) {
+        cur = data[key][j];
+        $root.append(renderItem(itemIndex++, cur.title, cur.url));
+      }
+    }
+    return $root;
+  }
+
+  // search box
+  var $result = $('.js-search-result'), $resultItems;
+  var lastActiveIndex, activeIndex;
+
+  function clear() {
+    $result.html(null);
+    $resultItems = $('.search-result__item'); activeIndex = 0;
+  }
+  function onInputNotEmpty(val) {
+    $result.html(render(searchByQuery(val)));
+    $resultItems = $('.search-result__item'); activeIndex = 0;
+    $resultItems.eq(0).addClass('active');
+  }
+
+  search.clear = clear;
+  search.onInputNotEmpty = onInputNotEmpty;
+
+  function updateResultItems() {
+    lastActiveIndex >= 0 && $resultItems.eq(lastActiveIndex).removeClass('active');
+    activeIndex >= 0 && $resultItems.eq(activeIndex).addClass('active');
+  }
+
+  function moveActiveIndex(direction) {
+    var itemsCount = $resultItems ? $resultItems.length : 0;
+    if (itemsCount > 1) {
+      lastActiveIndex = activeIndex;
+      if (direction === 'up') {
+        activeIndex = (activeIndex - 1 + itemsCount) % itemsCount;
+      } else if (direction === 'down') {
+        activeIndex = (activeIndex + 1 + itemsCount) % itemsCount;
+      }
+      updateResultItems();
+    }
+  }
+
+  // Char Code: 13  Enter, 37  ⬅, 38  ⬆, 39  ➡, 40  ⬇
+  $(window).on('keyup', function(e) {
+    var modalVisible = search.getModalVisible && search.getModalVisible();
+    if (modalVisible) {
+      if (e.which === 38) {
+        modalVisible && moveActiveIndex('up');
+      } else if (e.which === 40) {
+        modalVisible && moveActiveIndex('down');
+      } else if (e.which === 13) {
+        modalVisible && $resultItems && activeIndex >= 0 && $resultItems.eq(activeIndex).children('a')[0].click();
+      }
+    }
+  });
+
+  $result.on('mouseover', '.search-result__item > a', function() {
+    var itemIndex = $(this).parent().data('index');
+    itemIndex >= 0 && (lastActiveIndex = activeIndex, activeIndex = itemIndex, updateResultItems());
+  });
+});
+</script>
+</div></div>
+
+
+<script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    function scrollToAnchor(anchor, duration, callback) {
+      var $root = this;
+      $root.animate({ scrollTop: $(anchor).position().top }, duration, function() {
+        window.history.replaceState(null, '', window.location.href.split('#')[0] + anchor);
+        callback && callback();
+      });
+    }
+    $.fn.scrollToAnchor = scrollToAnchor;
+  });
+})();
+(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    function affix(options) {
+      var $root = this, $window = $(window), $scrollTarget, $scroll,
+        offsetBottom = 0, scrollTarget = window, scroll = window.document, disabled = false, isOverallScroller = true,
+        rootTop, rootLeft, rootHeight, scrollBottom, rootBottomTop,
+        hasInit = false, curState;
+
+      function setOptions(options) {
+        var _options = options || {};
+        _options.offsetBottom && (offsetBottom = _options.offsetBottom);
+        _options.scrollTarget && (scrollTarget = _options.scrollTarget);
+        _options.scroll && (scroll = _options.scroll);
+        _options.disabled !== undefined && (disabled = _options.disabled);
+        $scrollTarget = $(scrollTarget);
+        isOverallScroller = window.isOverallScroller($scrollTarget[0]);
+        $scroll = $(scroll);
+      }
+      function preCalc() {
+        top();
+        rootHeight = $root.outerHeight();
+        rootTop = $root.offset().top + (isOverallScroller ? 0 :  $scrollTarget.scrollTop());
+        rootLeft = $root.offset().left;
+      }
+      function calc(needPreCalc) {
+        needPreCalc && preCalc();
+        scrollBottom = $scroll.outerHeight() - offsetBottom - rootHeight;
+        rootBottomTop = scrollBottom - rootTop;
+      }
+      function top() {
+        if (curState !== 'top') {
+          $root.removeClass('fixed').css({
+            left: 0,
+            top: 0
+          });
+          curState = 'top';
+        }
+      }
+      function fixed() {
+        if (curState !== 'fixed') {
+          $root.addClass('fixed').css({
+            left: rootLeft + 'px',
+            top: 0
+          });
+          curState = 'fixed';
+        }
+      }
+      function bottom() {
+        if (curState !== 'bottom') {
+          $root.removeClass('fixed').css({
+            left: 0,
+            top: rootBottomTop + 'px'
+          });
+          curState = 'bottom';
+        }
+      }
+      function setState() {
+        var scrollTop = $scrollTarget.scrollTop();
+        if (scrollTop >= rootTop && scrollTop <= scrollBottom) {
+          fixed();
+        } else if (scrollTop < rootTop) {
+          top();
+        } else {
+          bottom();
+        }
+      }
+      function init() {
+        if(!hasInit) {
+          var interval, timeout;
+          calc(true); setState();
+          // run calc every 100 millisecond
+          interval = setInterval(function() {
+            calc();
+          }, 100);
+          timeout = setTimeout(function() {
+            clearInterval(interval);
+          }, 45000);
+          window.pageLoad.then(function() {
+            setTimeout(function() {
+              clearInterval(interval);
+              clearTimeout(timeout);
+            }, 3000);
+          });
+          $scrollTarget.on('scroll', function() {
+            disabled || setState();
+          });
+          $window.on('resize', function() {
+            disabled || (calc(true), setState());
+          });
+          hasInit = true;
+        }
+      }
+
+      setOptions(options);
+      if (!disabled) {
+        init();
+      }
+      $window.on('resize', window.throttle(function() {
+        init();
+      }, 200));
+      return {
+        setOptions: setOptions,
+        refresh: function() {
+          calc(true, { animation: false }); setState();
+        }
+      };
+    }
+    $.fn.affix = affix;
+  });
+})();
+(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    function toc(options) {
+      var $root = this, $window = $(window), $scrollTarget, $scroller, $tocUl = $('<ul class="toc toc--ellipsis"></ul>'), $tocLi, $headings, $activeLast, $activeCur,
+        selectors = 'h1,h2,h3', container = 'body', scrollTarget = window, scroller = 'html, body', disabled = false,
+        headingsPos, scrolling = false, hasRendered = false, hasInit = false;
+
+      function setOptions(options) {
+        var _options = options || {};
+        _options.selectors && (selectors = _options.selectors);
+        _options.container && (container = _options.container);
+        _options.scrollTarget && (scrollTarget = _options.scrollTarget);
+        _options.scroller && (scroller = _options.scroller);
+        _options.disabled !== undefined && (disabled = _options.disabled);
+        $headings = $(container).find(selectors).filter('[id]');
+        $scrollTarget = $(scrollTarget);
+        $scroller = $(scroller);
+      }
+      function calc() {
+        headingsPos = [];
+        $headings.each(function() {
+          headingsPos.push(Math.floor($(this).position().top));
+        });
+      }
+      function setState(element, disabled) {
+        var scrollTop = $scrollTarget.scrollTop(), i;
+        if (disabled || !headingsPos || headingsPos.length < 1) { return; }
+        if (element) {
+          $activeCur = element;
+        } else {
+          for (i = 0; i < headingsPos.length; i++) {
+            if (scrollTop >= headingsPos[i]) {
+              $activeCur = $tocLi.eq(i);
+            } else {
+              $activeCur || ($activeCur = $tocLi.eq(i));
+              break;
+            }
+          }
+        }
+        $activeLast && $activeLast.removeClass('active');
+        ($activeLast = $activeCur).addClass('active');
+      }
+      function render() {
+        if(!hasRendered) {
+          $root.append($tocUl);
+          $headings.each(function() {
+            var $this = $(this);
+            $tocUl.append($('<li></li>').addClass('toc-' + $this.prop('tagName').toLowerCase())
+              .append($('<a></a>').text($this.text()).attr('href', '#' + $this.prop('id'))));
+          });
+          $tocLi = $tocUl.children('li');
+          $tocUl.on('click', 'a', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            scrolling = true;
+            setState($this.parent());
+            $scroller.scrollToAnchor($this.attr('href'), 400, function() {
+              scrolling = false;
+            });
+          });
+        }
+        hasRendered = true;
+      }
+      function init() {
+        var interval, timeout;
+        if(!hasInit) {
+          render(); calc(); setState(null, scrolling);
+          // run calc every 100 millisecond
+          interval = setInterval(function() {
+            calc();
+          }, 100);
+          timeout = setTimeout(function() {
+            clearInterval(interval);
+          }, 45000);
+          window.pageLoad.then(function() {
+            setTimeout(function() {
+              clearInterval(interval);
+              clearTimeout(timeout);
+            }, 3000);
+          });
+          $scrollTarget.on('scroll', function() {
+            disabled || setState(null, scrolling);
+          });
+          $window.on('resize', window.throttle(function() {
+            if (!disabled) {
+              render(); calc(); setState(null, scrolling);
+            }
+          }, 100));
+        }
+        hasInit = true;
+      }
+
+      setOptions(options);
+      if (!disabled) {
+        init();
+      }
+      $window.on('resize', window.throttle(function() {
+        init();
+      }, 200));
+      return {
+        setOptions: setOptions
+      };
+    }
+    $.fn.toc = toc;
+  });
+})();
+/*(function () {
+
+})();*/
+</script><script>
+  /* toc must before affix, since affix need to konw toc' height. */(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  var TOC_SELECTOR = window.TEXT_VARIABLES.site.toc.selectors;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window);
+    var $articleContent = $('.js-article-content');
+    var $tocRoot = $('.js-toc-root'), $col2 = $('.js-col-aside');
+    var toc;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+    var hasToc = $articleContent.find(TOC_SELECTOR).length > 0;
+
+    function disabled() {
+      return $col2.css('display') === 'none' || !hasToc;
+    }
+
+    tocDisabled = disabled();
+
+    toc = $tocRoot.toc({
+      selectors: TOC_SELECTOR,
+      container: $articleContent,
+      scrollTarget: hasSidebar ? '.js-page-main' : null,
+      scroller: hasSidebar ? '.js-page-main' : null,
+      disabled: tocDisabled
+    });
+
+    $window.on('resize', window.throttle(function() {
+      tocDisabled = disabled();
+      toc && toc.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+  });
+})();
+(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window), $pageFooter = $('.js-page-footer');
+    var $pageAside = $('.js-page-aside');
+    var affix;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+
+    affix = $pageAside.affix({
+      offsetBottom: $pageFooter.outerHeight(),
+      scrollTarget: hasSidebar ? '.js-page-main' : null,
+      scroller: hasSidebar ? '.js-page-main' : null,
+      scroll: hasSidebar ? $('.js-page-main').children() : null,
+      disabled: tocDisabled
+    });
+
+    $window.on('resize', window.throttle(function() {
+      affix && affix.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+    window.pageAsideAffix = affix;
+  });
+})();
+</script>
+    </div>
+    <script>(function () {
+  var $root = document.getElementsByClassName('root')[0];
+  if (window.hasEvent('touchstart')) {
+    $root.dataset.isTouch = true;
+    document.addEventListener('touchstart', function(){}, false);
+  }
+})();
+</script>
+  </body>
+</html>
+

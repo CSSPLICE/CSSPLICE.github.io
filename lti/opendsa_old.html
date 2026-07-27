@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LTI Use Case: Exposing OpenDSA Visualizations and Exercises</title>
+    <link rel="stylesheet" href="../cssplice.css" type="text/css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <div class="text-center">
+        <h1>LTI Use Case: Exposing OpenDSA Visualizations and Exercises</h1>
+      </div>
+      <br>
+      <p>
+        There are two ways to add OpenDSA content to
+        Canvas. One is to add a standalone exercise through LMS External
+        Tools option. 
+        <a href="https://opendsa-server.cs.vt.edu/guides/opendsa-canvas">Click here</a><a href="https://opendsa-server.cs.vt.edu/guides/opendsa-canvas">Click here</a>
+        for instructions on how to add OpenDSA standalone exercises to Canvas.
+        The second method is to go to the OpenDSA website and create a
+        book instance, this automatically creates the OpenDSA textbook as Modules
+        and Assignments in Canvas. But this feature is only available for Canvas,
+        because OpenDSA uses the Canvas API to provide the links from modules in
+        Canvas to the OpenDSA HTML pages. 
+        <a href="https://opendsa-server.cs.vt.edu/guides/opendsa-bookinstance">Click here</a>
+        for instructions on how to create an OpenDSA book instance. Once the
+        OpenDSA content is added to the course with either of the methods
+        mentioned above, then Canvas uses LTI to launch, show, and grade an
+        exercise in the normal way as a tool consumer.
+      </p>
+      <p>
+        This tutorial will explain how the OpenDSA eTextbook system implements LTI
+        being an LTI content provider, allowing it to expose materials to an LMS
+        that acts as an LTI consumer, such as Canvas or Moodle. We detail how
+        OpenDSA supports a student who sees an individual exercise or
+        visualization from within the LMS. See 
+        <a href="https://opendsa-server.cs.vt.edu/guides/opendsa-embed">here</a>
+        for details on how OpenDSA supports an
+        instructor who wants to include individual visualizations or exercises in
+        the LMS. To better understand this example, the image below shows what a
+        student might see from within an LMS. In the LMS, the student sees an
+        exercise or visualization as though these materials were native to that
+        LMS.
+        <div class="text-center">
+          <img src="opendsa/tree_exercise.png", style:'width:128px;height:128px;', alt="opendsa exercise" >
+        </div>
+      </p>
+      <p>
+        For more information on OpenDSA, see <a href="http://opendsa.org"
+        target="_blank">opendsa.org</a>.
+      </p>
+  
+  
+      <h3 id="stand-alone">LTI in OpenDSA</h3>
+      <p>
+        To make use of LTI, OpenDSA implements an LTI controller, which handles
+        all the LTI requests. There are two types of LTI requests in OpenDSA, one
+        is for a student and other is for instructors. When an instructor adds
+        OpenDSA content, he sees a list of exercises that he can add to his
+        course. A <strong>resource</strong> endpoint is called for instructors.
+        The <strong>Launch</strong> endpoint is called when a student
+        accesses an OpenDSA exercise embedded in a Canvas page.
+      </p>
+      <p>
+        LTI controller <em>(apps/controllers/lti_controller.rb)</em> in OpenDSA
+        takes care of all the requests related to LTI. Therefore, these
+        <em>resource</em> and <em>launch</em> endpoints are implemented within
+        this LTI controller. Below we explain how LTI requests are handled in
+        OpenDSA within this controller.
+      </p>
+      An LTI-compliant LMS expects a Tool Provider to open in an iframe.
+      Therefore, at the start of the LTI controller, OpenDSA allows both
+      the launch and the resource endpoints to open in an iframe.<br><br>
+      <pre>
+        after_action :allow_iframe, only: [:launch, :resource]
+      </pre>
+  
+      We begin by explaining the launch endpoint here.
+      <br><br>
+  
+      Once the OpenDSA content is added to a course and a student clicks on an
+      OpenDSA exercise, the LMS sends an LTI request to the launch endpoint
+      of OpenDSA. Within the launch endpoint, OpenDSA initially validates if
+      "custom_inst_book_id" is available or not. This is a custom parameter,
+      which if available means that the OpenDSA book instance was created on
+      OpenDSA's website and modules were created in Canvas using the Canvas API.
+      In other words, this exercise belongs to an OpenDSA book instance. (This is
+      an <a href="https://opendsa-server.cs.vt.edu/guides/opendsa-bookinstance">alternative</a> 
+      way that
+      OpenDSA materials are presented in Canvas, and is not the subject of this
+      tutorial). If the book instance is not present, it means that this is a
+      standalone exercise and OpenDSA calls the "launch_ex" endpoint to handle
+      the standalone exercises. <br><br>
+      <pre>
+        unless params.key?(:custom_inst_book_id)
+          launch_ex
+          return
+        end
+      </pre>
+  
+      <!-- In this tutorial, we will first cover launch_ex endpoint <strong> that
+      handles standalone exercises</strong>. To add standalone graded
+      exercises in your course follow the steps mentioned
+      <%= link_to "here", lti_instructions_opendsa_path >. Furthermore, to read
+      how OpenDSA handles LTI requests for a book instance exercise, click
+      <%= link_to "here", lti_opendsa_bookinstance_path >. <br><br>
+  
+      <h1 id="stand-alone">LTI in OpenDSA - Stand-alone Exercises</h1> -->
+  
+      When a student clicks on an OpenDSA visualization/exercise from within the
+      LMS, OpenDSA first fetches the credentials (the unique secret) from the
+      public authentication key received in the request, and finds the course
+      offering to which this assignment belongs.<br><br>
+      <pre>
+      def launch_ex
+        require 'oauth/request_proxy/rack_request'
+        $oauth_creds = LmsAccess.get_oauth_creds(params[:oauth_consumer_key])
+        course_offering = CourseOffering.joins(:lms_instance).where(
+          lms_instances: {url: params[:custom_canvas_api_base_url]},
+          course_offerings: {lms_course_num: params[:custom_canvas_course_id]}
+        ).first
+      </pre>
+      After that, OpenDSA calls the "<em>lti_authorize!</em>" method to validate
+      the received request.<br><br>
+      <pre>
+        render('error') and return unless lti_authorize!
+      </pre>
+  
+      Within the <em>lti_authorize!</em> endpoint, OpenDSA creates a tool
+      provider object from the authentication object created above and throws an
+      error and returns in case the key and secret do not match.<br><br>
+  
+      <pre>
+        def lti_authorize!
+          if key = params['oauth_consumer_key']
+            if secret = $oauth_creds[key]
+              @tp = IMS::LTI::ToolProvider.new(key, secret, params)
+            else
+              @tp = IMS::LTI::ToolProvider.new(nil, nil, params)
+              @tp.lti_msg = "Your consumer didn't use a recognized key."
+              @tp.lti_errorlog = "You did it wrong!"
+              @message = "Consumer key wasn't recognized"
+              return false
+            end
+          else
+            render("No consumer key")
+            return false
+          end
+      </pre>
+  
+      If the key and secret match, then within the same 'lti_authorize!' endpoint,
+      OpenDSA checks if the request is valid or not, or if the timestamp on the
+      request is too old. If so, then OpenDSA returns an error, otherwise, it
+      returns "<em>true</em>" to the <em>launch_ex</em> endpoint, which means the
+      request is valid.
+      <br><br>
+  
+      <pre>
+          if !params.has_key?(:selection_directive)
+            if !@tp.valid_request?(request)
+              @message = "The OAuth signature was invalid"
+              return false
+            end
+  
+            if Time.now.utc.to_i - @tp.request_oauth_timestamp.to_i > 60*60
+              @message = "Your request is too old."
+              return false
+            end
+  
+            if was_nonce_used_in_last_x_minutes?(@tp.request_oauth_nonce, 60)
+              @message = "Why are you reusing the nonce?"
+              return false
+            end
+          end
+  
+          return true
+        end
+      </pre>
+  
+      Once the request has been validated, OpenDSA returns back to the
+      <em>"launch_ex"</em> endpoint and calls the <em>"ensure_user"</em> method.
+      <br><br>
+      <pre>
+        ensure_user()
+      </pre>
+  
+      Within <em>"ensure_user"</em>, OpenDSA checks if a user with the
+      same email exists or not and creates a new user if that email is not found.
+      Finally, it signs in that user to start her session.<br><br>
+      <pre>
+        def ensure_user
+          email = params[:lis_person_contact_email_primary]
+          @user = User.where(email: email).first
+          if @user.blank?
+            # TODO: should mark this as LMS user then prevent this user from
+            login to opendsa domain
+            @user = User.new(:email => email,
+                             :password => email,
+                             :password_confirmation => email,
+                             :first_name => params[:lis_person_name_given],
+                             :last_name => params[:lis_person_name_family])
+            @user.save
+          end
+          sign_in @user
+        end
+      </pre>
+  
+      After a new user has been created, OpenDSA calls <em>"lti_enroll"</em> with
+      the course offering object, which enrolls the user in this particular
+      course.
+      <br><br>
+      <pre>
+        lti_enroll(@course_offering)
+      </pre>
+  
+      Within the <em>"lti_enroll"</em> method, OpenDSA checks if the course
+      offering exists and allows users to enroll or not. After that, OpenDSA
+      enrolls the user if she has not already enrolled in this specific course
+      offering.<br><br>
+      <pre>
+        def lti_enroll(course_offering, role = CourseRole.student)
+          if course_offering &&
+            course_offering.can_enroll? &&
+            !course_offering.is_enrolled?(current_user)
+  
+            CourseEnrollment.create(
+              course_offering: course_offering,
+              user: current_user,
+              course_role: role)
+          end
+        end
+      </pre>
+  
+      OpenDSA modules are written in ReStructuredText (RST) format and have
+      information about exercises within these modules. OpenDSA converts these
+      RST files into HTML pages. Once the request has been validated and a user
+      has been enrolled, OpenDSA uses an RST parser to parse the names of
+      exercises in ReStructuredText (RST) files and finds the current exercise
+      using the short name of the exercise.
+      <br><br>
+  
+      <pre>
+        require 'RST/rst_parser'
+        @ex = RstParser.get_exercise_map()[params[:ex_short_name]]
+      </pre>
+  
+      Once the specific exercise has been fetched, OpenDSA finds the course
+      offering exercise object with the course offering id and the
+      resource_link_id parameter received in the original request. A
+      resource_link_id is a unique id referencing the link, or placement, of the
+      tool within the consumer's pages.<br><br>
+  
+      <pre>
+        @course_off_ex = InstCourseOfferingExercise.find_by(
+          course_offering_id: course_offering.id,
+          resource_link_id: params[:resource_link_id]
+        )
+      </pre>
+      If this exercise is launched for the first time, then OpenDSA will not find
+      this exercise linked to any course offering and therefore, in the next step,
+      OpenDSA links this launched exercise with the course offering object
+      created above.
+      <br><br>
+      <pre>
+        if @course_off_ex.blank?
+          @course_off_ex = InstCourseOfferingExercise.new(
+            course_offering: course_offering,
+            inst_exercise_id: @ex.id,
+            resource_link_id: params[:resource_link_id],
+            resource_link_title: params[:resource_link_title],
+            threshold: @ex.threshold
+          )
+          @course_off_ex.save
+        end
+      </pre>
+  
+      Once the exercise is linked to the course offering, the only thing left is
+      to show the exercise to the user. There are two kinds of exercises in
+      OpenDSA, one is "<em>avembed</em>", which have their own HTML pages and
+      other is "<em>inlineav</em>", which are generated through JavaScript and
+      CSS. OpenDSA checks the type of exercise and renders the respective layout
+      to the user. <br><br>
+      <pre>
+        if @ex.instance_of?(AvEmbed)
+          render "launch_avembed", layout: 'lti_launch' #own html page
+        else
+          render 'launch_inlineav', layout: 'lti_launch'
+        end
+      end
+      </pre>
+    <p>
+      At this point, the student will view an exercise. Here the
+      OpenDSA Binary Tree exercise appears as an assignment in Canvas.
+      <div class="text-center">
+        <img src="opendsa/single_exercise.png", style:'width:128px;height:128px;', alt="opendsa exercise" >
+      </div>
+    </p>
+  
+    When a student completes an exercise, OpenDSA sends a new request to the
+    <em>assessment</em> endpoint from JavaScript. The <em>assessment</em>
+    method sends a score back to the Tool Consumer if this exercise was launched
+    as an assessment.
+    <br><br>
+    Within the <em>assessment</em> endpoint, initially, OpenDSA checks if the
+    exercise is from a book instance or not. If the exercise is from a book
+    instance then the request will have <em>"instBookSectionExerciseId"</em>
+    parameter. OpenDSA fetches the number of attempts on this exercise and
+    current progress of a student using the book instance exercise id and user id.
+    <br><br>
+    <pre>
+  
+    def assessment
+      request_params = JSON.parse(request.body.read.to_s)
+      hasBook = request_params.key?('instBookId')
+  
+      if hasBook
+        inst_section = InstSection.find_by(id: request_params['instSectionId'])
+  
+        @odsa_exercise_attempts =
+        OdsaExerciseAttempt.where("inst_book_section_exercise_id=? AND user_id=?",
+                                    request_params['instBookSectionExerciseId'],
+                                    current_user.id).select(
+                                    "id, user_id, question_name, request_type,
+                                    correct, worth_credit, time_done, time_taken,
+                                    earned_proficiency, points_earned,
+                                    pe_score, pe_steps_fixed")
+        @odsa_exercise_progress =
+        OdsaExerciseProgress.where("inst_book_section_exercise_id=? AND
+        user_id=?",
+                                    request_params['instBookSectionExerciseId'],
+                                    current_user.id).select("user_id,
+                                    current_score, highest_score,
+                                    total_correct, proficient_date,first_done,
+                                    last_done")
+      </pre>
+      If the exercise is not from a book instance then the request will have the
+      <em>"instCourseOfferingExerciseId"</em> parameter, which means that a
+      standalone exercise is directly added to the course. For the standalone
+      exercises, OpenDSA fetches the number of attempts on this exercise and
+      current progress of the student using the course offering exercise id and
+      user id.<br><br>
+      <pre>
+      else
+        @odsa_exercise_attempts =
+        OdsaExerciseAttempt.where("inst_course_offering_exercise_id=? AND
+        user_id=?",
+                                    request_params['instCourseOfferingExerciseId']
+                                    , current_user.id).select(
+                                    "id, user_id, question_name, request_type,
+                                    correct, worth_credit, time_done, time_taken,
+                                    earned_proficiency, points_earned,
+                                    pe_score, pe_steps_fixed")
+        @odsa_exercise_progress =
+        OdsaExerciseProgress.where("inst_course_offering_exercise_id=? AND
+        user_id=?",
+                                    request_params['instCourseOfferingExerciseId']
+                                    , current_user.id).select("user_id,
+                                    current_score, highest_score,
+                                    total_correct, proficient_date,first_done,
+                                    last_done")
+      end
+      </pre>
+  
+      Once the progress and the number of attempts have been fetched, OpenDSA
+      sends these statistics back in tabular form to the Tool Consumer along with
+      the results of the exercise and students can view these stats in Tool
+      Consumer.<br><br>
+      <pre>
+      a = @odsa_exercise_attempts
+      b = @odsa_exercise_progress
+      TableHelper.arg(a, b)
+      f = render_to_string "lti/table.html.erb"
+      </pre>
+      <p>
+        The progress and attempts can be checked in Canvas by clicking on Grades
+        -> [Name of Assignment]. Here is how this result is shown in tabular
+        form in Canvas.
+        <div class="text-center">
+          <img src="opendsa/exercise_progress.png", style:'width:128px;height:128px;', alt="opendsa exercise" >
+        </div>
+      </p>
+  
+  
+      When the above stats and results have been gathered, OpenDSA fetches the
+      launch parameters from the request and finds the authentication credentials
+      associated with the public consumer key in order to send the results back to
+      the tool consumer. These launch parameters are same as the ones received in
+      the initial launch request. These parameters are saved within a JavaScript
+      variable and are passed to the <em>assessment</em> endpoint with the
+      request. <br><br>
+      <pre>
+        launch_params = request_params['toParams']['launch_params']
+        if launch_params
+          key = launch_params['oauth_consumer_key']
+          $oauth_creds = LmsAccess.get_oauth_creds(key)
+        else
+          @message = "The tool never launched"
+          render(:error)
+        end
+      </pre>
+  
+      Once the credentials have been fetched, OpenDSA submits the score back to
+      the tool consumer. To do so, OpenDSA creates a tool provider object using
+      the key and a secret. Then OpenDSA extends the tool provider
+      object with the OutcomeData extension provided by the IMS-LTI gem.<br><br>
+      <pre>
+        lti_param = {
+          "lis_outcome_service_url" =>
+          "#{launch_params['lis_outcome_service_url']}",
+          "lis_result_sourcedid" => "#{launch_params['lis_result_sourcedid']}"
+        }
+        @tp = IMS::LTI::ToolProvider.new(key, $oauth_creds[key], lti_param)
+  
+        @tp.extend IMS::LTI::Extensions::OutcomeData::ToolProvider
+      </pre>
+      OpenDSA then checks whether the tool was launched as an
+      outcome service or not. The outcome service allows tool providers to manage
+      results in gradebook columns associated with a launch link within the tool
+      consumer. If the tool was not launched as an outcome service means that the
+      results cannot be reported back to the Tool Consumer.
+      <br><br>
+      <pre>
+        if !@tp.outcome_service?
+          @message = "This tool wasn't launched as an outcome service"
+          render(:error)
+        end
+  
+        # post the given score to the TC
+        score = (request_params['toParams']['score'] != '' ?
+        request_params['toParams']['score'] : nil)
+        #res = @tp.post_replace_result!(score)
+        res = @tp.post_extended_replace_result!(score: score, text: f)
+      </pre>
+      If the tool was launched as an assignment, then OpenDSA has to send the
+      final results of every assessment back to the tool consumer.
+      Therefore, in the request, the Tool Consumer sends the
+      <strong><em>lis_outcome_service_url</em></strong>
+      and <strong><em>lis_result_sourcedid</em></strong> parameters.
+      The first parameter is a URL used to send the score back, and
+      the second parameter identifies a unique row and column within
+      the Tool Consumer's gradebook.
+      If these two parameters are not present, then OpenDSA throws an error.
+      Otherwise, it sends the result back to the tool consumer.
+      The IMS-LTI gem enables all of this using the
+      <em>"post_extended_replace_result"</em> method.
+  
+      <br><br>
+  
+      Once the results have been posted, and if the exercise was launched from a
+      book instance, OpenDSA saves in the database that the result has been
+      posted for this exercise along with current time.<br><br>
+      <pre>
+        if res.success?
+          if hasBook
+            inst_section.lms_posted = true
+            inst_section.time_posted = Time.now
+            inst_section.save!
+          end
+          render :json => { :message => 'success', :res => res.to_json }.to_json
+      </pre>
+      If there is some error in posting the results, OpenDSA saves in the database
+      that the result posting failed for this instance and throws an
+      error back to the Tool Consumer.<br><br>
+      <pre>
+        else
+          if hasBook
+            inst_section.lms_posted = false
+            inst_section.save!
+          end
+          render :json => { :message => 'failure', :res => res.to_json }.to_json,
+          :status => :bad_request
+          error = Error.new(:class_name => 'post_replace_result_fail',
+              :message => res.inspect, :params => lti_param.to_s)
+          error.save!
+        end
+      </pre>
+      <br>
+  
+      <p>
+        In the example shown above, once the student finishes the exercise and
+        clicks on the grade, the "<em>assessment</em>"" endpoint is called and
+        the user will see her score as shown in the image below.
+        <div class="text-center">
+          <img src="opendsa/single_exercise_result.png", style:'width:128px;height:128px;', alt="opendsa exercise" >
+        </div>
+        <br><br>
+        This result is also recorded in the gradebook of Tool Consumer. Following
+        is an example of gradebook of Canvas.<br><br>
+        <div class="text-center">
+          <img src="opendsa/single_exercise_grade.png", style:'width:128px;height:128px;', alt="opendsa exercise" >
+        </div>
+      </p>
+      <br>
+  
+      This is how LTI is implemented in OpenDSA when a student tries to access a
+      standalone OpenDSA exercise through a learning management system. Click 
+      <a href="https://opendsa-server.cs.vt.edu/guides/opendsa-bookinstance">here</a> 
+      to read how OpenDSA implements LTI for an exercise within a book instance.  
+    </div>
+
+  </body>
+</html>
+ 

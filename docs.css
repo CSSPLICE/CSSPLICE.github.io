@@ -1,0 +1,171 @@
+/* Shared presentation for legacy SPLICE reference and tutorial pages. */
+.documentation-page {
+  padding-bottom: 4.2rem;
+}
+
+.documentation-page .site-header h1 {
+  max-width: 78%;
+}
+
+.documentation-page #content {
+  width: min(980px, calc(100% - 2rem));
+  min-height: calc(100vh - 8rem);
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  margin: 0 auto;
+  border-right: 1px solid var(--site-line);
+  border-left: 1px solid var(--site-line);
+  background: var(--site-surface);
+  box-shadow: 0 6px 24px rgba(27, 48, 77, 0.05);
+}
+
+.documentation-page #content > :first-child { margin-top: 0; }
+.documentation-page #content > :last-child { margin-bottom: 0; }
+
+.documentation-page #content h2,
+.documentation-page #content h3,
+.documentation-page #content h4 {
+  margin-top: 2rem;
+  color: var(--site-ink);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.documentation-page #content h2 {
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--site-line);
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+}
+
+.documentation-page #content p,
+.documentation-page #content li { color: var(--site-muted); }
+.documentation-page #content li + li { margin-top: 0.35rem; }
+.documentation-page #content a { overflow-wrap: anywhere; font-weight: 650; }
+
+.documentation-page #content img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin: 1.25rem auto;
+  border: 1px solid var(--site-line);
+  border-radius: 0.8rem;
+  box-shadow: 0 5px 18px rgba(27, 48, 77, 0.08);
+}
+
+.documentation-page #content pre {
+  max-width: 100%;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid #c9d8e6;
+  border-radius: 0.7rem;
+  background: #f3f7fb;
+  color: #18334d;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.documentation-page #content code {
+  padding: 0.1em 0.3em;
+  border-radius: 0.3rem;
+  background: #edf3f8;
+  color: #173a5c;
+  font-size: 0.9em;
+}
+
+.documentation-page #content pre code { padding: 0; background: transparent; }
+
+.documentation-page #content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.documentation-page #content th,
+.documentation-page #content td {
+  padding: 0.65rem;
+  border: 1px solid var(--site-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.documentation-page #content th { background: var(--site-brand-light); }
+
+.documentation-page #footer {
+  position: fixed;
+  z-index: 30;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  min-height: 3.6rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem max(1rem, calc((100% - var(--site-width)) / 2));
+  border-top: 1px solid var(--site-line);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 -3px 12px rgba(27, 48, 77, 0.05);
+}
+
+.documentation-page #footer hr { display: none; }
+.documentation-page #footer p { margin: 0; color: var(--site-muted); font-size: 0.76rem; }
+
+.documentation-page .text-center { text-align: left; }
+
+.archive-funder {
+  float: right;
+  margin: 0 0 1rem 1rem;
+}
+
+.documentation-page #content .archive-funder img {
+  max-height: 64px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 680px) {
+  .documentation-page #content {
+    width: 100%;
+    padding: 1.15rem 0.85rem 2rem;
+    border: 0;
+  }
+  .documentation-page #footer { min-height: 4.5rem; align-items: flex-start; flex-direction: column; gap: 0.1rem; }
+  .documentation-page .site-header h1 { max-width: 70%; }
+}
+
+.glossary-page #content > ul,
+.mini-grants-page #content > ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.glossary-page #content > ul > li,
+.mini-grants-page #content > ul > li {
+  padding: 1rem;
+  border: 1px solid var(--site-line);
+  border-radius: 0.8rem;
+  background: #f9fcff;
+}
+
+.glossary-page #content > ul > br { display: none; }
+
+.administrative-page #content > h2 {
+  margin-top: 2.75rem;
+  padding: 0.75rem 0.85rem;
+  border: 0;
+  border-left: 4px solid var(--site-brand);
+  border-radius: 0.4rem;
+  background: var(--site-brand-light);
+}
+
+@media (max-width: 680px) {
+  .glossary-page #content > ul,
+  .mini-grants-page #content > ul { grid-template-columns: 1fr; }
+}

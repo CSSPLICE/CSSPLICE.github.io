@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>System Story: OpenDSA eTextbook System</title>
+<link href="../cssplice.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div id="content">
+  <h1>System Story: OpenDSA eTextbook System</h1>
+
+  <h2>System Information</h2>
+
+  <ul>
+    <li><a href="http://opendsa.org">OpenDSA Homepage</a>
+    <li><a href="https://github.com/OpenDSA">OpenDSA GitHub Organization Homepage</a>
+  </ul>
+  
+
+<h2>Initial Project Conception</h2>
+
+<p>OpenDSA began in early summer of 2011 as a collaboration between
+  Cliff Shaffer and Ville Karavirta while Shaffer was on an extended
+  visit to the research group of Lauri Malmi at Aalto University in
+  Finland. At that point, Shaffer had been working for several years
+  on the AlgoViz project, which promoted greater use of Algorithm
+  Visualization within the CS education community. A key finding from
+  AlgoViz was that instructors find it easier to adopt complete units
+  of instruction rather than individual visualizations. For example,
+  there are many variations on Quicksort. Given access to a
+  high-quality Quicksort visualization, there is a strong chance that
+  it won't match the code or approach presented in the rest of the
+  course instructional materials, making it harder for the instructor
+  to integrate and for the students to understand. Better is to give
+  instructors the ability to adopt a full Quicksort presentation, or a
+  chapter on sorting, or a full data structures textbook.</p>
+
+<p>Karavirta created the JavaScript Algorithm Visualization (JSAV)
+  library during Summer 2011 while Shaffer created demonstration
+  visualizations and associated explanatory text. They worked
+  extensively with Tom Naps of University of Wisconsin-Oshkosh, who
+  had a vision for a community-centered, open-source eTextbook
+  project. This led to using the name "OpenDSA" for the
+  project. Shaffer had recovered the publication rights to a data
+  structures textbook that he published in the 1990's, and so had a
+  large base of prose to work from. One of the first decisions that
+  had to be made was how to author content. After conversations with
+  Brad Miller of Runestone Academy, we adopted the Sphinx compiler and
+  ReStructuredText (RST), the documentation language of the Python
+  community. What made RST attractive to OpenDSA is the ability to
+  extend the language through implementing "directives" in Python, and
+  the openness of the Sphinx compilation process. This gave us a rich
+  authoring tool that could also integrate non-RST elements (like
+  visualizations and exercises) into the compiled HTML files.</p>
+
+<p>This gave us all the building blocks for the eventual project:
+  RST-based prose integrated with JSAV-based visualizations and
+  exercises compiled into HTML pages that could be served to
+  users. OpenDSA's fundamental conception is that it provides
+  infrastructure and a collection of materials, which allows
+  instructors to pick-and-choose from the content to create their own
+  eTextbook. The content selections are saved in configuration files
+  for future use.</p>
+
+<p>The initial server for managing student logins, serving content,
+  and collecting scores was written by Eric Fouh in Django, with the
+  initial client-side framework written by Daniel Breakiron. The first
+  use of OpenDSA to support a course was for a chapter on sorting for
+  a junior-level data structures course at Virginia tech during Fall
+  2012. One of the first lessons learned was that while good prose and
+  visualizations are important (and students strongly prefer visual
+  presentations of algorithms and data structures), the interactive
+  exercises are the single most important thing in any eTextbook. Most
+  of the early exercises used by OpenDSA were rewritten versions of
+  TRAKLA exercises, contributed to OpenDSA by developers at Aalto
+  University. OpenDSA was used as the full textbook for Virginia
+  Tech's junior-level data structures course for the first time in
+  Fall 2013, with full textbook prose, extensive visualizations, and
+  automatically graded homework exercises for the full semester.</p>
+
+<p>Since this time, use of OpenDSA has grown to be used by dozens of
+  institutions around the world, with full textbook support for course
+  in Data Structures (primarily written by Shaffer), senior-level
+  algorithms (primarily written by Shaffer), programming languages
+  (primarily written by David Furcy and Tom Naps at University of
+  Wisconsin-Oshkosh), and formal languages and automata (primarily
+  written by Mostafa Mohammed and Cliff Shaffer at Virginia Tech,
+  2019-2023). Visualizations and exercises have been developed over
+  the years by nearly 100 undergraduate and graduate students at a
+  number of universities. By 2020, in a typical semester OpenDSA is
+  used in classes at around 15-20 institutions, mostly in the US but
+  also around the world.</p>
+
+
+<h2>Major Development Milestones</h2>
+
+<p>While the original OpenDSA server was written in Django in 2012, we
+  recognized the need to move to a system that could better
+  interoperate with other systems. A major goal in making a change was
+  to break the notion that the OpenDSA server would supply LMS
+  features like logins and maintaining scores, that these should be
+  offloaded to a real LMS. During Summer 2015, we attempted to develop
+  a new server based on the OpenEdX project. By the end of the summer
+  we decided that this approach would not work for us. At that time we
+  decided to adopt Ruby/Rails as our server implementation. The
+  OpenEdX effort and then the initial Ruby/Rails server implementation
+  were led by Hossam Shahin. Equally important, we adopted the LTI
+  protocol for communicating score information between client, server,
+  and LMS. LTI not only allows OpenDSA to communicate with an LMS, it
+  also allows use of 3rd-party exercises that support LTI. At about
+  that time, Virginia Tech adopted Canvas as the institution's
+  LMS. Thus our initial Ruby/Rails server implementation compiled
+  books and made them available within Canvas as Canvas module, with
+  scores communicated between the client-side runtime framework and
+  Canvas (though the OpenDSA server) via the LTI
+  protocol. Additionally, OpenDSA can support some integration with
+  any LMS that supports the LTI protocol, as we also expose all
+  exercises and modules as LTI tools. One weakness of Canvas is that
+  only a single scorable entity can appear on a Canvas
+  module. Initially this meant artificially breaking up what might
+  naturally appear on a page as a "topic" or "section". In 2018
+  Jackson Wonderley reimplemented the LTI support so that OpenDSA
+  module pages report exercise scores to the server, which in turn
+  aggregates the values of various exercises in the module
+  appropriately and reports them to the LMS. In this sense, the
+  OpenDSA server changed from being just an LTI Tool Provider to also
+  an LTI Tool Consumer. This basic server configuration has been in
+  place since that time.</p>
+
+<p>While we have always aspired to have the OpenDSA infrastructure be
+  easy to install locally by developers and institutions that want to
+  use it, it has historically been fairly difficult to install the
+  OpenDSA server. In 2021, Alex Hicks and Patrick Sullivan implemented
+  a Docker containerized version of the system. Those who only want to
+  develop content can easily install this, while those who want to run
+  a full server stack capable of serving students in courses can also
+  do a relatively easy installation.</p>
+
+
+<h2>Funding and Support</h2>
+
+<p>Resources to operate and expand OpenDSA has come over the years in
+  three forms.
+
+  <ol>
+    <li>OpenDSA has been funded by a series of NSF grants. The first
+      NSF-TUES program grant in June 2012 had PIs Cliff Shaffer of
+      Virginia Tech, Tom Naps of University of Wisconsin-Oshkosh, and
+      Richard Baraniuk of Rice University, with the VT share directly
+      supporting OpenDSA infrastructure development with $125,000. An
+      EAGER program grant from January 2013 to December 2015 supported
+      collaboration between Virginia Tech (Cliff Shaffer, $67,000),
+      UW-Madison (S. Puntambekar), and Auburn University (Hari
+      Narayanan) to work with Aalto University. A major NSF IUSE grant
+      for $1,000,000 supported major OpenDSA development from
+      2016-2019. While SPLICE grant funding from 2017-2025 does not
+      directly support OpenDSA, it does affect bringing OpenDSA
+      infrastructure in compliance with community standards such as
+      PEML, ProgSnap, and Caliper.</li>
+    
+<li>As an open-source project, OpenDSA has had tremendous success at
+  getting volunteers to help over the years. About 100 people, mostly
+  students doing Independent Study or volunteer work, have contributed
+  content in the form of individual visualizations or exercises. The
+  general model has been that paid graduate students build and
+  maintain core functionality, faculty design modules, chapters, or
+  books, and students are recruited to volunteer or get credit to
+  implement visualizations and exercises.</li>
+
+<li>Starting in 2021, the Department of Computer Science at Virginia
+  Tech has contributed a small amount of professional staff time to do
+  basic system maintenance, in recognition of OpenDSA's role as
+  supplying basic instructional infrastructure. In 2023, CS@VT agreed
+  to support OpenDSA directly with 1/4 of an instructor position to do
+  core software development.</li>
+</ol>
+
+</div>
+
+<div id="footer">
+<p class="footertext">
+Last updated:
+<script type="text/javascript">
+document.write(document.lastModified);
+</script>
+</p>
+</div>
+
+</body>
+</html>

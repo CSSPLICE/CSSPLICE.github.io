@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Learning Tools Advantage</title>
-    <link rel="stylesheet" href="../cssplice.css" type="text/css" />
+
+    <link rel="stylesheet" href="../site.css">
+    <link rel="stylesheet" href="../docs.css">
   </head>
 
-  <body>
+  <body class="documentation-page">
+    <a class="skip-link" href="#content">Skip to main content</a>
+    <header class="site-header"><div class="site-shell demo-page-heading"><a class="site-brand" href="../index.html">SPLICE</a><h1>LTI Advantage</h1></div></header>
     <div id="content">
       <div class="text-center">
-        <h1>Learning Tools Advantage</h1>
+
       </div><br>
         <p>
             Learning Tools Interoperability is a specification
@@ -76,7 +82,7 @@
             GET request to this endpoint and in return the Tool Provider will receive
             a membership list.
           </p>
-      
+
           <p>
             A Tool Provider can send one or more of the following query parameters in
             a GET request:
@@ -138,19 +144,19 @@
             The ContentItemSelectionRequest in lti_message_type indicates that this
             request represents a deep linking selection message.
           </p>
-      
+
           <strong>lti_version=</strong> LTI-1p0 (Required) <br>
           <p>
             The version of the LTI specification.
           </p>
-      
+
           <strong>accept_media_types=</strong>
           application/vnd.ims.lti.v1.ltilink,image/*, text/html (Required)
           <br>
           <p>
             A comma-separated list of MIME types which the Tool Consumer can accept.
           </p>
-      
+
           <strong>accept_presentation_document_targets=</strong>
           embed,frame,iframe,window,popup,overlay (Required)
           <br>
@@ -160,26 +166,26 @@
             means that the content item is not intended for display and will only be
             used for storing or processing.
           </p>
-      
+
           <strong>content_item_return_url=</strong> [URL] (Required) <br>
           <p>
             A URL where the Tool Provider redirects the user back to the Tool
             Consumer.
           </p>
-      
+
           <strong>accept_unsigned=</strong> false | true (Optional)
           <br>
           <p>
             Indicates whether the the Tool Consumer accepts an unsigned return
             message or not.
           </p>
-      
+
           <strong>accept_multiple=</strong> false | true (Optional)
           <br>
           <p>
             Indicates if the user can select multiple content items or not.
           </p>
-      
+
           <strong>accept_copy_advice=</strong> false | true (Optional)
           <br>
           <p>
@@ -187,14 +193,14 @@
             Tool Providers can send the <em>expiresAt</em> parameter to let
             the Tool Consumer know that the item will expire on that date.
           </p>
-      
+
           <strong>accept_unsigned=</strong> false | true (Optional)
           <br>
           <p>
             Indicates whether the Tool Consumer accepts an unsigned return
             message or not.
           </p>
-      
+
           <p>
             Along with the fields mentioned above, the Tool Consumer can also send
             additional fields like text, title, data, auto_create (to indicate if
@@ -202,26 +208,26 @@
             persisted) and other parameters about the Tool Consumer and the user.
           </p>
           <br>
-      
+
           <p>
             Once content item(s) has been selected, the Tool Provider should redirect
             the user to the Tool Consumer by a sending POST request. It may send the
             following parameters in the request:
           </p>
-      
+
           <strong>lti_message_type=</strong> ContentItemSelection (Required)
           <br>
           <p>
             ContentItemSelection indicates that this message contains an array of
             content items.
           </p>
-      
+
           <strong>lti_version=</strong> LTI-1p0 (Required)
           <br>
           <p>
             This indicates the version of the LTI specification.
           </p>
-      
+
           <strong>content_items=</strong> [JSON Array] (Optional)
           <br>
           <p>
@@ -293,13 +299,13 @@
             If the Tool Consumer sent this parameter in the original request, then the
             Tool Provider should return it as is back to the Tool Consumer.
           </p>
-      
+
           <strong>lti_msg=</strong> [Message to be displayed] (Optional)
           <br>
           <p>
             Message to be displayed to user when returning.
           </p>
-      
+
           <p>
             Along with the above parameters, the Tool Provider can return additional
             parameters such as <em>lti_log</em> to give the Tool Consumer a message
@@ -310,6 +316,7 @@
           </p>
     </div>
 
+  <div id="footer"><p><a href="mailto:cssplice@gmail.com">Contact Us</a></p><p>Last updated: <time datetime="2026-07-27">July 27, 2026</time></p></div>
   </body>
 </html>
- 
+

@@ -1,12 +1,18 @@
-<html>
+<html lang="en">
   <head>
-    <title>SPLICE Working Group: Smart Learning Content Protocols</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+    <title>SPLICE Working Group: Smart Learning Content Protocols</title>
     <meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
-    <link rel='stylesheet' href='../cssplice.css' type='text/css'/> 
-  </head> 
-  <body>
+
+<link rel="stylesheet" href="../site.css">
+<link rel="stylesheet" href="../docs.css">
+</head>
+  <body class="documentation-page archive-page">
+<a class="skip-link" href="#content">Skip to main content</a>
+<header class="site-header"><div class="site-shell demo-page-heading"><a class="site-brand" href="../index.html">SPLICE</a><h1>SPLICE iframe Protocol: Prior Art</h1></div></header>
     <div id='content'>
-      <h1>SPLICE iframe Protocol: Prior Art</h1>
+
 
 
 
@@ -22,14 +28,14 @@
 <pre>EPUB.Education.reportScores([scores], callback)
 EPUB.Education.getScores([location], callback)</pre>
 <p>Each scores object has the form</p>
-<pre>{ 
+<pre>{
    score: number,
    location: string,
    metadata: { /* arbitrary element-specific state */ }
 }
 </pre>
       <p>When scores are retrieved, the callback function is called with an array of
-</p><pre>{ 
+</p><pre>{
    score: number,
    location: string,
    timestamp: UTCTimeStamp,
@@ -94,11 +100,11 @@ EPUB.Education.getScores([location], callback)</pre>
                       max_value: 1.0 })
 </pre>
 <h2>JSAV</h2>
-<p>The <a href='https://opendsa.cs.vt.edu/'>OpenDSA textbooks</a> contain smart learning content in iframes, such as <a href='http://jsav.io/'>JSAV</a> instances. JSAV is a library for authoring interactive exercises involving data structures such as graphs, trees, and linked lists. 
+<p>The <a href='https://opendsa.cs.vt.edu/'>OpenDSA textbooks</a> contain smart learning content in iframes, such as <a href='http://jsav.io/'>JSAV</a> instances. JSAV is a library for authoring interactive exercises involving data structures such as graphs, trees, and linked lists.
 JSAV has a <a href='http://jsav.io/otherapis/logging/'><code>logEvent</code></a> method that can be configured to send messages to the parent frame. Here is a typical message:</p>
-<pre>{ 
-   type: "jsav-exercise-step-fixed", 
-   tstamp: "2023-03-20T17:53:37.325Z", 
+<pre>{
+   type: "jsav-exercise-step-fixed",
+   tstamp: "2023-03-20T17:53:37.325Z",
    av: "DijkstraPE",
    currentStep: 2,
    desc: { score: 0, complete: 0.17 },
@@ -130,11 +136,11 @@ horstmann_config.retrieve_state = function(element, callback)</pre>
 <p>Upon successful retrieval, <code>callback(element, state)</code> is invoked.</p>
 <p>The postMessage format had three query types:</p>
 <pre>{ query: 'docHeight', param: { docHeight: ... }}
-{ query: 'send', param: { id: ..., state: ..., score: ... }} 
+{ query: 'send', param: { id: ..., state: ..., score: ... }}
 { query: 'retrieve', param: { id: ... }, nonce }</pre>
 <p>The first two queries have no response. The <code>retrieve</code> query returns <code>{ request: /* the entire request */, param: state }</code></p>
 <h2>PAWS Cumulate-Adapt2 Protocol</h2>
-<p>CUMULATE (Centralized User Modeling Architecture for TEaching) collects evidence (events) about student learning from multiple applications. CUMULATE supports a protocol that allows external applications to send learner interaction events for student modeling purposes. In short, to report student activity, the external application should indicate what learning object the student (user) is working on, who the student is, and what the outcome of this interaction is (success/failure). 
+<p>CUMULATE (Centralized User Modeling Architecture for TEaching) collects evidence (events) about student learning from multiple applications. CUMULATE supports a protocol that allows external applications to send learner interaction events for student modeling purposes. In short, to report student activity, the external application should indicate what learning object the student (user) is working on, who the student is, and what the outcome of this interaction is (success/failure).
 </p>
       <p>External applications send the interaction logs using HTTP GET requests to the CUMULATE’s report servlet using the following URL format:</p>
 <pre>http://&lt;server&gt;?app=&lt;application&gt;&amp;act=&lt;learning_object&gt;&amp;sub=&lt;learning_object_step&gt;
@@ -163,15 +169,13 @@ OpenDSA offers a collection of exercise types, with the most commonly used being
 <p>These are some potential use cases for the light weight protocol for OpenDSA
 </p><ol><li><b>External Tool Integration:</b> OpenDSA can act as an external tool, the exercises can be embedded within other systems via an iframe. In this scenario, the scores and student progress data collected from OpenDSA exercises can be transmitted back to the parent HTML or any server.</li>
 <li><b>Server Interaction and Grade Passback:</b> The lightweight protocol can also facilitate server-side communication. In this use case, student scores are sent directly to OpenDSA server and then to the LTI service for grade passback in the LMS.</li></ol>
-      
-    </div> 
+
+    </div>
     <div id='footer'>
-      <hr/> 
-      <p class='footertext'><a href='mailto:cssplice@gmail.com'>Contact us</a> </p> 
-      <p class='footertext'>Last updated: 
-        <script type='text/javascript'>document.write(document.lastModified);
-        </script> 
-      </p> 
-    </div> 
-  </body> 
+      <hr/>
+      <p class='footertext'><a href='mailto:cssplice@gmail.com'>Contact us</a> </p>
+      <p class='footertext'>Last updated: <time datetime="2026-07-27">July 27, 2026</time>
+      </p>
+    </div>
+  </body>
 </html>

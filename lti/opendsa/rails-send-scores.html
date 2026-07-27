@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rails LTI Tool Provider - Send Scores back to Canvas</title>
-    <link rel="stylesheet" href="../../cssplice.css" type="text/css" />
+
+    <link rel="stylesheet" href="../../site.css">
+    <link rel="stylesheet" href="../../docs.css">
   </head>
 
-  <body>
+  <body class="documentation-page">
+    <a class="skip-link" href="#content">Skip to main content</a>
+    <header class="site-header"><div class="site-shell demo-page-heading"><a class="site-brand" href="../../index.html">SPLICE</a><h1>Sending Scores Back to Canvas</h1></div></header>
     <div id="content">
       <div class="text-center">
-        <h1>Rails LTI Tool Provider - Send Scores back to Canvas</h1>
+
       </div>
       <p>
         In our <a href="lti/exercises/rails.html">previous tutorial</a>,
@@ -54,23 +60,23 @@
         file <i><strong>config/lti_settings.yml</strong></i>, and add a
         key and a secret to that file.
         The lti_settings.yml file should contain the following:
-  
+
         <pre>
           production:
             quizkey: 'FirstSecret'
-  
+
           development:
             quizkey: 'FirstSecret'</pre><br>
-  
+
         Once you share your unique keys and secrets with a tool
         consumer, it will be able to add your application.
         Here is an example of the interface that Canvas uses:
-  
+
         <br><br>
         <div class="text-center">
           <img src="../quiz_keysecret.png", style:';width:128px;height:128px;', alt="quiz keysecret" >
         </div><br><br>
-  
+
         If you create a new settings file, you need to create a variable
         that loads the content from your settings file. Add this line
         in <i><strong>config/application.rb</i></strong><br><br>
@@ -79,7 +85,7 @@
         </pre>
         This variable will load the key and secret from your settings
         file.<br><br>
-  
+
         You can change the <em>quizkey</em> and <em>FirstSecret</em> in this
         example to what you like but each key/secret pair should be distinct for
         each tool consumer.
@@ -87,7 +93,7 @@
         want to integrate your tool into their courses, you might create
         10 key/pairs.
       </p><br>
-  
+
       <p>
         <strong>Step 3:</strong>
         Along with a key and a secret, the tool consumer will also need a
@@ -99,7 +105,7 @@
         validate and authenticate the LTI requests within this
         endpoint.
       </p><br>
-  
+
       <p>
         <strong>Step 4:</strong>
         We need to keep a check if our application is
@@ -120,7 +126,7 @@
         <div class="text-center">
           <img src="../quiz_no_iframe.png", style:'width:128px;height:128px;', alt="quiz no iframe" >
         </div><br><br>
-  
+
         To fix this, add the following line at the beginning of the
         <em>launch</em> endpoint.
         <pre>
@@ -137,7 +143,7 @@
           <img src="../quiz_iframe.png", style:'width:128px;height:128px;', alt="quiz iframe" >
         </div><br><br>
       </p><br>
-  
+
       <p>
         <strong>Step 5:</strong>
         When your app is launched from a Tool Consumer (such as Canvas),
@@ -156,13 +162,13 @@
             render :launch_error, status: 401
             return
           end </pre><br>
-  
+
         The code above checks if the key is present in the settings
         variable you created in step 2. If the key is not present, then
         redirect the user to <strong>launch_error</strong> page. We will
         create this page later in this tutorial.
       </p><br>
-  
+
       <p>
         <strong>Step 6:</strong>
         If the key is present, then we move to the second step of
@@ -199,7 +205,7 @@
         The second part validates the request.
         If the validation or authentication fails, it will
         redirect the user to <strong>launch_error</strong> page.<br><br>
-  
+
         <pre>
           require 'oauth/request_proxy/action_controller_request'
           @provider = IMS::LTI::ToolProvider.new(
@@ -207,14 +213,14 @@
             Rails.configuration.lti_settings[params[:oauth_consumer_key]],
             params
           )
-  
+
           if not @provider.valid_request?(request)
             # the request wasn't validated
             render :launch_error, status: 401
             return
           end</pre>
       </p><br>
-  
+
       <p>
         <strong>Step 7:</strong>
         At this point, you have a valid and authentic LTI request.
@@ -238,14 +244,14 @@
               puts @user.errors.full_messages.first
             end
           end
-  
+
           #Login the user and create his session.
           authorized_user = User.authenticate(email,email)
           session[:user_id] = authorized_user.id
-  
+
           #redirect the user to give quiz starting from question id 1
           redirect_to(:controller => "questions", :action => "show", :id => 1)</pre>
-  
+
         In the first line we save request parameters, because we will
         need those to submit scores back to the Tool Consumer.
         Then we check if any user with this email already exists in our
@@ -255,7 +261,7 @@
         Finally, we redirect the user to the quiz, starting from
         question id 1.
       </p><br>
-  
+
       <p>
         <strong>Step 8:</strong>
         Our quiz application normally redirects the user to a results
@@ -300,15 +306,15 @@
               @@launch_params)
             # add extension
             @tp.extend IMS::LTI::Extensions::OutcomeData::ToolProvider
-  
+
             if !@tp.outcome_service?
               @message = "This tool wasn't lunched as an outcome service"
               puts "This tool wasn't lunched as an outcome service"
               render(:launch_error)
             end
-  
+
             res = @tp.post_extended_replace_result!(score: params[:result])
-  
+
             if res.success?
               puts "Score Submitted"
             else
@@ -401,7 +407,7 @@
         <div class="text-center">
           <img src="../quiz_ext.png", style:'width:64px;height:64px;', alt="quiz ext" >
         </div><br><br>
-  
+
       </p><br>
       <p>
         <strong>Step 13:</strong>
@@ -445,25 +451,25 @@
           because it set 'X-Frame-Options' to 'sameorigin'.
         </pre>
         <br>
-  
+
         You see this error because Canvas opens the
         LTI Tool in an iframe, but Rails does not allow the application
         to be embedded in an iframe by default.
         Therefore, you need to add the following code in
         the <strong>questions</strong> controller.<br><br>
-  
+
         <pre>
           after_action :allow_iframe, only: [:show, :result]
-  
+
           def allow_iframe
             response.headers.except! 'X-Frame-Options'
           end</pre><br>
-  
+
         In the first line of the code, we tell rails to only allow "show" and
         "result"
         endpoints to open in an iframe.
       </p><br>
-  
+
       <p>
         <strong>Step 17:</strong>
         The last step is to update routes and also to create
@@ -473,31 +479,31 @@
         Create <strong>views/lit/launch_error.html.erb</strong>
         and add the following code to it:
         <xmp>
-          <h1>Lunch Error</h1>
+          <h2>Lunch Error</h2>
           <p>Make sure you have a correct key and a secret to access the quiz
             application.</p>
         </xmp><br>
-  
+
         Since Canvas will also open this launch error page in an iframe
         and we redirect to this page within the launch endpoint, we need
         to allow the launch endpoint to open in an iframe as well.
         Add the following code in the <strong>lti</strong> controller.
         <br><br>
-  
+
         <pre>
           after_action :allow_iframe, only: [:launch]
-  
+
           def allow_iframe
           response.headers.except! 'X-Frame-Options'
           end
         </pre><br>
-  
+
         Now, if the request received is not validated or authenticated,
         you will see the the following on Canvas:<br><br>
         <div class="text-center">
           <img src="../quiz_launch_error.png", style:'width:128px;height:128px;', alt="quiz launch error" >
         </div>
-  
+
         Your <strong>routes.rb</strong> file at the end should somewhat
         look like this for our Quiz application:
         <br><br>
@@ -529,7 +535,7 @@
           end
         </pre>
       </p><br>
-  
+
       <p>
         At this point you should have a working LTI-enabled quiz
         application.
@@ -540,7 +546,7 @@
         then once a user submits an assessment, his scores can be
         recorded in the tool consumer's gradebook.
         On Canvas it will look like this:
-  
+
         <div class="text-center">
           <img src="../quiz_result.png", style:'width:128px;height:128px;' alt="quiz result" >
         </div><br><br>
@@ -551,6 +557,7 @@
       </p>
     </div>
 
+  <div id="footer"><p><a href="mailto:cssplice@gmail.com">Contact Us</a></p><p>Last updated: <time datetime="2026-07-27">July 27, 2026</time></p></div>
   </body>
 </html>
- 
+
