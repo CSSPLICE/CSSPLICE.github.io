@@ -7,48 +7,163 @@
 
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="docs.css">
+
+<style>
+  /* Override the default grid to 1 column on mobile, 2 columns on larger screens */
+  .demo-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .demo-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
 </head>
 
 <body class="documentation-page mini-grants-page">
 <a class="skip-link" href="#content">Skip to main content</a>
-<header class="site-header"><div class="site-shell demo-page-heading"><a class="site-brand" href="index.html">SPLICE</a><h1>SPLICE Mini-Grants Program</h1></div></header>
+<header class="site-header">
+  <div class="site-shell demo-page-heading">
+    <a class="site-brand" href="index.html">SPLICE</a>
+    <h1>SPLICE Mini-Grants Program</h1>
+  </div>
+</header>
+
   <div id="content">
+    <p>
+      Both the original NSF grant and the current NSF grant include funding for SPLICE to provide mini-grants (typically, $5,000-$20,000) to our collaborators to do work that advances SPLICE priorities.
+      <br><br>Below is information on prior and ongoing mini-grant projects.
+    </p>
 
+    <h2>Mini-Grant Projects</h2>
 
-    <p>Both the original NSF grant and the current NSF grant include
-      funding for SPLICE to provide mini-grants (typically,
-      $5,000-$20,000) to our collaborators to do
-      work that advances SPLICE priorities.
-      Below is information on prior and ongoing mini-grant projects.</p>
+    <div class="demo-grid">
+      
+      <!-- Brad Miller -->
+      <article class="demo-card">
+        <div class="demo-card-body">
+          <h3 style="margin-top: 0;">Runestone Anonymous Data Proposal</h3>
+          <p class="demo-notes"><strong>Brad Miller</strong> (Runestone Interactive)<br>
+          Proposals: <a href="MiniGrants/Runestone2020.pdf">Part 1</a> and <a href="MiniGrants/RunestoneAnonymousDataProposalII.pdf">Part 2</a></p>
+          <dl class="demo-meta">
+            <div>
+              <dt>Outcomes</dt>
+              <dd>
+                <ul>
+                  <li><a href="#">Dataset 1 (Link pending)</a></li>
+                  <li><a href="#">Dataset 2 (Link pending)</a></li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </article>
 
-    <h2>Projects</h2>
+      <!-- Ryan Hardt -->
+      <article class="demo-card">
+        <div class="demo-card-body">
+          <h3 style="margin-top: 0;">Integration of Database Query Analyzer (DBQA) with Mastery Grids</h3>
+          <p class="demo-notes"><strong>Ryan Hardt</strong> (University of St. Thomas)<br>
+          <a href="MiniGrants/DBQA2020.pdf">Read Proposal</a></p>
+          <dl class="demo-meta">
+            <div>
+              <dt>Outcomes</dt>
+              <dd>
+                <ul>
+                  <li><a href="#">DBQA SQL worked examples collection in SPLICE catalog (URL pending)</a></li>
+                  <li><a href="https://www.researchgate.net/publication/361852969_A_Study_of_Worked_Examples_for_SQL_Programming" target="_blank" rel="noopener noreferrer">Akhuseyinoglu, K., Hardt, R., Barria-Pineda, J., Brusilovsky, P., Pollari-Malmi, K., Sirkiä, T., and Malmi, L. (2022). A Study of Worked Examples for SQL Programming. In: Proceedings of 2022 Annual Conference on Innovation and Technology in Computer Science Education, ITiCSE’22.</a></li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </article>
 
-    <ul>
-      <li>Brad Miller (Runestone Interactive),
-        <strong>Runestone Anonymous Data Proposal:</strong>
-        <a href="MiniGrants/Runestone2020.pdf">Part 1</a> and
-        <a href="MiniGrants/RunestoneAnonymousDataProposalII.pdf">Part 2</a></li>
-      <li>Ryan Hardt (University of St. Thomas),
-        <a href="MiniGrants/DBQA2020.pdf">Integration of Database Query Analyzier (DBQA) with Mastery Grids</a></li>
-      <li> Jeremiah Blanchard (University of Florida) and John
-        R. Hott (University of Virginia),
-        <a href="MiniGrants/ARTCE.pdf">ARTCE: the Archival Repository of Tools for Computing
-        Education</a></li>
-      <li> Paulo Carvalho and Michael Asher (Carnegie Mellon University),
-        <a href="MiniGrants/LearnSphereWorkflow.pdf">LearnSphere Workflow Components
-        Education</a></li>
-      <li>Mohammed Farghally (Virginia Tech),
-        <a href="MiniGrants/Farghally_ClusteringETextbookInteractions.pdf">Clustering and Comparing Students’ Interactions with an eTextbook</a></li>
-      <li>David H. Smith IV (Virginia Tech),
-        <a href="MiniGrants/Smith_PromptSnap.pdf">PromptSnap: Community Standards and Datasets for Natural Language Programming Assessment</a></li>
-    </ul>
+      <!-- Jeremiah Blanchard & John R. Hott -->
+      <article class="demo-card">
+        <div class="demo-card-body">
+          <h3 style="margin-top: 0;">ARTCE: the Archival Repository of Tools for Computing Education</h3>
+          <p class="demo-notes"><strong>Jeremiah Blanchard</strong> (University of Florida) and <strong>John R. Hott</strong> (University of Virginia)<br>
+          <a href="MiniGrants/ARTCE.pdf">Read Proposal</a></p>
+          <dl class="demo-meta">
+            <div>
+              <dt>Outcomes</dt>
+              <dd>
+                <ul>
+                  <li><a href="https://artce.cs.virginia.edu/" target="_blank" rel="noopener noreferrer">ARTCE Prototype System</a></li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </article>
 
-</div>
+      <!-- Paulo Carvalho & Michael Asher -->
+      <article class="demo-card">
+        <div class="demo-card-body">
+          <h3 style="margin-top: 0;">LearnSphere Workflow Components Education</h3>
+          <p class="demo-notes"><strong>Paulo Carvalho</strong> and <strong>Michael Asher</strong> (Carnegie Mellon University)<br>
+          <a href="MiniGrants/LearnSphereWorkflow.pdf">Read Proposal</a></p>
+          <dl class="demo-meta">
+            <div>
+              <dt>Outcomes</dt>
+              <dd>
+                <ul>
+                  <li><a href="https://github.com/the-oak-lab/extract-resource-use" target="_blank" rel="noopener noreferrer">GitHub Repository: extract-resource-use</a></li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </article>
 
-<div id="footer"><p><a href="mailto:cssplice@gmail.com">Contact Us</a></p>
-<p class="footertext">
-Last updated: <time datetime="2026-08-15">August 15, 2026</time>
-</p>
+      <!-- Mohammed Farghally -->
+      <article class="demo-card">
+        <div class="demo-card-body">
+          <h3 style="margin-top: 0;">Clustering and Comparing Students’ Interactions with an eTextbook</h3>
+          <p class="demo-notes"><strong>Mohammed Farghally</strong> (Virginia Tech)<br>
+          <a href="MiniGrants/Farghally_ClusteringETextbookInteractions.pdf">Read Proposal</a></p>
+          <dl class="demo-meta">
+            <div>
+              <dt>Outcomes</dt>
+              <dd>
+                <ul>
+                  <li><a href="https://www.researchgate.net/publication/399749694_Categorizing_and_Comparing_Students'_Interactions_in_eTextbooks" target="_blank" rel="noopener noreferrer">Sapkota, J. (2025). Categorizing and Comparing Students' Interactions in eTextbooks (Masters Thesis). Virginia Tech.</a></li>
+                  <li>Sapkota, J., Farghally, M., Mohammed, M., and Shaffer, C. A. (2025). Categorizing and Comparing Students' Interactions in eTextbooks. In: Proceedings of 2025 IEEE Frontiers in Education Conference (FIE).</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+
+      <!-- David H. Smith IV -->
+      <article class="demo-card">
+        <div class="demo-card-body">
+          <h3 style="margin-top: 0;">PromptSnap: Community Standards and Datasets for Natural Language Programming Assessment</h3>
+          <p class="demo-notes"><strong>David H. Smith IV</strong> (Virginia Tech)<br>
+          <a href="MiniGrants/Smith_PromptSnap.pdf">Read Proposal</a></p>
+          <dl class="demo-meta">
+            <div>
+              <dt>Outcomes</dt>
+              <dd>Project is currently ongoing.</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+
+<div id="footer">
+  <p><a href="mailto:cssplice@gmail.com">Contact Us</a></p>
+  <p class="footertext">
+    Last updated: <time datetime="2026-08-17">August 17, 2026</time>
+  </p>
 </div>
 
 </body>
