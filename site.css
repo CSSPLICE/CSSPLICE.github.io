@@ -500,6 +500,26 @@ button:focus-visible {
   text-underline-offset: 0.3em;
 }
 
+.page-title {
+  margin: 0 0 1.25rem;
+  color: var(--site-ink);
+  font-size: clamp(1.7rem, 3.2vw, 2.35rem);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.interior-content > .page-title {
+  margin-bottom: 1.5rem;
+}
+
+.working-group-main .page-title {
+  margin: 0 0 1.25rem;
+}
+
+.demo-main .page-title {
+  margin: 0 0 1.15rem;
+}
+
 .hero {
   position: relative;
   overflow: hidden;
@@ -1158,23 +1178,32 @@ button:focus-visible {
   color: white;
 }
 
+.wg-card .wg-action + .wg-action {
+  margin-top: 0.55rem;
+}
+
 .wg-resource-list,
 .wg-document-list,
 .wg-news-list {
-  display: grid;
-  gap: 0.6rem;
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding-left: 1.25rem;
+  list-style: disc;
 }
 
-.wg-resource-list > li,
-.wg-document-list > li,
-.wg-news-list > li {
-  padding: 0.75rem 0.85rem;
-  border: 1px solid var(--site-line);
-  border-radius: 0.7rem;
-  background: #fbfdff;
+.wg-resource-list ul,
+.wg-document-list ul,
+.wg-news-list ul {
+  margin: 0.35rem 0 0.15rem;
+  padding-left: 1.25rem;
+  list-style: circle;
+}
+
+.wg-resource-list li,
+.wg-document-list li,
+.wg-news-list li {
+  padding: 0;
+  border: 0;
+  background: none;
 }
 
 .wg-news-date {

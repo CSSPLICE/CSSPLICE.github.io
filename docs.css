@@ -3,10 +3,6 @@
   padding-bottom: 4.2rem;
 }
 
-.documentation-page .site-header h1 {
-  max-width: 78%;
-}
-
 .documentation-page #content {
   width: min(980px, calc(100% - 2rem));
   min-height: calc(100vh - 8rem);
@@ -20,6 +16,15 @@
 
 .documentation-page #content > :first-child { margin-top: 0; }
 .documentation-page #content > :last-child { margin-bottom: 0; }
+
+.documentation-page #content h1,
+.documentation-page #content .page-title {
+  margin: 0 0 1.25rem;
+  color: var(--site-ink);
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
 
 .documentation-page #content h2,
 .documentation-page #content h3,
