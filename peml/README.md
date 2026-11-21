@@ -24,19 +24,32 @@ auto-grader or simplify tasks for tool writers.
 ## Structure of This Subtree
 
 The source for all documentation in this tree is stored in the `jekyll_src`
-folder. These pages are part of the
-[CSSPLICE project web pages](https://CSSPLICE.github.io/), which is
-not yet jekyll-enabled. As a result, when updates are made to this
-project, we hand-build the `jekyll_src` and copy `jekyll_src\_site` to
-this folder to commit the changes, so that the statically genertated pages
-are viewable through https://CSSPLICE.github.io/. Some day, we might fix
-that extra bit of effort.
+folder. The [SPLICE website](https://cssplice.org/) serves the generated files
+committed in `peml/`. PEML uses a local Jekyll plugin for syntax highlighting
+of its examples.
 
-We've taken advantage of the fact that pages are statically generated offline
-to add a jekyll plugin to provide rouge syntax highlighting for PEML examples
-in these pages, so they currently are not configured for auto-jekyll-generation
-on github.io anyway. we would need to issue a pull request against rouge to
-get PEML officially supported to enable that ... eventually.
+### Build the documentation
+
+From the repository root, use the Ruby version in `peml/jekyll_src/.ruby-version`.
+On Windows, use [RubyInstaller with Devkit](https://rubyinstaller.org/downloads/)
+to compile native gems.
+
+```sh
+cd peml/jekyll_src
+bundle install
+bundle exec jekyll build
+```
+
+Review the files in `peml/jekyll_src/_site`, then copy the generated site files
+to `peml/` when publishing documentation changes.
+
+For a Docker preview, run these commands from the repository root and open
+`http://localhost:4000/peml/`.
+
+```sh
+docker build -t peml-docs peml
+docker run --rm -p 127.0.0.1:4000:4000 peml-docs
+```
 
 
 ## The PEML Code

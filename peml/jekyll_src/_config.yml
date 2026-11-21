@@ -14,8 +14,8 @@ lang: en
 permalink: none
 theme: jekyll-text-theme
 
-# plugins:
-  # - jekyll-feed
+exclude:
+  - Dockerfile
 
 collections:
   examples:
